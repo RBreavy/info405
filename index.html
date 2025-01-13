@@ -1,36 +1,41 @@
 <!--Page Login-->
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=*, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="Index_style.css">
     <title>Login</title>
 </head>
 <body>
-    <h2>Bienvenue!!</h2>
+    
 
-<div id="id01" class="modal">
+<div id="form_conn">
+
+  <h2>Bienvenue!!</h2>
 
     <div class="container">
-      <label for="uname"><b>Nom ou Email</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required> <br><br>
-      
+      <label for="nom"><b>Nom :</b></label>
+      <input type="text" placeholder="Entrer votre nom" id="nom" required> <br><br>
 
-      <label for="psw"><b>Mot de passe</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required> <br><br>
+      <label for="mail"><b>Mail :</b></label>
+      <input type="text" placeholder="Entrer votre mail" id="mail" required> <br><br>
+      
+      <label for="psw"><b>Mot de passe :</b></label>
+      <input type="password" placeholder="Entrer votre mot de passe" id="psw" required> <br><br>
         
-      <button type="submit">Login</button>
+      <button type="submit" id="submit-btn">Connexion</button>
       <label><br><br>
 
-        <input type="checkbox" checked="checked" name="remember"> Remember me
+        <input type="checkbox" checked="checked" id="souvenir"> Se souvenir de moi
       </label>
     </div>
 
     <div class="container">
-      <span class="psw">Mot de passe <a href="mdp_oublie.html">oublier</a>?</span>
+      <span class="lien">Mot de passe <a href="mdp_oublie.html">oublier</a>?</span>
     </div>
   </form>
 </div>
 
 </body>
 </html>
+
+<script src="index_JS.js"></script>
