@@ -2,11 +2,10 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="Index_style.css">
+    <link rel="stylesheet" href="index/Index_style.css">
     <title>Login</title>
 </head>
 <body>
-    
 
 <div id="form_conn">
 
@@ -20,18 +19,21 @@
       <input type="text" placeholder="Entrer votre mail" id="mail" required> <br><br>
       
       <label for="psw"><b>Mot de passe :</b></label>
-      <input type="password" placeholder="Entrer votre mot de passe" id="psw" required> <br><br>
+      <input type="password" placeholder="Entrer votre mot de passe" id="psw" required> <br>
+
+      <div class="container">
+        <span class="lien">
+          <a href="index/mdp_oublie.html">Mot de passe oublié ?</a> 
+          <input type="checkbox" checked="checked" id="souvenir"> Se souvenir de moi
+        </span>
+      </div>
+
         
+      </label><br><br>
+
       <button type="submit" id="submit-btn">Connexion</button>
-      <label><br><br>
-
-        <input type="checkbox" checked="checked" id="souvenir"> Se souvenir de moi
-      </label>
     </div>
 
-    <div class="container">
-      <span class="lien">Mot de passe <a href="mdp_oublie.html">oublier</a>?</span>
-    </div>
   </form>
 </div>
 

@@ -5,6 +5,8 @@
 (boolean admin a revoir)
 */
 
+
+
 // pour la page mdp_oublié
 const mailBtn = document.getElementById("mail-btn");
 if (mailBtn) {
@@ -15,6 +17,9 @@ if (mailBtn) {
         console.log("Mail pour réinitialisation :", mailRecup);
     });
 };
+
+
+
 
 // sauvegarde local si se souvenir est coché
 document.addEventListener("DOMContentLoaded", function () {
