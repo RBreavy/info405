@@ -28,7 +28,12 @@
 
 
 body {
-    background-color:green;
+    background-image: url("fond.jpg");
+    background-size: cover;  /* Cela permet à l'image de couvrir tout l'écran */
+    background-position: center; /* Centrer l'image dans la fenêtre */
+    background-repeat: no-repeat; /* Empêcher l'image de se répéter */
+    margin: 0; /* Supprimer les marges par défaut */
+    height: 100vh; /* S'assurer que le body prend toute la hauteur de la fenêtre */
 }
 
 h2 {
