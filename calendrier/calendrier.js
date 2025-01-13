@@ -24,16 +24,37 @@ for (let i = 0 ; i<7 ; i++) {
         horaire.id = i.toString() + j.toString()
         horaire.classList.add("horaire")
         if (j%2 == 0) {
-            horaire.style.backgroundColor = "#586f7c"
+            
             var heure = (Math.floor(j/6)+8)+"h00"
+        } 
+        /*else {
+            
+            var heure = (Math.floor(j/6)+8)+"h30"
+        }*/
+
+        if (Math.floor(j / 3) % 2 == 0) {
+            horaire.style.backgroundColor = "#586f7c"
         } else {
             horaire.style.backgroundColor = "#b8dbd9"
-            var heure = (Math.floor(j/6)+8)+"h30"
         }
 
         if (j%3 == 0) {
+            
+            
+            
+            if (j%2 == 0) {
+                horaire.style.borderTop = "solid 1px black"
+            }
+        }
+
+        if (j%6 == 0) {
             var texte = create("p",horaire,heure)
             texte.classList.add("heure")
+        }
+
+        if (j==71) {
+            horaire.style.borderBottomLeftRadius = "5px"
+            horaire.style.borderBottomRightRadius = "5px"
         }
 
     }
