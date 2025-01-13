@@ -1,0 +1,104 @@
+/* Bannière */
+.banner {
+    background-color: #4CAF50; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 20px; /* Espace interne */
+    font-size: 24px; /* Taille de la police */
+    font-weight: bold; /* Texte en gras */
+    border-radius: 5px; /* Coins arrondis */
+    display: flex; /* Utilisation de Flexbox */
+    justify-content: flex-start; /* Alignement des éléments au début */
+    align-items: center; /* Centrer verticalement */
+    gap: 20px; /* Espace entre le logo et le texte */
+}
+
+/* Logo */
+.banner img {
+    height: 70px; /* Hauteur du logo */
+    width: 70px; /* Largeur du logo */
+    object-fit: contain; /* Garde les proportions */
+}
+
+/* Texte principal */
+.banner-text {
+    flex-grow: 1; /* Le texte occupe l'espace restant */
+    text-align: center; /* Aligner le texte à gauche */
+    margin: 0; /* Enlever les marges par défaut */
+}
+
+
+body {
+    background-color:green;
+}
+
+h2 {
+    text-align: center;
+    color: #4CAF50;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+/* Table de l'emploi du temps */
+.schedule-table {
+    width: 80%; /* Largeur de la table */
+    margin: 20px auto; /* Centrer la table */
+    border-collapse: collapse; /* Fusionner les bordures */
+    font-size: 16px;
+    text-align: center;
+}
+
+.schedule-table th,
+.schedule-table td {
+    border: 1px solid #ddd; /* Bordure simple */
+    padding: 10px;
+}
+
+.schedule-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.dropdown {
+    position: relative; /* Nécessaire pour positionner le contenu du menu */
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #4CAF50; /* Couleur du bouton */
+    color: white; /* Couleur du texte */
+    padding: 10px 20px; /* Espacement interne */
+    font-size: 16px; /* Taille de la police */
+    border: none; /* Pas de bordure */
+    cursor: pointer; /* Curseur de clic */
+    border-radius: 5px; /* Coins arrondis */
+}
+
+.dropdown-content {
+    display: none; /* Cacher le contenu par défaut */
+    position: absolute; /* Positionner sous le bouton */
+    right: 0; /* Aligner à droite */
+    background-color: white; /* Couleur de fond */
+    min-width: 150px; /* Largeur minimale */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Ombre */
+    z-index: 1; /* Garder le contenu au-dessus des autres éléments */
+}
+
+.dropdown-content a {
+    color: black; /* Couleur des liens */
+    padding: 10px 15px; /* Espacement interne */
+    text-decoration: none; /* Pas de soulignement */
+    display: block; /* Chaque lien sur une nouvelle ligne */
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd; /* Couleur au survol */
+}
+
+/* Afficher le contenu au survol */
+.dropdown:hover .dropdown-content {
+    display: block; /* Afficher le contenu */
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41; /* Changer la couleur du bouton au survol */
+}
