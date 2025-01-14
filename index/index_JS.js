@@ -6,57 +6,48 @@
 */
 
 
-
-// pour la page mdp_oublié
-const mailBtn = document.getElementById("mail-btn");
-if (mailBtn) {
-    mailBtn.addEventListener("click", function(event) {
-        event.preventDefault();
-        
-        const mailRecup = document.getElementById("mail-recup").value;
-        console.log("Mail pour réinitialisation :", mailRecup);
-    });
-};
-
-
-
-
-// sauvegarde local si se souvenir est coché
 document.addEventListener("DOMContentLoaded", function () {
     const savedName = localStorage.getItem("nom");
     const savedMail = localStorage.getItem("mail");
     const savedsouvenir = localStorage.getItem("souvenir");
 
-    if (savedsouvenir === "true") {
-        document.getElementById("nom").value = savedName || "";
-        document.getElementById("mail").value = savedMail || "";
-        document.getElementById("souvenir").checked = true;
+    const nomInput = document.getElementById("nom");
+    if (nomInput) {
+        nomInput.value = savedName || "";
     }
 
-    // Gérer le clic sur le bouton de connexion
-    document.getElementById("submit-btn").addEventListener("click", function (event) {
-        event.preventDefault();
+    const mailInput = document.getElementById("mail");
+    if (mailInput) {
+        mailInput.value = savedMail || "";
+    }
 
-        const nom = document.getElementById("nom").value;
-        const mail = document.getElementById("mail").value;
-        const souvenir = document.getElementById("souvenir").checked;
+    const souvenirCheckbox = document.getElementById("souvenir");
+    if (souvenirCheckbox) {
+        souvenirCheckbox.checked = savedsouvenir === "true";
+    }
 
-        if (souvenir) {
-            //sauvegarde dans la mémoire
-            localStorage.setItem("nom", nom);
-            localStorage.setItem("mail", mail);
-            localStorage.setItem("souvenir", true);
-        } else {
-            //supprime de la mémoire si on décoche
-            localStorage.removeItem("nom");
-            localStorage.removeItem("mail");
-            localStorage.setItem("souvenir", false);
-        }
+    const submitBtn = document.getElementById("submit-btn");
+    if (submitBtn) {
+        submitBtn.addEventListener("click", function (event) {
+            event.preventDefault();
 
-        // test dans la console
-        console.log("Nom :", nom);
-        console.log("Mail :", mail);
-        console.log("Se souvenir de moi :", souvenir);
-    });
+            const nom = nomInput ? nomInput.value : "";
+            const mail = mailInput ? mailInput.value : "";
+            const souvenir = souvenirCheckbox ? souvenirCheckbox.checked : false;
+
+            if (souvenir) {
+                localStorage.setItem("nom", nom);
+                localStorage.setItem("mail", mail);
+                localStorage.setItem("souvenir", true);
+            } else {
+                localStorage.removeItem("nom");
+                localStorage.removeItem("mail");
+                localStorage.setItem("souvenir", false);
+            }
+
+            console.log("Nom :", nom);
+            console.log("Mail :", mail);
+            console.log("Se souvenir de moi :", souvenir);
+        });
+    }
 });
-

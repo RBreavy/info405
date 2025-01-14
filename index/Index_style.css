@@ -41,7 +41,7 @@ label {
     color: #333;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="email"]{
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -96,6 +96,12 @@ label input[type="checkbox"] {
 }
 
 .container .lien a {
+    color: #2575fc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#creation {
     color: #2575fc;
     text-decoration: none;
     font-weight: bold;
