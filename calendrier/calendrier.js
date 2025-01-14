@@ -1,5 +1,11 @@
-console.log("test")
+const dateString = new Date().toLocaleDateString("fr-FR")
+
+const [day, month, year] = dateString.split('/').map(Number)
+const date = new Date(year, month - 1, day)
+const indice_jour = date.getDay()
+
 var main = document.getElementById("main_cal")
+
 
 
 
@@ -16,26 +22,34 @@ var listeJour = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanch
 
 
 for (let i = 0 ; i<7 ; i++) {
-    var divt = create("div",main)
-    var article = create("article",divt)
-    var t = create("p",article,listeJour[i])
+    var datetemp = new Date();
+    datetemp.setDate(date.getDate()+i+1-indice_jour)
+    console.log(date)
+    console.log("test")
+
+
+    var div_jour = create("div",main)
+    var article = create("article",div_jour)
+    var t = create("p",article,listeJour[i]+"\n"+datetemp.toLocateDateString())
+
+
+
     for (let j = 0 ; j<72 ; j++) {
-        var horaire = create("article",divt)
-        horaire.id = i.toString() + j.toString()
-        horaire.classList.add("horaire")
-        if (j%2 == 0) {
-            
+        var creneau = create("article",div_jour)
+        creneau.id = i.toString() + j.toString()
+        creneau.classList.add("creneau")
+        if (i == 0 && j%6 == 0) {
+            var carre_heure = create("div",creneau)
+            carre_heure.classList.add("carre_heure")
             var heure = (Math.floor(j/6)+8)+"h00"
+            var texte = create("p",carre_heure,heure)
+            texte.classList.add("heure")
         } 
-        /*else {
-            
-            var heure = (Math.floor(j/6)+8)+"h30"
-        }*/
 
         if (Math.floor(j / 3) % 2 == 0) {
-            horaire.style.backgroundColor = "#586f7c"
+            creneau.style.backgroundColor = "#586f7c"
         } else {
-            horaire.style.backgroundColor = "#b8dbd9"
+            creneau.style.backgroundColor = "#b8dbd9"
         }
 
         if (j%3 == 0) {
@@ -43,21 +57,36 @@ for (let i = 0 ; i<7 ; i++) {
             
             
             if (j%2 == 0) {
-                horaire.style.borderTop = "solid 1px black"
+                creneau.style.borderTop = "solid 1px black"
             }
         }
 
-        if (j%6 == 0) {
-            var texte = create("p",horaire,heure)
-            texte.classList.add("heure")
+
+
+
+
+        if (j == 71) {
+            if (i == 0) {
+                creneau.style.borderBottomLeftRadius = "5px"
+            } else if (i == 6) {
+                creneau.style.borderBottomRightRadius = "5px"
+            }
+            
         }
 
-        if (j==71) {
-            horaire.style.borderBottomLeftRadius = "5px"
-            horaire.style.borderBottomRightRadius = "5px"
-        }
 
     }
+
+    if (i == 0) {
+        div_jour.style.borderBottomLeftRadius = "5px"
+        div_jour.style.borderTopLeftRadius = "5px"
+    }
+
+    if (i == 6) {
+        div_jour.style.borderBottomRightRadius = "5px"
+        div_jour.style.borderTopRightRadius = "5px"
+        div_jour.style.borderRight = "solid 1px black"
+    }
     article.id = "datejour"
-    divt.id = "j";
+    div_jour.id = "j";
 }
