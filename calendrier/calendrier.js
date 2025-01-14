@@ -2,7 +2,13 @@ const dateString = new Date().toLocaleDateString("fr-FR")
 
 const [day, month, year] = dateString.split('/').map(Number)
 const date = new Date(year, month - 1, day)
-const indice_jour = date.getDay()
+var indice_jour = date.getDay()
+
+console.log("debug")
+
+if (indice_jour == 0) {
+    indice_jour = 7
+}
 
 var main = document.getElementById("main_cal")
 
@@ -24,13 +30,12 @@ var listeJour = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanch
 for (let i = 0 ; i<7 ; i++) {
     var datetemp = new Date();
     datetemp.setDate(date.getDate()+i+1-indice_jour)
-    console.log(date)
-    console.log("test")
+    console.log(datetemp)
 
 
     var div_jour = create("div",main)
     var article = create("article",div_jour)
-    var t = create("p",article,listeJour[i]+"\n"+datetemp.toLocateDateString())
+    var t = create("p",article,listeJour[i]+"\n"+datetemp.toLocaleDateString())
 
 
 
@@ -52,13 +57,8 @@ for (let i = 0 ; i<7 ; i++) {
             creneau.style.backgroundColor = "#b8dbd9"
         }
 
-        if (j%3 == 0) {
-            
-            
-            
-            if (j%2 == 0) {
-                creneau.style.borderTop = "solid 1px black"
-            }
+        if (j%6 == 0) {
+            creneau.style.borderTop = "solid 1px black"
         }
 
 
@@ -90,3 +90,23 @@ for (let i = 0 ; i<7 ; i++) {
     article.id = "datejour"
     div_jour.id = "j";
 }
+
+
+
+function create_rdv(horaire_debut,horaire_fin,journee) {
+    for (let i = horaire_debut; i<=horaire_fin; i++) {
+        console.log(journee.toString()+i.toString())
+        let creneau_horaire = document.getElementById(journee.toString()+i.toString())
+        creneau_horaire.style.backgroundColor = "yellow"
+
+        if (i%6 == 0 && i != horaire_debut) {
+            creneau_horaire.style.borderTop = "solid 1px yellow"
+        }
+        
+    }
+}
+
+create_rdv(0,71,0)
+create_rdv(31,48,2)
+create_rdv(51,60,2)
+create_rdv(3,6,4)
