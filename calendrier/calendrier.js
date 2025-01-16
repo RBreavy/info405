@@ -150,26 +150,24 @@ buttonD.textContent = 'Apply transition_cal_d';
 document.body.appendChild(buttonG);
 document.body.appendChild(buttonD);
 
-const box = document.querySelectorAll("#j");
+const box = document.querySelectorAll(".jour");
 
 // Add event listeners to the buttons
 buttonG.addEventListener('click', () => {
     offsetjour -= 7;
-    console.log(offsetjour);
     box.forEach(element => {
         element.classList.add('transition_cal_g');
         setTimeout(_ => {
             element.classList.remove('transition_cal_g');
         },1000);
     });
-    //setTimeout(maj_jour(),1000);
+    setTimeout(maj_jour(),1000);
     
 });
 
 buttonD.addEventListener('click', () => {
     offsetjour += 7;
     console.log(offsetjour);
-    maj_jour();
     box.forEach(element => {
         element.classList.add('transition_cal_d');
         
@@ -177,5 +175,5 @@ buttonD.addEventListener('click', () => {
             element.classList.remove('transition_cal_d');
         },1000);
     });
-    //setTimeout(maj_jour(),1000);
+    setTimeout(maj_jour(),1000);
 });
