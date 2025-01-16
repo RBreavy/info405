@@ -102,7 +102,7 @@ body {
 
 
 
-#j {
+.jour {
     position: relative;
     width: 13.5%;
     height: 90%;
@@ -112,9 +112,10 @@ body {
     border-left: solid 2px black;
     border-bottom: solid 2px black;
     border-top: solid 2px black;
+    box-shadow: 6px 4px 2px 1px rgba(59,59,59,0.5)
 }
 
-#datejour {
+.datejour {
     display: flex;
     flex-direction: column; 
     justify-content: center; 
@@ -125,7 +126,7 @@ body {
     border-bottom: solid 1px black;
 }
 
-#datejour p {
+.datejour p {
     color: #f4f4f9 ;
     text-align: center;
 }
@@ -137,7 +138,20 @@ body {
     position: relative;
 }
 
+.border_bottom_top_left {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
 
+
+.border_bottom_top_right {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.border_right {
+    border-right: solid 1px black;
+}
 
 .carre_heure {
     position: absolute;
@@ -152,4 +166,54 @@ body {
     color: black;
     z-index: 1;
     margin-right: 5px;
+}
+
+
+.gris_fonce {
+    background-color: #586f7c;
+}
+
+.gris_clair {
+    background-color: #b8dbd9;
+}
+
+.border_top {
+    border-top: solid 1px black;
+}
+
+.article_border_bottom_left_radius {
+    border-bottom-left-radius: 5px;
+}
+
+.article_border_bottom_right_radius {
+    border-bottom-right-radius: 5px;
+}
+
+.transition_cal_d {
+    animation-name: anim_cal_d;
+    animation-duration: 1s;
+}
+
+.transition_cal_g {
+    animation-name: anim_cal_g;
+    animation-duration: 1s;
+}
+
+@keyframes anim_cal_g {
+    40% {transform: translateX(50px);}
+}
+
+@keyframes anim_cal_d {
+    40% {transform: translateX(-50px);}
+}
+
+
+.invisible_border_top {
+    box-shadow: 0 -1px 0 black;
+    z-index: 1;
+}
+
+.invisible_border_bottom {
+    box-shadow: 0 1px 0 black;
+    z-index: 1;
 }
