@@ -1,8 +1,8 @@
 /* Centrage et style de base */
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start; /* Aligner le div à gauche */
+    align-items: center; /* Centrer verticalement */
     height: 100vh;
     margin: 0;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -19,12 +19,14 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.2);
     width: 350px;
     text-align: center;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.2);
-
+    font-family: cursive;
+    margin-left: 16vw;
+    max-width: 90vw;
 }
+
 
 /* Titre */
 #form_conn h2 {
@@ -49,6 +51,7 @@ input[type="text"], input[type="password"], input[type="email"]{
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 14px;
+    border-radius: 20px;
 }
 
 /* Bouton de connexion */
@@ -62,7 +65,7 @@ input[type="text"], input[type="password"], input[type="email"]{
     font-size: 16px;
     width: 100%;
     transition: background-color 0.3s ease;
-    
+    border-radius: 20px;
 }
 
 #mail-btn {
@@ -75,6 +78,7 @@ input[type="text"], input[type="password"], input[type="email"]{
     font-size: 16px;
     width: 100%;
     transition: background-color 0.3s ease;
+    border-radius: 20px;
 }
 
 #submit-btn:hover {
@@ -99,12 +103,14 @@ label input[type="checkbox"] {
     color: #2575fc;
     text-decoration: none;
     font-weight: bold;
+    font-size: larger;
 }
 
 #creation {
     color: #2575fc;
     text-decoration: none;
     font-weight: bold;
+    font-size: larger;
 }
 
 .container .psw a:hover {
