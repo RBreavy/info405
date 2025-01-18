@@ -1,6 +1,6 @@
 const dateString = new Date().toLocaleDateString("fr-FR")
-const [day, month, year] = dateString.split('/').map(Number)
-const date = new Date(year, month - 1, day)
+var [day, month, year] = dateString.split('/').map(Number)
+var date = new Date(year, month - 1, day)
 
 var indice_jour = date.getDay()
 
@@ -9,7 +9,21 @@ if (indice_jour == 0) {
     indice_jour = 7
 }
 
-var main = document.getElementById("main_cal")
+
+const dateInput = document.getElementById("calendrier");
+dateInput.addEventListener('change', _ => {
+    [year, month, day] = dateInput.value.split("-").map(Number);
+    dateInput.value = "";
+    date = new Date(year, month - 1, day);
+    indice_jour = date.getDay();
+    offsetjour = 0;
+    maj_semaine();
+});
+
+
+
+
+var main = document.getElementsByClassName("main_cal")[0]
 var listeJour = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"]
 
 var lundi = "13/01/2025"
@@ -89,9 +103,10 @@ function maj_semaine() {
 function maj_date() {
     let jours = document.querySelectorAll(".jour");
     jours.forEach((e, index) => {
-        let datetemp = new Date();
+        let datetemp = new Date(year,month-1,day);
         datetemp.setDate(date.getDate()+index+offsetjour+1-indice_jour);
         let date_jour = datetemp.toLocaleDateString();
+        console.log(date.getDate())
         e.id = date_jour;
         let dj = e.querySelector(".datejour > p");
         dj.innerText = listeJour[index] + "\n" + date_jour;
@@ -178,9 +193,6 @@ function create_rdv(horaire_debut,horaire_fin,journee,color="yellow") {
             if (i == horaire_fin && (i-1)%6 != 0) {
                 creneau_horaire.classList.add("invisible_border_bottom")
             }
-            if (i==38) {
-                console.log(i,i==horaire_fin, i%6 == 0)
-            }
             
         }
     }
@@ -196,18 +208,13 @@ function create_rdv(horaire_debut,horaire_fin,journee,color="yellow") {
 
 
 
-const buttonG = document.createElement('button');
-buttonG.textContent = 'Apply transition_cal_g';
-const buttonD = document.createElement('button');
-buttonD.textContent = 'Apply transition_cal_d';
+const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
+const boutonD = document.getElementsByClassName("selecteur_droit")[0];
 
-document.body.appendChild(buttonG);
-document.body.appendChild(buttonD);
 
 const box = document.querySelectorAll(".jour");
 
-// Add event listeners to the buttons
-buttonG.addEventListener('click', () => {
+boutonG.addEventListener('click', () => {
     offsetjour -= 7;
     box.forEach(element => {
         element.classList.remove('transition_cal_g');
@@ -220,7 +227,7 @@ buttonG.addEventListener('click', () => {
     
 });
 
-buttonD.addEventListener('click', () => {
+boutonD.addEventListener('click', () => {
     offsetjour += 7;
     box.forEach(element => {
         element.classList.remove('transition_cal_d');
