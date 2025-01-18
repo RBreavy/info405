@@ -12,7 +12,33 @@ if (indice_jour == 0) {
 var main = document.getElementById("main_cal")
 var listeJour = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"]
 
+var lundi = "13/01/2025"
+var jeudi = "16/01/2025"
+var dimanche = "19/01/2025"
 
+var mardi = "21/01/2025"
+var mercredi = "22/01/2025"
+
+var vendredi = "10/01/2025"
+var samedi = "11/01/2025"
+creation_jour()
+
+
+var listeCreneau = [
+    () => create_rdv(0, 71, lundi, "blue"),
+    () => create_rdv(31, 48, jeudi),
+    () => create_rdv(51, 60, jeudi, "green"),
+    () => create_rdv(6, 11, dimanche, "red"),
+
+    () => create_rdv(39, 45, mardi, "blue"),
+    () => create_rdv(14, 18, mercredi,"aqua"),
+
+    () => create_rdv(21, 38, vendredi, "white"),
+    () => create_rdv(41, 50, vendredi, "purple"),
+    () => create_rdv(6, 11, samedi, "orange")
+];
+
+listeCreneau.forEach(func => func());
 
 
 function create(tag,container,text=null){
@@ -39,6 +65,7 @@ function creation_jour() {
     
         let date_jour = datetemp.toLocaleDateString();
         create("p",article,listeJour[i]+"\n"+date_jour);
+        div_jour.id = date_jour;
         
         creation_crenau(i,div_jour,datetemp)
     
@@ -53,17 +80,47 @@ function creation_jour() {
 }
 
 
-function maj_jour() {
-    console.log("rdef")
-    let jours = document.querySelectorAll(".datejour > p")
+function maj_semaine() {
+    maj_date();
+    maj_id();
+    maj_rdv();
+}
+
+function maj_date() {
+    let jours = document.querySelectorAll(".jour");
     jours.forEach((e, index) => {
         let datetemp = new Date();
         datetemp.setDate(date.getDate()+index+offsetjour+1-indice_jour);
         let date_jour = datetemp.toLocaleDateString();
-        ;
-        e.innerText = listeJour[index] + "\n" + date_jour;
+        e.id = date_jour;
+        let dj = e.querySelector(".datejour > p");
+        dj.innerText = listeJour[index] + "\n" + date_jour;
     })
 }
+
+function maj_id() {
+    let jour = document.querySelectorAll(".jour");
+    jour.forEach(e => {
+        let lC = e.querySelectorAll(".creneau");
+        lC.forEach((creneau,index) => {
+            creneau.id = e.id+index;
+        });
+    });
+    listeCreneau.forEach(func => func());
+}
+
+function maj_rdv() {
+    let rdv = document.querySelectorAll(".rdv");
+    rdv.forEach(e => {
+        e.classList.remove("custom_bg_color");
+        e.classList.remove("rdv");
+        e.classList.remove('custom_border_top');
+        e.classList.remove("invisible_border_top");
+        e.classList.remove("invisible_border_bottom");
+    });
+    listeCreneau.forEach(func => func());
+}
+
 
 
 
@@ -103,23 +160,31 @@ function creation_crenau(indice_div_jour,div_jour,datetemp) {
 
 
 function create_rdv(horaire_debut,horaire_fin,journee,color="yellow") {
-    for (let i = horaire_debut; i<=horaire_fin; i++) {
-        var creneau_horaire = document.getElementById(journee.toString()+i.toString())
-        creneau_horaire.style.backgroundColor = color
-
-        if (i%6 == 0 && i != horaire_debut) {
-            creneau_horaire.style.borderTop = "solid 1px "+color
-        } 
-
-        if (i == horaire_debut && i%6 !=0) {
-            creneau_horaire.classList.add("invisible_border_top")
+    if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
+        for (let i = horaire_debut; i<=horaire_fin; i++) {
+            var creneau_horaire = document.getElementById(journee.toString()+i.toString())
+            creneau_horaire.style.setProperty('--border-color', color);
+            creneau_horaire.classList.add("custom_bg_color");
+            creneau_horaire.classList.add("rdv")
+    
+            if (i%6 == 0 && i != horaire_debut) {
+                creneau_horaire.classList.add('custom_border_top');
+            } 
+    
+            if (i == horaire_debut && i%6 !=0) {
+                creneau_horaire.classList.add("invisible_border_top")
+            }
+            
+            if (i == horaire_fin && (i-1)%6 != 0) {
+                creneau_horaire.classList.add("invisible_border_bottom")
+            }
+            if (i==38) {
+                console.log(i,i==horaire_fin, i%6 == 0)
+            }
+            
         }
-        
-        if (i == horaire_fin && i%6 == 0) {
-            creneau_horaire.classList.add("invisible_border_bottom")
-        }
-        
     }
+
 }
 
 
@@ -127,18 +192,7 @@ function create_rdv(horaire_debut,horaire_fin,journee,color="yellow") {
 
 
 
-var lundi = "13/01/2025"
-var mardi = "14/01/2025"
-var mercredi = "15/01/2025"
-var jeudi = "16/01/2025"
-var vendredi = "17/01/2025"
-var samedi = "18/01/2025"
-var dimanche = "19/01/2025"
-creation_jour()
-create_rdv(0,71,lundi,"blue")
-create_rdv(31,48,jeudi)
-create_rdv(51,60,jeudi,"green")
-create_rdv(6,11,dimanche,"red")
+
 
 
 
@@ -156,24 +210,25 @@ const box = document.querySelectorAll(".jour");
 buttonG.addEventListener('click', () => {
     offsetjour -= 7;
     box.forEach(element => {
+        element.classList.remove('transition_cal_g');
         element.classList.add('transition_cal_g');
         setTimeout(_ => {
             element.classList.remove('transition_cal_g');
         },1000);
     });
-    setTimeout(maj_jour(),1000);
+    maj_semaine();
     
 });
 
 buttonD.addEventListener('click', () => {
     offsetjour += 7;
-    console.log(offsetjour);
     box.forEach(element => {
+        element.classList.remove('transition_cal_d');
         element.classList.add('transition_cal_d');
         
         setTimeout(_ => {
             element.classList.remove('transition_cal_d');
         },1000);
     });
-    setTimeout(maj_jour(),1000);
+    maj_semaine();
 });
