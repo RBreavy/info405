@@ -8,7 +8,7 @@ body {
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     font-family: Arial, sans-serif;
     color: #000000;
-    background-image: url('font_indextest.jpg');
+    background-image: url('font_indextest.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -20,10 +20,11 @@ body {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.2);
-    width: 350px;
+    width: 400px;
     text-align: center;
     font-family: cursive;
-    margin-left: 16vw;
+    margin-left: 10vw;
+    margin-top: 16vw;
     max-width: 90vw;
 }
 
@@ -96,21 +97,19 @@ label input[type="checkbox"] {
 
 .container {
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .container .lien a {
     color: #2575fc;
     text-decoration: none;
     font-weight: bold;
-    font-size: larger;
 }
 
 #creation {
     color: #2575fc;
     text-decoration: none;
     font-weight: bold;
-    font-size: larger;
 }
 
 .container .psw a:hover {
