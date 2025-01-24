@@ -1,0 +1,98 @@
+p {
+    font-family: "URW Chancery L", cursive;
+    font-size:30px;
+}
+
+h1 {
+    font-family: "URW Chancery L", cursive;
+    font-size:50px;
+}
+
+.banner {
+    background: linear-gradient(135deg, #042763,#4f0999);
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.banner img {
+    height: 100px;
+    width: 160px;
+    object-fit: contain;
+    object-position:center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+}
+
+body {
+    background-image: url("fond.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    height: 100vh;
+    color: white;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #5e41a1;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    background-color: #ffffff;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    border-radius: 5px;
+
+}
+
+.dropdown-content a:hover {
+    background-color: #a3a3a3;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #440875;
+}
+
+img {
+    width: 200px;
+    height: 250px;
+    border-radius: 5px;
+    margin-left: auto; 
+}
