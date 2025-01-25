@@ -8,6 +8,8 @@ h1 {
     font-size:50px;
 }
 
+
+
 .banner {
     background: linear-gradient(135deg, #042763,#4f0999);
     color: white;
@@ -46,13 +48,14 @@ body {
     display: inline-block;
 }
 
-.dropbtn {
+.dropbtn a{
     background-color: #5e41a1;
     color: white;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    text-decoration: none;
     border-radius: 5px;
 }
 
