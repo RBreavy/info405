@@ -297,3 +297,9 @@ body {
     background-color: var(--border-color);
 }
 
+.rdv {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: black;
+}

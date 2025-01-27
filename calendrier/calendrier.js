@@ -45,16 +45,16 @@ creation_jour()
 
 var listeCreneau = [
     () => create_rdv(0, 71, lundi, "blue"),
-    () => create_rdv(31, 48, jeudi),
-    () => create_rdv(51, 60, jeudi, "green"),
-    () => create_rdv(6, 11, dimanche, "red"),
+    () => create_rdv(31, 17, jeudi),
+    () => create_rdv(51, 9, jeudi, "green"),
+    () => create_rdv(6, 5, dimanche, "red"),
 
-    () => create_rdv(39, 45, mardi, "blue"),
-    () => create_rdv(14, 18, mercredi,"aqua"),
+    () => create_rdv(39, 6, mardi, "blue"),
+    () => create_rdv(14, 4, mercredi,"aqua"),
 
-    () => create_rdv(21, 38, vendredi, "white"),
-    () => create_rdv(41, 50, vendredi, "purple"),
-    () => create_rdv(6, 11, samedi, "orange")
+    () => create_rdv(21, 17, vendredi, "white"),
+    () => create_rdv(41, 9, vendredi, "purple"),
+    () => create_rdv(6, 5, samedi, "orange")
 ];
 
 listeCreneau.forEach(func => func());
@@ -178,8 +178,9 @@ function creation_crenau(indice_div_jour,div_jour,datetemp) {
 }
 
 
-function create_rdv(horaire_debut,horaire_fin,journee,color="yellow") {
-    if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
+function create_rdv(horaire_debut,duree,journee,color="yellow") {
+    if (horaire_debut>-1 && horaire_debut+duree<72 && document.getElementById(journee) !== null) {
+        /*
         for (let i = horaire_debut; i<=horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString()+i.toString())
             creneau_horaire.style.setProperty('--border-color', color);
@@ -197,10 +198,14 @@ function create_rdv(horaire_debut,horaire_fin,journee,color="yellow") {
             if (i == horaire_fin && (i-1)%6 != 0) {
                 creneau_horaire.classList.add("invisible_border_bottom")
             }
-            
+          
         }
+        */
+       var creneau_horaireedededed = document.getElementById(journee.toString()+horaire_debut);
+       var trdv = create("article",creneau_horaireedededed);
+       //trdv.style.height = 
+       //trdv.classList.add("rdv")
     }
-
 }
 
 
