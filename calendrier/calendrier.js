@@ -10,14 +10,19 @@ if (indice_jour == 0) {
 }
 
 
-const dateInput = document.getElementById("calendrier");
+
+
+var dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', _ => {
     [year, month, day] = dateInput.value.split("-").map(Number);
-    dateInput.value = "";
-    date = new Date(year, month - 1, day);
-    indice_jour = date.getDay();
-    offsetjour = 0;
-    maj_semaine();
+    if (2000 <= year && year <= 2100) {
+        console.log(2000 <=year);
+        dateInput.value = "";
+        date = new Date(year, month - 1, day);
+        indice_jour = date.getDay();
+        offsetjour = 0;
+        maj_semaine();
+    } 
 });
 
 
@@ -106,7 +111,6 @@ function maj_date() {
         let datetemp = new Date(year,month-1,day);
         datetemp.setDate(date.getDate()+index+offsetjour+1-indice_jour);
         let date_jour = datetemp.toLocaleDateString();
-        console.log(date.getDate())
         e.id = date_jour;
         let dj = e.querySelector(".datejour > p");
         dj.innerText = listeJour[index] + "\n" + date_jour;
@@ -198,13 +202,6 @@ function create_rdv(horaire_debut,horaire_fin,journee,color="yellow") {
     }
 
 }
-
-
-
-
-
-
-
 
 
 
