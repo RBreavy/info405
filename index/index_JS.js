@@ -6,6 +6,8 @@
 */
 
 
+
+
 document.addEventListener("DOMContentLoaded", function () {     // utilisation du local storage pour sauvegarder les informations
     const savedName = localStorage.getItem("nom");
     const savedPsw = localStorage.getItem("psw");
@@ -44,10 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {     // utilisation d
                 localStorage.removeItem("psw");
                 localStorage.setItem("souvenir", false);
             }
-
-            console.log("Nom :", nom);
-            console.log("Mot de passe :", psw);
-            console.log("Se souvenir de moi :", souvenir);
+            
         });
     }
 });
