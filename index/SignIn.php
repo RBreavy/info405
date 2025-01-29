@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (password_verify($password, $user['mot_de_passe'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['nom'];
-            echo "<script>window.location.href='/index/patient.html';</script>";
+            echo "<script>window.location.href='../patient.html';</script>";
             exit();
         } else {
             echo "<script>alert('Mot de passe incorrect.'); window.history.back();</script>";
