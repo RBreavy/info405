@@ -1,27 +1,17 @@
 <?php
-session_start(); // Démarrer la session
-include "db_connect.php"; // Connexion à la base de données
-
-if (!$conn) {
-    die("Erreur de connexion: " . mysqli_connect_error());
-}
+session_start();
+include "db_connect.php";
 
 // Méthode POST 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $mail = trim($_POST['mail']);
-    $password = trim($_POST['password']);
-
-    // Si les 2 champs ne sont pas remplis
-    if (empty($mail) || empty($password)) {
-        echo "<script>alert('Veuillez remplir tous les champs.'); window.history.back();</script>";
-        exit();
-    }
+    $nom = trim($_POST['nom']);
+    $password = trim($_POST['psw']);
 
     // Rechercher l'utilisateur dans la base de données
-    $stmt = $conn->prepare("SELECT id, nom, mot_de_passe FROM utilisateurs WHERE email = ?");
-    $stmt->bind_param("s", $mail);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt = $conn->prepare("SELECT id, nom, mot_de_passe FROM utilisateurs WHERE nom = $nom");
+    $stmt->bind_param("s", $nom);   // indique que c'est un String
+    $stmt->execute();               // exec le prepare
+    $result = $stmt->get_result();  
 
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
