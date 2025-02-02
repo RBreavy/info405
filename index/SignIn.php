@@ -1,38 +1,35 @@
 <?php
+echo "<script>console.log('SignIn possible');</script>";
 session_start();
-include "db_connect.php";
+require_once "db_connect.php";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nom = trim($_POST['nom']);
-    $password = trim($_POST['psw']);
+if (!$pdo) {
+    die("Échec de la connexion à la base de données.");
+}
 
-    // Vérifier que les champs ne sont pas vides
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    var_dump($_POST);
+    $nom = $_POST['nom'];
+    $password = $_POST['psw'];
+
     if (empty($nom) || empty($password)) {
-        echo "<script>alert('Veuillez remplir tous les champs.'); window.history.back();</script>";
-        exit();
+        die("Veuillez remplir tous les champs.");
     }
 
-    // Préparer la requête SQL sécurisée
-    $stmt = $conn->prepare("SELECT id_utilisateurs, nom, mot_de_passe FROM utilisateurs WHERE nom = ?");
-    $stmt->bind_param("s", $nom);
+    $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE nom = :nom");
+    $stmt->bindParam(':nom', $nom);
     $stmt->execute();
-    $stmt->store_result();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($stmt->num_rows === 1) {
-        $stmt->bind_result($id, $nom, $hashed_password);
-        $stmt->fetch();
-
-        // Vérifier le mot de passe
-        if (password_verify($password, $hashed_password)) {
-            $_SESSION['user_id'] = $id;
-            $_SESSION['user_name'] = $nom;
-            header("Location: ../patient.html");
-            exit();
-        }
+    if ($user && password_verify($password, $user['mot_de_passe']))
+        // Connexion réussie
+        $_SESSION['nom'] = $user['nom'];
+        header("Location: ../patient.html");
+        exit();
+    } else {
+        echo "Nom ou mot de passe incorrect.";
     }
-    echo "<script>alert('Nom ou mot de passe incorrect.'); window.history.back();</script>";
-    
-    $stmt->close();
-    $conn->close();
+} else {
+    echo "Accès non autorisé.";
 }
 ?>

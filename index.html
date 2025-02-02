@@ -11,29 +11,29 @@
 
   <h2>Bienvenue!!</h2>
 
-  <form method="POST" action="index/SignIn.php">
-    <div class="container">
+  
+  <div class="container">
+    <form method="POST" action="index/SignIn.php">
       <label for="nom"><b>Nom :</b></label>
       <input name="nom" type="text" placeholder="Entrer votre nom" id="nom" required> <br><br>
       
       <label for="psw"><b>Mot de passe :</b></label>
       <input name="psw" type="password" placeholder="Entrer votre mot de passe" id="psw" required> <br>
+    </form>
 
-      <div class="container">
-        <span class="lien">
-          <a href="index/mdp_oublie.html">Mot de passe oublié ?</a> 
-          <input type="checkbox" checked="checked" id="souvenir"> Se souvenir de moi
-        </span>
-      </div>
+  <div class="container">
+    <span class="lien">
+      <a href="index/mdp_oublie.html">Mot de passe oublié ?</a> 
+      <input type="checkbox" checked="checked" id="souvenir"> Se souvenir de moi
+    </span>
+  </div>
         
-      </label><br><br>
+  </label><br><br>
 
-      <button type="submit" id="submit-btn">Connexion</button> <br><br>
+  <button type="submit" id="submit-btn">Connexion</button> <br><br>
 
-      <a id="creation" href="index/creer_compte.html">Créer vous un compte</a>
-    </div>
-
-  </form>
+  <a id="creation" href="index/creer_compte.html">Créer vous un compte</a>
+  </div>
 </div>
 
 </body>
