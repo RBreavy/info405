@@ -1,17 +1,8 @@
-/* pour chaque personne il faut :
-- nom
-- mail
-- mdp
-(boolean admin a revoir)
-*/
-
-
-
-
-document.addEventListener("DOMContentLoaded", function () {     // utilisation du local storage pour sauvegarder les informations
+document.addEventListener("DOMContentLoaded", function () {
+    // Récupérer les valeurs sauvegardées dans le localStorage
     const savedName = localStorage.getItem("nom");
     const savedPsw = localStorage.getItem("psw");
-    const savedsouvenir = localStorage.getItem("souvenir");
+    const savedSouvenir = localStorage.getItem("souvenir");
 
     const nomInput = document.getElementById("nom");
     if (nomInput) {
@@ -25,12 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {     // utilisation d
 
     const souvenirCheckbox = document.getElementById("souvenir");
     if (souvenirCheckbox) {
-        souvenirCheckbox.checked = savedsouvenir === "true";
+        souvenirCheckbox.checked = savedSouvenir === "true"; 
     }
 
-    const submitBtn = document.getElementById("submit-btn");
-    if (submitBtn) {
-        submitBtn.addEventListener("click", function (event) {
+    const form = document.querySelector("form");
+    if (form) {
+        form.addEventListener("submit", function (event) {
             event.preventDefault();
 
             const nom = nomInput ? nomInput.value : "";
@@ -40,13 +31,14 @@ document.addEventListener("DOMContentLoaded", function () {     // utilisation d
             if (souvenir) {
                 localStorage.setItem("nom", nom);
                 localStorage.setItem("psw", psw);
-                localStorage.setItem("souvenir", true);
+                localStorage.setItem("souvenir", "true");
             } else {
                 localStorage.removeItem("nom");
                 localStorage.removeItem("psw");
-                localStorage.setItem("souvenir", false);
+                localStorage.setItem("souvenir", "false");
             }
-            
+
+            form.submit();
         });
     }
 });
