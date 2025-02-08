@@ -21,7 +21,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $result->fetch_assoc();
 
     if ($user) {
-
+        // Affiche les données de l'utilisateur récupérées pour déboguer
+        echo "<pre>";
+        print_r($user); 
+        echo "</pre>";
+    
+        // Afficher le mot de passe en texte brut et le haché pour vérifier
+        echo "Mot de passe soumis : $password <br>";
+        echo "Mot de passe haché dans la base de données : " . $user['mot_de_passe'] . "<br>";
+    
         if (password_verify($password, $user['mot_de_passe'])) {
             // Si le mot de passe est correct, on démarre la session et on redirige l'utilisateur
             $_SESSION['nom'] = $user['nom'];
@@ -36,8 +44,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Si l'utilisateur n'a pas été trouvé
         echo "Utilisateur non trouvé.";
     }
-} else {
-    // Si ce n'est pas une requête POST, afficher ce message
-    echo "Accès non autorisé.";
-}
+    
 ?>
