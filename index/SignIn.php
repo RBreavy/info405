@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "db_connect.php";
+require_once "db_connect.php"; // This will now use mysqli
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -11,11 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Veuillez remplir tous les champs.");
     }
 
-    // récuperer dans la base de donnée de manière sécurisée
-    $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE nom = :nom");
-    $stmt->bindParam(':nom', $nom);
+    // Using mysqli to prepare and execute the query
+    $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE nom = ?");
+    $stmt->bind_param('s', $nom); // 's' means string type
     $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
     if ($user && password_verify($password, $user['mot_de_passe'])) {
         $_SESSION['nom'] = $user['nom'];
