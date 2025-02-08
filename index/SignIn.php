@@ -44,5 +44,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Si l'utilisateur n'a pas été trouvé
         echo "Utilisateur non trouvé.";
     }
-    
+}
 ?>
