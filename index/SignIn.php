@@ -18,16 +18,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
-    if ($user && password_verify($password, $user['mot_de_passe'])) {
-        $_SESSION['nom'] = $user['nom'];
-        echo "Connexion réussie";
-        header("Location: ../patient.html");
-        exit();
-    
+    if ($user) {
+        echo "<pre>";
+        print_r($user); // Affiche les données de l'utilisateur récupérées
+        echo "</pre>";
+        
+        if (password_verify($password, $user['mot_de_passe'])) {
+            $_SESSION['nom'] = $user['nom'];
+            echo "Connexion réussie";
+            header("Location: ../patient.html");
+            exit();
+        } else {
+            echo "Nom ou mot de passe incorrect.";
+        }
     } else {
-        echo "Nom ou mot de passe incorrect.";
+        echo "Utilisateur non trouvé.";
     }
-} else {
-    echo "Accès non autorisé.";
-}
 ?>
