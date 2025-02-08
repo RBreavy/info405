@@ -26,11 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         print_r($user); 
         echo "</pre>";
     
-        // Afficher le mot de passe en texte brut et le haché pour vérifier
-        echo "Mot de passe soumis : $password <br>";
-        echo "Mot de passe haché dans la base de données : " . $user['mot_de_passe'] . "<br>";
-    
-        if (password_verify($password, $user['mot_de_passe'])) {
+        // Vérifier le mot de passe avec password_verify() si les mots de passe sont hachés
+        if ($password === $user['mot_de_passe']) {
             // Si le mot de passe est correct, on démarre la session et on redirige l'utilisateur
             $_SESSION['nom'] = $user['nom'];
             echo "Connexion réussie";
