@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "db_connect.php"; // This will now use mysqli
+require_once "db_connect.php"; // Assurez-vous que db_connect.php est correct et retourne $conn
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -11,18 +11,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Veuillez remplir tous les champs.");
     }
 
-    // Using mysqli to prepare and execute the query
+    // Utilisation de mysqli pour préparer et exécuter la requête
     $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE nom = ?");
-    $stmt->bind_param('s', $nom); // 's' means string type
+    $stmt->bind_param('s', $nom); // 's' pour type string
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
     if ($user) {
+        // Affiche les données de l'utilisateur récupérées pour déboguer
         echo "<pre>";
-        print_r($user); // Affiche les données de l'utilisateur récupérées
+        print_r($user); 
         echo "</pre>";
-        
+
         if (password_verify($password, $user['mot_de_passe'])) {
             $_SESSION['nom'] = $user['nom'];
             echo "Connexion réussie";
@@ -34,4 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Utilisateur non trouvé.";
     }
+} else {
+    echo "Accès non autorisé.";
+}
 ?>
