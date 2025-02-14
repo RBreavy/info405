@@ -39,7 +39,7 @@ var mardi = "21/01/2025"
 var mercredi = "22/01/2025"
 
 var vendredi = "10/01/2025"
-var samedi = "11/01/2025"
+var samedi = "16/02/2025"
 creation_jour()
 
 
@@ -54,7 +54,7 @@ var listeCreneau = [
 
     () => create_rdv(21, 17, vendredi, "white"),
     () => create_rdv(41, 9, vendredi, "purple"),
-    () => create_rdv(6, 5, samedi, "orange")
+    () => create_rdv(6, 5, samedi, "orange", "docteur Dupont")
 ];
 
 listeCreneau.forEach(func => func());
@@ -177,15 +177,40 @@ function creation_crenau(indice_div_jour,div_jour,datetemp) {
     }
 }
 
+function calcul_duree(heure_debut,duree) {
+    let h_dbt_rdv = (8+Math.floor((heure_debut+1)/6)).toString()+"h"
+    let m_dbt_rdv = (heure_debut%6).toString()
+    let h_fin_rdv = (8+Math.floor((heure_debut+duree+1)/6)).toString()+"h"
+    let m_fin_rdv = ((heure_debut+duree+1)%6).toString()
+    if (m_dbt_rdv.length == 1) {
+        m_dbt_rdv = m_dbt_rdv + "0";
+    }
 
-function create_rdv(horaire_debut,duree,journee,color="yellow") {
-    if (horaire_debut>-1 && horaire_debut+duree<72 && document.getElementById(journee) !== null) {
-        /*
+    if (m_fin_rdv.length == 1) {
+        m_fin_rdv = m_fin_rdv + "0";
+    }
+    
+    return (h_dbt_rdv+m_dbt_rdv+" - "+h_fin_rdv+m_fin_rdv)
+}
+
+
+
+function create_rdv(horaire_debut,duree,journee,color="yellow",texte) {
+    let horaire_fin = horaire_debut+duree;
+    if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
         for (let i = horaire_debut; i<=horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString()+i.toString())
             creneau_horaire.style.setProperty('--border-color', color);
             creneau_horaire.classList.add("custom_bg_color");
-            creneau_horaire.classList.add("rdv")
+            
+            if (i == horaire_debut) {
+                let box_invisible = create("article",creneau_horaire);
+                create("p",box_invisible,texte);
+                create("p",box_invisible,calcul_duree(horaire_debut,duree));
+                box_invisible.classList.add("rdv")
+                box_invisible.style.height = creneau_horaire.offsetHeight* (duree+1) -3+"px";
+            }
+            
     
             if (i%6 == 0 && i != horaire_debut) {
                 creneau_horaire.classList.add('custom_border_top');
@@ -195,16 +220,12 @@ function create_rdv(horaire_debut,duree,journee,color="yellow") {
                 creneau_horaire.classList.add("invisible_border_top")
             }
             
-            if (i == horaire_fin && (i-1)%6 != 0) {
+            if (i == horaire_fin && (i+1)%6 != 0) {
+                console.log(i)
                 creneau_horaire.classList.add("invisible_border_bottom")
             }
           
         }
-        */
-       var creneau_horaireedededed = document.getElementById(journee.toString()+horaire_debut);
-       var trdv = create("article",creneau_horaireedededed);
-       //trdv.style.height = 
-       //trdv.classList.add("rdv")
     }
 }
 
