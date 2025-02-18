@@ -1,13 +1,14 @@
 .banner {
     background: linear-gradient(135deg, #042763,#4f0999);
-    padding: 20px;
+    color: white;
+    height:15%;
     font-size: 24px;
-    height: 10vh;
     font-weight: bold;
     border-radius: 5px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    gap: 20px;
     overflow: hidden;
 }
 
@@ -52,8 +53,7 @@ body {
     display: none;
     position: absolute;
     background-color: #f0efef6f;
-    min-width: 9vw;
-    min-height: 9vh;
+    min-width: 150px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     font-family: "URW Chancery L", cursive;
@@ -62,14 +62,14 @@ body {
 
 .dropdown-content a {
     color: black;
-    padding: 6%;
+    padding: 10px 15px;
     text-decoration: none;
     display: block;
     border-radius: 5px;
     font-family: "URW Chancery L", cursive;
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
-    font-size: 60%;
+    font-size: 15px;
     
 }
 
@@ -140,12 +140,9 @@ body {
     border-bottom: solid 1px black;
 }
 
-
-
 .datejour p {
     color: #f4f4f9 ;
     text-align: center;
-    font-size: 1vw;
     font-family: "URW Chancery L", cursive;
 }
 
@@ -153,7 +150,6 @@ body {
 .creneau {
     width: 100%;
     flex: auto;
-    font-size: 1vw;
     position: relative;
     font-family: "URW Chancery L", cursive;
 }
@@ -184,15 +180,14 @@ body {
 
 .heure {
     color: black;
-    font-size: 1vw;
     z-index: 1;
     margin-right: 5px;
 }
 
 .selecteur {
     position: absolute;
-    width: 20vw;
-    height: 5vh;
+    width: 20%;
+    height: 40px;
     background-color: rgba(157, 157, 157, 0.5);
     top: 5px;
     left: 50%;
@@ -212,8 +207,8 @@ body {
 }
 
 .selecteur_droit, .selecteur_gauche {
-    width: 8%;
-    height: 70%;
+    width: 30px;
+    height: 30px;
     border-radius: 30px;
     box-shadow: 0 0 0 1px black;
     background-size: 100%;
@@ -238,7 +233,6 @@ body {
     background-color: rgba(0, 0, 0, 0);
     color: white;
     padding: 3px;
-    width: 40%;
     border: solid 1px black;
     border-radius: 3px;
     text-shadow: 1px 1px 1px black;
@@ -277,22 +271,22 @@ body {
 }
 
 @keyframes anim_cal_g {
-    40% {transform: translateX(20%);}
+    40% {transform: translateX(50px);}
 }
 
 @keyframes anim_cal_d {
-    40% {transform: translateX(-20%);}
+    40% {transform: translateX(-50px);}
 }
 
 
 .invisible_border_top {
-    margin-top: -1px;
-    border-top: black solid 1px;
+    box-shadow: 0 -1px 0 black;
+    z-index: 1;
 }
 
 .invisible_border_bottom {
-    margin-top: -1px;
-    border-bottom: black solid 1px;
+    box-shadow: 0 1px 0 black;
+    z-index: 1;
 }
 
 .custom_border_top {
@@ -302,7 +296,6 @@ body {
 .custom_bg_color {
     background-color: var(--border-color);
 }
-
 .rdv {
     position: absolute;
     z-index: 1;
@@ -311,14 +304,56 @@ body {
 }
 
 .rdv p {
-    color: black;
     width: 100%;
     height: 50%;
     overflow-wrap: break-word;
     overflow-y: hidden;
 }
 
-.rdv:hover p {
+.rdv p:hover {
     overflow-y: visible;
-    z-index: 2;
 }
+
+button {
+    background-color: #5e41a1;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    top:30%;
+}
+
+
+button:hover {
+    background-color: #7777cd;
+    color:black;
+}
+
+
+.invisible{
+    display:none;
+}
+
+.lateralbar {
+    position: absolute;
+    margin-top: 11.5%;
+    left: 83vw;
+    height: 100vh;
+    width: 10vw;
+    
+}
+
+.ajouter h2 {
+    position: absolute;
+    top:50px;
+    color: green;
+    text-align: center;
+
+}
+.aggrandis{
+    transform: scale(1.1);
+}
+
