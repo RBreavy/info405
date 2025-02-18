@@ -2,10 +2,10 @@
 include('db_connect.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Vérification des données reçues via POST
+
     if (isset($_POST['nom'], $_POST['mail'], $_POST['mdp'])) {
-        $nom = mysqli_real_escape_string($conn, $_POST['nom']);
-        $mail = mysqli_real_escape_string($conn, $_POST['mail']);
+        $nom = $_POST['nom'];
+        $mail = $_POST['mail'];
         $mdp = $_POST['mdp'];
 
         // Vérifier que l'email est valide
@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Hashage du mot de passe
         $mdp = password_hash($mdp, PASSWORD_DEFAULT);
 
-        // Requête SQL avec préparation pour éviter les injections SQL
         $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, mail, mot_de_passe) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $nom, $mail, $mdp);
 
@@ -39,6 +38,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => false, 'message' => 'Données manquantes']);
     }
 
-    exit;
 }
 ?>
