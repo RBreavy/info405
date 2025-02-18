@@ -12,12 +12,12 @@ try {
               JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs
               JOIN periode p ON r.id_periode = p.id_periode";
               
-    $stmt = $conn->query($query);
-    $rdvs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = mysqli_query($conn, $query);
+    $rdvs = mysqli_fetch_all($result, MYSQLI_ASSOC);
     
     header('Content-Type: application/json');
     echo json_encode($rdvs);
-} catch(PDOException $e) {
+} catch(Exception $e) {
     header('Content-Type: application/json');
     echo json_encode(['error' => $e->getMessage()]);
 }
