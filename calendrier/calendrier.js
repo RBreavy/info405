@@ -187,7 +187,7 @@ function creation_crenau(indice_div_jour,div_jour,datetemp) {
 }
 
 
-fetch('calendrier/get-data.php')
+fetch('get-data.php')
   .then(response => response.json())
   .then(data => {
     // Utiliser les données
