@@ -188,12 +188,17 @@ function creation_crenau(indice_div_jour,div_jour,datetemp) {
 
 let lrdv;
 
-fetch('calendrier/get-data.php')
-  .then(response => response.json())
-  .then(data => {
-    lrdv = data;
-  })
-  .catch(error => console.error(error));
+async function fetchAndSaveData() {
+  try {
+    const response = await fetch('get-data.php');
+    savedData = await response.json();
+    return lrdv;
+  } catch(error) {
+    console.error(error);
+  }
+}
+
+fetchAndSaveData();
   
 
 lrdv.forEach(e => {
