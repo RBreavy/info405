@@ -3,19 +3,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
     const nomInput = document.getElementById("nom");
     const mailInput = document.getElementById("mail");
-    const pswInput = document.getElementById("psw");
+    const mdpInput = document.getElementById("mdp");
 
     if (form) {
         form.addEventListener("submit", function (event) {
             event.preventDefault(); // Empêcher la soumission classique
 
             // Récupération des valeurs
-            const nom = nomInput.value.trim();
-            const mail = mailInput.value.trim();
-            const mdp = pswInput.value.trim();
+            const nom = nomInput.value;
+            const mail = mailInput.value;
+            const mdp = mdpInput.value;
 
             // Vérifications de base
-            if (!nom || !mail || !mdp) {
+            if (!nomInput || !mailInput || !mdpInput) {
                 showError("Tous les champs doivent être remplis.");
                 return;
             }
