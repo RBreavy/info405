@@ -5,55 +5,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const mailInput = document.getElementById("mail");
     const mdpInput = document.getElementById("mdp");
 
-    if(nomInput && mailInput && mailInput){
-        const nom = nomInput.value || "";
-        const mail = mailInput.value || "";
-        const mdp = mdpInput.value || "";
-    } else {
-        showError("Problème des champs")
+    if (!nomInput || !mailInput || !mdpInput) {
+        console.error("Un ou plusieurs champs du formulaire sont introuvables !");
+        return;
     }
 
     if (form) {
         form.addEventListener("submit", function (event) {
             event.preventDefault(); // Empêcher la soumission classique
 
+            const nom = nomInput.value.trim();
+            const mail = mailInput.value.trim();
+            const mdp = mdpInput.value.trim();
+
             // Vérifications de base
-            if (!nomInput || !mailInput || !mdpInput) {
-                showError("Tous les champs doivent être remplis.");
+            if (nom === "" || mail === "" || mdp === "") {
+                alert("Tous les champs doivent être remplis.");
                 return;
             }
 
-            // Création de FormData
-            const formData = new FormData();
-            formData.append("nom", nom);
-            formData.append("mail", mail);
-            formData.append("mdp", mdp);
+            localStorage.setItem("nom", nom);
+            localStorage.setItem("mail", mail);
+            localStorage.setItem("mdp", mdp);
 
-            // Envoi de la requête
-            fetch("SignUp.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = "patient.html"; // Redirection après succès
-                } else {
-                    showError(data.message || "Une erreur est survenue.");
-                }
-            })
-            .catch(error => {
-                console.error("Erreur de connexion:", error);
-                showError("Impossible de contacter le serveur. Réessayez plus tard.");
-            });
+            form.submit();
         });
-    }
-
-    // Fonction d'affichage des erreurs
-    function showError(message) {
-        if (errorContainer) {
-            errorContainer.innerText = message;
-            errorContainer.style.color = "red";
-        }
     }
 });
