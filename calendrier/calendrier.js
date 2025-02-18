@@ -192,6 +192,7 @@ fetch('calendrier/get-data.php')
   .then(data => {
     // Utiliser les données
     console.log(data);
+    console.log("test")
   })
   .catch(error => console.error(error));
   
