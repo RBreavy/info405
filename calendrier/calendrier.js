@@ -189,25 +189,25 @@ function creation_crenau(indice_div_jour,div_jour,datetemp) {
 let lrdv;
 
 async function fetchAndSaveData() {
-  try {
-    const response = await fetch('calendrier/get-data.php');
-    savedData = await response.json();
-    return lrdv;
-  } catch(error) {
-    console.error(error);
-  }
+ try {
+   const response = await fetch('get-data.php');
+   lrdv = await response.json();
+   processData();
+ } catch(error) {
+   console.error(error);
+ }
+}
+
+function processData() {
+ lrdv.forEach(e => {
+   console.log(e["nom_medecin"]);
+   console.log(e["date_debut"]);
+   console.log(e["date_fin"]); 
+   console.log(e["couleur"]);
+ });
 }
 
 fetchAndSaveData();
-  
-
-lrdv.forEach(e => {
-    console.log(e["nom_medecin"]);
-    console.log(e["date_debut"]);
-    console.log(e["date_debut"]);
-    console.log(e["date_fin"]);
-    console.log(e["couleur"]);
-});
 
 
 function calcul_duree(heure_debut,duree) {
