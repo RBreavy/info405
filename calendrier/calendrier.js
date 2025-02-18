@@ -190,7 +190,7 @@ let lrdv;
 
 async function fetchAndSaveData() {
  try {
-   const response = await fetch('get-data.php');
+   const response = await fetch('calendrier/get-data.php');
    lrdv = await response.json();
    processData();
  } catch(error) {
