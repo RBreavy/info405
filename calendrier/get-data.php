@@ -2,7 +2,7 @@
 error_reporting(0);
 ini_set('display_errors', 0);
 
-include_once "../../index/db_connect.php";
+include_once "../index/db_connect.php";
 
 try {
     $query = "SELECT r.*, m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
