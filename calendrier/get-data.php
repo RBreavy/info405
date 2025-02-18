@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 include_once "../index/db_connect.php";
 $query = "SELECT r.*, m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
           p.date_debut, p.date_fin 
