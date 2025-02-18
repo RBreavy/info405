@@ -54,7 +54,7 @@ var listeCreneau = [
 
     () => create_rdv(21, 17, vendredi, "white"),
     () => create_rdv(41, 9, vendredi, "purple"),
-    () => create_rdv(6, 0, samedi, "orange", "docteur Dupont")
+    () => create_rdv(6, 5, samedi, "orange", "docteur Dupont")
 ];
 
 listeCreneau.forEach(func => func());
@@ -130,12 +130,17 @@ function maj_id() {
 function maj_rdv() {
     let rdv = document.querySelectorAll(".rdv");
     rdv.forEach(e => {
+
+        e.remove();
+    });
+
+    let rdv_color = document.querySelectorAll(".custom_bg_color");
+    rdv_color.forEach(e => {
         e.classList.remove("custom_bg_color");
-        e.classList.remove("rdv");
         e.classList.remove('custom_border_top');
         e.classList.remove("invisible_border_top");
         e.classList.remove("invisible_border_bottom");
-    });
+    })
     listeCreneau.forEach(func => func());
 }
 
@@ -181,19 +186,14 @@ function creation_crenau(indice_div_jour,div_jour,datetemp) {
     }
 }
 
-var crn = document.querySelectorAll(".creneau")
-crn.forEach(e => [
-    e.addEventListener('onmouseenter', (e) => {
-        if (test) {}
-        const element = document.elementFromPoint(e.clientX, e.clientY);
-        console.log(element);
-        // element est l'élément sous la souris
-    }) 
-])
 
-
-
-
+fetch('calendrier/get-data.php')
+  .then(response => response.json())
+  .then(data => {
+    // Utiliser les données
+    console.log(data);
+  })
+  .catch(error => console.error(error));
   
 
 
