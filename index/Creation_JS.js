@@ -1,38 +1,56 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const submitButton = document.getElementById("submit-btn");
+    // Sélection des éléments
+    const form = document.querySelector("form");
+    const nomInput = document.getElementById("nom");
+    const mailInput = document.getElementById("mail");
+    const pswInput = document.getElementById("psw");
 
-    if (submitButton) {
-        submitButton.addEventListener("click", function (event) {
-            event.preventDefault();
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Empêcher la soumission classique
 
-            const nom = document.getElementById("nom").value;
-            const mail = document.getElementById("mail").value;
-            const mdp = document.getElementById("psw").value;
+            // Récupération des valeurs
+            const nom = nomInput.value.trim();
+            const mail = mailInput.value.trim();
+            const mdp = pswInput.value.trim();
 
-            // Crée un objet FormData pour envoyer les données du formulaire
+            // Vérifications de base
+            if (!nom || !mail || !mdp) {
+                showError("Tous les champs doivent être remplis.");
+                return;
+            }
+
+            // Création de FormData
             const formData = new FormData();
-            formData.append('nom', nom);
-            formData.append('mail', mail);
-            formData.append('mdp', mdp);
+            formData.append("nom", nom);
+            formData.append("mail", mail);
+            formData.append("mdp", mdp);
 
-            // Envoie la requête POST au serveur
-            fetch('SignUp.php', {
-                method: 'POST',
+            // Envoi de la requête
+            fetch("SignUp.php", {
+                method: "POST",
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert("Inscription réussie !");
-                    window.location.href = "patient.html"; 
+                    window.location.href = "patient.html"; // Redirection après succès
                 } else {
-                    alert("Erreur : " + data.message);
+                    showError(data.message || "Une erreur est survenue.");
                 }
             })
             .catch(error => {
                 console.error("Erreur de connexion:", error);
-                alert("Une erreur s'est produite. Essayez à nouveau.");
+                showError("Impossible de contacter le serveur. Réessayez plus tard.");
             });
         });
+    }
+
+    // Fonction d'affichage des erreurs
+    function showError(message) {
+        if (errorContainer) {
+            errorContainer.innerText = message;
+            errorContainer.style.color = "red";
+        }
     }
 });
