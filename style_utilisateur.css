@@ -99,18 +99,18 @@ body {
 
 .main_cal {
     position: relative;
-    width: 80vw;
+    width: 91vw;
     height: 80vh;
     
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-end;
-    justify-content: flex-end;
+    justify-content: flex-start;
     margin: 10px;
     background-image: linear-gradient(to bottom right, rgba(255,255,255,0.66), rgba(0,61,91,0.66));
     backdrop-filter: blur(5px);
-    padding: 0 25px 25px 0;
+    padding: 0 25px 25px 3.5%;
     border-radius: 10px;
 }
 
@@ -118,7 +118,7 @@ body {
 
 .jour {
     position: relative;
-    width: 13.5%;
+    width: 10.5%;
     height: 90%;
     background-color: black;
     display: flex;
@@ -143,6 +143,7 @@ body {
 .datejour p {
     color: #f4f4f9 ;
     text-align: center;
+    font-size:1vw;
     font-family: "URW Chancery L", cursive;
 }
 
@@ -187,11 +188,11 @@ body {
 
 .selecteur {
     position: absolute;
-    width: 20vw;
+    width: 30vw;
     height: 5vh;
     background-color: rgba(157, 157, 157, 0.5);
     top: 5px;
-    left: 50%;
+    left: 35%;
     margin-left: -10%;
     border-radius: 40px;
     transition: box-shadow 0.5s ease-in; 
@@ -208,7 +209,7 @@ body {
 }
 
 .selecteur_droit, .selecteur_gauche {
-    width: 8%;
+    width: 7%;
     height: 70%;
     border-radius: 30px;
     box-shadow: 0 0 0 1px black;
@@ -314,10 +315,12 @@ body {
     height: 50%;
     overflow-wrap: break-word;
     overflow-y: hidden;
+    font-size:1vw;
 }
 
 .rdv p:hover {
     overflow-y: visible;
+
 }
 
 button {
