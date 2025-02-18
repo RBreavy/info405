@@ -12,7 +12,7 @@ try {
               JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs
               JOIN periode p ON r.id_periode = p.id_periode";
               
-    $stmt = $connexion->query($query);
+    $stmt = $conn->query($query);
     $rdvs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     header('Content-Type: application/json');

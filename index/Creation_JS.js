@@ -5,14 +5,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const mailInput = document.getElementById("mail");
     const mdpInput = document.getElementById("mdp");
 
+    if(nomInput && mailInput && mailInput){
+        const nom = nomInput.value || "";
+        const mail = mailInput.value || "";
+        const mdp = mdpInput.value || "";
+    } else {
+        showError("Problème des champs")
+    }
+
     if (form) {
         form.addEventListener("submit", function (event) {
             event.preventDefault(); // Empêcher la soumission classique
-
-            // Récupération des valeurs
-            const nom = nomInput.value;
-            const mail = mailInput.value;
-            const mdp = mdpInput.value;
 
             // Vérifications de base
             if (!nomInput || !mailInput || !mdpInput) {
