@@ -39,7 +39,7 @@ var mardi = "21/01/2025"
 var mercredi = "22/01/2025"
 
 var vendredi = "10/01/2025"
-var samedi = "16/02/2025"
+var samedi = "17/02/2025"
 creation_jour()
 
 
@@ -54,7 +54,7 @@ var listeCreneau = [
 
     () => create_rdv(21, 17, vendredi, "white"),
     () => create_rdv(41, 9, vendredi, "purple"),
-    () => create_rdv(6, 5, samedi, "orange", "docteur Dupont")
+    () => create_rdv(6, 0, samedi, "orange", "docteur Dupont")
 ];
 
 listeCreneau.forEach(func => func());
@@ -125,7 +125,6 @@ function maj_id() {
             creneau.id = e.id+index;
         });
     });
-    listeCreneau.forEach(func => func());
 }
 
 function maj_rdv() {
@@ -140,7 +139,7 @@ function maj_rdv() {
     listeCreneau.forEach(func => func());
 }
 
-
+var test = true;
 
 
 function creation_crenau(indice_div_jour,div_jour,datetemp) {
@@ -174,8 +173,29 @@ function creation_crenau(indice_div_jour,div_jour,datetemp) {
                 article_creneau.classList.add("article_border_bottom_right_radius")
             }
         }
+
+        article_creneau.addEventListener("click", _ => {
+            console.log(article_creneau.id)
+            setTimeout(test=false, 2000)
+        })
     }
 }
+
+var crn = document.querySelectorAll(".creneau")
+crn.forEach(e => [
+    e.addEventListener('onmouseenter', (e) => {
+        if (test) {}
+        const element = document.elementFromPoint(e.clientX, e.clientY);
+        console.log(element);
+        // element est l'élément sous la souris
+    }) 
+])
+
+
+
+
+  
+
 
 function calcul_duree(heure_debut,duree) {
     let h_dbt_rdv = (8+Math.floor((heure_debut+1)/6)).toString()+"h"
