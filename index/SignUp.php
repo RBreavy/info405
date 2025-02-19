@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("sss", $nom, $mail, $mdp);
         if ($stmt->execute()) {
             header("Location : ../patient.html");
+            exit();
         } else {
             echo "Erreur lors de l’insertion : " . $stmt->error;
         }
