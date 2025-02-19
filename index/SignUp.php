@@ -23,11 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Hashage du mot de passe
         $mdp = password_hash($mdp, PASSWORD_DEFAULT);
 
-        $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, mail, mot_de_passe) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $nom, $mail, $mdp);
         $stmt->close();
         mysqli_close($conn);
-        
+
     } else {
         echo json_encode(['success' => false, 'message' => 'Données manquantes']);
     }
