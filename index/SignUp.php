@@ -25,8 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $nom, $mail, $mdp);
+        if ($stmt->execute()) {
+            echo "Inscription réussie.";
+        } else {
+            echo "Erreur lors de l’insertion : " . $stmt->error;
+        }
+        
         $stmt->close();
-        mysqli_close($conn);
+        $conn->close();
 
     } else {
         echo json_encode(['success' => false, 'message' => 'Données manquantes']);
