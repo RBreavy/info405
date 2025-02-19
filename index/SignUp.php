@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $nom, $mail, $mdp);
         if ($stmt->execute()) {
-            header("location : ../patient.html");
+            header("Location : ../patient.html");
         } else {
             echo "Erreur lors de l’insertion : " . $stmt->error;
         }
