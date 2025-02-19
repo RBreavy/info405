@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const mailInput = document.getElementById("mail");
     const mdpInput = document.getElementById("mdp");
 
+
+
     if (!nomInput || !mailInput || !mdpInput) {
         console.error("Un ou plusieurs champs du formulaire sont introuvables !");
         return;
@@ -14,9 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
         form.addEventListener("submit", function (event) {
             event.preventDefault(); // Empêcher la soumission classique
 
-            const nom = nomInput.value.trim();
-            const mail = mailInput.value.trim();
-            const mdp = mdpInput.value.trim();
+            const nom = nomInput.value;
+            const mail = mailInput.value;
+            const mdp = mdpInput.value;
 
             // Vérifications de base
             if (nom === "" || mail === "" || mdp === "") {
@@ -24,9 +26,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            localStorage.setItem("nom", nom);
-            localStorage.setItem("mail", mail);
-            localStorage.setItem("mdp", mdp);
+            console.log("Nom:", nomInput, "Valeur:", nomInput.value);
+            console.log("Mail:", mailInput, "Valeur:", mailInput.value);
+            console.log("Mot de passe:", mdpInput, "Valeur:", mdpInput.value);
 
             form.submit();
         });
