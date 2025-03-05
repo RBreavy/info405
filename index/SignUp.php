@@ -1,12 +1,17 @@
 <?php
-include('db_connect.php');
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+include_once "db_connect.php";
 
-    if (isset($_POST['nom'], $_POST['mail'], $_POST['mdp'])) {
-        $nom = $_POST['nom'];
-        $mail = $_POST['mail'];
-        $mdp = $_POST['mdp'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if (!empty($_POST['nom']) && !empty($_POST['mail']) && !empty($_POST['mdp'])) {
+        $nom = trim($_POST['nom']);
+        $mail = trim($_POST['mail']);
+        $mdp = trim($_POST['mdp']);
 
         // Vérifier que l'email est valide
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
@@ -21,15 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Hashage du mot de passe
-        $mdp = password_hash($mdp, PASSWORD_DEFAULT);
+        $mdp_hache = password_hash($mdp, PASSWORD_DEFAULT);
 
+        // Requête préparée
         $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nom, $mail, $mdp);
+        $stmt->bind_param("sss", $nom, $mail, $mdp_hache);
+
         if ($stmt->execute()) {
-            header("Location : ../patient.html");
+            // Pas d'output avant la redirection
+            header("Location: ../patient.html");
             exit();
         } else {
-            echo "Erreur lors de l’insertion : " . $stmt->error;
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de l’insertion : ' . $stmt->error]);
         }
         
         $stmt->close();
