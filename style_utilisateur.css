@@ -366,3 +366,36 @@ button:hover {
     transform: scale(1.1);
 }
 
+.bouton_docteur {
+    position: absolute;
+    left: 3vw;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    padding: 70vw;
+    border-radius: 10px;
+}
+
+.docteur {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.docteur input[type="button"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3800a7;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.docteur input:hover {
+    background-color: #0056b3;
+}
+
+
