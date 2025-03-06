@@ -25,12 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
 
-        // Hashage du mot de passe
-        $mdp_hache = password_hash($mdp, PASSWORD_DEFAULT);
-
         // Requête préparée
         $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nom, $mail, $mdp_hache);
+        $stmt->bind_param("sss", $nom, $mail, $mdp);
 
         if ($stmt->execute()) {
             // Pas d'output avant la redirection
