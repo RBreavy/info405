@@ -21,20 +21,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $result->fetch_assoc();
 
     if ($user) {
-        // Vérifier le mot de passe avec password_verify() si les mots de passe sont hachés
+        // Comparer directement le mot de passe (puisque plus de hashage)
         if ($password === $user['mot_de_passe']) {
-            // Si le mot de passe est correct, on démarre la session et on redirige l'utilisateur
             $_SESSION['nom'] = $user['nom'];
-            echo "Connexion réussie";
             header("Location: ../patient.html");
             exit();
         } else {
-            // Si le mot de passe est incorrect
-            echo "Nom ou mot de passe incorrect.";
+            echo "Mot de passe incorrect.";
         }
     } else {
-        // Si l'utilisateur n'a pas été trouvé
         echo "Utilisateur non trouvé.";
     }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>
