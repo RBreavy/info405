@@ -1,7 +1,36 @@
-import { create_rdv } from '../calendrier/calendrier.js';
-
-
-
+function create_rdv(horaire_debut,duree,journee,color="yellow",texte) {
+    let horaire_fin = horaire_debut+duree;
+    if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
+        for (let i = horaire_debut; i<=horaire_fin; i++) {
+            var creneau_horaire = document.getElementById(journee.toString()+i.toString())
+            creneau_horaire.style.setProperty('--border-color', color);
+            creneau_horaire.classList.add("custom_bg_color");
+            
+            if (i == horaire_debut) {
+                let box_invisible = create("article",creneau_horaire);
+                create("p",box_invisible,texte);
+                create("p",box_invisible,calcul_duree(horaire_debut,duree));
+                box_invisible.classList.add("rdv")
+                box_invisible.style.height = creneau_horaire.offsetHeight* (duree+1) -3+"px";
+            }
+            
+    
+            if (i%6 == 0 && i != horaire_debut) {
+                creneau_horaire.classList.add('custom_border_top');
+            } 
+    
+            if (i == horaire_debut && i%6 !=0) {
+                creneau_horaire.classList.add("invisible_border_top")
+            }
+            
+            if (i == horaire_fin && (i+1)%6 != 0) {
+                console.log(i)
+                creneau_horaire.classList.add("invisible_border_bottom")
+            }
+          
+        }
+    }
+}
 
 async function getNomDoc() {
  try {
