@@ -91,7 +91,6 @@ function DateEnTemps(date) {
 function affichage_indisponiblite(lrdv) {
     let rdv = document.querySelectorAll(".rdv");
     rdv.forEach(e => {
-        console.log(e);
         e.remove();
     });
     let rdv_color = document.querySelectorAll(".custom_bg_color");
@@ -106,8 +105,8 @@ function affichage_indisponiblite(lrdv) {
         let duree = DateEnTemps(rdv.date_fin)-DateEnTemps(rdv.date_debut);
         let jour = new Date(rdv.date_debut).toLocaleDateString('fr-FR');
         create_rdv2(debut,duree,jour);
-        console.log(rdv);
     });
+    selection_creneau();
 }
 
 // Création du formulaire de rendez-vous
