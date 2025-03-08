@@ -199,15 +199,15 @@ async function fetchAndSaveData() {
 }
 
 function processData() {
-    const docteurs = lrdv.map(objet => objet.nom)
-    const container = document.querySelector(".docteur");
+    let docteurs = lrdv.map(objet => objet.nom)
+    let container = document.querySelector(".docteur");
     
  
     container.innerHTML = "";
     
    
     docteurs.forEach(nom => {
-        const button = create("input",container);
+        let button = create("input",container);
         button.type = "button";
         button.value = nom;
         button.classList.add("bouton-docteur");
@@ -216,6 +216,7 @@ function processData() {
 }
 
 function selection_creneau() {
+    let container = document.querySelector(".docteur");
     container.innerHTML = "";
 }
 
