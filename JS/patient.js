@@ -1,18 +1,22 @@
-let lrdv;
+import 'calendrier\calendrier.js';
 
-async function fetchAndSaveData() {
+
+
+
+async function getNomDoc() {
  try {
-   const response = await fetch('calendrier/get-data.php?action=doctors');
-   lrdv = await response.json();
-   processData();
- } catch(error) {
-   console.error(error);
- }
+    let lrdv;
+    let response = await fetch('calendrier/get-data.php?action=doctors');
+    lrdv = await response.json();
+    affichage_menu_selection(lrdv);
+} catch(error) {
+    console.error(error);
+}
 }
 
-fetchAndSaveData();
+getNomDoc();
 
-function processData() {
+function affichage_menu_selection(lrdv) {
     let docteurs = lrdv.map(objet => objet.nom)
     let container = document.querySelector(".docteur");
     
@@ -25,7 +29,26 @@ function processData() {
         button.type = "button";
         button.value = nom;
         button.classList.add("bouton-docteur");
-        button.addEventListener("click",_ => {selection_creneau()});
+        button.addEventListener("click",_ => {getRDV()});
+    });
+}
+
+
+async function getRDV(lrdv){
+    try {
+        let lrdv;
+        let response = await fetch('calendrier/get-data.php');
+        lrdv = await response.json(lrdv);
+        affichage_indisponiblite(lrdv);
+      } catch(error) {
+        console.error(error);
+      }
+}
+
+
+function affichage_indisponiblite(lrdv) {
+    lrdv.forEach(rdv => {
+        console.log(rdv);
     });
 }
 
