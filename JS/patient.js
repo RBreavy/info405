@@ -1,4 +1,4 @@
-import { create_rdv } from 'calendrier/calendrier.js';
+import { create_rdv } from '../calendrier/calendrier.js';
 
 
 
