@@ -96,6 +96,7 @@ function affichage_indisponiblite(lrdv) {
         let duree = DateEnTemps(rdv.date_debut)-DateEnTemps(rdv.date_fin);
         let jour = new Date(rdv.date_debut).toLocaleDateString('fr-FR');
         create_rdv(debut,duree,jour);
+        console.log(rdv)
     });
 }
 
