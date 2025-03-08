@@ -62,12 +62,6 @@ function affichage_menu_selection(lrdv) {
 
 
 async function getRDV(id){
-    let rdv = document.querySelectorAll(".rdv");
-    rdv.forEach(e => {
-
-        e.remove();
-    });
-
     try {
         let lrdv;
         let response = await fetch('calendrier/get-data.php');
@@ -95,6 +89,11 @@ function DateEnTemps(date) {
 
 
 function affichage_indisponiblite(lrdv) {
+    let rdv = document.querySelectorAll(".rdv");
+    rdv.forEach(e => {
+
+        e.remove();
+    });
     lrdv.forEach(rdv => {
         let debut = DateEnTemps(rdv.date_debut);
         let duree = DateEnTemps(rdv.date_fin)-DateEnTemps(rdv.date_debut);
