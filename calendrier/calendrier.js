@@ -199,6 +199,9 @@ async function fetchAndSaveData() {
 }
 
 function processData() {
+    lrdv.forEach(d => {
+        d = d["nom"];
+    })
  console.log(lrdv);
 }
 
