@@ -56,7 +56,7 @@ function affichage_menu_selection(lrdv) {
         let button = create("input",container);
         button.type = "button";
         button.value = doc.nom;
-        button.id = doc.id;
+        button.id = doc.id_medecin;
         button.classList.add("bouton-docteur");
         button.addEventListener("click",_ => {getRDV()});
     });
