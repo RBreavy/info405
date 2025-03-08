@@ -91,7 +91,7 @@ function DateEnTemps(date) {
 function affichage_indisponiblite(lrdv) {
     lrdv.forEach(rdv => {
         let debut = DateEnTemps(rdv.date_debut);
-        let duree = DateEnTemps(rdv.date_debut)-DateEnTemps(rdv.date_fin);
+        let duree = DateEnTemps(rdv.date_fin)-DateEnTemps(rdv.date_debut);
         let jour = new Date(rdv.date_debut).toLocaleDateString('fr-FR');
         create_rdv2(debut,duree,jour);
         console.log(debut,duree,jour);
