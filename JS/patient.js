@@ -68,18 +68,22 @@ async function getRDV(id){
         let lrdv;
         let response = await fetch('calendrier/get-data.php');
         lrdv = await response.json(lrdv);
-        affichage_indisponiblite(lrdv,id);
+        let new_lrdv;
+        lrdv.forEach(rdv => {
+            if (rdv.id_medecin = id) {
+                new_lrdv.push(rdv);
+            }
+        })
+        affichage_indisponiblite(lrdv);
       } catch(error) {
         console.error(error);
       }
 }
 
 
-function affichage_indisponiblite(lrdv,id) {
+function affichage_indisponiblite(lrdv) {
     lrdv.forEach(rdv => {
-        if (rdv.id_medecin = id) {
-            console.log(rdv);
-        }
+        console.log(rdv);
     });
 }
 
