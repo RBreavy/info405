@@ -89,13 +89,18 @@ function DateEnTemps(date) {
 
 
 function affichage_indisponiblite(lrdv) {
-    document.addEventListener('DOMContentLoaded', function() {
-        let rdv = document.querySelectorAll(".rdv");
-        rdv.forEach(e => {
-            console.log(e);
-            e.remove();
-        });
-      });
+    let rdv = document.querySelectorAll(".rdv");
+    rdv.forEach(e => {
+        console.log(e);
+        e.remove();
+    });
+    let rdv_color = document.querySelectorAll(".custom_bg_color");
+    rdv_color.forEach(e => {
+        e.classList.remove("custom_bg_color");
+        e.classList.remove('custom_border_top');
+        e.classList.remove("invisible_border_top");
+        e.classList.remove("invisible_border_bottom");
+    })
     lrdv.forEach(rdv => {
         let debut = DateEnTemps(rdv.date_debut);
         let duree = DateEnTemps(rdv.date_fin)-DateEnTemps(rdv.date_debut);
