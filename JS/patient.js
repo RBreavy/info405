@@ -68,7 +68,7 @@ async function getRDV(id){
         lrdv = await response.json(lrdv);
         let new_lrdv = [];
         lrdv.forEach(rdv => {
-            if (rdv.id_medecin = id) {
+            if (rdv.id_medecin == id) {
                 new_lrdv.push(rdv);
             }
         })
