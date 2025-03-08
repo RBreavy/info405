@@ -91,7 +91,7 @@ function DateEnTemps(date) {
 function affichage_indisponiblite(lrdv) {
     let rdv = document.querySelectorAll(".rdv");
     rdv.forEach(e => {
-
+        console.log("test")
         e.remove();
     });
     lrdv.forEach(rdv => {
