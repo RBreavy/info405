@@ -190,7 +190,7 @@ let lrdv;
 
 async function fetchAndSaveData() {
  try {
-   const response = await fetch('calendrier/get-data.php');
+   const response = await fetch('calendrier/get-data.php?action=doctors');
    lrdv = await response.json();
    processData();
  } catch(error) {
@@ -201,9 +201,6 @@ async function fetchAndSaveData() {
 function processData() {
  lrdv.forEach(e => {
    console.log(e["nom_medecin"]);
-   console.log(e["date_debut"]);
-   console.log(e["date_fin"]); 
-   console.log(e["couleur"]);
  });
 }
 
