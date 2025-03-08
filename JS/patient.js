@@ -3,7 +3,7 @@ function create_rdv2(horaire_debut,duree,journee) {
     if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
         for (let i = horaire_debut; i<=horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString()+i.toString())
-            creneau_horaire.style.setProperty('--border-color', grey);
+            creneau_horaire.style.setProperty('--border-color', "grey");
             creneau_horaire.classList.add("custom_bg_color");
             
             if (i == horaire_debut) {
