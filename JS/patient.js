@@ -63,7 +63,7 @@ function affichage_menu_selection(lrdv) {
 }
 
 
-async function getRDV(lrdv,id){
+async function getRDV(id){
     try {
         let lrdv;
         let response = await fetch('calendrier/get-data.php');
