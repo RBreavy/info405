@@ -211,7 +211,7 @@ function processData() {
         button.type = "button";
         button.value = nom;
         button.classList.add("bouton-docteur");
-        button.addEventListener(_ => {selection_creneau()});
+        button.addEventListener("click",_ => {selection_creneau()});
     });
 }
 
