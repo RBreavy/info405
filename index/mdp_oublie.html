@@ -3,6 +3,18 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="Index_style.css">
     <title>oublier</title>
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+      emailjs.init({
+        publicKey: "Fzcsrfnh8mpUUfmjk",
+      });
+    })();
+    </script>
+    <script src="envoi_mail.js"></script>
 </head>
 <body>
     <div id="form_conn">
@@ -10,7 +22,7 @@
         <label for="mail-recup">Entrez votre email :</label>
         <input id="mail-recup" type="email" placeholder="example@domain.com" required>
 
-        <button type="submit" id="mail-btn">envoyer le mail</button>
+        <button type="submit" id="mail-btn" onclick="envoiMail()">envoyer le mail</button>
 
         <p>Un mail va être envoyé a cette adresse pour vous permettre de récuperer l'accès a votre compte</p>
 
