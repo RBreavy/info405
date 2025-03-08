@@ -200,7 +200,7 @@ async function fetchAndSaveData() {
 
 function processData() {
  lrdv.forEach(e => {
-   console.log(e);
+   console.log(e["nom"]);
  });
 }
 
