@@ -58,12 +58,12 @@ function affichage_menu_selection(lrdv) {
         button.value = doc.nom;
         button.id = doc.id_medecin;
         button.classList.add("bouton-docteur");
-        button.addEventListener("click",_ => {getRDV()});
+        button.addEventListener("click",_ => {getRDV(button.id)});
     });
 }
 
 
-async function getRDV(lrdv){
+async function getRDV(lrdv,id){
     try {
         let lrdv;
         let response = await fetch('calendrier/get-data.php');
@@ -75,9 +75,11 @@ async function getRDV(lrdv){
 }
 
 
-function affichage_indisponiblite(lrdv) {
+function affichage_indisponiblite(lrdv,id) {
     lrdv.forEach(rdv => {
-        console.log(rdv);
+        if (rdv.id_medecin = id) {
+            console.log(rdv);
+        }
     });
 }
 
