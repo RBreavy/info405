@@ -199,7 +199,7 @@ async function fetchAndSaveData() {
 }
 
 function processData() {
-    console.log(lrdv);
+    console.log(lrdv.map(objet => objet.nom));
 }
 
 fetchAndSaveData();
