@@ -1,15 +1,13 @@
-function create_rdv(horaire_debut,duree,journee,color="grey",texte="") {
+function create_rdv2(horaire_debut,duree,journee) {
     let horaire_fin = horaire_debut+duree;
     if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
         for (let i = horaire_debut; i<=horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString()+i.toString())
-            creneau_horaire.style.setProperty('--border-color', color);
+            creneau_horaire.style.setProperty('--border-color', grey);
             creneau_horaire.classList.add("custom_bg_color");
             
             if (i == horaire_debut) {
                 let box_invisible = create("article",creneau_horaire);
-                create("p",box_invisible,texte);
-                create("p",box_invisible,calcul_duree(horaire_debut,duree));
                 box_invisible.classList.add("rdv")
                 box_invisible.style.height = creneau_horaire.offsetHeight* (duree+1) -3+"px";
             }
@@ -95,8 +93,8 @@ function affichage_indisponiblite(lrdv) {
         let debut = DateEnTemps(rdv.date_debut);
         let duree = DateEnTemps(rdv.date_debut)-DateEnTemps(rdv.date_fin);
         let jour = new Date(rdv.date_debut).toLocaleDateString('fr-FR');
-        create_rdv(debut,duree,jour);
-        console.log(rdv)
+        create_rdv2(debut,duree,jour);
+        console.log(debut,duree,jour);
     });
 }
 
