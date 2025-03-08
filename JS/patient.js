@@ -46,17 +46,17 @@ async function getNomDoc() {
 getNomDoc();
 
 function affichage_menu_selection(lrdv) {
-    let docteurs = lrdv.map(objet => objet.nom)
     let container = document.querySelector(".docteur");
     
  
     container.innerHTML = "";
     
    
-    docteurs.forEach(nom => {
+    lrdv.forEach(doc => {
         let button = create("input",container);
         button.type = "button";
-        button.value = nom;
+        button.value = doc.nom;
+        button.id = doc.id;
         button.classList.add("bouton-docteur");
         button.addEventListener("click",_ => {getRDV()});
     });
