@@ -89,11 +89,13 @@ function DateEnTemps(date) {
 
 
 function affichage_indisponiblite(lrdv) {
-    let rdv;
-    rdv = document.querySelectorAll(".rdv");
-    rdv.forEach(e => {
-        e.remove();
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+        let rdv = document.querySelectorAll(".rdv");
+        rdv.forEach(e => {
+            console.log(e);
+            e.remove();
+        });
+      });
     lrdv.forEach(rdv => {
         let debut = DateEnTemps(rdv.date_debut);
         let duree = DateEnTemps(rdv.date_fin)-DateEnTemps(rdv.date_debut);
