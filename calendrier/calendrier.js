@@ -211,7 +211,12 @@ function processData() {
         button.type = "button";
         button.value = nom;
         button.classList.add("bouton-docteur");
+        button.addEventListener(_ => {selection_creneau()});
     });
+}
+
+function selection_creneau() {
+    container.innerHTML = "";
 }
 
 
