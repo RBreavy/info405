@@ -199,8 +199,25 @@ async function fetchAndSaveData() {
 }
 
 function processData() {
-    console.log(lrdv.map(objet => objet.nom));
+    const docteurs = lrdv.map(objet => objet.nom)
+    const container = document.querySelector(".docteur");
+    
+ 
+    container.innerHTML = "";
+    
+   
+    docteurs.forEach(nom => {
+        const button = create("input",container);
+        button.type = "button";
+        button.value = nom;
+        button.classList.add("bouton-docteur");
+    });
 }
+
+
+
+
+
 
 fetchAndSaveData();
 
