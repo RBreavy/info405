@@ -40,6 +40,7 @@ function getAllDoctors() {
     }
 }
 
+
 // Traitement de la requête
 $action = isset($_GET['action']) ? $_GET['action'] : 'rdvs';
 
