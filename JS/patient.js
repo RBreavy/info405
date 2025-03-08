@@ -1,4 +1,4 @@
-function create_rdv(horaire_debut,duree,journee,color="yellow",texte) {
+function create_rdv(horaire_debut,duree,journee,color="grey",texte="") {
     let horaire_fin = horaire_debut+duree;
     if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
         for (let i = horaire_debut; i<=horaire_fin; i++) {
@@ -80,10 +80,22 @@ async function getRDV(id){
       }
 }
 
+function DateEnTemps(date) {
+    let [hours, minutes] = (date.slice(-8,-3)).split(':').map(Number);
+    
+    let hourValue = (hours - 8) * 6;
+    let minuteValue = Math.floor(minutes / 10);
+    
+    return hourValue + minuteValue;
+  }
+
 
 function affichage_indisponiblite(lrdv) {
     lrdv.forEach(rdv => {
-        console.log(rdv);
+        let debut = DateEnTemps(rdv.date_debut);
+        let duree = DateEnTemps(rdv.date_debut)-DateEnTemps(rdv.date_fin);
+        let jour = new Date(rdv.date_debut).toLocaleDateString('fr-FR');
+        create_rdv(debut,duree,jour);
     });
 }
 
