@@ -72,7 +72,7 @@ async function getRDV(id){
                 new_lrdv.push(rdv);
             }
         })
-        affichage_indisponiblite(lrdv);
+        affichage_indisponiblite(new_lrdv);
       } catch(error) {
         console.error(error);
       }
