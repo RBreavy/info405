@@ -68,7 +68,7 @@ async function getRDV(lrdv,id){
         let lrdv;
         let response = await fetch('calendrier/get-data.php');
         lrdv = await response.json(lrdv);
-        affichage_indisponiblite(lrdv);
+        affichage_indisponiblite(lrdv,id);
       } catch(error) {
         console.error(error);
       }
