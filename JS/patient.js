@@ -68,7 +68,7 @@ async function getRDV(id){
         let lrdv;
         let response = await fetch('calendrier/get-data.php');
         lrdv = await response.json(lrdv);
-        let new_lrdv;
+        let new_lrdv = [];
         lrdv.forEach(rdv => {
             if (rdv.id_medecin = id) {
                 new_lrdv.push(rdv);
