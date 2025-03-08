@@ -62,6 +62,12 @@ function affichage_menu_selection(lrdv) {
 
 
 async function getRDV(id){
+    let rdv = document.querySelectorAll(".rdv");
+    rdv.forEach(e => {
+
+        e.remove();
+    });
+
     try {
         let lrdv;
         let response = await fetch('calendrier/get-data.php');
