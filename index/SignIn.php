@@ -20,13 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($user && $password === $user['mot_de_passe']) {
         $_SESSION['nom'] = $user['nom'];
-        $_SESSION['role'] = 'utilisateur';
         header("Location: ../patient.html");
         exit();
     }
 
     // Vérification dans la table médecins
-    $stmt = $conn->prepare("SELECT * FROM medecins WHERE nom = ?");
+    $stmt = $conn->prepare("SELECT * FROM medecin WHERE nom = ?");
     $stmt->bind_param('s', $nom);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -34,8 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($medecin && $password === $medecin['mot_de_passe']) {
         $_SESSION['nom'] = $medecin['nom'];
-        $_SESSION['role'] = 'medecin';
-        header("Location: ../medecin.html");
+        header("Location: ../Vue_docteur.html");
         exit();
     }
 
