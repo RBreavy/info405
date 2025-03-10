@@ -368,12 +368,12 @@ button:hover {
 
 .bouton_docteur {
     position: absolute;
-    left: 3vw;
+    right: 3vw;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
-    padding: 70vw;
+    padding: 20vw;
     border-radius: 10px;
 }
 
