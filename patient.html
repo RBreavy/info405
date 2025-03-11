@@ -38,17 +38,18 @@
 
 
 	<script>
-        // Récupérer le nom du patient depuis la session avec AJAX
-        fetch('session.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.nom) {
-                    document.getElementById('username').textContent = 'Bienvenue, ' + data.nom;
-                } else {
-                    window.location.href = 'index.html';
-                }
-            })
-            .catch(error => console.error('Erreur:', error));
+        // Récupérer le nom depuis l'URL
+        const params = new URLSearchParams(window.location.search);
+        const nom = params.get('nom');
+
+        if (nom) {
+            // Affiche le nom et stocke dans sessionStorage
+            document.getElementById('username').textContent = 'Bienvenue, ' + nom;
+            sessionStorage.setItem('nom', nom);
+        } else {
+            // Si pas de nom, redirection vers la page de login
+            window.location.href = 'index.html';
+        }
     </script>
    
 </body>
