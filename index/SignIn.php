@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password === $user['mot_de_passe']) {
             // Stockage des informations de l'utilisateur dans la session
             $_SESSION['nom'] = $user['nom'];
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_id'] = $user['id_utilisateurs'];
             $_SESSION['user_type'] = 'patient';
             
             // Régénération de l'ID de session pour éviter la fixation de session
