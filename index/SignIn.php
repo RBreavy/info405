@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_regenerate_id(true);
             
             // Redirection sans exposer le nom dans l'URL
-            header("Location: ../patient.html");
+            header("Location: ../patient.php");
             exit();
         }
     }
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_regenerate_id(true);
             
             // Redirection sans exposer le nom dans l'URL
-            header("Location: ../Vue_docteur.html");
+            header("Location: ../Vue_docteur.php");
             exit();
         }
     }
