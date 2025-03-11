@@ -90,7 +90,6 @@ function DateEnTemps(date) {
 
 
 function affichage_indisponiblite(lrdv) {
-    console.log(lrdv);
     let ancienrdv = document.querySelectorAll(".rdv");
     ancienrdv.forEach(e => {
         e.remove();
