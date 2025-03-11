@@ -72,6 +72,7 @@ async function getRDV(id){
                 new_lrdv.push(rdv);
             }
         })
+        console.log(new_lrdv);
         affichage_indisponiblite(new_lrdv);
       } catch(error) {
         console.error(error);
@@ -89,6 +90,7 @@ function DateEnTemps(date) {
 
 
 function affichage_indisponiblite(lrdv) {
+    console.log(lrdv);
     let ancienrdv = document.querySelectorAll(".rdv");
     ancienrdv.forEach(e => {
         e.remove();
