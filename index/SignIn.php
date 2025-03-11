@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Vérification dans la table utilisateurs avec prepared statements
-    $stmt = $conn->prepare("SELECT id, nom, mot_de_passe FROM utilisateurs WHERE nom = ?");
+    $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE nom = ?");
     if (!$stmt) {
         die("Erreur de préparation de requête: " . $conn->error);
     }
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Vérification dans la table médecins avec prepared statements
-    $stmt = $conn->prepare("SELECT id, nom, mot_de_passe FROM medecin WHERE nom = ?");
+    $stmt = $conn->prepare("SELECT * FROM medecin WHERE nom = ?");
     if (!$stmt) {
         die("Erreur de préparation de requête: " . $conn->error);
     }
