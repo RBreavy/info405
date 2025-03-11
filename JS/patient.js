@@ -48,8 +48,8 @@ function affichage_menu_selection(lrdv) {
     
  
     container.innerHTML = "";
-    
-   
+
+    console.log(lrdv);
     lrdv.forEach(doc => {
         let button = create("input",container);
         button.type = "button";

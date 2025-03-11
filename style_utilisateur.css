@@ -367,7 +367,7 @@ button:hover {
     transform: scale(1.1);
 }
 
-/*.bouton_docteur {
+.bouton_docteur {
     position: absolute;
     left: 3vw;
     top: 50%;
@@ -397,6 +397,6 @@ button:hover {
 
 .docteur input:hover {
     background-color: #0056b3;
-}*/
+}
 
 

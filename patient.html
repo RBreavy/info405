@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style_utilisateur.css">
-    <title>Document</title>
+    <title>Patient</title>
 </head>
 <body>
     <div class="banner">
@@ -19,6 +19,8 @@
             </div>
         </div>
     </div>
+
+    <p id="username" style="font-size: 10px; height: 50px; width: 100px;"></p>
 
     <section class="main_cal">
         <article class = "selecteur">
@@ -36,17 +38,18 @@
 
 
 	<script>
-        // Récupérer le nom du patient depuis la session avec AJAX
-        fetch('session.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.nom) {
-                    document.getElementById('username').textContent = 'Bienvenue, ' + data.nom;
-                } else {
-                    window.location.href = 'index.html';
-                }
-            })
-            .catch(error => console.error('Erreur:', error));
+        // Récupérer le nom depuis l'URL
+        const params = new URLSearchParams(window.location.search);
+        const nom = params.get('nom');
+
+        if (nom) {
+            // Affiche le nom et stocke dans sessionStorage
+            document.getElementById('username').textContent = 'Bienvenue, ' + nom;
+            sessionStorage.setItem('nom', nom);
+        } else {
+            // Si pas de nom, redirection vers la page de login
+            window.location.href = 'index.html';
+        }
     </script>
    
 </body>

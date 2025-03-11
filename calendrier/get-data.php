@@ -9,7 +9,7 @@ function getAllRdvs() {
     global $conn;
     
     try {
-        $query = "SELECT r.*, m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
+        $query = "SELECT m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
                   p.date_debut, p.date_fin 
                   FROM rdv r
                   JOIN medecin m ON r.id_medecin = m.id_medecin 
@@ -30,7 +30,7 @@ function getAllDoctors() {
     global $conn;
     
     try {
-        $query = "SELECT * FROM medecin";
+        $query = "SELECT nom FROM medecin";
         $result = mysqli_query($conn, $query);
         $doctors = mysqli_fetch_all($result, MYSQLI_ASSOC);
         
