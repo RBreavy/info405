@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Vérification dans la table utilisateurs avec prepared statements
-    $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE nom = ?");
+    $stmt = $conn->prepare("SELECT id, nom, mot_de_passe FROM utilisateurs WHERE nom = ?");
     if (!$stmt) {
         die("Erreur de préparation de requête: " . $conn->error);
     }
@@ -26,20 +26,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user) {
         // Comparaison directe des mots de passe (temporaire, à remplacer par password_verify)
         if ($password === $user['mot_de_passe']) {
+            // Stockage des informations de l'utilisateur dans la session
+            $_SESSION['user_id'] = $user['id'];
             $_SESSION['nom'] = $user['nom'];
-            $_SESSION['user_id'] = $user['id']; // Stockez l'ID utilisateur si disponible
             $_SESSION['user_type'] = 'patient';
             
-            // Utiliser un jeton de session pour éviter la fixation de session
+            // Régénération de l'ID de session pour éviter la fixation de session
             session_regenerate_id(true);
             
-            header("Location: ../patient.html?nom=" . urlencode($user['nom']));
+            // Redirection sans exposer le nom dans l'URL
+            header("Location: ../patient.html");
             exit();
         }
     }
 
     // Vérification dans la table médecins avec prepared statements
-    $stmt = $conn->prepare("SELECT * FROM medecin WHERE nom = ?");
+    $stmt = $conn->prepare("SELECT id, nom, mot_de_passe FROM medecin WHERE nom = ?");
     if (!$stmt) {
         die("Erreur de préparation de requête: " . $conn->error);
     }
@@ -53,14 +55,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($medecin) {
         // Comparaison directe des mots de passe (temporaire, à remplacer par password_verify)
         if ($password === $medecin['mot_de_passe']) {
+            // Stockage des informations du médecin dans la session
+            $_SESSION['user_id'] = $medecin['id'];
             $_SESSION['nom'] = $medecin['nom'];
-            $_SESSION['user_id'] = $medecin['id']; // Stockez l'ID médecin si disponible
             $_SESSION['user_type'] = 'medecin';
             
-            // Utiliser un jeton de session pour éviter la fixation de session
+            // Régénération de l'ID de session pour éviter la fixation de session
             session_regenerate_id(true);
             
-            header("Location: ../Vue_docteur.html?nom=" . urlencode($medecin['nom']));
+            // Redirection sans exposer le nom dans l'URL
+            header("Location: ../Vue_docteur.html");
             exit();
         }
     }
