@@ -27,9 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Comparaison directe des mots de passe (temporaire, à remplacer par password_verify)
         if ($password === $user['mot_de_passe']) {
             // Stockage des informations de l'utilisateur dans la session
-            $_SESSION['user_id'] = $user['id'];
             $_SESSION['nom'] = $user['nom'];
-            $_SESSION['user_type'] = 'patient';
             
             // Régénération de l'ID de session pour éviter la fixation de session
             session_regenerate_id(true);
@@ -58,7 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Stockage des informations du médecin dans la session
             $_SESSION['user_id'] = $medecin['id'];
             $_SESSION['nom'] = $medecin['nom'];
-            $_SESSION['user_type'] = 'medecin';
             
             // Régénération de l'ID de session pour éviter la fixation de session
             session_regenerate_id(true);
