@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($medecin && $password === $medecin['mot_de_passe']) {
         $_SESSION['nom'] = $medecin['nom'];
-        header("Location: ../Vue_docteur.html");
+        header("Location: ../Vue_docteur.html?nom=" . urlencode($user['nom']));
         exit();
     }
 
