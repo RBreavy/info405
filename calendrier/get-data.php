@@ -30,7 +30,7 @@ function getAllDoctors() {
     global $conn;
     
     try {
-        $query = "SELECT nom FROM medecin";
+        $query = "SELECT id_medecin, nom FROM medecin";
         $result = mysqli_query($conn, $query);
         $doctors = mysqli_fetch_all($result, MYSQLI_ASSOC);
         
