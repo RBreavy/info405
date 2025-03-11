@@ -2,9 +2,9 @@
 session_start();
 
 // Vérification de sécurité
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'patient') {
-    //header("Location: index.html");
-    //exit();
+if (!isset($_SESSION['user_id']) /*|| !isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'patient'*/) {
+    header("Location: index.html");
+    exit();
 }
 
 // Récupération du nom depuis la session
