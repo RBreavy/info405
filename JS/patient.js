@@ -89,8 +89,8 @@ function DateEnTemps(date) {
 
 
 function affichage_indisponiblite(lrdv) {
-    let rdv = document.querySelectorAll(".rdv");
-    rdv.forEach(e => {
+    let ancienrdv = document.querySelectorAll(".rdv");
+    ancienrdv.forEach(e => {
         e.remove();
     });
     let rdv_color = document.querySelectorAll(".custom_bg_color");
@@ -100,6 +100,7 @@ function affichage_indisponiblite(lrdv) {
         e.classList.remove("invisible_border_top");
         e.classList.remove("invisible_border_bottom");
     })
+    
     lrdv.forEach(rdv => {
         let debut = DateEnTemps(rdv.date_debut);
         let duree = DateEnTemps(rdv.date_fin)-DateEnTemps(rdv.date_debut);
