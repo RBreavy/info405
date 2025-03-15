@@ -25,6 +25,58 @@ function getAllRdvs() {
     }
 }
 
+//Fonction pour récupérer les rdv en fonctions d'un médecin
+function getRdvpourdocteur($doctors) {
+    global $conn;
+    try {
+        $query = "SELECT medecin.nom, utilisateurs.nom, periode.date_debut, periode.date_fin, couleur
+                    FROM rdv
+                    JOIN medecin ON rdv.id_medecin = medecin.id_medecin
+                    JOIN utilisateurs ON rdv.id_utilisateurs = utilisateurs.id_utilisateurs
+                    JOIN periode ON rdv.id_periode = periode.id_periode
+                    WHERE medecin.nom = $doctors;"
+                  
+        $result = mysqli_query($conn, $query);
+        $rdvs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        
+        return $rdvs;
+    } catch(Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
+
+
+
+
+}
+
+//Fonction pour créé les rdv en fonctions d'un médecin
+function creer_rdv($id_medecin,$id_periode,$id_utilisateur,$couleur) {
+    global $conn;
+    try {
+        $query = "INSERT INTO rdv (id_medecin, id_utilisateurs, id_periode, couleur)  
+                  VALUES ($id_medecin,$id_utilisateurs,$id_periode,$couleur);"
+                  
+        $result = mysqli_query($conn, $query);
+        $rdvs = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        
+        return $rdvs;
+    } catch(Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
 // Nouvelle fonction pour récupérer tous les médecins
 function getAllDoctors() {
     global $conn;
@@ -55,4 +107,7 @@ switch($action) {
         echo json_encode(getAllRdvs());
         break;
 }
+
+
+
 ?>
