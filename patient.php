@@ -40,15 +40,15 @@ $nom = htmlspecialchars($_SESSION['nom']);
             </article>
             <input type="date" id="calendrier" name="cal"/>
             <article class = "selecteur_droit"></article>
-        </article>
     </section>
-
     <section class="bouton_docteur">
-        <article class = "docteur">
-        </article>
-    </section>
+    <article class = "docteur">
+    </article>
+</section>
+
+
    
 </body>
-<script src = "calendrier\calendrier.js"></script>
+<script src = "calendrier/calendrier.js"></script>
 <script src = "JS/patient.js"></script>
 </html>
