@@ -54,7 +54,7 @@ function creer_rdv($id_medecin,$id_periode,$id_utilisateur,$couleur) {
     global $conn;
     try {
         $query = "INSERT INTO rdv (id_medecin, id_utilisateurs, id_periode, couleur)  
-                  VALUES ($id_medecin,$id_utilisateurs,$id_periode,$couleur);"
+          VALUES ($id_medecin, $id_utilisateur, $id_periode, '$couleur');";
                   
         $result = mysqli_query($conn, $query);
         $rdvs = mysqli_fetch_all($result, MYSQLI_ASSOC);
