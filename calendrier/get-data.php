@@ -25,7 +25,7 @@ function getAllRdvs() {
     }
 }
 
-//Fonction pour récupérer les rdv en fonctions d'un médecin
+/*Fonction pour récupérer les rdv en fonctions d'un médecin
 function getRdvpourdocteur($doctors) {
     global $conn;
     try {
@@ -47,7 +47,7 @@ function getRdvpourdocteur($doctors) {
 
 
 
-}
+}*/
 
 //Fonction pour créé les rdv en fonctions d'un médecin
 function creer_rdv($id_medecin,$id_periode,$id_utilisateur,$couleur) {
