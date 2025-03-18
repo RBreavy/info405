@@ -31,24 +31,15 @@ function create_rdv2(horaire_debut,duree,journee) {
 }
 
 async function getNomDoc() {
-    try {
-      let response = await fetch('calendrier/get-data.php?action=doctors');
-      
-      // Log raw response to see what's being returned
-      const rawText = await response.text();
-      console.log('Raw response:', rawText);
-      
-      // Try to parse manually if possible
-      try {
-        const lrdv = JSON.parse(rawText);
-        affichage_menu_selection(lrdv);
-      } catch (parseError) {
-        console.error('JSON parse error:', parseError);
-      }
-    } catch(error) {
-      console.error('Fetch error:', error);
-    }
-  }
+ try {
+    let lrdv;
+    let response = await fetch('calendrier/get-data.php?action=doctors');
+    lrdv = await response.json();
+    affichage_menu_selection(lrdv);
+} catch(error) {
+    console.error(error);
+}
+}
 
 getNomDoc();
 
