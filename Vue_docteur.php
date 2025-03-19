@@ -92,16 +92,13 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
         </article>
 
+    </section>
 
-        
-        <div class="form-box">
+    <div class="form-box">
         <div class="tabs">
             <button id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</div>
             <button id="tab-temporaire" class="tab inactive" onclick="toggleForm('temporaire')">TEMPORAIRE</div>
         </div>
-        
-        
-    </section>
 
     <div id="form-repetitif">
             <button class="day-button selected">LUN</button>
