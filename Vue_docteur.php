@@ -96,8 +96,8 @@ $nom = htmlspecialchars($_SESSION['nom']);
         
         <div class="form-box">
         <div class="tabs">
-            <div id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</div>
-            <div id="tab-temporaire" class="tab inactive" onclick="toggleForm('temporaire')">TEMPORAIRE</div>
+            <button id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</div>
+            <button id="tab-temporaire" class="tab inactive" onclick="toggleForm('temporaire')">TEMPORAIRE</div>
         </div>
         
         
