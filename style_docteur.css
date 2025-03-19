@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+.container {
+    display: flex;
+    gap: 20px;
+}
+.form-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+.tabs {
+    display: flex;
+}
+.tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.active {
+    background-color: blue;
+    color: white;
+}
+.inactive {
+    background-color: lightgray;
+    color: black;
+}
+.day-button {
+    padding: 5px;
+    margin: 2px;
+    border: none;
+    cursor: pointer;
+}
+.selected {
+    background-color: blue;
+    color: white;
+}
+.submit-button {
+    width: 100%;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    left: -250px;
+    top: 0;
+    background-color: #111;
+    padding-top: 20px;
+    transition: 0.3s;
+    z-index: 1;
+}
+
+.sidenav a {
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-top: 40px;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    background-color: #575757;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    position: relative;
+    color: white;
+    display: inline-block;
+}

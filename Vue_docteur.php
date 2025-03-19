@@ -9,6 +9,9 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION[
 
 // Récupération du nom depuis la session
 $nom = htmlspecialchars($_SESSION['nom']);
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,54 +19,8 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style_utilisateur.css">
+    <link rel="stylesheet" href="style_docteur.css">
     <title>Document</title>
-    <style>
-        .sidenav {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            left: -250px;
-            top: 0;
-            background-color: #111;
-            padding-top: 20px;
-            transition: 0.3s;
-            z-index: 1;
-        }
-
-        .sidenav a {
-            padding: 10px 20px;
-            text-decoration: none;
-			margin-top: 40px;
-            font-size: 18px;
-            color: white;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidenav a:hover {
-            background-color: #575757;
-        }
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-            position: relative;
-            color: white;
-            display: inline-block;
-        }
-        
-    </style>
 </head>
 <body>
     <div class="banner">
@@ -84,6 +41,48 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_gauche"></article>
             <input type="date" id="calendrier" name="cal"/>
             <article class="selecteur_droit"></article>
+        </article>
+
+
+        
+        <article class="formulaire">
+            <div class="container">
+                <div class="form-box">
+                    <div class="tabs">
+                        <div class="tab active">RÉPÉTITIF</div>
+                        <div class="tab inactive">TEMPORAIRE</div>
+                    </div>
+                    <div>
+                        <button class="day-button selected">LUN</button>
+                        <button class="day-button">MAR</button>
+                        <button class="day-button">MER</button>
+                        <button class="day-button">JEU</button>
+                        <button class="day-button">VEN</button>
+                        <button class="day-button">SAM</button>
+                        <button class="day-button">DIM</button>
+                    </div>
+                    <label>Heure début :</label>
+                    <input type="time">
+                    <label>Heure fin :</label>
+                    <input type="time">
+                    <button class="submit-button">ENVOYER</button>
+                </div>
+                    <div class="form-box">
+                        <div class="tabs">
+                            <div class="tab inactive">RÉPÉTITIF</div>
+                            <div class="tab active" style="background-color: red;">TEMPORAIRE</div>
+                        </div>
+                        <label>Jour début :</label>
+                        <input type="date">
+                        <label>Jour fin :</label>
+                        <input type="date">
+                        <label>Heure début :</label>
+                        <input type="time">
+                        <label>Heure fin :</label>
+                        <input type="time">
+                        <button class="submit-button">ENVOYER</button>
+                </div>
+            </div>
         </article>
     </section>
 
