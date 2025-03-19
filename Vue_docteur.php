@@ -19,8 +19,54 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style_docteur.css">
+    <link rel="stylesheet" href="style_utilisateurs.css">
     <title>Document</title>
+    <style>
+        .sidenav {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            background-color: #111;
+            padding-top: 20px;
+            transition: 0.3s;
+            z-index: 1;
+        }
+
+        .sidenav a {
+            padding: 10px 20px;
+            text-decoration: none;
+			margin-top: 40px;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            background-color: #575757;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: relative;
+            color: white;
+            display: inline-block;
+        }
+        
+    </style>
 </head>
 <body>
     <div class="banner">
@@ -45,57 +91,42 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 
         
-        <article class="formulaire">
-            <div class="container">
-                <div class="form-box">
-                    <div class="tabs">
-                        <div class="tab active">RÉPÉTITIF</div>
-                        <div class="tab inactive">TEMPORAIRE</div>
-                    </div>
-                    <div>
-                        <button class="day-button selected">LUN</button>
-                        <button class="day-button">MAR</button>
-                        <button class="day-button">MER</button>
-                        <button class="day-button">JEU</button>
-                        <button class="day-button">VEN</button>
-                        <button class="day-button">SAM</button>
-                        <button class="day-button">DIM</button>
-                    </div>
-                    <label>Heure début :</label>
-                    <input type="time">
-                    <label>Heure fin :</label>
-                    <input type="time">
-                    <button class="submit-button">ENVOYER</button>
-                </div>
-                    <div class="form-box">
-                        <div class="tabs">
-                            <div class="tab inactive">RÉPÉTITIF</div>
-                            <div class="tab active" style="background-color: red;">TEMPORAIRE</div>
-                        </div>
-                        <label>Jour début :</label>
-                        <input type="date">
-                        <label>Jour fin :</label>
-                        <input type="date">
-                        <label>Heure début :</label>
-                        <input type="time">
-                        <label>Heure fin :</label>
-                        <input type="time">
-                        <button class="submit-button">ENVOYER</button>
-                </div>
-            </div>
-        </article>
+        <div class="form-box">
+        <div class="tabs">
+            <div id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</div>
+            <div id="tab-temporaire" class="tab inactive" onclick="toggleForm('temporaire')">TEMPORAIRE</div>
+        </div>
+        
+        <div id="form-repetitif">
+            <button class="day-button selected">LUN</button>
+            <button class="day-button">MAR</button>
+            <button class="day-button">MER</button>
+            <button class="day-button">JEU</button>
+            <button class="day-button">VEN</button>
+            <button class="day-button">SAM</button>
+            <button class="day-button">DIM</button>
+            <label>Heure début :</label>
+            <input type="time">
+            <label>Heure fin :</label>
+            <input type="time">
+            <button class="submit-button">ENVOYER</button>
+        </div>
+        
+        <div id="form-temporaire" class="hidden">
+            <label>Jour début :</label>
+            <input type="date">
+            <label>Jour fin :</label>
+            <input type="date">
+            <label>Heure début :</label>
+            <input type="time">
+            <label>Heure fin :</label>
+            <input type="time">
+            <button class="submit-button">ENVOYER</button>
+        </div>
+    </div>
     </section>
-
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.left = "0";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.left = "-250px";
-        }
-    </script>
 
 </body>
 <script src = "calendrier\calendrier.js"></script>
+<script src = "form_doc.js"></script>
 </html>
