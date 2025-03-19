@@ -7,19 +7,8 @@ function closeNav() {
 }
 
 function toggleForm(type) {
-    if (type === 'repetitif') {
-        document.getElementById('form-repetitif').classList.remove('hidden');
-        document.getElementById('form-temporaire').classList.add('hidden');
-        document.getElementById('tab-repetitif').classList.add('active');
-        document.getElementById('tab-repetitif').classList.remove('inactive');
-        document.getElementById('tab-temporaire').classList.add('inactive');
-        document.getElementById('tab-temporaire').classList.remove('active');
-    } else {
-        document.getElementById('form-repetitif').classList.add('hidden');
-        document.getElementById('form-temporaire').classList.remove('hidden');
-        document.getElementById('tab-temporaire').classList.add('active');
-        document.getElementById('tab-temporaire').classList.remove('inactive');
-        document.getElementById('tab-repetitif').classList.add('inactive');
-        document.getElementById('tab-repetitif').classList.remove('active');
-    }
+    document.getElementById("form-repetitif").classList.toggle("hidden", type !== "repetitif");
+    document.getElementById("form-temporaire").classList.toggle("hidden", type !== "temporaire");
+    document.getElementById("tab-repetitif").classList.toggle("active", type === "repetitif");
+    document.getElementById("tab-temporaire").classList.toggle("active", type === "temporaire");
 }
