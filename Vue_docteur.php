@@ -80,9 +80,12 @@ $nom = htmlspecialchars($_SESSION['nom']);
         <a href="logout.php" class="buttons">Déconnexion</a>
     </div>
 
+
+
     <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, Dr. <?php echo $nom; ?></div>
 
     <section class="main_cal">
+
         <article class="selecteur">
             <article class="selecteur_gauche"></article>
             <input type="date" id="calendrier" name="cal"/>
@@ -97,7 +100,10 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <div id="tab-temporaire" class="tab inactive" onclick="toggleForm('temporaire')">TEMPORAIRE</div>
         </div>
         
-        <div id="form-repetitif">
+        
+    </section>
+
+    <div id="form-repetitif">
             <button class="day-button selected">LUN</button>
             <button class="day-button">MAR</button>
             <button class="day-button">MER</button>
@@ -124,7 +130,6 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <button class="submit-button">ENVOYER</button>
         </div>
     </div>
-    </section>
 
 </body>
 <script src = "calendrier\calendrier.js"></script>
