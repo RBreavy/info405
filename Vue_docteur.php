@@ -20,6 +20,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style_utilisateur.css">
+    <link rel="stylesheet" href="calendrier/calendrier.css">
     <title>Document</title>
     
 </head>
@@ -83,6 +84,6 @@ $nom = htmlspecialchars($_SESSION['nom']);
     </div>
 
 </body>
-<script src = "calendrier\calendrier.js"></script>
+<script src = "calendrier/calendrier.js"></script>
 <script src = "form_doc.js"></script>
 </html>

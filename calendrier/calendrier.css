@@ -1,0 +1,238 @@
+.main_cal {
+    position: relative;
+    width: 93vw;
+    height: 73vh;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: flex-start;
+    
+    margin: 10px;
+    background-image: linear-gradient(to bottom right, rgba(255,255,255,0.66), rgba(0,61,91,0.66));
+    backdrop-filter: blur(5px);
+    padding: 0 25px 25px 3.5%;
+    border-radius: 10px;
+}
+
+
+
+.jour {
+    position: relative;
+    width: 10%;
+    height: 80%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    border-left: solid 2px black;
+    border-bottom: solid 2px black;
+    border-top: solid 2px black;
+    box-shadow: 6px 4px 2px 1px rgba(59,59,59,0.5);
+
+    margin: 0;
+    padding: 0;
+    
+}
+
+.datejour {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+    height: 10%;
+    background-color: #3e00a2;
+    border-bottom: solid 1px black;
+}
+
+.datejour p {
+    color: #f4f4f9 ;
+    text-align: center;
+    font-size:1vw;
+    font-family: "URW Chancery L", cursive;
+}
+
+
+.creneau {
+    width: 100%;
+    flex: auto;
+    position: relative;
+    font-family: "URW Chancery L", cursive;
+}
+
+.border_bottom_top_left {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+
+.border_bottom_top_right {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.border_right {
+    border-right: solid 1px black;
+}
+
+.carre_heure {
+    position: absolute;
+    transform: translateX(-100%);
+    width: 50px;
+    height: 25px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.heure {
+    color: black;
+    z-index: 1;
+    margin-right: 5px;
+    font-size:1vw;
+}
+
+.selecteur {
+    position: absolute;
+    width: 30vw;
+    height: 5vh;
+    background-color: rgba(157, 157, 157, 0.5);
+    top: 5px;
+    left: 35%;
+    margin-left: -10%;
+    border-radius: 40px;
+    transition: box-shadow 0.5s ease-in; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10%;
+}
+
+.selecteur:hover {
+    box-shadow: 0 0 3px 2px white;
+}
+
+.selecteur_droit, .selecteur_gauche {
+    width: 7%;
+    height: 70%;
+    border-radius: 30px;
+    box-shadow: 0 0 0 1px black;
+    background-size: 100%;
+    background-position: center;
+    transition: background-size 0.5s ease-in-out;
+}
+
+.selecteur_gauche {
+    background-image: url("../arrow_l.jpg");
+    background-color: white;
+    background-repeat: no-repeat;
+}
+
+.selecteur_droit {
+    background-image: url("../arrow_r.jpg");
+    background-color: white;
+    background-repeat: no-repeat;
+}
+
+
+.selecteur_droit:hover , .selecteur_gauche:hover {
+    background-size: 110%;
+}
+
+#calendrier {
+    background-color: rgba(0, 0, 0, 0);
+    width: 40%;
+    color: white;
+    padding: 4px;
+    border: solid 1px black;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px black;
+}
+
+
+
+.gris_fonce {
+    background-color: #7777cd;
+}
+
+.gris_clair {
+    background-color: #f3f0f0;
+}
+
+.border_top {
+    border-top: solid 1px black;
+}
+
+.article_border_bottom_left_radius {
+    border-bottom-left-radius: 5px;
+}
+
+.article_border_bottom_right_radius {
+    border-bottom-right-radius: 5px;
+}
+
+.transition_cal_d {
+    animation-name: anim_cal_d;
+    animation-duration: 1s;
+}
+
+.transition_cal_g {
+    animation-name: anim_cal_g;
+    animation-duration: 1s;
+}
+
+@keyframes anim_cal_g {
+    40% {transform: translateX(20%);}
+}
+
+@keyframes anim_cal_d {
+    40% {transform: translateX(-20%);}
+}
+
+
+.invisible_border_top {
+    box-shadow: 0 -1px 0 black;
+    z-index: 1;
+}
+
+.invisible_border_bottom {
+    box-shadow: 0 1px 0 black;
+    z-index: 1;
+}
+
+.custom_border_top {
+    border-top: solid 1px var(--border-color);
+}
+
+.custom_bg_color {
+    background-color: var(--border-color);
+}
+.rdv {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    background-color: transparent;
+}
+
+.rdv p {
+    width: 100%;
+    height: 50%;
+    overflow-wrap: break-word;
+    overflow-y: hidden;
+    font-size:1vw;
+}
+
+.rdv p:hover {
+    overflow-y: visible;
+
+}
+
+* {
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
