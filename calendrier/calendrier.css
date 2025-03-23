@@ -1,6 +1,6 @@
 .main_cal {
     position: relative;
-    width: 93vw;
+    width: 110vw;
     height: 73vh;
     
     display: flex;
@@ -94,7 +94,7 @@
 
 .selecteur {
     position: absolute;
-    width: 30vw;
+    width: 40vw;
     height: 5vh;
     background-color: rgba(157, 157, 157, 0.5);
     top: 5px;

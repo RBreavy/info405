@@ -186,7 +186,7 @@ button:hover {
     position: fixed;
     left: -250px;
     top: 0;
-    background-color: #111;
+    background-color: #1111114e;
     padding-top: 20px;
     transition: 0.3s;
     z-index: 1;
@@ -203,7 +203,7 @@ button:hover {
 }
 
 .sidenav a:hover {
-    background-color: #575757;
+    background-color: #57575791;
 }
 
 .sidenav .closebtn {
