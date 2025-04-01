@@ -58,8 +58,7 @@ button:hover {
 }
 
 .day-button:hover {
-    background-color: #7777cd;
-    color:red;
+    text-decoration: underline;
 }
 
 .invisible{
