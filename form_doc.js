@@ -1,19 +1,31 @@
 // Form toggle functionality
 function toggleForm(formType) {
+    // Get references to both forms and tabs
+    const formRepetitif = document.getElementById('form-repetitif');
+    const formTemporaire = document.getElementById('form-temporaire');
+    const tabRepetitif = document.getElementById('tab-repetitif');
+    const tabTemporaire = document.getElementById('tab-temporaire');
+    
     if (formType === 'repetitif') {
-        document.getElementById('form-repetitif').classList.remove('hidden');
-        document.getElementById('form-temporaire').classList.add('hidden');
-        document.getElementById('tab-repetitif').classList.add('active');
-        document.getElementById('tab-repetitif').classList.remove('inactive');
-        document.getElementById('tab-temporaire').classList.remove('active');
-        document.getElementById('tab-temporaire').classList.add('inactive');
-    } else {
-        document.getElementById('form-repetitif').classList.add('hidden');
-        document.getElementById('form-temporaire').classList.remove('hidden');
-        document.getElementById('tab-repetitif').classList.remove('active');
-        document.getElementById('tab-repetitif').classList.add('inactive');
-        document.getElementById('tab-temporaire').classList.add('active');
-        document.getElementById('tab-temporaire').classList.remove('inactive');
+        // Show repetitif form, hide temporaire form
+        formRepetitif.classList.remove('hidden');
+        formTemporaire.classList.add('hidden');
+        
+        // Update tab styles
+        tabRepetitif.classList.add('active');
+        tabRepetitif.classList.remove('inactive');
+        tabTemporaire.classList.remove('active');
+        tabTemporaire.classList.add('inactive');
+    } else if (formType === 'temporaire') {
+        // Hide repetitif form, show temporaire form
+        formRepetitif.classList.add('hidden');
+        formTemporaire.classList.remove('hidden');
+        
+        // Update tab styles
+        tabRepetitif.classList.remove('active');
+        tabRepetitif.classList.add('inactive');
+        tabTemporaire.classList.add('active');
+        tabTemporaire.classList.remove('inactive');
     }
 }
 
@@ -56,3 +68,9 @@ function recupForm() {
     // You could show a confirmation message here
     alert('Disponibilités enregistrées avec succès!');
 }
+
+// Initialize the form on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Make sure the repetitif form is visible by default
+    toggleForm('repetitif');
+});

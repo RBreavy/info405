@@ -47,7 +47,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
         </article>
 
-        <!-- The form-indisp will be positioned to the right of jour elements -->
+        <!-- Form-indisp will be positioned to the right of jour elements -->
         <div class="form-indisp">
             <div class="tabs">
                 <button id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</button>

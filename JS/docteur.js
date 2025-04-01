@@ -7,7 +7,6 @@ function changeSelection(jour) {
     console.log("temp");
     temp.classList.add("selected");
 }
-
 // Menu functionality
 function openNav() {
     document.getElementById("mySidenav").style.left = "0";
