@@ -23,7 +23,8 @@ $nom = htmlspecialchars($_SESSION['nom']);
 <body>
     <div class="banner">
         <img src="logo.png" alt="Logo" class="banner-logo">
-        <span class="menu-icon" onclick="openNav()">☰</span>
+        <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, <?php echo $nom; ?></div>
+        <span class="menu-icon" onclick="openNav()">☰</span> <br>
     </div>
     
     <div id="mySidenav" class="sidenav">
@@ -32,7 +33,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
         <a href="logout.php" class="buttons">Déconnexion</a>
     </div>
 
-    <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, <?php echo $nom; ?></div>
+    
 
     <section class="main_cal">
         <article class = "selecteur">
