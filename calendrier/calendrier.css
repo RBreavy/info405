@@ -236,17 +236,18 @@
     padding: 0;
 }
 
-/* Styles for the form-indisp */
+/* Styles for the form-indisp with relative positioning */
 .form-indisp {
-    position: absolute;
-    width: 300px;
-    right: 20px;
-    top: 60px;
+    position: relative;
+    width: 280px;
+    height: 80%;
+    margin-top: 60px;
+    margin-left: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    z-index: 10;
+    align-self: flex-end;
 }
 
 .tabs {
