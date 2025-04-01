@@ -3,7 +3,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="Index_style.css">
     <title>Réinitialisation du mot de passe</title>
-    <script defer src="envoi_mail.js"></script> 
 </head>
 <body>
     <div id="form_conn">
@@ -11,14 +10,38 @@
         <form id="reset-form">
             <label for="mail-recup">Entrez votre email :</label>
             <input id="mail-recup" name="email" type="email" placeholder="example@domain.com" required>
-            <button type="submit" id="mail-btn">Envoyer le mail</button>
+            <button type="button" id="mail-btn" onclick="envoiMail()">Envoyer le mail</button>
         </form>
-        <p id="message"></p>
+        <p>Un mail va être envoyé à cette adresse pour vous permettre de récupérer l'accès à votre compte.</p>
         <div class="container">
             <span class="lien">
                 <a href="../index.html">Retour</a>
             </span>
         </div>
     </div>
+
+    <script>
+        function envoiMail() {
+            let email = document.getElementById("mail-recup").value;
+
+            // Effectuer la requête vers le serveur Node.js
+            fetch('http://51.68.91.213:3000/send-mail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({ email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message); // Affiche un message de succès
+                } else {
+                    alert(data.message); // Affiche une erreur
+                }
+            })
+            .catch(error => console.error('Erreur:', error));
+        }
+    </script>
 </body>
 </html>
