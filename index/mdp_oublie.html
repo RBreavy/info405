@@ -11,7 +11,7 @@
     <script type="text/javascript">
     (function(){
       emailjs.init({
-        publicKey: "Fzcsrfnh8mpUUfmjk", // Remplacez par votre publicKey
+        publicKey: "Fzcsrfnh8mpUUfmjk",
       });
     })();
     </script>
@@ -21,11 +21,12 @@
 <body>
     <div id="form_conn">
         <h1>Réinitialisez votre mot de passe</h1>
-
-        <form id="reset-form" onsubmit="envoiMail(event)">
+        <!-- Formulaire sans action, tout est géré par JavaScript -->
+        <form id="reset-form" onsubmit="envoiMail()">
             <label for="mail-recup">Entrez votre email :</label>
             <input id="mail-recup" name="email" type="email" placeholder="example@domain.com" required>
-            <button type="submit" id="mail-btn">Envoyer le mail</button>
+
+            <button type="button" id="mail-btn" onclick="envoiMail()">Envoyer le mail</button>
         </form>
 
         <p>Un mail va être envoyé à cette adresse pour vous permettre de récupérer l'accès à votre compte.</p>
