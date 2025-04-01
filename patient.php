@@ -18,7 +18,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style_utilisateur.css">
     <link rel="stylesheet" href="calendrier/calendrier.css">
-    <title>Patient</title>
+    <title>Patient page</title>
 </head>
 <body>
     <div class="banner">

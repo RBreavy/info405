@@ -21,7 +21,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style_utilisateur.css">
     <link rel="stylesheet" href="calendrier/calendrier.css">
-    <title>Document</title>
+    <title>Docteur page</title>
     
 </head>
 <body>
