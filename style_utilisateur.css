@@ -233,3 +233,9 @@ button:hover {
     color: white;
     display: inline-block;
 }
+
+#welcome-message{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: grab;
+    font-size: large;
+}
