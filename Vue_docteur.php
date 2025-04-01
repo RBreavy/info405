@@ -21,7 +21,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style_utilisateur.css">
     <link rel="stylesheet" href="calendrier/calendrier.css">
-    <title>Document</title>
+    <title>Docteur page</title>
     
 </head>
 <body>
@@ -56,13 +56,15 @@ $nom = htmlspecialchars($_SESSION['nom']);
         </div>
 
     <div id="form-repetitif">
-            <button class="day-button selected">LUN</button>
-            <button class="day-button">MAR</button>
-            <button class="day-button">MER</button>
-            <button class="day-button">JEU</button>
-            <button class="day-button">VEN</button>
-            <button class="day-button">SAM</button>
-            <button class="day-button">DIM</button>
+            <button class="day-button lun selected" onclick="changeSelection('lun')">LUN</button>
+            <button class="day-button mar" onclick="changeSelection('mar')">MAR</button>
+            <button class="day-button mer" onclick="changeSelection('mer')">MER</button>
+            <button class="day-button jeu" onclick="changeSelection('jeu')">JEU</button>
+            <button class="day-button ven" onclick="changeSelection('ven')">VEN</button>
+            <button class="day-button sam" onclick="changeSelection('sam')">SAM</button>
+            <button class="day-button dim" onclick="changeSelection('dim')">DIM</button>
+
+            </form>
             <label>Heure début :</label>
             <input type="time" min="08:00" max="20:00">
             <label>Heure fin :</label>
@@ -88,3 +90,5 @@ $nom = htmlspecialchars($_SESSION['nom']);
 <script src = "form_doc.js"></script>
 <script src = "JS/docteur.js"></script>
 </html>
+
+
