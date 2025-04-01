@@ -7,12 +7,11 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Configuration du transporteur Nodemailer (exemple avec Gmail)
 const transporter = nodemailer.createTransport({
-    service: 'gmail',  // Tu peux aussi utiliser d'autres services comme SendGrid, Mailgun, etc.
+    service: 'gmail',
     auth: {
-        user: 'info405mailrecup@gmail.com', // Ton email
-        pass: 'tonmotdepasse'               // Ton mot de passe ou mot de passe d'application
+        user: 'info405mailrecup@gmail.com',
+        pass: 'tonmotdepasse'
     }
 });
 
@@ -36,9 +35,4 @@ app.post('/send-mail', (req, res) => {
             return res.json({ success: true, message: '📩 E-mail envoyé avec succès !' });
         }
     });
-});
-
-// Démarrer le serveur sur le port 3000
-app.listen(3000, () => {
-    console.log('Serveur Node.js en cours d\'exécution sur le port 3000');
 });
