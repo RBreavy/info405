@@ -153,11 +153,13 @@ button:hover {
 .tab.active {
     background-color: #5e41a1;
     color: white;
+    transition: all 1S ; 
 }
 
 .tab.inactive {
     background-color: #5e41a1;
     color: white;
+    transition: all 1S ; 
 }
 
 .tab.active:hover {
@@ -239,4 +241,5 @@ button:hover {
     cursor: grab;
     font-size: large;
     text-align: center;
+    box-shadow: 0px 2px 10px rgba(56, 0, 188, 0.71);
 }
