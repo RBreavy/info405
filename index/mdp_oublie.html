@@ -3,20 +3,16 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="Index_style.css">
     <title>Réinitialisation du mot de passe</title>
-    <script defer src="envoi_mail.js"></script>
 </head>
 <body>
     <div id="form_conn">
         <h1>Réinitialisez votre mot de passe</h1>
-        <form id="reset-form">
+        <form id="reset-form" method="POST" action="mail.php">
             <label for="mail-recup">Entrez votre email :</label>
             <input id="mail-recup" name="email" type="email" placeholder="example@domain.com" required>
-
-            <button type="button" id="mail-btn" onclick="envoiMail()">Envoyer le mail</button>
+            <button type="submit" id="mail-btn">Envoyer le mail</button>
         </form>
-
         <p>Un mail va être envoyé à cette adresse pour vous permettre de récupérer l'accès à votre compte.</p>
-
         <div class="container">
             <span class="lien">
                 <a href="../index.html">Retour</a>
