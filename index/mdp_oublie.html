@@ -7,11 +7,11 @@
 <body>
     <div id="form_conn">
         <h1>Réinitialisez votre mot de passe</h1>
-        <form action="mail.php" method="POST">
+        <form id="reset-form">
             <label for="mail-recup">Entrez votre email :</label>
             <input id="mail-recup" name="email" type="email" placeholder="example@domain.com" required>
 
-            <button type="submit" id="mail-btn">Envoyer le mail</button>
+            <button type="button" id="mail-btn" onclick="envoiMail()">Envoyer le mail</button>
         </form>
 
         <p>Un mail va être envoyé à cette adresse pour vous permettre de récupérer l'accès à votre compte.</p>

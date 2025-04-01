@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $subject = "Réinitialisation de votre mot de passe";
         $message = "Pour récupérer votre mot de passe, cliquez sur ce lien : blabla";
         $headers = "From: info405mailrecup@gmail.com\r\n" .
-                   "Reply-To: contact@tondomaine.com\r\n" .
+                   "Reply-To: info405mailrecup@gmail.com\r\n" .
                    "Content-Type: text/plain; charset=UTF-8";
 
         // Envoi de l'email
