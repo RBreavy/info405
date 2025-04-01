@@ -10,11 +10,10 @@ function getAllRdvs() {
     
     try {
         $query = "SELECT m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
-                  p.date_debut, p.date_fin 
+                  r.date_debut, r.date_fin 
                   FROM rdv r
                   JOIN medecin m ON r.id_medecin = m.id_medecin 
-                  JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs
-                  JOIN periode p ON r.id_periode = p.id_periode";
+                  JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs;
                   
         $result = mysqli_query($conn, $query);
         $rdvs = mysqli_fetch_all($result, MYSQLI_ASSOC);
