@@ -59,12 +59,10 @@ button {
 }
 
 
-button:hover {
-    background-color: #7777cd;
-    color:black;
-}
+
 
 .day-button:hover {
+    transition: all 0.5s ease-in;
     text-decoration: underline;
 }
 
