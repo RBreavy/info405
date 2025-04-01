@@ -1,27 +1,25 @@
-function envoiMail() {
-    let email = document.getElementById("mail-recup").value;
+document.getElementById("reset-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Empêche le rechargement de la page
 
-    console.log("Envoi de l'email à : " + email); // Message de suivi
+    let email = document.getElementById("mail-recup").value;
+    let messageDiv = document.getElementById("message");
+
+    console.log("📨 Tentative d'envoi de l'email à : " + email);
 
     fetch("mail.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({ email: email })
     })
-    .then(response => {
-        console.log("Réponse du serveur reçue.");
-        return response.json(); // Transforme la réponse en JSON
-    })
+    .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            console.log("E-mail envoyé avec succès."); // Message de succès
-            alert(data.message);
-        } else {
-            console.error("Erreur d'envoi de l'email : " + data.message); // Message d'erreur
-            alert(data.message);
-        }
+        console.log("Réponse du serveur : ", data);
+        messageDiv.textContent = data.message;
+        messageDiv.style.color = data.success ? "green" : "red";
     })
     .catch(error => {
-        console.error("Erreur lors de la requête : ", error); // Erreur de requête
+        console.error("❌ Erreur lors de la requête :", error);
+        messageDiv.textContent = "❌ Une erreur est survenue.";
+        messageDiv.style.color = "red";
     });
-}
+});
