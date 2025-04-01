@@ -240,8 +240,9 @@ button {
 .menu-icon {
     font-size: 5vh;
     cursor: pointer;
-    position: relative;
+    position: absolute;
     color: white;
-    display: inline-block;
+    margin-top: 40px;
+    margin-left: 50px;
 }
 
