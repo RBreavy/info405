@@ -153,11 +153,13 @@ button:hover {
 .tab.active {
     background-color: #5e41a1;
     color: white;
+    transition: all 1S ; 
 }
 
 .tab.inactive {
     background-color: #5e41a1;
     color: white;
+    transition: all 1S ; 
 }
 
 .tab.active:hover {
