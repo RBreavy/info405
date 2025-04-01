@@ -98,8 +98,7 @@ button {
     right: 5vw;
     left: 73vw;
     transform: translateY(-50%);
-    text-align: center;
-    
+    text-align: center;   
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -143,27 +142,29 @@ button {
 }
 
 .tab.active {
+    cursor: pointer;
     background-color: #5e41a1;
     color: white;
-    transition: all 1S ; 
+    transition: all 1S ease; 
 }
 
 .tab.inactive {
+    cursor: pointer;
     background-color: #5e41a1;
     color: white;
-    transition: all 1S ; 
+    transition: all 1S ease; 
 }
 
 .tab.active:hover {
     background-color: #7777cd;
     color: black;
-    transform: scale(1.0);
+    transform: scale(1.05);
   }
 
 .tab.inactive:hover {
     background-color: #7777cd;
     color: black;
-    transform: scale(1.0);
+    transform: scale(1.05);
   }
 
 .day-button {
