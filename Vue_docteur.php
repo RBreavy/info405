@@ -56,32 +56,21 @@ $nom = htmlspecialchars($_SESSION['nom']);
         </div>
 
     <div id="form-repetitif">
-        <input type="radio" id="lundi" name="jour" value="lundi" checked>
-        <label for="lundi">Lun</label>
-        
-        <input type="radio" id="mardi" name="jour" value="mardi">
-        <label for="mardi">Mar</label>
-        
-        <input type="radio" id="mercredi" name="jour" value="mercredi">
-        <label for="mercredi">Mer</label>
-        
-        <input type="radio" id="jeudi" name="jour" value="jeudi">
-        <label for="jeudi">Jeu</label>
-        
-        <input type="radio" id="vendredi" name="jour" value="vendredi">
-        <label for="vendredi">Ven</label>
-        
-        <input type="radio" id="samedi" name="jour" value="samedi">
-        <label for="samedi">Sam</label>
-        
-        <input type="radio" id="dimanche" name="jour" value="dimanche">
-        <label for="dimanche">Dim</label>
-        <label>Heure début :</label>
-        <input type="time" min="08:00" max="20:00">
-        <label>Heure fin :</label>
-        <input type="time" min="08:00" max="20:00">
-        <button class="submit-button" onclick="recupForm()">ENVOYER</button>
-    </div>
+            <button class="day-button lun selected" onclick="changeSelection('lun')">LUN</button>
+            <button class="day-button mar" onclick="changeSelection('mar')">MAR</button>
+            <button class="day-button mer" onclick="changeSelection('mer')">MER</button>
+            <button class="day-button jeu" onclick="changeSelection('jeu')">JEU</button>
+            <button class="day-button ven" onclick="changeSelection('ven')">VEN</button>
+            <button class="day-button sam" onclick="changeSelection('sam')">SAM</button>
+            <button class="day-button dim" onclick="changeSelection('dim')">DIM</button>
+
+            </form>
+            <label>Heure début :</label>
+            <input type="time" min="08:00" max="20:00">
+            <label>Heure fin :</label>
+            <input type="time" min="08:00" max="20:00">
+            <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+        </div>
         
         <div id="form-temporaire" class="hidden">
             <label>Jour début :</label>
@@ -103,38 +92,3 @@ $nom = htmlspecialchars($_SESSION['nom']);
 </html>
 
 
-        /* Style minimaliste pour les boutons jours */
-        .days-selector {
-            display: flex;
-            gap: 5px;
-            margin: 20px;
-        }
-
-        /* Cacher les boutons radio originaux */
-        .days-selector input[type="radio"] {
-            opacity: 0;
-            position: absolute;
-        }
-
-        /* Style pour les labels qui serviront de boutons */
-        .days-selector label {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border: 1px solid #3498db;
-            border-radius: 50%;
-            color: #3498db;
-            cursor: pointer;
-        }
-
-        /* Style pour le label quand le bouton radio est sélectionné */
-        .days-selector input[type="radio"]:checked + label {
-            background-color: #3498db;
-            color: white;
-        }
-
-
-</body>
-</html>
