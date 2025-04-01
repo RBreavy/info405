@@ -23,3 +23,5 @@ function envoiMail() {
     })
     .catch(error => {
         console.error("Erreur lors de la requête : ", error); // Erreur de requête
+    });
+}
