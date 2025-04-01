@@ -56,19 +56,32 @@ $nom = htmlspecialchars($_SESSION['nom']);
         </div>
 
     <div id="form-repetitif">
-            <button class="day-button selected">LUN</button>
-            <button class="day-button">MAR</button>
-            <button class="day-button">MER</button>
-            <button class="day-button">JEU</button>
-            <button class="day-button">VEN</button>
-            <button class="day-button">SAM</button>
-            <button class="day-button">DIM</button>
-            <label>Heure début :</label>
-            <input type="time" min="08:00" max="20:00">
-            <label>Heure fin :</label>
-            <input type="time" min="08:00" max="20:00">
-            <button class="submit-button" onclick="recupForm()">ENVOYER</button>
-        </div>
+        <input type="radio" id="lundi" name="jour" value="lundi" checked>
+        <label for="lundi">Lun</label>
+        
+        <input type="radio" id="mardi" name="jour" value="mardi">
+        <label for="mardi">Mar</label>
+        
+        <input type="radio" id="mercredi" name="jour" value="mercredi">
+        <label for="mercredi">Mer</label>
+        
+        <input type="radio" id="jeudi" name="jour" value="jeudi">
+        <label for="jeudi">Jeu</label>
+        
+        <input type="radio" id="vendredi" name="jour" value="vendredi">
+        <label for="vendredi">Ven</label>
+        
+        <input type="radio" id="samedi" name="jour" value="samedi">
+        <label for="samedi">Sam</label>
+        
+        <input type="radio" id="dimanche" name="jour" value="dimanche">
+        <label for="dimanche">Dim</label>
+        <label>Heure début :</label>
+        <input type="time" min="08:00" max="20:00">
+        <label>Heure fin :</label>
+        <input type="time" min="08:00" max="20:00">
+        <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+    </div>
         
         <div id="form-temporaire" class="hidden">
             <label>Jour début :</label>
@@ -87,4 +100,41 @@ $nom = htmlspecialchars($_SESSION['nom']);
 <script src = "calendrier/calendrier.js"></script>
 <script src = "form_doc.js"></script>
 <script src = "JS/docteur.js"></script>
+</html>
+
+
+        /* Style minimaliste pour les boutons jours */
+        .days-selector {
+            display: flex;
+            gap: 5px;
+            margin: 20px;
+        }
+
+        /* Cacher les boutons radio originaux */
+        .days-selector input[type="radio"] {
+            opacity: 0;
+            position: absolute;
+        }
+
+        /* Style pour les labels qui serviront de boutons */
+        .days-selector label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #3498db;
+            border-radius: 50%;
+            color: #3498db;
+            cursor: pointer;
+        }
+
+        /* Style pour le label quand le bouton radio est sélectionné */
+        .days-selector input[type="radio"]:checked + label {
+            background-color: #3498db;
+            color: white;
+        }
+
+
+</body>
 </html>
