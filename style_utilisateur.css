@@ -239,4 +239,6 @@ button:hover {
     cursor: grab;
     font-size: large;
     text-align: center;
+    background-color: navy;
+    border: 0ch;
 }
