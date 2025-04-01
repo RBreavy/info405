@@ -22,10 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Envoyer l'email
     if (mail($to, $subject, $message, $headers)) {
         error_log("✅ E-mail envoyé avec succès à $email");
-        echo json_encode(["success" => true, "message" => "📩 E-mail envoyé avec succès !"]);
     } else {
         error_log("❌ Erreur lors de l'envoi du mail à $email");
-        echo json_encode(["success" => false, "message" => "❌ Erreur lors de l'envoi du mail."]);
     }
 }
 ?>
