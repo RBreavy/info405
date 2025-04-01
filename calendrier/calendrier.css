@@ -1,27 +1,36 @@
 .main_cal {
     position: relative;
-    width: 110vw;
+    width: 95%;
     height: 73vh;
     
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: flex-start;
+    align-items: flex-start;
+    justify-content: space-between;
     
-    margin: 10px;
+    margin: 10px auto;
     background-image: linear-gradient(to bottom right, rgba(255,255,255,0.66), rgba(0,61,91,0.66));
     backdrop-filter: blur(5px);
     padding: 0 25px 25px 3.5%;
     border-radius: 10px;
 }
 
-
+.calendar-container {
+    width: 60%;
+    height: 80%;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
 
 .jour {
     position: relative;
     width: 10%;
-    height: 80%;
+    height: 100%;
     background-color: black;
     display: flex;
     flex-direction: column;
@@ -236,3 +245,68 @@
     padding: 0;
 }
 
+/* Styles for the form inside main_cal */
+.form-box {
+    width: 30%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#form-repetitif, #form-temporaire {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+#form-repetitif .day-button {
+    margin: 5px;
+    width: 60px;
+}
+
+.form-box label {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.form-box input[type="time"], 
+.form-box input[type="date"] {
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #5e41a1;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+}
+
+.submit-button {
+    margin-top: 20px;
+    width: 80%;
+    padding: 10px;
+    background-color: #5e41a1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #7777cd;
+}

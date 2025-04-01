@@ -10,8 +10,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION[
 // Récupération du nom depuis la session
 $nom = htmlspecialchars($_SESSION['nom']);
 
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +19,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style_utilisateur.css">
     <link rel="stylesheet" href="calendrier/calendrier.css">
-    <title>Document</title>
+    <title>Docteur page</title>
     
 </head>
 <body>
@@ -36,8 +34,6 @@ $nom = htmlspecialchars($_SESSION['nom']);
         <a href="logout.php" class="buttons">Déconnexion</a>
     </div>
 
-
-
     <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, Dr. <?php echo $nom; ?></div>
 
     <section class="main_cal">
@@ -47,48 +43,48 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
         </article>
 
-    </section>
-
-    <div class="form-box">
-        <div class="tabs">
-            <button id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</div>
-            <button id="tab-temporaire" class="tab inactive" onclick="toggleForm('temporaire')">TEMPORAIRE</div>
-        </div>
-
-    <div id="form-repetitif">
-            <button class="day-button lun selected" onclick="changeSelection('lun')">LUN</button>
-            <button class="day-button mar" onclick="changeSelection('mar')">MAR</button>
-            <button class="day-button mer" onclick="changeSelection('mer')">MER</button>
-            <button class="day-button jeu" onclick="changeSelection('jeu')">JEU</button>
-            <button class="day-button ven" onclick="changeSelection('ven')">VEN</button>
-            <button class="day-button sam" onclick="changeSelection('sam')">SAM</button>
-            <button class="day-button dim" onclick="changeSelection('dim')">DIM</button>
-
-            </form>
-            <label>Heure début :</label>
-            <input type="time" min="08:00" max="20:00">
-            <label>Heure fin :</label>
-            <input type="time" min="08:00" max="20:00">
-            <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+        <div class="calendar-container">
+            <!-- Calendar content will be here -->
         </div>
         
-        <div id="form-temporaire" class="hidden">
-            <label>Jour début :</label>
-            <input type="date">
-            <label>Jour fin :</label>
-            <input type="date">
-            <label>Heure début :</label>
-            <input type="time" min="08:00" max="20:00">
-            <label>Heure fin :</label>
-            <input type="time" min="08:00" max="20:00">
-            <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+        <div class="form-box">
+            <div class="tabs">
+                <button id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</button>
+                <button id="tab-temporaire" class="tab inactive" onclick="toggleForm('temporaire')">TEMPORAIRE</button>
+            </div>
+
+            <div id="form-repetitif">
+                <button class="day-button lun selected" onclick="changeSelection('lun')">LUN</button>
+                <button class="day-button mar" onclick="changeSelection('mar')">MAR</button>
+                <button class="day-button mer" onclick="changeSelection('mer')">MER</button>
+                <button class="day-button jeu" onclick="changeSelection('jeu')">JEU</button>
+                <button class="day-button ven" onclick="changeSelection('ven')">VEN</button>
+                <button class="day-button sam" onclick="changeSelection('sam')">SAM</button>
+                <button class="day-button dim" onclick="changeSelection('dim')">DIM</button>
+
+                <label>Heure début :</label>
+                <input type="time" min="08:00" max="20:00">
+                <label>Heure fin :</label>
+                <input type="time" min="08:00" max="20:00">
+                <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+            </div>
+            
+            <div id="form-temporaire" class="hidden">
+                <label>Jour début :</label>
+                <input type="date">
+                <label>Jour fin :</label>
+                <input type="date">
+                <label>Heure début :</label>
+                <input type="time" min="08:00" max="20:00">
+                <label>Heure fin :</label>
+                <input type="time" min="08:00" max="20:00">
+                <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+            </div>
         </div>
-    </div>
+    </section>
 
 </body>
 <script src = "calendrier/calendrier.js"></script>
 <script src = "form_doc.js"></script>
 <script src = "JS/docteur.js"></script>
 </html>
-
-
