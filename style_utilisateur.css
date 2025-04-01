@@ -64,6 +64,9 @@ button:hover {
     color:black;
 }
 
+.day-button:hover {
+    text-decoration: underline;
+}
 
 .invisible{
     display:none;
