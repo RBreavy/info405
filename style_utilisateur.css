@@ -48,6 +48,7 @@ button {
     border-radius: 5px;
     text-align: center;
     top:30%;
+    transition: all 1s;
 }
 
 
@@ -153,11 +154,13 @@ button:hover {
 .tab.active {
     background-color: #5e41a1;
     color: white;
+    transition: all 1S ; 
 }
 
 .tab.inactive {
     background-color: #5e41a1;
     color: white;
+    transition: all 1S ; 
 }
 
 .tab.active:hover {
