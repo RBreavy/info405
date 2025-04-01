@@ -1,10 +1,18 @@
-function envoiMail(){
-    let param = {
-        name : "test",
-        email : document.getElementById("mail-recup").value ,
-        subject : "réinitialiser votre mot de passe",
-        message : "Pour récuperer votre mot de passe cliquer sur ce lien blabla"
-    }
+function envoiMail() {
+    let email = document.getElementById("mail-recup").value;
 
-    emailjs.send("service_info405","template_1wicn1k", param).then(alert("Mail envoyé !!"));
+    fetch("mail.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ email })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => console.error("Erreur :", error));
 }
