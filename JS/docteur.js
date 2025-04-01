@@ -65,29 +65,3 @@ function recupForm() {
     // You could show a confirmation message here
     alert('Disponibilités enregistrées avec succès!');
 }
-
-// Make sure calendar days are added to the container
-document.addEventListener('DOMContentLoaded', function() {
-    // This code assumes that the calendar.js script will create and append
-    // the jour elements to the main_cal
-    // If needed, you can add a MutationObserver to ensure they're placed
-    // in the calendar-days-container
-    
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.addedNodes.length) {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.classList && node.classList.contains('jour')) {
-                        // Move jour elements to calendar-days-container
-                        const container = document.querySelector('.calendar-days-container');
-                        if (container && node.parentNode === document.querySelector('.main_cal')) {
-                            container.appendChild(node);
-                        }
-                    }
-                });
-            }
-        });
-    });
-    
-    observer.observe(document.querySelector('.main_cal'), { childList: true });
-});

@@ -43,45 +43,48 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
         </article>
         
-        <!-- Calendar days will be inserted here by JavaScript -->
-        <div class="calendar-days-container">
-            <!-- Calendar content (jour elements) will go here -->
-        </div>
-        
-        <div class="form-box">
-            <div class="tabs">
-                <button id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</button>
-                <button id="tab-temporaire" class="tab inactive" onclick="toggleForm('temporaire')">TEMPORAIRE</button>
-            </div>
-
-            <div id="form-repetitif">
-                <div class="day-buttons-container">
-                    <button class="day-button lun selected" onclick="changeSelection('lun')">LUN</button>
-                    <button class="day-button mar" onclick="changeSelection('mar')">MAR</button>
-                    <button class="day-button mer" onclick="changeSelection('mer')">MER</button>
-                    <button class="day-button jeu" onclick="changeSelection('jeu')">JEU</button>
-                    <button class="day-button ven" onclick="changeSelection('ven')">VEN</button>
-                    <button class="day-button sam" onclick="changeSelection('sam')">SAM</button>
-                    <button class="day-button dim" onclick="changeSelection('dim')">DIM</button>
+        <div class="content-container">
+            <!-- Form on the left -->
+            <div class="form-box">
+                <div class="tabs">
+                    <button id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</button>
+                    <button id="tab-temporaire" class="tab inactive" onclick="toggleForm('temporaire')">TEMPORAIRE</button>
                 </div>
 
-                <label>Heure début :</label>
-                <input type="time" min="08:00" max="20:00">
-                <label>Heure fin :</label>
-                <input type="time" min="08:00" max="20:00">
-                <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+                <div id="form-repetitif">
+                    <div class="day-buttons-container">
+                        <button class="day-button lun selected" onclick="changeSelection('lun')">LUN</button>
+                        <button class="day-button mar" onclick="changeSelection('mar')">MAR</button>
+                        <button class="day-button mer" onclick="changeSelection('mer')">MER</button>
+                        <button class="day-button jeu" onclick="changeSelection('jeu')">JEU</button>
+                        <button class="day-button ven" onclick="changeSelection('ven')">VEN</button>
+                        <button class="day-button sam" onclick="changeSelection('sam')">SAM</button>
+                        <button class="day-button dim" onclick="changeSelection('dim')">DIM</button>
+                    </div>
+
+                    <label>Heure début :</label>
+                    <input type="time" min="08:00" max="20:00">
+                    <label>Heure fin :</label>
+                    <input type="time" min="08:00" max="20:00">
+                    <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+                </div>
+                
+                <div id="form-temporaire" class="hidden">
+                    <label>Jour début :</label>
+                    <input type="date">
+                    <label>Jour fin :</label>
+                    <input type="date">
+                    <label>Heure début :</label>
+                    <input type="time" min="08:00" max="20:00">
+                    <label>Heure fin :</label>
+                    <input type="time" min="08:00" max="20:00">
+                    <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+                </div>
             </div>
             
-            <div id="form-temporaire" class="hidden">
-                <label>Jour début :</label>
-                <input type="date">
-                <label>Jour fin :</label>
-                <input type="date">
-                <label>Heure début :</label>
-                <input type="time" min="08:00" max="20:00">
-                <label>Heure fin :</label>
-                <input type="time" min="08:00" max="20:00">
-                <button class="submit-button" onclick="recupForm()">ENVOYER</button>
+            <!-- Calendar on the right -->
+            <div class="calendar-container">
+                <!-- Calendar content (jour elements) will go here -->
             </div>
         </div>
     </section>
