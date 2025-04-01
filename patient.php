@@ -23,8 +23,8 @@ $nom = htmlspecialchars($_SESSION['nom']);
 <body>
     <div class="banner">
         <img src="logo.png" alt="Logo" class="banner-logo">
-        <span class="menu-icon" onclick="openNav()">☰</span> <br>
         <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, <?php echo $nom; ?></div>
+        <span class="menu-icon" onclick="openNav()">☰</span> <br>
     </div>
     
     <div id="mySidenav" class="sidenav">
