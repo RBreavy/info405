@@ -228,4 +228,5 @@ button:hover {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     cursor: grab;
     font-size: large;
+    text-align: center;
 }
