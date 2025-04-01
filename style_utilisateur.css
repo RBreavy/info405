@@ -55,7 +55,6 @@ button {
 
 
 .day-button:hover {
-    background: 
     transition: all 0.5s ease-in;
     text-decoration: underline;
 }
