@@ -42,10 +42,6 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <input type="date" id="calendrier" name="cal"/>
             <article class="selecteur_droit"></article>
         </article>
-
-        <div class="calendar-container">
-            <!-- Calendar content will be here -->
-        </div>
         
         <div class="form-box">
             <div class="tabs">
@@ -54,13 +50,15 @@ $nom = htmlspecialchars($_SESSION['nom']);
             </div>
 
             <div id="form-repetitif">
-                <button class="day-button lun selected" onclick="changeSelection('lun')">LUN</button>
-                <button class="day-button mar" onclick="changeSelection('mar')">MAR</button>
-                <button class="day-button mer" onclick="changeSelection('mer')">MER</button>
-                <button class="day-button jeu" onclick="changeSelection('jeu')">JEU</button>
-                <button class="day-button ven" onclick="changeSelection('ven')">VEN</button>
-                <button class="day-button sam" onclick="changeSelection('sam')">SAM</button>
-                <button class="day-button dim" onclick="changeSelection('dim')">DIM</button>
+                <div class="day-buttons-container">
+                    <button class="day-button lun selected" onclick="changeSelection('lun')">LUN</button>
+                    <button class="day-button mar" onclick="changeSelection('mar')">MAR</button>
+                    <button class="day-button mer" onclick="changeSelection('mer')">MER</button>
+                    <button class="day-button jeu" onclick="changeSelection('jeu')">JEU</button>
+                    <button class="day-button ven" onclick="changeSelection('ven')">VEN</button>
+                    <button class="day-button sam" onclick="changeSelection('sam')">SAM</button>
+                    <button class="day-button dim" onclick="changeSelection('dim')">DIM</button>
+                </div>
 
                 <label>Heure début :</label>
                 <input type="time" min="08:00" max="20:00">
