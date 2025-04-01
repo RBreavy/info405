@@ -157,11 +157,13 @@ button {
 .tab.active:hover {
     background-color: #7777cd;
     color: black;
+    transform: scale(1.0);
   }
 
 .tab.inactive:hover {
     background-color: #7777cd;
     color: black;
+    transform: scale(1.0);
   }
 
 .day-button {
