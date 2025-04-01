@@ -43,6 +43,11 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
         </article>
         
+        <!-- Calendar days will be inserted here by JavaScript -->
+        <div class="calendar-days-container">
+            <!-- Calendar content (jour elements) will go here -->
+        </div>
+        
         <div class="form-box">
             <div class="tabs">
                 <button id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</button>
