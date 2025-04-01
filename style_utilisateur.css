@@ -156,7 +156,7 @@ button:hover {
 }
 
 .tab.inactive {
-    background-color: #7777cd;
+    background-color: #5e41a1;
     color: black;
 }
 
@@ -184,7 +184,7 @@ button:hover {
     height: 100%;
     width: 250px;
     position: fixed;
-    right: -250px;
+    left: -250px;
     top: 0;
     background-color: #1111114e;
     padding-top: 20px;

@@ -64,10 +64,10 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <button class="day-button">SAM</button>
             <button class="day-button">DIM</button>
             <label>Heure début :</label>
-            <input type="time">
+            <input type="time" min="08:00" max="20:00">
             <label>Heure fin :</label>
-            <input type="time">
-            <button class="submit-button">ENVOYER</button>
+            <input type="time" min="08:00" max="20:00">
+            <button class="submit-button" onclick="recupForm()">ENVOYER</button>
         </div>
         
         <div id="form-temporaire" class="hidden">
@@ -76,14 +76,15 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <label>Jour fin :</label>
             <input type="date">
             <label>Heure début :</label>
-            <input type="time">
+            <input type="time" min="08:00" max="20:00">
             <label>Heure fin :</label>
-            <input type="time">
-            <button class="submit-button">ENVOYER</button>
+            <input type="time" min="08:00" max="20:00">
+            <button class="submit-button" onclick="recupForm()">ENVOYER</button>
         </div>
     </div>
 
 </body>
 <script src = "calendrier/calendrier.js"></script>
 <script src = "form_doc.js"></script>
+<script src = "JS/docteur.js"></script>
 </html>
