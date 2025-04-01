@@ -15,6 +15,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,14 +23,15 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <link rel="stylesheet" href="style_utilisateur.css">
     <link rel="stylesheet" href="calendrier/calendrier.css">
     <title>Docteur page</title>
-    
+
 </head>
+
 <body>
     <div class="banner">
-        <img src="logo.png" alt="Logo" class="banner-logo">
+        <img src="images/logo.png" alt="Logo" class="banner-logo">
         <span class="menu-icon" onclick="openNav()">☰</span>
     </div>
-    
+
     <div id="mySidenav" class="sidenav">
         <button class="closebtn" onclick="closeNav()">X</button>
         <a href="contact.html" class="buttons">Contact</a>
@@ -43,7 +45,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <section class="main_cal">
         <article class="selecteur">
             <article class="selecteur_gauche"></article>
-            <input type="date" id="calendrier" name="cal"/>
+            <input type="date" id="calendrier" name="cal" />
             <article class="selecteur_droit"></article>
         </article>
 
@@ -71,7 +73,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
                 <input type="time" min="08:00" max="20:00">
                 <button class="submit-button" onclick="recupForm()">ENVOYER</button>
             </div>
-            
+
             <div id="form-temporaire" class="hidden">
                 <label>Jour début :</label>
                 <input type="date">
@@ -87,7 +89,8 @@ $nom = htmlspecialchars($_SESSION['nom']);
     </section>
 
 </body>
-<script src = "calendrier/calendrier.js"></script>
-<script src = "form_doc.js"></script>
-<script src = "JS/docteur.js"></script>
+<script src="calendrier/calendrier.js"></script>
+<script src="form_doc.js"></script>
+<script src="JS/docteur.js"></script>
+
 </html>
