@@ -16,8 +16,6 @@
     border-radius: 10px;
 }
 
-
-
 .jour {
     position: relative;
     width: 10%;
@@ -236,3 +234,70 @@
     padding: 0;
 }
 
+/* Styles for the form inside main_cal */
+.form-box {
+    position: absolute;
+    width: 300px;
+    right: 20px;
+    top: 60px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#form-repetitif, #form-temporaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#form-repetitif .day-buttons-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.form-box label {
+    margin-top: 10px;
+    font-size: 14px;
+    display: block;
+}
+
+.form-box input[type="time"], 
+.form-box input[type="date"] {
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #5e41a1;
+    margin: 5px 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+}
+
+.submit-button {
+    margin-top: 15px;
+    width: 80%;
+    padding: 10px;
+    background-color: #5e41a1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #7777cd;
+}

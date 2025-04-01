@@ -135,23 +135,6 @@ button {
     transform: scale(1.05);
 }
 
-
-.form-box {
-    width: 50%;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.tabs {
-    display: flex;
-    justify-content: space-around;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    border-radius: 5px;
-}
-
 .tab {
     cursor: pointer;
     padding: 10px;
@@ -247,4 +230,3 @@ button {
     margin-top: 40px;
     margin-left: 50px;
 }
-
