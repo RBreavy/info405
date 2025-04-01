@@ -207,7 +207,7 @@ button {
     position: fixed;
     left: -250px;
     top: 0;
-    background-color: #1111114e;
+    background-color: #111111a1;
     padding-top: 20px;
     transition: 0.3s;
     z-index: 1;
@@ -224,7 +224,7 @@ button {
 }
 
 .sidenav a:hover {
-    background-color: #57575791;
+    background-color: #575757c1;
 }
 
 .sidenav .closebtn {
