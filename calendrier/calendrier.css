@@ -236,3 +236,127 @@
     padding: 0;
 }
 
+/* Styles for the form-indisp with relative positioning */
+.form-indisp {
+    position: relative;
+    width: 280px;
+    height: 80%;
+    margin-top: 60px;
+    margin-left: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    align-self: flex-end;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#form-repetitif, #form-temporaire {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.day-buttons-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.form-indisp label {
+    margin-top: 10px;
+    font-size: 14px;
+    display: block;
+}
+
+.form-indisp input[type="time"], 
+.form-indisp input[type="date"] {
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #5e41a1;
+    margin: 5px 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+}
+
+.submit-button {
+    margin-top: 15px;
+    width: 80%;
+    padding: 10px;
+    background-color: #5e41a1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #7777cd;
+}
+
+/* Style for hiding elements */
+.hidden {
+    display: none !important;
+}
+
+/* Tab styling */
+.tab {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.tab.active {
+    background-color: #5e41a1;
+    color: white;
+    transition: all 1s;
+}
+
+.tab.inactive {
+    background-color: #3a3a3a;
+    color: white;
+    transition: all 1s;
+}
+
+.tab.active:hover {
+    background-color: #7777cd;
+    color: black;
+}
+
+.tab.inactive:hover {
+    background-color: #5e5e5e;
+    color: white;
+}
+
+/* Day button styling */
+.day-button {
+    margin: 5px;
+    padding: 10px;
+    background: #5e41a1;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.day-button.selected {
+    background: #7777cd;
+}
+
+.day-button:hover {
+    transition: all 0.5s ease-in;
+    text-decoration: underline;
+}

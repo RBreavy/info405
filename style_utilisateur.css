@@ -7,7 +7,8 @@
     height: 15vh;
     display: flex;
     align-items: center;
-    
+    flex-direction: column;
+    text-align: center;
 }
 
 
@@ -17,11 +18,17 @@
     width: 6em;
 }
 
-
+#welcome-message{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: grab;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+}
 
 
 body {
-    background-image: url("fond.png");
+    background-image: url("images/fond.png");
     background-size: cover;
     background-position: center;
     margin: 0;
@@ -48,14 +55,16 @@ button {
     border-radius: 5px;
     text-align: center;
     top:30%;
+    transition: all 1s;
 }
 
 
-button:hover {
-    background-color: #7777cd;
-    color:black;
-}
 
+
+.day-button:hover {
+    transition: all 0.5s ease-in;
+    text-decoration: underline;
+}
 
 .invisible{
     display:none;
@@ -153,12 +162,24 @@ button:hover {
 .tab.active {
     background-color: #5e41a1;
     color: white;
+    transition: all 1S ; 
 }
 
 .tab.inactive {
+    background-color: #5e41a1;
+    color: white;
+    transition: all 1S ; 
+}
+
+.tab.active:hover {
     background-color: #7777cd;
     color: black;
-}
+  }
+
+.tab.inactive:hover {
+    background-color: #7777cd;
+    color: black;
+  }
 
 .day-button {
     margin: 5px;
@@ -186,7 +207,7 @@ button:hover {
     position: fixed;
     left: -250px;
     top: 0;
-    background-color: #1111114e;
+    background-color: #111111a1;
     padding-top: 20px;
     transition: 0.3s;
     z-index: 1;
@@ -203,7 +224,7 @@ button:hover {
 }
 
 .sidenav a:hover {
-    background-color: #57575791;
+    background-color: #575757c1;
 }
 
 .sidenav .closebtn {
@@ -219,7 +240,8 @@ button:hover {
 .menu-icon {
     font-size: 5vh;
     cursor: pointer;
-    position: relative;
+    position: absolute;
     color: white;
-    display: inline-block;
+    margin-top: 40px;
+    margin-left: 50px;
 }
