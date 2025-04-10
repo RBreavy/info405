@@ -27,7 +27,7 @@ function envoiMail() {
 
     // Service et template ID
     const serviceID = 'service_info405';
-    const templateID = 'template_utcix5m';
+    const templateID = 'template_1wicn1k';
 
     // Envoi de l'email
     emailjs.send(serviceID, templateID, templateParams)
