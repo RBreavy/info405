@@ -21,7 +21,8 @@ function envoiMail() {
     // Paramètres de l'email à envoyer
     const templateParams = {
         to_email: email,
-        message: message
+        message: message,
+        subject: "réinitialiser votre mot de passe"
     };
 
     // Service et template ID
