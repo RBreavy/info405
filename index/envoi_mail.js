@@ -25,8 +25,8 @@ function envoiMail() {
     };
 
     // Service et template ID
-    const serviceID = 'service_18s7vqc';
-    const templateID = 'template_1wicn1k';
+    const serviceID = 'service_info405';
+    const templateID = 'template_utcix5m';
 
     // Envoi de l'email
     emailjs.send(serviceID, templateID, templateParams)
