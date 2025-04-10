@@ -1,20 +1,30 @@
+function generateToken(length = 32) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let token = '';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        token += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return token;
+}
+
+
 function envoiMail() {
     // Récupérer l'email saisi par l'utilisateur
     const email = document.getElementById('mail-recup').value;
 
-    // Générer un lien de réinitialisation (à adapter selon votre logique serveur)
-    const resetLink = `http://51.68.91.213/info2/site/index/reset_mdp.html?token=GENERATED_TOKEN`;
+    const token = generateToken();
+    const resetLink = `http://51.68.91.213/info2/site/index/reset_mdp.html?token=${token}`;
 
-    // Message à inclure dans l'email
     const message = `Cliquez sur le lien suivant pour réinitialiser votre mot de passe : ${resetLink}`;
 
     // Paramètres de l'email à envoyer
     const templateParams = {
         to_email: email,
-        message: message // Ajoutez ici le message ou toute autre variable nécessaire
+        message: message
     };
 
-    // Service et template ID à remplacer par les vôtres
+    // Service et template ID
     const serviceID = 'service_18s7vqc';
     const templateID = 'template_1wicn1k';
 
