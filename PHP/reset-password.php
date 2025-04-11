@@ -11,7 +11,7 @@ if (!isset($data['token']) || !isset($data['newPassword'])) {
 }
 
 $token = $data['token'];
-$newPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT); // Hash du mot de passe
+//$newPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT); // Hash du mot de passe
 
 // On cherche l'utilisateur par son token et sa date de validité
 $sql = "SELECT email FROM utilisateurs WHERE reset_token = ? AND reset_token_expires > NOW()";
@@ -34,7 +34,7 @@ $email = $user['email'];
 
 // Mise à jour du mot de passe + suppression du token
 $update = $conn->prepare("UPDATE utilisateurs SET mot_de_passe = ?, reset_token = NULL, reset_token_expires = NULL WHERE email = ?");
-$update->bind_param("ss", $newPassword, $email);
+$update->bind_param("ss", $data['newPassword'], $email);
 $success = $update->execute();
 
 if ($success) {
