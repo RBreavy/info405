@@ -28,12 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
             // Pas d'output avant la redirection
-            header("Location: ../patient.html");
+            header("Location: ../patient.php");
             exit();
         } else {
             echo json_encode(['success' => false, 'message' => 'Erreur lors de l’insertion : ' . $stmt->error]);
         }
-        
+
         $stmt->close();
         $conn->close();
 
