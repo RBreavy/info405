@@ -6,9 +6,9 @@
     <title>Réinitialiser le mot de passe</title>
 </head>
 <body>
-    <div id="reset-form-container">
+    <div id="form_conn">
         <h1>Réinitialiser votre mot de passe</h1>
-        <form id="reset-password-form">
+        <form id="reset-form">
             <label for="new-password">Nouveau mot de passe :</label>
             <input type="password" id="new-password" name="new-password" required>
             <button type="submit">Réinitialiser le mot de passe</button>
@@ -16,7 +16,7 @@
     </div>
 
     <script>
-        document.getElementById('reset-password-form').addEventListener('submit', function(event) {
+        document.getElementById('reset-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const newPassword = document.getElementById('new-password').value;
 
@@ -33,7 +33,7 @@
                 if (data.success) {
                     alert('Mot de passe réinitialisé avec succès !');
                     // Rediriger l'utilisateur vers la page de connexion
-                    window.location.href = '/login';
+                    window.location.href = '../index.php';
                 } else {
                     alert('Erreur lors de la réinitialisation du mot de passe.');
                 }
