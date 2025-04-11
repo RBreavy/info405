@@ -1,7 +1,7 @@
 <?php
 
 header("Content-Type: application/json");
-require_once('./index/db_connect/db_connect.php'); // ta connexion PDO à la base de données
+require_once('../index/db_connect.php'); // ta connexion PDO à la base de données
 
 // Lire les données JSON du corps de la requête
 $data = json_decode(file_get_contents("php://input"), true);
