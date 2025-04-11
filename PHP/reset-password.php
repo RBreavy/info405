@@ -1,7 +1,6 @@
 <?php
-
 header("Content-Type: application/json");
-require_once('../index/db_connect.php'); // ta connexion PDO à la base de données
+require_once('../index/db_connect.php');
 
 // Lire les données JSON du corps de la requête
 $data = json_decode(file_get_contents("php://input"), true);
@@ -12,30 +11,33 @@ if (!isset($data['token']) || !isset($data['newPassword'])) {
 }
 
 $token = $data['token'];
+$newPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT); // Hash du mot de passe
 
-// Tu dois avoir une table genre "reset_tokens" associée à chaque utilisateur
-// On cherche l'utilisateur associé à ce token
-$sql = "SELECT email FROM utilisateurs WHERE reset_token = ?";
+// On cherche l'utilisateur par son token et sa date de validité
+$sql = "SELECT email FROM utilisateurs WHERE reset_token = ? AND reset_token_expires > NOW()";
 $stmt = $conn->prepare($sql);
-$stmt->execute([$token]);
-$user = $stmt->fetch();
+if (!$stmt) {
+    echo json_encode(["success" => false, "message" => "Erreur de préparation", "error" => $conn->error]);
+    exit;
+}
+$stmt->bind_param("s", $token);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
 
 if (!$user) {
-    echo json_encode(["success" => false, "message" => "Token invalide"]);
+    echo json_encode(["success" => false, "message" => "Token invalide ou expiré"]);
     exit;
 }
 
-$email = $data['email'];
+$email = $user['email'];
 
-// Mise à jour du mot de passe de l'utilisateur
-$update = $conn->prepare("UPDATE utilisateurs SET mot_de_passe = ? WHERE email = ?");
-$success = $update->execute([$data['newPassword'], $email]);
+// Mise à jour du mot de passe + suppression du token
+$update = $conn->prepare("UPDATE utilisateurs SET mot_de_passe = ?, reset_token = NULL, reset_token_expires = NULL WHERE email = ?");
+$update->bind_param("ss", $newPassword, $email);
+$success = $update->execute();
 
 if ($success) {
-    // Supprimer le token après usage
-    $del = $conn->prepare("DELETE FROM reset_tokens WHERE token = ?");
-    $del->execute([$token]);
-
     echo json_encode(["success" => true]);
 } else {
     echo json_encode(["success" => false, "message" => "Erreur lors de la mise à jour"]);
