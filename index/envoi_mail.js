@@ -16,7 +16,7 @@ function envoiMail() {
 
     const message = `Cliquez sur le lien suivant pour réinitialiser votre mot de passe : ${resetLink}`;
 
-    fetch('/info2/PHP/site/set_token.php', {
+    fetch('/info2/site/PHP/set_token.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email, token: token })
