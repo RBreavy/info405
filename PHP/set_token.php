@@ -1,6 +1,6 @@
 <?php
 // Connexion à la BDD
-require_once(__DIR__ . './index/db_connect/db_connect.php');
+require_once('./index/db_connect.php');
 
 // Récupération des données JSON envoyées
 $data = json_decode(file_get_contents('php://input'), true);
