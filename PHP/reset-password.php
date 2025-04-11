@@ -15,7 +15,7 @@ $token = $data['token'];
 
 // Tu dois avoir une table genre "reset_tokens" associée à chaque utilisateur
 // On cherche l'utilisateur associé à ce token
-$sql = "SELECT email FROM reset_tokens WHERE token = ?";
+$sql = "SELECT email FROM utilisateurs WHERE reset_token = ?";
 $stmt = $conn->prepare($sql);
 $stmt->execute([$token]);
 $user = $stmt->fetch();
@@ -28,7 +28,7 @@ if (!$user) {
 $email = $data['email'];
 
 // Mise à jour du mot de passe de l'utilisateur
-$update = $conn->prepare("UPDATE utilisateurs SET password = ? WHERE email = ?");
+$update = $conn->prepare("UPDATE utilisateurs SET mot_de_passe = ? WHERE email = ?");
 $success = $update->execute([$data['newPassword'], $email]);
 
 if ($success) {
