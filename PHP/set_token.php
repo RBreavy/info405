@@ -10,8 +10,15 @@ $token = $data['token'];
 // Date d’expiration (1 heure plus tard)
 $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-// Mise à jour dans la BDD
+// Préparation de la requête
 $stmt = $conn->prepare("UPDATE utilisateurs SET reset_token = ?, reset_token_expires = ? WHERE email = ?");
-$success = $stmt->execute([$token, $expires, $email]);
 
-echo json_encode(['success' => $success]);
+if ($stmt) {
+    // On lie les paramètres au bon format : s = string
+    $stmt->bind_param("sss", $token, $expires, $email);
+    $success = $stmt->execute();
+    echo json_encode(['success' => $success]);
+} else {
+    echo json_encode(['success' => false, 'error' => $conn->error]);
+}
+?>
