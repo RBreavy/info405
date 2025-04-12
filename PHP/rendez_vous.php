@@ -1,0 +1,39 @@
+<?php
+header("Content-Type: application/json");
+require_once('info2/site/index/db_connect.php');
+
+// Récupération des données JSON
+$data = json_decode(file_get_contents("php://input"), true);
+
+// Vérifier les champs nécessaires
+if (!isset($data['id_medecin'], $data['id_utilisateur'], $data['couleur'], $data['date_debut'], $data['date_fin'])) {
+    echo json_encode(["success" => false, "message" => "Champs manquants"]);
+    exit;
+}
+
+// Récupération des données
+$id_medecin = $data['id_medecin'];
+$id_utilisateur = $data['id_utilisateur'];
+$couleur = $data['couleur'];
+$date_debut = new DateTime($data['date_debut']);
+$date_fin = new DateTime($data['date_fin']);
+
+// Calcul de la durée en minutes
+$duree_minutes = ($date_fin->getTimestamp() - $date_debut->getTimestamp()) / 60;
+
+// Vérification de la durée
+if ($duree_minutes < 10 || $duree_minutes > 40) {
+    echo json_encode(["success" => false, "message" => "La durée du rendez-vous doit être entre 10 et 40 minutes."]);
+    exit;
+}
+
+// Insertion en base de données
+$sql = "INSERT INTO rdv (id_medecin, id_utilisateurs, couleur, date_debut, date_fin) VALUES (?, ?, ?, ?, ?)";
+$stmt = $conn->prepare($sql);
+
+if ($stmt && $stmt->execute([$id_medecin, $id_utilisateur, $couleur, $date_debut->format('Y-m-d H:i:s'), $date_fin->format('Y-m-d H:i:s')])) {
+    echo json_encode(["success" => true]);
+} else {
+    echo json_encode(["success" => false, "message" => "Erreur lors de la prise de rendez-vous."]);
+}
+?>
