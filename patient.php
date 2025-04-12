@@ -45,39 +45,8 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
     </section>
     <section class="bouton_docteur">
-        <section class="formulaire_rdv">
-            <form id="rdv-form">
-                <h2>Prise de rendez-vous</h2>
-
-                <div class="form-group">
-                    <label for="rdv-date">Date du rendez-vous :</label>
-                    <input type="date" id="rdv-date" name="rdv-date" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="rdv-time">Heure du rendez-vous :</label>
-                    <input type="time" id="rdv-time" name="rdv-time" min="08:00" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="rdv-duration">Durée du rendez-vous :</label>
-                    <select id="rdv-duration" name="rdv-duration" required>
-                        <option value="10">10 minutes</option>
-                        <option value="20">20 minutes</option>
-                        <option value="30">30 minutes</option>
-                        <option value="40">40 minutes</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="rdv-docteur">Médecin :</label>
-                    <select id="rdv-docteur" name="rdv-docteur" required></select>
-                </div>
-
-                <button type="submit">Prendre rendez-vous</button>
-            </form>
-        </section>
-
+        <article class="docteur">
+        </article>
     </section>
 
 
