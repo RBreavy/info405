@@ -1,3 +1,11 @@
+let idMedecinSelectionne = null;
+
+button.addEventListener("click", _ => {
+    idMedecinSelectionne = button.id;
+    getRDV(button.id);
+});
+
+
 function create_rdv2(horaire_debut,duree,journee) {
     let horaire_fin = horaire_debut+duree;
     if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
@@ -168,7 +176,7 @@ function selection_creneau() {
     durationSelect.required = true;
     
     // Options pour la durée
-    const durations = [10, 20, 30, 40];
+    const durations = [10, 20, 30, 40, 50];
     durations.forEach(duration => {
         const option = create("option", durationSelect, `${duration} minutes`);
         option.value = duration;
@@ -181,28 +189,49 @@ function selection_creneau() {
     // Ajout de la validation pour s'assurer que le rendez-vous se termine avant 20h
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        
+    
+        if (!idMedecinSelectionne) {
+            alert("Veuillez sélectionner un médecin.");
+            return;
+        }
+    
         const timeValue = timeInput.value;
         const durationValue = parseInt(durationSelect.value);
-        
+    
         if (timeValue) {
-            // Extraire les heures et minutes
             const [hours, minutes] = timeValue.split(':').map(Number);
-            
-            // Calculer l'heure de fin
             let endMinutes = minutes + durationValue;
             let endHours = hours + Math.floor(endMinutes / 60);
             endMinutes = endMinutes % 60;
-            
-            // Vérifier si le rendez-vous se termine avant 20h
+    
             if (endHours > 20 || (endHours === 20 && endMinutes > 0)) {
                 alert("Le rendez-vous doit se terminer au plus tard à 20h00.");
-                return false;
+                return;
             }
-            
-            // Si tout est valide, on peut soumettre le formulaire
-            alert(`Rendez-vous programmé le ${dateInput.value} à ${timeInput.value} pour une durée de ${durationValue} minutes.`);
-            // Ici, vous pouvez ajouter le code pour envoyer les données au serveur
+    
+            fetch("rendez-vous.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({
+                    date: dateInput.value,
+                    time: timeInput.value,
+                    duration: durationValue,
+                    id_medecin: idMedecinSelectionne
+                })
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log("Réponse du serveur :", data);
+                alert("Rendez-vous bien enregistré !");
+                form.reset();
+            })
+            .catch(error => {
+                console.error("Erreur lors de l'envoi :", error);
+                alert("Erreur lors de l'enregistrement du rendez-vous.");
+            });
         }
     });
+    
 }
