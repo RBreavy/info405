@@ -9,6 +9,14 @@
     color : #000000;
 }
 
+.appointment-form h2 {
+    color : #000000;
+}
+
+.appointment-form label {
+    color : #000000;
+}
+
 .doctor-list {
     display: flex;
     flex-wrap: wrap;
