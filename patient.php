@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION[
 $nom = htmlspecialchars($_SESSION['nom']);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/info2/site/CSS/style_utilisateur.css">
     <link rel="stylesheet" href="calendrier/calendrier.css">
-    <title>Patient page</title>
+    <title>Page Patient</title>
 </head>
 
 <body>
@@ -35,22 +35,20 @@ $nom = htmlspecialchars($_SESSION['nom']);
         <a href="logout.php" class="buttons">Déconnexion</a>
     </div>
 
-
-
     <section class="main_cal">
         <article class="selecteur">
-            <article class="selecteur_gauche">
-            </article>
+            <article class="selecteur_gauche"></article>
             <input type="date" id="calendrier" name="cal" />
             <article class="selecteur_droit"></article>
-    </section>
-    <section class="bouton_docteur">
-        <article class="docteur">
         </article>
     </section>
+    <section class="bouton_docteur">
+        <article class="docteur"></article>
+    </section>
 
-
-
+    <script>
+        const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
+    </script>
 </body>
 <script defer src="calendrier/calendrier.js"></script>
 <script defer src="JS/patient.js"></script>
