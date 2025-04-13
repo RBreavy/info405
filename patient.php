@@ -34,7 +34,9 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
     <section class="main_cal">
         <article class="selecteur">
+            <article class="selecteur_gauche"></article>
             <input type="date" id="calendrier" name="cal" />
+            <article class="selecteur_droit"></article>
         </article>
     </section>
 
