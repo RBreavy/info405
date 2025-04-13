@@ -75,7 +75,7 @@ function setupEventListeners() {
         const endDateTime = calculateEndTime(startDateTime, duration);
         
         try {
-            const response = await fetch('rendez_vous.php', {
+            const response = await fetch('/info2/site/PHP/rendez_vous.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
