@@ -1,71 +1,30 @@
-.doctor-selection {
-    margin: 20px;
-    padding: 15px;
-    background: #f5f5f5;
-    border-radius: 8px;
-}
-
-.doctor-list {
+.main-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
-
+.controls-container {
+    width: 300px;
+    margin-right: 20px;
+}
+.calendar-container {
+    flex: 1;
+}
+/* Vos styles existants */
+.selecteur {
+    display: flex;
+    margin-bottom: 10px;
+}
+.doctor-list {
+    margin-top: 15px;
+}
 .doctor-button {
-    padding: 10px 15px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
     background: #4a90e2;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s;
-}
-
-.doctor-button:hover {
-    background: #3a7bc8;
-}
-
-.appointment-form {
-    margin: 20px;
-    padding: 20px;
-    background: #f5f5f5;
-    border-radius: 8px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-#rdv-form button[type="submit"] {
-    background: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#cancel-appointment {
-    background: #f44336;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 10px;
-}
+}   

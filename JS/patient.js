@@ -85,7 +85,7 @@ function setupEventListeners() {
                     id_utilisateur: userId,
                     date_debut: startDateTime,
                     date_fin: endDateTime,
-                    couleur: 'blue' // ou une couleur dynamique
+                    couleur: 'blue'
                 })
             });
             
@@ -99,7 +99,6 @@ function setupEventListeners() {
                 alert(result.message || 'Erreur lors de la prise de rendez-vous');
             }
         } catch (error) {
-            console.error('Erreur:', error);
             alert('Erreur lors de la communication avec le serveur');
         }
     });

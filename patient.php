@@ -34,17 +34,20 @@ $nom = htmlspecialchars($_SESSION['nom']);
     </div>
 
     <section class="main_cal">
+        <!-- calendrier -->
         <article class="selecteur">
             <article class="selecteur_gauche"></article>
             <input type="date" id="calendrier" name="cal" />
             <article class="selecteur_droit"></article>
         </article>
 
+        <!-- nom des medecins -->
         <section class="doctor-selection">
             <h2>Sélectionnez un médecin :</h2>
             <div class="doctor-list"></div>
         </section>
 
+        <!-- form rendez-vous -->
         <section class="appointment-form" style="display: none;">
             <h2>Prendre rendez-vous avec <span id="selected-doctor-name"></span></h2>
             <form id="rdv-form">
