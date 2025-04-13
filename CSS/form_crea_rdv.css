@@ -5,6 +5,10 @@
     border-radius: 8px;
 }
 
+.doctor-selection h2 {
+    color : #000000;
+}
+
 .doctor-list {
     display: flex;
     flex-wrap: wrap;
