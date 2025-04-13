@@ -125,13 +125,13 @@
 }
 
 .selecteur_gauche {
-    background-image: url("../arrow_l.jpg");
+    background-image: url("info2/site/images/arrow_l.jpg");
     background-color: white;
     background-repeat: no-repeat;
 }
 
 .selecteur_droit {
-    background-image: url("../arrow_r.jpg");
+    background-image: url("info2/site/images/arrow_r.jpg");
     background-color: white;
     background-repeat: no-repeat;
 }
