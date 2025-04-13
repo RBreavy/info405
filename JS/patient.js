@@ -41,7 +41,7 @@ function create_rdv2(horaire_debut,duree,journee) {
 async function getNomDoc() {
  try {
     let lrdv;
-    let response = await fetch('calendrier/get-data.php?action=doctors');
+    let response = await fetch('info2/site/calendrier/get-data.php?action=doctors');
     lrdv = await response.json();
     affichage_menu_selection(lrdv);
 } catch(error) {
@@ -72,7 +72,7 @@ function affichage_menu_selection(lrdv) {
 async function getRDV(id){
     try {
         let lrdv;
-        let response = await fetch('calendrier/get-data.php');
+        let response = await fetch('info2/site/calendrier/get-data.php');
         lrdv = await response.json(lrdv);
         let new_lrdv = [];
         lrdv.forEach(rdv => {
