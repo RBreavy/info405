@@ -209,7 +209,7 @@ function selection_creneau() {
                 return;
             }
     
-            fetch("rendez-vous.php", {
+            fetch("info2/site/PHP/rendez-vous.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
