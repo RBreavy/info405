@@ -42,6 +42,8 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
         </article>
 
+        <script src="calendrier/calendrier.js"></script>
+
         <article>
             <!-- nom des medecins -->
             <section class="doctor-selection">
@@ -82,7 +84,6 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <script>
         const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
     </script>
-    <script src="calendrier/calendrier.js"></script>
     <script src="JS/patient.js"></script>
 </body>
 
