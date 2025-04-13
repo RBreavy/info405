@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Vérification de sécurité
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'patient') {
-    header("Location: index.html");
+    header("Location: /info2/site/index.html");
     exit();
 }
 
-// Récupération du nom depuis la session
 $nom = htmlspecialchars($_SESSION['nom']);
 ?>
 <!DOCTYPE html>
@@ -16,17 +14,16 @@ $nom = htmlspecialchars($_SESSION['nom']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/info2/site/CSS/style_utilisateur.css">
-    <link rel="stylesheet" href="calendrier/calendrier.css">
     <title>Page Patient</title>
+    <link rel="stylesheet" href="/info2/site/CSS/style_utilisateur.css">
+    <link rel="stylesheet" href="/info2/site/calendrier/calendrier.css">
 </head>
 
 <body>
     <div class="banner">
         <img src="images/logo.png" alt="Logo" class="banner-logo">
-        <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, <?php echo $nom; ?></div>
-        <span class="menu-icon" onclick="openNav()">☰</span> <br>
+        <div id="welcome-message">Bienvenue, <?php echo $nom; ?></div>
+        <span class="menu-icon" onclick="openNav()">☰</span>
     </div>
 
     <div id="mySidenav" class="sidenav">
@@ -37,21 +34,46 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
     <section class="main_cal">
         <article class="selecteur">
-            <article class="selecteur_gauche"></article>
             <input type="date" id="calendrier" name="cal" />
-            <article class="selecteur_droit"></article>
         </article>
     </section>
-    <section class="bouton_docteur">
-        <article class="docteur"></article>
+
+    <!-- Section pour la liste des médecins -->
+    <section class="doctor-selection">
+        <h2>Sélectionnez un médecin :</h2>
+        <div class="doctor-list"></div>
+    </section>
+
+    <!-- Section pour le formulaire de RDV (cachée initialement) -->
+    <section class="appointment-form" style="display: none;">
+        <h2>Prendre rendez-vous avec <span id="selected-doctor-name"></span></h2>
+        <form id="rdv-form">
+            <div class="form-group">
+                <label for="rdv-date">Date :</label>
+                <input type="date" id="rdv-date" required>
+            </div>
+            <div class="form-group">
+                <label for="rdv-time">Heure :</label>
+                <input type="time" id="rdv-time" min="08:00" max="19:30" required>
+            </div>
+            <div class="form-group">
+                <label for="rdv-duration">Durée :</label>
+                <select id="rdv-duration" required>
+                    <option value="10">10 min</option>
+                    <option value="20">20 min</option>
+                    <option value="30">30 min</option>
+                </select>
+            </div>
+            <button type="submit">Confirmer</button>
+            <button type="button" id="cancel-appointment">Annuler</button>
+        </form>
     </section>
 
     <script>
         const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
     </script>
+    <script src="calendrier/calendrier.js"></script>
+    <script src="JS/patient.js"></script>
 </body>
-<script defer src="calendrier/calendrier.js"></script>
-<script defer src="JS/patient.js"></script>
-<script defer src="form_doc.js"></script>
 
 </html>
