@@ -1,233 +1,193 @@
-let idMedecinSelectionne = null;
+let selectedDoctorId = null;
+let selectedDoctorName = null;
 
-button.addEventListener("click", _ => {
-    idMedecinSelectionne = button.id;
-    getRDV(button.id);
+// Chargement initial - affiche la liste des médecins
+document.addEventListener('DOMContentLoaded', () => {
+    loadDoctors();
+    setupEventListeners();
 });
 
-
-function create_rdv2(horaire_debut,duree,journee) {
-    let horaire_fin = horaire_debut+duree;
-    if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
-        for (let i = horaire_debut; i<=horaire_fin; i++) {
-            var creneau_horaire = document.getElementById(journee.toString()+i.toString())
-            creneau_horaire.style.setProperty('--border-color', "grey");
-            creneau_horaire.classList.add("custom_bg_color");
-            
-            if (i == horaire_debut) {
-                let box_invisible = create("article",creneau_horaire);
-                box_invisible.classList.add("rdv")
-                box_invisible.style.height = creneau_horaire.offsetHeight* (duree+1) -3+"px";
-            }
-            
-    
-            if (i%6 == 0 && i != horaire_debut) {
-                creneau_horaire.classList.add('custom_border_top');
-            } 
-    
-            if (i == horaire_debut && i%6 !=0) {
-                creneau_horaire.classList.add("invisible_border_top")
-            }
-            
-            if (i == horaire_fin && (i+1)%6 != 0) {
-                console.log(i)
-                creneau_horaire.classList.add("invisible_border_bottom")
-            }
-          
-        }
+async function loadDoctors() {
+    try {
+        const response = await fetch('calendrier/get-data.php?action=doctors');
+        const doctors = await response.json();
+        displayDoctors(doctors);
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert('Impossible de charger la liste des médecins');
     }
 }
 
-async function getNomDoc() {
- try {
-    let lrdv;
-    let response = await fetch('calendrier/get-data.php?action=doctors');
-    lrdv = await response.json();
-    affichage_menu_selection(lrdv);
-} catch(error) {
-    console.error(error);
-}
-}
+function displayDoctors(doctors) {
+    const doctorList = document.querySelector('.doctor-list');
+    doctorList.innerHTML = '';
 
-getNomDoc();
-
-function affichage_menu_selection(lrdv) {
-    let container = document.querySelector(".docteur");
-    
- 
-    container.innerHTML = "";
-
-    console.log(lrdv);
-    lrdv.forEach(doc => {
-        let button = create("input",container);
-        button.type = "button";
-        button.value = doc.nom;
-        button.id = doc.id_medecin;
-        button.classList.add("bouton-docteur");
-        button.addEventListener("click",_ => {getRDV(button.id)});
+    doctors.forEach(doctor => {
+        const doctorButton = document.createElement('button');
+        doctorButton.className = 'doctor-button';
+        doctorButton.textContent = doctor.nom;
+        doctorButton.dataset.id = doctor.id_medecin;
+        doctorButton.dataset.name = doctor.nom;
+        
+        doctorButton.addEventListener('click', () => {
+            selectDoctor(doctor.id_medecin, doctor.nom);
+        });
+        
+        doctorList.appendChild(doctorButton);
     });
 }
 
-
-async function getRDV(id){
-    try {
-        let lrdv;
-        let response = await fetch('calendrier/get-data.php');
-        lrdv = await response.json(lrdv);
-        let new_lrdv = [];
-        lrdv.forEach(rdv => {
-            if (rdv.id_medecin == id) {
-                new_lrdv.push(rdv);
-            }
-        })
-        console.log(new_lrdv);
-        affichage_indisponiblite(new_lrdv);
-      } catch(error) {
-        console.error(error);
-      }
+function selectDoctor(doctorId, doctorName) {
+    selectedDoctorId = doctorId;
+    selectedDoctorName = doctorName;
+    
+    // Mise à jour de l'UI
+    document.querySelector('.doctor-selection').style.display = 'none';
+    document.querySelector('.appointment-form').style.display = 'block';
+    document.getElementById('selected-doctor-name').textContent = doctorName;
+    
+    // Charger les RDV existants pour ce médecin
+    loadAppointments(doctorId);
 }
 
-function DateEnTemps(date) {
-    let [hours, minutes] = (date.slice(-8,-3)).split(':').map(Number);
-    
-    let hourValue = (hours - 8) * 6;
-    let minuteValue = Math.floor(minutes / 10);
-    
-    return hourValue + minuteValue;
-  }
-
-
-function affichage_indisponiblite(lrdv) {
-    let ancienrdv = document.querySelectorAll(".rdv");
-    ancienrdv.forEach(e => {
-        e.remove();
+function setupEventListeners() {
+    // Annulation du formulaire
+    document.getElementById('cancel-appointment').addEventListener('click', () => {
+        document.querySelector('.appointment-form').style.display = 'none';
+        document.querySelector('.doctor-selection').style.display = 'block';
+        document.getElementById('rdv-form').reset();
     });
-    let rdv_color = document.querySelectorAll(".custom_bg_color");
-    rdv_color.forEach(e => {
-        e.classList.remove("custom_bg_color");
-        e.classList.remove('custom_border_top');
-        e.classList.remove("invisible_border_top");
-        e.classList.remove("invisible_border_bottom");
-    })
     
-    lrdv.forEach(rdv => {
-        let debut = DateEnTemps(rdv.date_debut);
-        let duree = DateEnTemps(rdv.date_fin)-DateEnTemps(rdv.date_debut);
-        let jour = new Date(rdv.date_debut).toLocaleDateString('fr-FR');
-        console.log(debut,duree,jour);
-        create_rdv2(debut,duree,jour);
-    });
-    selection_creneau();
-}
-
-// Création du formulaire de rendez-vous
-function selection_creneau() {
-    let container = document.querySelector(".docteur");
-    container.innerHTML = "";
-    const form = create("form", container);
-    form.id = "rdv-form";
-    
-    // Titre du formulaire
-    create("h2", form, "Prise de rendez-vous");
-    
-    // Section pour la date
-    const dateContainer = create("div", form);
-    dateContainer.className = "form-group";
-    
-    // Label et input pour la date
-    const dateLabel = create("label", dateContainer);
-    dateLabel.htmlFor = "rdv-date";
-    dateLabel.textContent = "Date du rendez-vous:";
-    
-    const dateInput = create("input", dateContainer);
-    dateInput.type = "date";
-    dateInput.id = "rdv-date";
-    dateInput.name = "rdv-date";
-    dateInput.required = true;
-    
-    // Section pour l'heure
-    const timeContainer = create("div", form);
-    timeContainer.className = "form-group";
-    
-    // Label et input pour l'heure
-    const timeLabel = create("label", timeContainer);
-    timeLabel.htmlFor = "rdv-time";
-    timeLabel.textContent = "Heure du rendez-vous:";
-    
-    const timeInput = create("input", timeContainer);
-    timeInput.type = "time";
-    timeInput.id = "rdv-time";
-    timeInput.name = "rdv-time";
-    timeInput.min = "08:00"; // Heure d'ouverture
-    timeInput.required = true;
-    
-    // Section pour la durée
-    const durationContainer = create("div", form);
-    durationContainer.className = "form-group";
-    
-    // Label et select pour la durée
-    const durationLabel = create("label", durationContainer);
-    durationLabel.htmlFor = "rdv-duration";
-    durationLabel.textContent = "Durée du rendez-vous:";
-    
-    const durationSelect = create("select", durationContainer);
-    durationSelect.id = "rdv-duration";
-    durationSelect.name = "rdv-duration";
-    durationSelect.required = true;
-    
-    // Options pour la durée
-    const durations = [10, 20, 30, 40, 50];
-    
-    // Bouton de soumission
-    const submitButton = create("button", form, "Prendre rendez-vous");
-    submitButton.type = "submit";
-    
-    // Ajout de la validation pour s'assurer que le rendez-vous se termine avant 20h
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-    
-        if (!idMedecinSelectionne) {
-            alert("Veuillez sélectionner un médecin.");
+    // Soumission du formulaire
+    document.getElementById('rdv-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const date = document.getElementById('rdv-date').value;
+        const time = document.getElementById('rdv-time').value;
+        const duration = parseInt(document.getElementById('rdv-duration').value);
+        
+        if (!date || !time || !duration) {
+            alert('Veuillez remplir tous les champs');
             return;
         }
-    
-        const timeValue = timeInput.value;
-        const durationValue = parseInt(durationSelect.value);
-    
-        if (timeValue) {
-            const [hours, minutes] = timeValue.split(':').map(Number);
-            let endMinutes = minutes + durationValue;
-            let endHours = hours + Math.floor(endMinutes / 60);
-            endMinutes = endMinutes % 60;
-    
-            if (endHours > 20 || (endHours === 20 && endMinutes > 0)) {
-                alert("Le rendez-vous doit se terminer au plus tard à 20h00.");
-                return;
-            }
-    
-            fetch("/info2/site/PHP/rendez-vous.php", {
-                method: "POST",
+        
+        const startDateTime = `${date}T${time}`;
+        const endDateTime = calculateEndTime(startDateTime, duration);
+        
+        try {
+            const response = await fetch('rendez_vous.php', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                    'Content-Type': 'application/json',
                 },
-                body: new URLSearchParams({
-                    date: dateInput.value,
-                    time: timeInput.value,
-                    duration: durationValue,
-                    id_medecin: idMedecinSelectionne
+                body: JSON.stringify({
+                    id_medecin: selectedDoctorId,
+                    id_utilisateur: userId,
+                    date_debut: startDateTime,
+                    date_fin: endDateTime,
+                    couleur: 'blue' // ou une couleur dynamique
                 })
-            })
-            .then(response => response.text())
-            .then(data => {
-                console.log("Réponse du serveur :", data);
-                alert("Rendez-vous bien enregistré !");
-                form.reset();
-            })
-            .catch(error => {
-                console.error("Erreur lors de l'envoi :", error);
-                alert("Erreur lors de l'enregistrement du rendez-vous.");
             });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('Rendez-vous enregistré avec succès!');
+                loadAppointments(selectedDoctorId);
+                document.getElementById('rdv-form').reset();
+            } else {
+                alert(result.message || 'Erreur lors de la prise de rendez-vous');
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert('Erreur lors de la communication avec le serveur');
         }
     });
+}
+
+function calculateEndTime(startDateTime, duration) {
+    const start = new Date(startDateTime);
+    start.setMinutes(start.getMinutes() + duration);
+    return start.toISOString().slice(0, 16).replace('T', ' ');
+}
+
+async function loadAppointments(doctorId) {
+    try {
+        const response = await fetch(`calendrier/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
+        const appointments = await response.json();
+        displayAppointments(appointments);
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
+}
+
+function displayAppointments(appointments) {
+    // Nettoyage des anciens RDV affichés
+    const oldAppointments = document.querySelectorAll('.rdv, .custom_bg_color');
+    oldAppointments.forEach(el => el.remove());
     
+    // Réinitialisation des styles des créneaux
+    const allSlots = document.querySelectorAll('[id^="creneau"]');
+    allSlots.forEach(slot => {
+        slot.classList.remove('custom_bg_color', 'custom_border_top', 'invisible_border_top', 'invisible_border_bottom');
+        slot.style.removeProperty('--border-color');
+    });
+
+    // Affichage des nouveaux RDV
+    appointments.forEach(rdv => {
+        const startTime = new Date(rdv.date_debut);
+        const endTime = new Date(rdv.date_fin);
+        
+        // Conversion en format compatible avec votre système
+        const day = startTime.toLocaleDateString('fr-FR');
+        const startSlot = timeToSlot(startTime);
+        const duration = (endTime - startTime) / (1000 * 60 * 10); // Durée en créneaux de 10 min
+        
+        // Application du style pour ce RDV
+        applyAppointmentStyle(day, startSlot, duration, rdv.couleur || 'blue');
+    });
+}
+
+function timeToSlot(date) {
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    
+    // Convertit l'heure en créneau (ex: 8h00 = 0, 8h10 = 1, etc.)
+    return (hours - 8) * 6 + (minutes / 10);
+}
+
+function applyAppointmentStyle(day, startSlot, duration, color) {
+    for (let i = startSlot; i < startSlot + duration; i++) {
+        const slotId = `${day.replace(/\//g, '')}${i}`;
+        const slotElement = document.getElementById(slotId);
+        
+        if (!slotElement) continue;
+        
+        // Style de base pour le créneau
+        slotElement.style.setProperty('--border-color', color);
+        slotElement.classList.add('custom_bg_color');
+        
+        // Gestion des bordures (votre logique existante)
+        if (i === startSlot) {
+            // Création du bloc de RDV qui couvre toute la durée
+            const appointmentBlock = document.createElement('div');
+            appointmentBlock.className = 'rdv';
+            appointmentBlock.style.backgroundColor = color;
+            appointmentBlock.style.height = `${slotElement.offsetHeight * duration - 3}px`;
+            appointmentBlock.style.zIndex = '10';
+            slotElement.appendChild(appointmentBlock);
+            
+            if (i % 6 !== 0) {
+                slotElement.classList.add('invisible_border_top');
+            }
+        }
+        
+        if (i % 6 === 0 && i !== startSlot) {
+            slotElement.classList.add('custom_border_top');
+        }
+        
+        if (i === Math.floor(startSlot + duration - 1) && (i + 1) % 6 !== 0) {
+            slotElement.classList.add('invisible_border_bottom');
+        }
+    }
 }
