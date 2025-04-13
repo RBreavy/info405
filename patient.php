@@ -39,38 +39,39 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <input type="date" id="calendrier" name="cal" />
             <article class="selecteur_droit"></article>
         </article>
+
+        <section class="doctor-selection">
+            <h2>Sélectionnez un médecin :</h2>
+            <div class="doctor-list"></div>
+        </section>
+
+        <section class="appointment-form" style="display: none;">
+            <h2>Prendre rendez-vous avec <span id="selected-doctor-name"></span></h2>
+            <form id="rdv-form">
+                <div class="form-group">
+                    <label for="rdv-date">Date :</label>
+                    <input type="date" id="rdv-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="rdv-time">Heure :</label>
+                    <input type="time" id="rdv-time" min="08:00" max="19:30" required>
+                </div>
+                <div class="form-group">
+                    <label for="rdv-duration">Durée :</label>
+                    <select id="rdv-duration" required>
+                        <option value="10">10 min</option>
+                        <option value="20">20 min</option>
+                        <option value="30">30 min</option>
+                    </select>
+                </div>
+                <button type="submit">Confirmer</button>
+                <button type="button" id="cancel-appointment">Annuler</button>
+            </form>
+        </section>
     </section>
 
-    <!-- Section pour la liste des médecins -->
-    <section class="doctor-selection">
-        <h2>Sélectionnez un médecin :</h2>
-        <div class="doctor-list"></div>
-    </section>
 
-    <!-- Section pour le formulaire de RDV (cachée initialement) -->
-    <section class="appointment-form" style="display: none;">
-        <h2>Prendre rendez-vous avec <span id="selected-doctor-name"></span></h2>
-        <form id="rdv-form">
-            <div class="form-group">
-                <label for="rdv-date">Date :</label>
-                <input type="date" id="rdv-date" required>
-            </div>
-            <div class="form-group">
-                <label for="rdv-time">Heure :</label>
-                <input type="time" id="rdv-time" min="08:00" max="19:30" required>
-            </div>
-            <div class="form-group">
-                <label for="rdv-duration">Durée :</label>
-                <select id="rdv-duration" required>
-                    <option value="10">10 min</option>
-                    <option value="20">20 min</option>
-                    <option value="30">30 min</option>
-                </select>
-            </div>
-            <button type="submit">Confirmer</button>
-            <button type="button" id="cancel-appointment">Annuler</button>
-        </form>
-    </section>
+
 
     <script>
         const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
