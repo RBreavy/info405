@@ -52,8 +52,8 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 
 </body>
-<script src="calendrier/calendrier.js"></script>
-<script src="JS/patient.js"></script>
-<script src="form_doc.js"></script>
+<script defer src="calendrier/calendrier.js"></script>
+<script defer src="JS/patient.js"></script>
+<script defer src="form_doc.js"></script>
 
 </html>

@@ -72,7 +72,7 @@ function affichage_menu_selection(lrdv) {
 async function getRDV(id){
     try {
         let lrdv;
-        let response = await fetch('info2/site/calendrier/get-data.php');
+        let response = await fetch(`get-data.php?action=getRdvsByDoctor&id_medecin=${id}`);
         lrdv = await response.json(lrdv);
         let new_lrdv = [];
         lrdv.forEach(rdv => {
