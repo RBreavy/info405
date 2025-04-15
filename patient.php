@@ -30,7 +30,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <div id="mySidenav" class="sidenav">
         <button class="closebtn" onclick="closeNav()">X</button>
         <a href="contact.html" class="buttons">Contact</a>
-        <a href="logout.php" class="buttons">Déconnexion</a>
+        <a href="logout.php" class="buttons">test</a>
     </div>
 
 
