@@ -84,7 +84,7 @@ function setupEventListeners() {
             date_debut: formatDateTime(startDateTime),
             date_fin: formatDateTime(endDateTime)
         };
-    
+
         console.log('Payload to send:', payload);
 
         try {
@@ -111,7 +111,6 @@ function setupEventListeners() {
     });
 }
 
-
 async function loadAppointments(doctorId) {
     try {
         const response = await fetch(`/info2/site/calendrier/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
@@ -120,4 +119,13 @@ async function loadAppointments(doctorId) {
     } catch (error) {
         console.error('Erreur en chargeant les RDV:', error);
     }
+}
+
+// Menu functionality
+function openNav() {
+    document.getElementById("mySidenav").style.left = "0";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.left = "-250px";
 }
