@@ -3,12 +3,12 @@
     padding: 15px;
     background-image: linear-gradient(to bottom right, #042763,#4f0999);
     border-radius: 8px;
-    width:100px;
+    width:180px;
 }
 
 .doctor-selection h2 {
     color : white;
-    font-size: x-small;
+    font-size: x-large;
 }
 
 .appointment-form h2 {
