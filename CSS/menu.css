@@ -35,7 +35,7 @@ h1 {
 }
 
 body {
-    background-image: url("fond.png");
+    background-image: url("/info2/site/images/fond.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
