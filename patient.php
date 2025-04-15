@@ -23,7 +23,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 <body>
     <div class="banner">
         <img src="images/logo.png" alt="Logo" class="banner-logo">
-        <div id="welcome-message">Bienvenue, <?php echo $nom; ?></div>
+        <div id="welcome-message">Bienvenue, <?php echo $nom; ?> </div>
         <span class="menu-icon" onclick="openNav()">☰</span>
     </div>
 
@@ -84,7 +84,18 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <script>
         const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
     </script>
-    <script src="JS/patient.js"></script>
+    <script defer src="JS/patient.js"></script>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.right = "0"; // Move menu in from the right
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.right = "-250px"; // Move it back out of view
+        }
+    </script>
+
 </body>
 
 </html>
