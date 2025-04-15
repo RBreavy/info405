@@ -11,28 +11,23 @@ if (!isset($data['id_medecin'], $data['id_utilisateur'], $data['couleur'], $data
     exit;
 }
 
-// Récupération des données
 $id_medecin = $data['id_medecin'];
 $id_utilisateur = $data['id_utilisateur'];
 $couleur = $data['couleur'];
-$date_debut = new DateTime($data['date_debut']);
-$date_fin = new DateTime($data['date_fin']);
 
-// Calcul de la durée en minutes
-$duree_minutes = ($date_fin->getTimestamp() - $date_debut->getTimestamp()) / 60;
-echo $duree_minutes;
-
-if ($duree_minutes < 10 || $duree_minutes > 40) {
-    echo json_encode(["success" => false, "message" => "La durée du rendez-vous doit être entre 10 et 40 minutes."]);
+try {
+    $date_debut = new DateTime($data['date_debut']);
+    $date_fin = new DateTime($data['date_fin']);
+} catch (Exception $e) {
+    echo json_encode(["success" => false, "message" => "Format de date invalide"]);
     exit;
 }
 
-// Vérif si la date est sous un format correct
-try {
-    $date_debut = new DateTime($date_debut_str);
-    $date_fin = new DateTime($date_fin_str);
-} catch (Exception $e) {
-    echo json_encode(["success" => false, "message" => "Format de date invalide"]);
+// Calcul de la durée en minutes
+$duree_minutes = ($date_fin->getTimestamp() - $date_debut->getTimestamp()) / 60;
+
+if ($duree_minutes < 10 || $duree_minutes > 40) {
+    echo json_encode(["success" => false, "message" => "La durée du rendez-vous doit être entre 10 et 40 minutes."]);
     exit;
 }
 
@@ -40,7 +35,15 @@ $sql = "INSERT INTO rdv (id_medecin, id_utilisateurs, couleur, date_debut, date_
 $stmt = $conn->prepare($sql);
 
 if ($stmt) {
-    if ($stmt->execute([$id_medecin, $id_utilisateur, $couleur, $date_debut->format('Y-m-d H:i:s'), $date_fin->format('Y-m-d H:i:s')])) {
+    if (
+        $stmt->execute([
+            $id_medecin,
+            $id_utilisateur,
+            $couleur,
+            $date_debut->format('Y-m-d H:i:s'),
+            $date_fin->format('Y-m-d H:i:s')
+        ])
+    ) {
         echo json_encode(["success" => true]);
     } else {
         echo json_encode(["success" => false, "message" => "Erreur lors de la prise de rendez-vous."]);
