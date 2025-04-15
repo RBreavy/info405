@@ -110,12 +110,12 @@ function setupEventListeners() {
 }
 
 
-async function loadAppointments(doctorId) {
-    try {
-        const response = await fetch(`/info2/site/calendrier/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
-        const appointments = await response.json();
-        displayAppointments(appointments);
-    } catch (error) {
-        console.error('Erreur en chargeant les RDV:', error);
-    }
-}
+// async function loadAppointments(doctorId) {
+//     try {
+//         const response = await fetch(`/info2/site/calendrier/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
+//         const appointments = await response.json();
+//         displayAppointments(appointments);
+//     } catch (error) {
+//         console.error('Erreur en chargeant les RDV:', error);
+//     }
+// }
