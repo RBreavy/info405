@@ -1,6 +1,8 @@
 let selectedDoctorId = null;
 let selectedDoctorName = null;
 
+let userId = document.getElementById("nom_util");
+
 document.addEventListener('DOMContentLoaded', () => {
     loadDoctors();
     setupEventListeners();
@@ -77,7 +79,7 @@ function setupEventListeners() {
 
         const payload = {
             id_medecin: selectedDoctorId,
-            id_utilisateur: 1, // recup util
+            id_utilisateur: userId,
             couleur: 'blue',
             date_debut: formatDateTime(startDateTime),
             date_fin: formatDateTime(endDateTime)
