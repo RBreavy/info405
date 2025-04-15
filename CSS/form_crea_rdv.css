@@ -3,8 +3,12 @@
     padding: 30px;
     background-image: linear-gradient(to bottom right, #042763,#4f0999);
     border-radius: 8px;
+<<<<<<< HEAD
     width:180px;
     height: 400px;
+=======
+    width:10vw;
+>>>>>>> e250872d03ce02af7f5a379270d5546bd8bae4d2
 }
 
 .doctor-selection h2 {
@@ -46,8 +50,6 @@
     padding: 30px;
     background-image: linear-gradient(to bottom right, #042763,#4f0999);
     border-radius: 8px;
-    width: 180px;
-    height: 400px;
 }
 
 .form-group {
