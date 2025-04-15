@@ -17,7 +17,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <title>Page Patient</title>
     <link rel="stylesheet" href="/info2/site/CSS/style_utilisateur.css">
     <link rel="stylesheet" href="/info2/site/calendrier/calendrier.css">
-    <link rel="stylesheet" href="/info2/site/CSS/form_crea_rdv.css">
+    <link rel="stylesheet" href="/info2/site/CSS/form_crea_rdv.css?v=1.1">
 </head>
 
 <body>
