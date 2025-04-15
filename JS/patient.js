@@ -43,7 +43,6 @@ function selectDoctor(id, name) {
     document.querySelector('.appointment-form').style.display = 'block';
     document.getElementById('selected-doctor-name').textContent = name;
 
-    loadAppointments(id);
 }
 
 function setupEventListeners() {
@@ -97,7 +96,6 @@ function setupEventListeners() {
             if (result.success) {
                 alert('Rendez-vous enregistré avec succès!');
                 document.getElementById('rdv-form').reset();
-                //loadAppointments(selectedDoctorId);
             } else {
                 alert(result.message || 'Erreur lors de la prise de rendez-vous');
             }
@@ -107,15 +105,4 @@ function setupEventListeners() {
             alert('Erreur lors de la communication avec le serveur');
         }
     });
-}
-
-
-async function loadAppointments(doctorId) {
-    try {
-        const response = await fetch(`/info2/site/calendrier/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
-        const appointments = await response.json();
-        // displayAppointments(appointments);
-    } catch (error) {
-        console.error('Erreur en chargeant les RDV:', error);
-    }
 }
