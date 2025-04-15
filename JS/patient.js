@@ -83,6 +83,8 @@ function setupEventListeners() {
             date_fin: formatDateTime(endDateTime)
         });
 
+        console.log(json);
+
         try {
             const response = await fetch('/info2/site/PHP/rendez_vous.php', {
                 method: 'POST',
