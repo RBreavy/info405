@@ -8,7 +8,6 @@ function generateToken(length = 32) {
     return token;
 }
 
-
 function envoiMail() {
     const email = document.getElementById('mail-recup').value;
     const token = generateToken();
@@ -24,22 +23,29 @@ function envoiMail() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            const templateParams = {
-                to_email: email,
-                message: message,
-                subject: "Réinitialiser votre mot de passe"
-            };
-
-            emailjs.send('service_info405', 'template_1wicn1k', templateParams)
-                .then(function(response) {
-                    console.log('Email envoyé avec succès !', response.status, response.text);
-                    alert('Un email de réinitialisation a été envoyé à ' + email);
-                }, function(error) {
-                    console.log('Erreur lors de l\'envoi de l\'email :', error);
-                    alert('Une erreur est survenue, veuillez réessayer plus tard.');
-                });
+            return fetch('/info2/site/PHP/send_mail.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    to_email: email,
+                    message: message,
+                    subject: "Réinitialiser votre mot de passe"
+                })
+            });
         } else {
-            alert('Erreur lors de l’enregistrement du token.');
+            throw new Error('Erreur lors de l\'enregistrement du token.');
         }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Un email de réinitialisation a été envoyé à ' + email);
+        } else {
+            alert('Erreur lors de l\'envoi de l\'email: ' + (data.message || 'Erreur inconnue'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert(error.message || 'Une erreur est survenue, veuillez réessayer plus tard.');
     });
 }

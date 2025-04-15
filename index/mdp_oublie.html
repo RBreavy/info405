@@ -3,28 +3,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/info2/site/CSS/Index_style.css">
     <title>Réinitialisation du mot de passe</title>
-
     <link rel="icon" href="data:,">
-
-
-    <script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-    </script>
-
-    <script type="text/javascript">
-    (function(){
-      emailjs.init({
-        publicKey: "Fzcsrfnh8mpUUfmjk",
-      });
-    })();
-    </script>
-
     <script src="envoi_mail.js"></script>
 </head>
 <body>
     <div id="form_conn">
         <h1>Réinitialisez votre mot de passe</h1>
-        <!-- Formulaire sans action, tout est géré par JavaScript -->
         <form id="reset-form">
             <label for="mail-recup">Entrez votre email :</label>
             <input id="mail-recup" name="email" type="email" placeholder="example@domain.com" required>
