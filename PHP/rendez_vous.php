@@ -26,6 +26,15 @@ if ($duree_minutes <= 10 || $duree_minutes >= 40) {
     exit;
 }
 
+// Vérif si la date est sous un format correct
+try {
+    $date_debut = new DateTime($date_debut_str);
+    $date_fin = new DateTime($date_fin_str);
+} catch (Exception $e) {
+    echo json_encode(["success" => false, "message" => "Format de date invalide"]);
+    exit;
+}
+
 $sql = "INSERT INTO rdv (id_medecin, id_utilisateurs, couleur, date_debut, date_fin) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 
