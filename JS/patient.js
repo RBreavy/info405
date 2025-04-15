@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadDoctors() {
     try {
-        const response = await fetch('calendrier/get-data.php?action=doctors');
+        const response = await fetch('/info2/site/calendrier/get-data.php?action=doctors');
         const doctors = await response.json();
         displayDoctors(doctors);
     } catch (error) {
@@ -82,9 +82,9 @@ function setupEventListeners() {
             couleur: 'blue'
         });
 
+        console.log(json);
+
         try {
-            
-            console.log(json);
             const response = await fetch('/info2/site/PHP/rendez_vous.php', {
                 method: 'POST',
                 headers: {
