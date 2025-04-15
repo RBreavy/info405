@@ -211,10 +211,14 @@ function calcul_duree(heure_debut,duree) {
     return (h_dbt_rdv+m_dbt_rdv+" - "+h_fin_rdv+m_fin_rdv)
 }
 
+function conversion_heure_en_id(heure_debut) {
+    let int_h = (parseInt(heure_debut.slice(0,2))-8) * 6 + parseInt(heure_debut.slice(3,4));
+    return int_h;
+}
 
 
-function create_rdv(horaire_debut,duree,journee,color="yellow",texte) {
-    let horaire_fin = horaire_debut+duree;
+
+function create_rdv(horaire_debut,horaire_fin,journee,color="yellow",texte) {
     if (horaire_debut>-1 && horaire_fin<72 && document.getElementById(journee) !== null) {
         for (let i = horaire_debut; i<=horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString()+i.toString())
@@ -224,9 +228,9 @@ function create_rdv(horaire_debut,duree,journee,color="yellow",texte) {
             if (i == horaire_debut) {
                 let box_invisible = create("article",creneau_horaire);
                 create("p",box_invisible,texte);
-                create("p",box_invisible,calcul_duree(horaire_debut,duree));
+                create("p",box_invisible,calcul_duree(horaire_debut,horaire_fin-horaire_debut-1));
                 box_invisible.classList.add("rdv")
-                box_invisible.style.height = creneau_horaire.offsetHeight* (duree+1) -3+"px";
+                box_invisible.style.height = creneau_horaire.offsetHeight* (horaire_fin-horaire_debut) -3+"px";
             }
             
     
