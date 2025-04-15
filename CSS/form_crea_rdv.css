@@ -3,7 +3,7 @@
     padding: 15px;
     background-image: linear-gradient(to bottom right, #042763,#4f0999);
     border-radius: 8px;
-    width:180px;
+    width:10vw;
 }
 
 .doctor-selection h2 {
@@ -41,12 +41,10 @@
 }
 
 .appointment-form {
-    margin: 4vw;
-    padding: 4vw;
+    margin: 20px;
+    padding: 20px;
     background-image: linear-gradient(to bottom right, #042763,#4f0999);
     border-radius: 8px;
-    width: 180px;
-    height: 400px;
 }
 
 .form-group {
