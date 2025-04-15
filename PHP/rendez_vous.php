@@ -25,7 +25,7 @@ foreach ($required as $key) {
     }
 }
 
-$stmt = $conn->prepare("INSERT INTO rdv (id_utilisateur, id_medecin, couleur, date_debut, date_fin) VALUES (?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO rdv (id_utilisateurs, id_medecin, couleur, date_debut, date_fin) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("iisss", $data['id_utilisateur'], $data['id_medecin'], $data['couleur'], $data['date_debut'], $data['date_fin']);
 
 if ($stmt->execute()) {
