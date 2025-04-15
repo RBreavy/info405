@@ -1,74 +1,36 @@
 <?php
-// Afficher les erreurs (temporairement pour le debug)
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+header('Content-Type: application/json');
+require_once __DIR__ . '/../index/db_connect.php';
 
-// En-tête JSON
-header("Content-Type: application/json");
 
-// Connexion à la base
-include('../index/db_connect.php');
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
 
-// Lire et décoder les données JSON
-$data = json_decode(file_get_contents("php://input"), true);
-
-if (!$data) {
-    echo json_encode(["success" => false, "message" => "Données JSON invalides."]);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Erreur JSON: ' . json_last_error_msg()
+    ]);
     exit;
 }
 
-// Vérifier que tous les champs sont présents
-$required_fields = ['id_medecin', 'id_utilisateur', 'couleur', 'date_debut', 'date_fin'];
-foreach ($required_fields as $field) {
-    if (!isset($data[$field])) {
-        echo json_encode(["success" => false, "message" => "Champ manquant : $field"]);
+$required = ['id_utilisateur', 'id_medecin', 'couleur', 'date_debut', 'date_fin'];
+foreach ($required as $key) {
+    if (!isset($data[$key])) {
+        echo json_encode([
+            'success' => false,
+            'message' => "Champ manquant: $key"
+        ]);
         exit;
     }
 }
 
-// Récupération des données
-$id_medecin = $data['id_medecin'];
-$id_utilisateur = $data['id_utilisateur'];
-$couleur = $data['couleur'];
-$date_debut_str = $data['date_debut'];
-$date_fin_str = $data['date_fin'];
+$stmt = $conn->prepare("INSERT INTO rdv (id_utilisateurs, id_medecin, couleur, date_debut, date_fin) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("iisss", $data['id_utilisateur'], $data['id_medecin'], $data['couleur'], $data['date_debut'], $data['date_fin']);
 
-// Vérification du format des dates
-try {
-    $date_debut = new DateTime($date_debut_str);
-    $date_fin = new DateTime($date_fin_str);
-} catch (Exception $e) {
-    echo json_encode(["success" => false, "message" => "Format de date invalide."]);
-    exit;
-}
-
-// Calcul de la durée en minutes
-$duree_minutes = ($date_fin->getTimestamp() - $date_debut->getTimestamp()) / 60;
-if ($duree_minutes < 10 || $duree_minutes > 40) {
-    echo json_encode(["success" => false, "message" => "La durée du rendez-vous doit être entre 10 et 40 minutes."]);
-    exit;
-}
-
-// Requête d'insertion
-$sql = "INSERT INTO rdv (id_medecin, id_utilisateurs, couleur, date_debut, date_fin) VALUES (?, ?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
-
-if ($stmt) {
-    $executed = $stmt->execute([
-        $id_medecin,
-        $id_utilisateur,
-        $couleur,
-        $date_debut->format('Y-m-d H:i:s'),
-        $date_fin->format('Y-m-d H:i:s')
-    ]);
-
-    if ($executed) {
-        echo json_encode(["success" => true]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Erreur lors de l'exécution de la requête."]);
-    }
+if ($stmt->execute()) {
+    echo json_encode(['success' => true]);
 } else {
-    echo json_encode(["success" => false, "message" => "Erreur de préparation de la requête SQL."]);
+    echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'insertion.']);
 }
 ?>
