@@ -75,21 +75,21 @@ function setupEventListeners() {
             return `${dateObj.getFullYear()}-${pad(dateObj.getMonth()+1)}-${pad(dateObj.getDate())} ${pad(dateObj.getHours())}:${pad(dateObj.getMinutes())}:00`;
         };
 
-        const json = JSON.stringify({
+        const payload = {
             id_medecin: selectedDoctorId,
-            id_utilisateur: userId, // Assure-toi que userId est bien défini quelque part
+            id_utilisateur: "userId", // recup util
             couleur: 'blue',
             date_debut: formatDateTime(startDateTime),
             date_fin: formatDateTime(endDateTime)
-        });
-
-        console.log(json);
+        };
+    
+        console.log('Payload to send:', payload);
 
         try {
             const response = await fetch('/info2/site/PHP/rendez_vous.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: json
+                body: JSON.stringify(payload)
             });
 
             const result = await response.json();
