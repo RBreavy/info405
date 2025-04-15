@@ -103,8 +103,19 @@ function setupEventListeners() {
             }
 
         } catch (error) {
-            console.error('Erreur réseau ou serveur:', error); // 👈 AJOUTE ÇA
+            console.error('Erreur réseau ou serveur:', error);
             alert('Erreur lors de la communication avec le serveur');
         }
     });
+}
+
+
+async function loadAppointments(doctorId) {
+    try {
+        const response = await fetch(`/info2/site/calendrier/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
+        const appointments = await response.json();
+        displayAppointments(appointments);
+    } catch (error) {
+        console.error('Erreur en chargeant les RDV:', error);
+    }
 }
