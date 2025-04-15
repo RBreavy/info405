@@ -86,16 +86,6 @@ $nom = htmlspecialchars($_SESSION['nom']);
     </script>
     <script defer src="JS/patient.js"></script>
 
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.left = "0";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.left = "-250px";
-    }
-</script>
-
 
 </body>
 
