@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-include('../index/db_connect.php');
+include('/info2/site/index/db_connect.php');
 
 // Récupération des données JSON
 $data = json_decode(file_get_contents("php://input"), true);
@@ -21,7 +21,7 @@ $date_fin = new DateTime($data['date_fin']);
 // Calcul de la durée en minutes
 $duree_minutes = ($date_fin->getTimestamp() - $date_debut->getTimestamp()) / 60;
 
-if ($duree_minutes < 10 || $duree_minutes > 40) {
+if ($duree_minutes <= 10 || $duree_minutes >= 40) {
     echo json_encode(["success" => false, "message" => "La durée du rendez-vous doit être entre 10 et 40 minutes."]);
     exit;
 }
