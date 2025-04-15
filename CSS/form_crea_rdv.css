@@ -4,6 +4,7 @@
     background-image: linear-gradient(to bottom right, #042763,#4f0999);
     border-radius: 8px;
     width:10vw;
+    height: 400px;
 }
 
 .doctor-selection h2 {
@@ -45,7 +46,7 @@
     padding: 30px;
     background-image: linear-gradient(to bottom right, #042763,#4f0999);
     border-radius: 8px;
-    width:180px;
+    width:10vw;
     height: 400px;
 }
 
