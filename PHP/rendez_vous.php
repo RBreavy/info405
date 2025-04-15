@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-require_once('/info2/site/index/db_connect.php');
+include('../index/db_connect.php');
 
 // Récupération des données JSON
 $data = json_decode(file_get_contents("php://input"), true);
