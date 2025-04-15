@@ -76,9 +76,9 @@ function setupEventListeners() {
         };
 
         const payload = {
-            id_medecin: selectedDoctorId,
+            id_medecin: parseInt(selectedDoctorId),
             id_utilisateur: userId,
-            couleur: 'blue',
+            couleur: 'BLUE',    
             date_debut: formatDateTime(startDateTime),
             date_fin: formatDateTime(endDateTime)
         };
