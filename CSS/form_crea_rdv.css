@@ -41,8 +41,8 @@
 }
 
 .appointment-form {
-    margin: 20px;
-    padding: 20px;
+    margin: 4vw;
+    padding: 4vw;
     background-image: linear-gradient(to bottom right, #042763,#4f0999);
     border-radius: 8px;
 }
