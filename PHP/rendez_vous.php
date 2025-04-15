@@ -54,21 +54,23 @@ if ($duree_minutes < 10 || $duree_minutes > 40) {
 $sql = "INSERT INTO rdv (id_medecin, id_utilisateurs, couleur, date_debut, date_fin) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 
-if ($stmt) {
-    $executed = $stmt->execute([
-        $id_medecin,
-        $id_utilisateur,
-        $couleur,
-        $date_debut->format('Y-m-d H:i:s'),
-        $date_fin->format('Y-m-d H:i:s')
-    ]);
+$executed = $stmt->execute([
+    $id_medecin,
+    $id_utilisateur,
+    $couleur,
+    $date_debut->format('Y-m-d H:i:s'),
+    $date_fin->format('Y-m-d H:i:s')
+]);
 
-    if ($executed) {
-        echo json_encode(["success" => true]);
-    } else {
-        echo json_encode(["success" => false, "message" => "Erreur lors de l'exécution de la requête."]);
-    }
-} else {
-    echo json_encode(["success" => false, "message" => "Erreur de préparation de la requête SQL."]);
-}
+// if ($stmt) {
+    
+
+//     if ($executed) {
+//         echo json_encode(["success" => true]);
+//     } else {
+//         echo json_encode(["success" => false, "message" => "Erreur lors de l'exécution de la requête."]);
+//     }
+// } else {
+//     echo json_encode(["success" => false, "message" => "Erreur de préparation de la requête SQL."]);
+// }
 ?>
