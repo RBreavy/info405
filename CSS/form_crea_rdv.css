@@ -3,7 +3,7 @@
     padding: 15px;
     background-image: linear-gradient(to bottom right, #042763,#4f0999);
     border-radius: 8px;
-    width:10vw;
+    width:180px;
 }
 
 .doctor-selection h2 {
@@ -67,7 +67,7 @@
 
 #rdv-form button[type="submit"] {
     background: #50a4ef;
-    color: black;
+    color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
