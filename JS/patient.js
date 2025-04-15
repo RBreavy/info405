@@ -1,8 +1,6 @@
 let selectedDoctorId = null;
 let selectedDoctorName = null;
 
-let userId = document.getElementById("nom_util").value;
-
 document.addEventListener('DOMContentLoaded', () => {
     loadDoctors();
     setupEventListeners();
