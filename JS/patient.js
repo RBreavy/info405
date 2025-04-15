@@ -97,7 +97,7 @@ function setupEventListeners() {
             if (result.success) {
                 alert('Rendez-vous enregistré avec succès!');
                 document.getElementById('rdv-form').reset();
-                loadAppointments(selectedDoctorId);
+                //loadAppointments(selectedDoctorId);
             } else {
                 alert(result.message || 'Erreur lors de la prise de rendez-vous');
             }
