@@ -103,6 +103,7 @@ function setupEventListeners() {
             }
 
         } catch (error) {
+            console.error('Erreur réseau ou serveur:', error); // 👈 AJOUTE ÇA
             alert('Erreur lors de la communication avec le serveur');
         }
     });
