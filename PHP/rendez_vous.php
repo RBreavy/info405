@@ -20,6 +20,7 @@ $date_fin = new DateTime($data['date_fin']);
 
 // Calcul de la durée en minutes
 $duree_minutes = ($date_fin->getTimestamp() - $date_debut->getTimestamp()) / 60;
+echo $duree_minutes;
 
 if ($duree_minutes < 10 || $duree_minutes > 40) {
     echo json_encode(["success" => false, "message" => "La durée du rendez-vous doit être entre 10 et 40 minutes."]);
