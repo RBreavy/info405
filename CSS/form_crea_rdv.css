@@ -61,7 +61,7 @@
 .form-group select {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid black;
     border-radius: 4px;
 }
 
@@ -75,7 +75,7 @@
 }
 
 #cancel-appointment {
-    background: #0a5497;
+    background: #1f3548;
     color: white;
     padding: 10px 15px;
     border: none;
