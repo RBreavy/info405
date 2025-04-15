@@ -66,8 +66,8 @@
 }
 
 #rdv-form button[type="submit"] {
-    background: #4CAF50;
-    color: white;
+    background: #50a4ef;
+    color: black;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -75,7 +75,7 @@
 }
 
 #cancel-appointment {
-    background: #f44336;
+    background: #0a5497;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -83,3 +83,4 @@
     cursor: pointer;
     margin-left: 10px;
 }
+
