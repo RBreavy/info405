@@ -74,19 +74,24 @@ function setupEventListeners() {
         const startDateTime = `${date}T${time}`;
         const endDateTime = calculateEndTime(startDateTime, duration);
         
+        const json = JSON.stringify({
+            id_medecin: selectedDoctorId,
+            id_utilisateur: userId,
+            date_debut: startDateTime,
+            date_fin: endDateTime,
+            couleur: 'blue'
+        });
+
         try {
+            
+            console.log(json);
             const response = await fetch('/info2/site/PHP/rendez_vous.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    id_medecin: selectedDoctorId,
-                    id_utilisateur: userId,
-                    date_debut: startDateTime,
-                    date_fin: endDateTime,
-                    couleur: 'blue'
-                })
+                
+                body: json
             });
             
             const result = await response.json();
