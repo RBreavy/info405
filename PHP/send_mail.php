@@ -15,7 +15,7 @@ $mail->isSMTP();
 $mail->Host = 'smtp.gmail.com';
 $mail->SMTPAuth = true;
 $mail->Username = 'info405mailrecup@gmail.com';
-$mail->Password = 'your_password';
+$mail->Password = 'mailrecup';
 $mail->SMTPSecure = 'tls';
 $mail->Port = 587;
 
