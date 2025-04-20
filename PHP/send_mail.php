@@ -1,32 +1,54 @@
 <?php
-require_once '../lib/PHPMailer/src/PHPMailer.php';
-require_once '../index/db_connect.php';
+header('Content-Type: application/json');
+
+require_once '../lib/PHPMailer/vendor/autoload.php';
+require_once '/info2/site/info2/index/db_connect.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (!isset($data['to_email']) || !isset($data['message']) || !isset($data['subject'])) {
-    echo json_encode(['success' => false, 'message' => 'Missing required fields']);
-    exit;
+    http_response_code(400); // Bad Request
+    die(json_encode(['success' => false, 'message' => 'Champs obligatoires manquants']));
 }
 
-$mail = new PHPMailer;
+// Validation de l'email
+if (!filter_var($data['to_email'], FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    die(json_encode(['success' => false, 'message' => 'Email invalide']));
+}
 
-$mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
-$mail->SMTPAuth = true;
-$mail->Username = 'info405mailrecup@gmail.com';
-$mail->Password = 'mailrecup';
-$mail->SMTPSecure = 'tls';
-$mail->Port = 587;
+$mail = new PHPMailer(true);
 
-$mail->setFrom('info405mailrecup@gmail.com', 'Libdocto');
-$mail->addAddress($data['to_email']);
-$mail->Subject = $data['subject'];
-$mail->Body = $data['message'];
+try {
+    // Configuration SMTP
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'info405mailrecup@gmail.com';
+    $mail->Password = 'mailrecup';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->CharSet = 'UTF-8';
 
-if (!$mail->send()) {
-    echo json_encode(['success' => false, 'message' => 'Mailer Error: ' . $mail->ErrorInfo]);
-} else {
+    // Expéditeur
+    $mail->setFrom('info405mailrecup@gmail.com', 'Libdocto');
+
+    // Destinataire
+    $mail->addAddress($data['to_email']);
+
+    // Contenu
+    $mail->Subject = $data['subject'];
+    $mail->Body = $data['message'];
+
+    // Envoi
+    $mail->send();
     echo json_encode(['success' => true]);
+
+} catch (Exception $e) {
+    http_response_code(500); // Internal Server Error
+    echo json_encode([
+        'success' => false,
+        'message' => 'Erreur lors de l\'envoi du mail',
+        'error' => $mail->ErrorInfo // Note: Ne pas exposer cela en production!
+    ]);
 }
-?>
