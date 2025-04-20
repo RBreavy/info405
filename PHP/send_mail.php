@@ -7,9 +7,10 @@ error_reporting(E_ALL);
 
 header('Content-Type: application/json');
 
-require_once '../lib/PHPMailer/src/PHPMailer.php';
-require_once '../lib/PHPMailer/src/SMTP.php';
-require_once '../lib/PHPMailer/src/Exception.php';
+require_once __DIR__ . '/../PHPMailer/src/PHPMailer.php';
+require_once __DIR__ . '/../PHPMailer/src/SMTP.php';
+require_once __DIR__ . '/../PHPMailer/src/Exception.php';
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
