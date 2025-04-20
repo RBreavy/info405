@@ -7,9 +7,9 @@ error_reporting(E_ALL);
 
 header('Content-Type: application/json');
 
-require_once '/info2/site/lib/PHPMailer/src/PHPMailer.php';
-require_once '/info2/site/lib/PHPMailer/src/SMTP.php';
-require_once '/info2/site/lib/PHPMailer/src/Exception.php';
+require_once '../lib/PHPMailer/src/PHPMailer.php';
+require_once '../lib/PHPMailer/src/SMTP.php';
+require_once '../lib/PHPMailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -19,7 +19,7 @@ require_once '/info2/site/index/db_connect.php';
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (!isset($data['to_email']) || !isset($data['message']) || !isset($data['subject'])) {
-    http_response_code(400); // Bad Request
+    http_response_code(400);
     die(json_encode(['success' => false, 'message' => 'Champs obligatoires manquants']));
 }
 
