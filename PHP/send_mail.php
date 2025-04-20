@@ -1,7 +1,13 @@
 <?php
 header('Content-Type: application/json');
 
-require_once '../lib/PHPMailer/vendor/autoload.php';
+require_once '../lib/PHPMailer/src/PHPMailer.php';
+require_once '../lib/PHPMailer/src/SMTP.php';
+require_once '../lib/PHPMailer/src/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 require_once '/info2/site/info2/index/db_connect.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
@@ -25,10 +31,11 @@ try {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'info405mailrecup@gmail.com';
-    $mail->Password = 'mailrecup';
+    $mail->Password = 'xvzq fxdo dfpg cjpo';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
+    $mail->ErrorInfo;
 
     // Expéditeur
     $mail->setFrom('info405mailrecup@gmail.com', 'Libdocto');
