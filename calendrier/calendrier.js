@@ -27,7 +27,7 @@ dateInput.addEventListener('change', _ => {
 var main = document.getElementsByClassName("main_cal")[0];
 console.log("Element main:", main);
 
-var listeJour = ["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"];
+var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
 var lundi = "13/01/2025";
 var jeudi = "16/01/2025";
@@ -43,22 +43,22 @@ var samedi_fin = "18/02/2025";
 creation_jour();
 
 var listeCreneau = [
-    () => create_rdv(0, 71, lundi, lundi,"blue"),
+    () => create_rdv(0, 71, lundi, lundi, "blue"),
     () => create_rdv(51, 9, jeudi, jeudi, "green"),
     () => create_rdv(6, 5, dimanche, dimanche, "red"),
     () => create_rdv(39, 6, mardi, mardi, "blue"),
-    () => create_rdv(14, 4, mercredi, mercredi,"aqua"),
+    () => create_rdv(14, 4, mercredi, mercredi, "aqua"),
     () => create_rdv(21, 17, vendredi, vendredi, "white"),
     () => create_rdv(41, 9, vendredi, vendredi, "purple"),
-    () => create_rdv(6, 5, samedi, samedi_fin,"orange", "docteur Dupont")
+    () => create_rdv(6, 5, samedi, samedi_fin, "orange", "docteur Dupont")
 ];
 
 listeCreneau.forEach(func => func());
 
-function create(tag,container,text=null){
-    element = document.createElement(tag);
-    if (text){
-        element.innerText=text;
+function create(tag, container, text = null) {
+    let element = document.createElement(tag);
+    if (text) {
+        element.innerText = text;
     }
     container.appendChild(element);
     return element;
@@ -66,20 +66,20 @@ function create(tag,container,text=null){
 
 function creation_jour() {
     console.log("Création des jours...");
-    for (let i = 0 ; i<7 ; i++) {
+    for (let i = 0; i < 7; i++) {
         let datetemp = new Date();
         datetemp.setDate(date.getDate() + i + 1 - indice_jour);
-    
+
         let div_jour = create("div", main);
         div_jour.classList.add("jour");
-    
+
         let article = create("article", div_jour);
         article.classList.add("datejour");
-    
+
         let date_jour = datetemp.toLocaleDateString();
         create("p", article, listeJour[i] + "\n" + date_jour);
         div_jour.id = date_jour;
-        
+
         creation_crenau(i, div_jour, datetemp);
 
         if (i == 0) {
@@ -152,7 +152,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
         let article_creneau = create("article", div_jour);
         article_creneau.id = datetemp.toLocaleDateString() + j.toString();
         article_creneau.classList.add("creneau");
-        
+
         if (Math.floor(j / 3) % 2 == 0) {
             article_creneau.classList.add("gris_fonce");
         } else {
@@ -240,6 +240,7 @@ function create_rdv(horaire_debut, horaire_fin, journee, color = "yellow", texte
         }
     }
 }
+
 
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
 const boutonD = document.getElementsByClassName("selecteur_droit")[0];
