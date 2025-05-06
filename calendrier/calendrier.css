@@ -1,7 +1,7 @@
 .main_cal {
     position: relative;
-    width: 110vw;
-    height: 73vh;
+    width: 95vw;
+    height: 74vh;
     
     display: flex;
     flex-direction: row;
