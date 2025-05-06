@@ -76,7 +76,69 @@ function maj_rdv() {
     });
 
     let rdv_color = document.querySelectorAll(".custom_bg_color");
-    rdv_color.forEach(e => {
+    rdv_color.forEach(e => {function create_rdv(indexDebut, indexFin, jour, couleur, texte) {
+        console.log(`Création du RDV : Début : ${indexDebut}, Fin : ${indexFin}, Jour : ${jour}, Couleur : ${couleur}`);
+        for (let i = indexDebut; i < indexFin; i++) {
+            const cellule = document.querySelector(`.case[data-index="${i}"][data-jour="${jour}"]`);
+            if (cellule) {
+                cellule.style.backgroundColor = couleur;
+                cellule.textContent = texte;
+            }
+        }
+    }
+    
+    function parseSQLDateToInfos(sqlDate) {
+        const date = new Date(sqlDate);
+        const heure = date.getHours();
+        const minutes = date.getMinutes();
+        const jour = date.getDay(); // 0 (dimanche) à 6 (samedi)
+    
+        const jours = [1, 2, 3, 4, 5]; // Lundi à vendredi
+        const jourIndex = jours.includes(jour) ? jour - 1 : null; // 0 à 4
+    
+        if (jourIndex === null) return null; // Ignore les week-ends
+    
+        const totalMinutes = heure * 60 + minutes;
+        const index = Math.floor((totalMinutes - 480) / 10); // 480 = 8h00
+    
+        if (index < 0 || index >= 72) return null; // Hors créneaux
+    
+        return {
+            index,
+            jour: jourIndex
+        };
+    }
+    
+    async function chargerRendezVous() {
+        try {
+            const response = await fetch("/info2/site/get-data.php?action=rdvs");
+            const data = await response.json();
+            console.log("RDVs récupérés :", data); // pour debug
+    
+            data.forEach(rdv => {
+                const { date_debut, date_fin, nom_medecin, nom_utilisateur } = rdv;
+                const infosDebut = parseSQLDateToInfos(date_debut);
+                const infosFin = parseSQLDateToInfos(date_fin);
+    
+                if (!infosDebut || !infosFin) return;
+    
+                create_rdv(
+                    infosDebut.index,
+                    infosFin.index,
+                    infosDebut.jour,
+                    "blue",
+                    `${nom_medecin} (${nom_utilisateur})`
+                );
+            });
+        } catch (e) {
+            console.error("Erreur lors du chargement des RDV :", e);
+        }
+    }
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        chargerRendezVous();
+    });
+    
         e.classList.remove("custom_bg_color");
         e.classList.remove("custom_border_top");
         e.classList.remove("invisible_border_top");
