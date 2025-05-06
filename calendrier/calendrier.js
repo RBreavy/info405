@@ -44,13 +44,13 @@ creation_jour();
 
 var listeCreneau = [
     () => create_rdv(0, 71, lundi, lundi, "blue"),
-    () => create_rdv(51, 9, jeudi, jeudi, "green"),
-    () => create_rdv(6, 5, dimanche, dimanche, "red"),
-    () => create_rdv(39, 6, mardi, mardi, "blue"),
-    () => create_rdv(14, 4, mercredi, mercredi, "aqua"),
-    () => create_rdv(21, 17, vendredi, vendredi, "white"),
-    () => create_rdv(41, 9, vendredi, vendredi, "purple"),
-    () => create_rdv(6, 5, samedi, samedi_fin, "orange", "docteur Dupont")
+    () => create_rdv(9, 51, jeudi, jeudi, "green"),
+    () => create_rdv(5, 10, dimanche, dimanche, "red"),
+    () => create_rdv(6, 10, mardi, mardi, "blue"),
+    () => create_rdv(4, 14, mercredi, mercredi, "aqua"),
+    () => create_rdv(17, 21, vendredi, vendredi, "white"),
+    () => create_rdv(35, 41, vendredi, vendredi, "purple"),
+    () => create_rdv(2, 50, samedi, samedi_fin, "orange", "docteur Dupont")
 ];
 
 listeCreneau.forEach(func => func());
