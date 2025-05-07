@@ -27,71 +27,33 @@ dateInput.addEventListener('change', _ => {
 var main = document.getElementsByClassName("main_cal")[0];
 console.log("Element main:", main);
 
+var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
-function fetchRdvFromDatabase() {
-    fetch('/info2/site/calendrier/get-data.php?action=rdvs')
-        .then(response => response.json())  // Assurez-vous que la réponse est en JSON
-        .then(rdvData => {
-            rdvData.forEach(rdv => {
-                // Extraire le jour et les heures de début et de fin
-                let dateDebut = rdv.date_debut;  // Format : "YYYY-MM-DD HH:MM:SS"
-                let dateFin = rdv.date_fin;      // Format : "YYYY-MM-DD HH:MM:SS"
-                
-                // Extraire l'heure de début et de fin
-                let heureDebut = dateDebut.slice(11, 16);  // "HH:MM"
-                let heureFin = dateFin.slice(11, 16);      // "HH:MM"
+var lundi = "13/01/2025";
+var jeudi = "16/01/2025";
+var dimanche = "19/01/2025";
 
-                // Vérifier que les heures sont bien définies et valides
-                if (typeof heureDebut === 'string' && typeof heureFin === 'string') {
-                    // Convertir les heures en id (en minutes par exemple)
-                    let horaireDebut = conversion_heure_en_id(heureDebut);
-                    let horaireFin = conversion_heure_en_id(heureFin);
+var mardi = "21/01/2025";
+var mercredi = "22/01/2025";
 
-                    // Ajouter le rendez-vous à ton calendrier
-                    create_rdv(horaireDebut, horaireFin, rdv.date_debut.split(' ')[0], "yellow");
-                } else {
-                    console.error("Données de rendez-vous incorrectes:", rdv);
-                }
-            });
-        })
-        .catch(error => {
-            console.error("Erreur lors de la récupération des rendez-vous:", error);
-        });
-}
+var vendredi = "10/01/2025";
+var samedi = "17/02/2025";
+var samedi_fin = "18/02/2025";
 
+creation_jour();
 
+var listeCreneau = [
+    () => create_rdv(0, 71, lundi, lundi, "blue"),
+    () => create_rdv(9, 51, jeudi, jeudi, "green"),
+    () => create_rdv(5, 10, dimanche, dimanche, "red"),
+    () => create_rdv(6, 10, mardi, mardi, "blue"),
+    () => create_rdv(4, 14, mercredi, mercredi, "aqua"),
+    () => create_rdv(17, 21, vendredi, vendredi, "white"),
+    () => create_rdv(35, 41, vendredi, vendredi, "purple"),
+    () => create_rdv(2, 50, samedi, samedi_fin, "orange", "docteur Dupont")
+];
 
-// Appel de la fonction pour récupérer et afficher les rendez-vous
-fetchRdvFromDatabase();
-
-
-// var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
-
-// var lundi = "13/01/2025";
-// var jeudi = "16/01/2025";
-// var dimanche = "19/01/2025";
-
-// var mardi = "21/01/2025";
-// var mercredi = "22/01/2025";
-
-// var vendredi = "10/01/2025";
-// var samedi = "17/02/2025";
-// var samedi_fin = "18/02/2025";
-
-// creation_jour();
-
-// var listeCreneau = [
-//     () => create_rdv(0, 71, lundi, lundi, "blue"),
-//     () => create_rdv(9, 51, jeudi, jeudi, "green"),
-//     () => create_rdv(5, 10, dimanche, dimanche, "red"),
-//     () => create_rdv(6, 10, mardi, mardi, "blue"),
-//     () => create_rdv(4, 14, mercredi, mercredi, "aqua"),
-//     () => create_rdv(17, 21, vendredi, vendredi, "white"),
-//     () => create_rdv(35, 41, vendredi, vendredi, "purple"),
-//     () => create_rdv(2, 50, samedi, samedi_fin, "orange", "docteur Dupont")
-// ];
-
-// listeCreneau.forEach(func => func());
+listeCreneau.forEach(func => func());
 
 function create(tag, container, text = null) {
     let element = document.createElement(tag);
@@ -183,6 +145,7 @@ function maj_rdv() {
     console.log("Rendez-vous mis à jour.");
 }
 
+
 function calcul_duree(heure_debut, duree) {
     let h_dbt_rdv = (8 + Math.floor((heure_debut + 1) / 6)).toString() + "h";
     let m_dbt_rdv = (heure_debut % 6).toString();
@@ -207,50 +170,37 @@ function conversion_heure_en_id(heure_debut) {
 }
 
 function create_rdv(horaire_debut, horaire_fin, journee, color = "yellow", texte) {
-    const duree = horaire_fin - horaire_debut + 1;
+    let duree = 30;
     console.log(`Création d'un rendez-vous: ${journee} ${horaire_debut}-${horaire_fin} ${color}`);
-
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee) !== null) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
-            const creneau_horaire = document.getElementById(`${journee}${i}`);
+            var creneau_horaire = document.getElementById(journee.toString() + i.toString());
             creneau_horaire.style.setProperty('--border-color', color);
             creneau_horaire.classList.add("custom_bg_color");
 
-            // Si on est au début du rendez-vous, on ajoute un article pour afficher les détails
-            if (i === horaire_debut) {
-                const box_invisible = create("article", creneau_horaire);
+            if (i == horaire_debut) {
+                let box_invisible = create("article", creneau_horaire);
                 create("p", box_invisible, texte);
                 create("p", box_invisible, calcul_duree(horaire_debut, duree));
+                create("p", box_invisible, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1));
                 box_invisible.classList.add("rdv");
-                box_invisible.style.height = `${creneau_horaire.offsetHeight * duree - 3}px`;
+                box_invisible.style.height = creneau_horaire.offsetHeight * (duree + 1) - 3 + "px";
             }
 
-            // Si c'est un créneau en début de ligne, on gère les bordures
-            if (i % 6 === 0 && i !== horaire_debut) {
+            if (i % 6 == 0 && i != horaire_debut) {
                 creneau_horaire.classList.add('custom_border_top');
             }
 
-            if (i === horaire_debut && i % 6 !== 0) {
+            if (i == horaire_debut && i % 6 != 0) {
                 creneau_horaire.classList.add("invisible_border_top");
             }
 
-            if (i === horaire_fin && (i + 1) % 6 !== 0) {
+            if (i == horaire_fin && (i + 1) % 6 != 0) {
                 creneau_horaire.classList.add("invisible_border_bottom");
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
