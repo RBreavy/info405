@@ -126,7 +126,8 @@ function creation_crenau(index, div_jour, datetemp) {
   for (let j = 0; j < 72; j++) {
     const article = create("article", div_jour);
     article.id = `${datetemp.toLocaleDateString()}${j}`;
-    article.classList.add("creneau", j % 6 === 0 ? "border_top" : "");
+    article.classList.add("creneau");
+    if (j % 6 === 0) article.classList.add("border_top");
     article.classList.add(j % 2 === 0 ? "gris_fonce" : "gris_clair");
 
     if (index === 0 && j % 6 === 0) {
