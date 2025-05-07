@@ -145,6 +145,46 @@ function maj_rdv() {
     console.log("Rendez-vous mis à jour.");
 }
 
+function creation_crenau(indice_div_jour, div_jour, datetemp) {
+    console.log(`Création des créneaux pour ${datetemp.toLocaleDateString()}...`);
+    let heure = 8;
+    for (let j = 0; j < 72; j++) {
+        let article_creneau = create("article", div_jour);
+        article_creneau.id = datetemp.toLocaleDateString() + j.toString();
+        article_creneau.classList.add("creneau");
+
+        if (Math.floor(j / 3) % 2 == 0) {
+            article_creneau.classList.add("gris_fonce");
+        } else {
+            article_creneau.classList.add("gris_clair");
+        }
+
+        if (indice_div_jour == 0 && j % 6 == 0) {
+            let carre_heure = create("div", article_creneau);
+            carre_heure.classList.add("carre_heure");
+            let texte = create("p", carre_heure, heure + "h00");
+            heure = heure + 1;
+            texte.classList.add("heure");
+        }
+
+        if (j % 6 == 0) {
+            article_creneau.classList.add("border_top");
+        }
+
+        if (j == 71) {
+            if (indice_div_jour == 0) {
+                article_creneau.classList.add("article_border_bottom_left_radius");
+            } else if (indice_div_jour == 6) {
+                article_creneau.classList.add("article_border_bottom_right_radius");
+            }
+        }
+
+        article_creneau.addEventListener("click", _ => {
+            console.log("Créneau cliqué:", article_creneau.id);
+        });
+    }
+    console.log(`Créneaux pour ${datetemp.toLocaleDateString()} créés.`);
+}
 
 function calcul_duree(heure_debut, duree) {
     let h_dbt_rdv = (8 + Math.floor((heure_debut + 1) / 6)).toString() + "h";
