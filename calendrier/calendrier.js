@@ -80,7 +80,8 @@ function creation_jour() {
         create("p", article, listeJour[i] + "\n" + date_jour);
         div_jour.id = date_jour;
 
-        creation_crenau(i, div_jour, datetemp);
+        // Appeler create_rdv directement pour chaque créneau (remplacer creation_creneau)
+        create_rdv_for_day(i, div_jour, datetemp);
 
         if (i == 0) {
             div_jour.classList.add("border_bottom_top_left");
@@ -90,6 +91,47 @@ function creation_jour() {
         }
     }
     console.log("Jours créés.");
+}
+
+function create_rdv_for_day(indice_div_jour, div_jour, datetemp) {
+    console.log(`Création des créneaux pour ${datetemp.toLocaleDateString()}...`);
+    let heure = 8;
+    for (let j = 0; j < 72; j++) {
+        let article_creneau = create("article", div_jour);
+        article_creneau.id = datetemp.toLocaleDateString() + j.toString();
+        article_creneau.classList.add("creneau");
+
+        if (Math.floor(j / 3) % 2 == 0) {
+            article_creneau.classList.add("gris_fonce");
+        } else {
+            article_creneau.classList.add("gris_clair");
+        }
+
+        if (indice_div_jour == 0 && j % 6 == 0) {
+            let carre_heure = create("div", article_creneau);
+            carre_heure.classList.add("carre_heure");
+            let texte = create("p", carre_heure, heure + "h00");
+            heure = heure + 1;
+            texte.classList.add("heure");
+        }
+
+        if (j % 6 == 0) {
+            article_creneau.classList.add("border_top");
+        }
+
+        if (j == 71) {
+            if (indice_div_jour == 0) {
+                article_creneau.classList.add("article_border_bottom_left_radius");
+            } else if (indice_div_jour == 6) {
+                article_creneau.classList.add("article_border_bottom_right_radius");
+            }
+        }
+
+        article_creneau.addEventListener("click", _ => {
+            console.log("Créneau cliqué:", article_creneau.id);
+        });
+    }
+    console.log(`Créneaux pour ${datetemp.toLocaleDateString()} créés.`);
 }
 
 function maj_semaine() {
@@ -145,70 +187,6 @@ function maj_rdv() {
     console.log("Rendez-vous mis à jour.");
 }
 
-function creation_crenau(indice_div_jour, div_jour, datetemp) {
-    console.log(`Création des créneaux pour ${datetemp.toLocaleDateString()}...`);
-    let heure = 8;
-    for (let j = 0; j < 72; j++) {
-        let article_creneau = create("article", div_jour);
-        article_creneau.id = datetemp.toLocaleDateString() + j.toString();
-        article_creneau.classList.add("creneau");
-
-        if (Math.floor(j / 3) % 2 == 0) {
-            article_creneau.classList.add("gris_fonce");
-        } else {
-            article_creneau.classList.add("gris_clair");
-        }
-
-        if (indice_div_jour == 0 && j % 6 == 0) {
-            let carre_heure = create("div", article_creneau);
-            carre_heure.classList.add("carre_heure");
-            let texte = create("p", carre_heure, heure + "h00");
-            heure = heure + 1;
-            texte.classList.add("heure");
-        }
-
-        if (j % 6 == 0) {
-            article_creneau.classList.add("border_top");
-        }
-
-        if (j == 71) {
-            if (indice_div_jour == 0) {
-                article_creneau.classList.add("article_border_bottom_left_radius");
-            } else if (indice_div_jour == 6) {
-                article_creneau.classList.add("article_border_bottom_right_radius");
-            }
-        }
-
-        article_creneau.addEventListener("click", _ => {
-            console.log("Créneau cliqué:", article_creneau.id);
-        });
-    }
-    console.log(`Créneaux pour ${datetemp.toLocaleDateString()} créés.`);
-}
-
-function calcul_duree(heure_debut, duree) {
-    let h_dbt_rdv = (8 + Math.floor((heure_debut + 1) / 6)).toString() + "h";
-    let m_dbt_rdv = (heure_debut % 6).toString();
-    let h_fin_rdv = (8 + Math.floor((heure_debut + duree + 1) / 6)).toString() + "h";
-    let m_fin_rdv = ((heure_debut + duree + 1) % 6).toString();
-
-    if (m_dbt_rdv.length == 1) {
-        m_dbt_rdv = m_dbt_rdv + "0";
-    }
-
-    if (m_fin_rdv.length == 1) {
-        m_fin_rdv = m_fin_rdv + "0";
-    }
-
-    return (h_dbt_rdv + m_dbt_rdv + " - " + h_fin_rdv + m_fin_rdv);
-}
-
-function conversion_heure_en_id(heure_debut) {
-    let int_h = (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
-    console.log("Conversion de l'heure:", heure_debut, "=>", int_h);
-    return int_h;
-}
-
 function create_rdv(horaire_debut, horaire_fin, journee, color = "yellow", texte) {
     let duree = 30;
     console.log(`Création d'un rendez-vous: ${journee} ${horaire_debut}-${horaire_fin} ${color}`);
@@ -241,6 +219,7 @@ function create_rdv(horaire_debut, horaire_fin, journee, color = "yellow", texte
         }
     }
 }
+
 
 
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
