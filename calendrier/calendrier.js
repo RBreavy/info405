@@ -28,9 +28,8 @@ var main = document.getElementsByClassName("main_cal")[0];
 console.log("Element main:", main);
 
 
-// Fonction pour récupérer les rendez-vous depuis l'API
 function fetchRdvFromDatabase() {
-    fetch('http://51.68.91.213/info2/site/calendrier/get-data.php?action=rdvs')
+    fetch('/info2/site/calendrier/get-data.php?action=rdvs')
         .then(response => response.json())  // Assurez-vous que la réponse est en JSON
         .then(rdvData => {
             // Pour chaque rendez-vous récupéré, créer un rendez-vous dans le calendrier
@@ -40,19 +39,25 @@ function fetchRdvFromDatabase() {
                 let heureDebut = rdv.heure_debut;  // Format attendu : "HH:MM"
                 let heureFin = rdv.heure_fin;  // Format attendu : "HH:MM"
 
-                // Si nécessaire, tu peux convertir ou formater ces informations selon ton besoin
-                // Exemple : Calculer un horaire en minutes pour une gestion plus simple
-                let horaireDebut = conversion_heure_en_id(heureDebut);
-                let horaireFin = conversion_heure_en_id(heureFin);
+                // Vérifier que les heures sont bien définies et valides
+                if (typeof heureDebut === 'string' && typeof heureFin === 'string') {
+                    // Si nécessaire, tu peux convertir ou formater ces informations selon ton besoin
+                    // Exemple : Calculer un horaire en minutes pour une gestion plus simple
+                    let horaireDebut = conversion_heure_en_id(heureDebut);
+                    let horaireFin = conversion_heure_en_id(heureFin);
 
-                // Ajouter le rendez-vous à ton calendrier (en utilisant `create_rdv` par exemple)
-                create_rdv(horaireDebut, horaireFin, jour, "yellow");  // Couleur à ajuster selon tes besoins
+                    // Ajouter le rendez-vous à ton calendrier (en utilisant `create_rdv` par exemple)
+                    create_rdv(horaireDebut, horaireFin, jour, "yellow");  // Couleur à ajuster selon tes besoins
+                } else {
+                    console.error("Données de rendez-vous incorrectes:", rdv);
+                }
             });
         })
         .catch(error => {
             console.error("Erreur lors de la récupération des rendez-vous:", error);
         });
 }
+
 
 // Appel de la fonction pour récupérer et afficher les rendez-vous
 fetchRdvFromDatabase();
