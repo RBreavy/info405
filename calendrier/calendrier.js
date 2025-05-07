@@ -24,20 +24,6 @@ dateInput.addEventListener('change', _ => {
     } 
 });
 
-function getRdvs() {
-    fetch("http://51.68.91.213/info2/site/calendrier/get-data.php?action=rdvs")
-        .then(response => response.json())
-        .then(data => {
-            console.log("Rendez-vous récupérés:", data);
-            listeCreneau.forEach(func => func(data)); // Passez les données à vos fonctions de création de créneaux
-        })
-        .catch(error => console.error("Erreur lors de la récupération des RDVs:", error));
-}
-
-
-
-
-
 var main = document.getElementsByClassName("main_cal")[0];
 console.log("Element main:", main);
 
@@ -159,7 +145,7 @@ function maj_rdv() {
     console.log("Rendez-vous mis à jour.");
 }
 
-function creation_crenau(indice_div_jour, div_jour, datetemp, rdvs) {
+function creation_crenau(indice_div_jour, div_jour, datetemp) {
     console.log(`Création des créneaux pour ${datetemp.toLocaleDateString()}...`);
     let heure = 8;
     for (let j = 0; j < 72; j++) {
@@ -193,32 +179,12 @@ function creation_crenau(indice_div_jour, div_jour, datetemp, rdvs) {
             }
         }
 
-        // Vérifiez si ce créneau correspond à un rendez-vous
-        rdvs.forEach(rdv => {
-            let rdvStart = new Date(rdv.date_debut);
-            let rdvEnd = new Date(rdv.date_fin);
-            let rdvStartHour = rdvStart.getHours();
-            let rdvStartMinute = Math.floor(rdvStart.getMinutes() / 10) * 10; // Par exemple, 15:30 devient 15:30
-            let rdvEndHour = rdvEnd.getHours();
-            let rdvEndMinute = Math.floor(rdvEnd.getMinutes() / 10) * 10; // Par exemple, 15:50 devient 15:50
-
-            // Si le créneau correspond à un horaire de rendez-vous
-            if (rdvStartHour === heure && rdvStartMinute === (j % 6) * 10) {
-                article_creneau.classList.add("rdv"); // Ajoutez une classe pour les créneaux réservés
-                let box_invisible = create("article", article_creneau);
-                create("p", box_invisible, rdv.nom_utilisateur + " - " + rdv.nom_medecin);
-                create("p", box_invisible, calcul_duree(rdvStart.getHours() * 6 + rdvStart.getMinutes(), 30)); // Durée fixe de 30 minutes, ajustez si nécessaire
-                create("p", box_invisible, calcul_duree(rdvStart.getHours() * 6 + rdvStart.getMinutes(), rdvEnd.getHours() * 6 + rdvEnd.getMinutes() - rdvStart.getHours() * 6 - rdvStart.getMinutes()));
-            }
-        });
-
         article_creneau.addEventListener("click", _ => {
             console.log("Créneau cliqué:", article_creneau.id);
         });
     }
     console.log(`Créneaux pour ${datetemp.toLocaleDateString()} créés.`);
 }
-
 
 function calcul_duree(heure_debut, duree) {
     let h_dbt_rdv = (8 + Math.floor((heure_debut + 1) / 6)).toString() + "h";
@@ -305,5 +271,3 @@ boutonD.addEventListener('click', () => {
     });
     maj_semaine();
 });
-
-getRdvs();  // Appel pour récupérer et afficher les rendez-vous
