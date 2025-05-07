@@ -27,31 +27,62 @@ dateInput.addEventListener('change', _ => {
 var main = document.getElementsByClassName("main_cal")[0];
 console.log("Element main:", main);
 
-var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
-var lundi = "13/01/2025";
-var jeudi = "16/01/2025";
-var dimanche = "19/01/2025";
+// Fonction pour récupérer les rendez-vous depuis l'API
+function fetchRdvFromDatabase() {
+    fetch('http://51.68.91.213/info2/site/calendrier/get-data.php?action=rdvs')
+        .then(response => response.json())  // Assurez-vous que la réponse est en JSON
+        .then(rdvData => {
+            // Pour chaque rendez-vous récupéré, créer un rendez-vous dans le calendrier
+            rdvData.forEach(rdv => {
+                // Extraire le jour, l'heure de début et l'heure de fin
+                let jour = rdv.jour;  // Format attendu : "YYYY-MM-DD"
+                let heureDebut = rdv.heure_debut;  // Format attendu : "HH:MM"
+                let heureFin = rdv.heure_fin;  // Format attendu : "HH:MM"
 
-var mardi = "21/01/2025";
-var mercredi = "22/01/2025";
+                // Si nécessaire, tu peux convertir ou formater ces informations selon ton besoin
+                // Exemple : Calculer un horaire en minutes pour une gestion plus simple
+                let horaireDebut = conversion_heure_en_id(heureDebut);
+                let horaireFin = conversion_heure_en_id(heureFin);
 
-var vendredi = "10/01/2025";
-var samedi = "17/02/2025";
-var samedi_fin = "18/02/2025";
+                // Ajouter le rendez-vous à ton calendrier (en utilisant `create_rdv` par exemple)
+                create_rdv(horaireDebut, horaireFin, jour, "yellow");  // Couleur à ajuster selon tes besoins
+            });
+        })
+        .catch(error => {
+            console.error("Erreur lors de la récupération des rendez-vous:", error);
+        });
+}
 
-creation_jour();
+// Appel de la fonction pour récupérer et afficher les rendez-vous
+fetchRdvFromDatabase();
 
-var listeCreneau = [
-    () => create_rdv(0, 71, lundi, lundi, "blue"),
-    () => create_rdv(9, 51, jeudi, jeudi, "green"),
-    () => create_rdv(5, 10, dimanche, dimanche, "red"),
-    () => create_rdv(6, 10, mardi, mardi, "blue"),
-    () => create_rdv(4, 14, mercredi, mercredi, "aqua"),
-    () => create_rdv(17, 21, vendredi, vendredi, "white"),
-    () => create_rdv(35, 41, vendredi, vendredi, "purple"),
-    () => create_rdv(2, 50, samedi, samedi_fin, "orange", "docteur Dupont")
-];
+
+// var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
+
+// var lundi = "13/01/2025";
+// var jeudi = "16/01/2025";
+// var dimanche = "19/01/2025";
+
+// var mardi = "21/01/2025";
+// var mercredi = "22/01/2025";
+
+// var vendredi = "10/01/2025";
+// var samedi = "17/02/2025";
+// var samedi_fin = "18/02/2025";
+
+// creation_jour();
+
+// var listeCreneau = [
+//     () => create_rdv(0, 71, lundi, lundi, "blue"),
+//     () => create_rdv(9, 51, jeudi, jeudi, "green"),
+//     () => create_rdv(5, 10, dimanche, dimanche, "red"),
+//     () => create_rdv(6, 10, mardi, mardi, "blue"),
+//     () => create_rdv(4, 14, mercredi, mercredi, "aqua"),
+//     () => create_rdv(17, 21, vendredi, vendredi, "white"),
+//     () => create_rdv(35, 41, vendredi, vendredi, "purple"),
+//     () => create_rdv(2, 50, samedi, samedi_fin, "orange", "docteur Dupont")
+// ];
 
 listeCreneau.forEach(func => func());
 
@@ -145,47 +176,6 @@ function maj_rdv() {
     console.log("Rendez-vous mis à jour.");
 }
 
-function creation_crenau(indice_div_jour, div_jour, datetemp) {
-    console.log(`Création des créneaux pour ${datetemp.toLocaleDateString()}...`);
-    let heure = 8;
-    for (let j = 0; j < 72; j++) {
-        let article_creneau = create("article", div_jour);
-        article_creneau.id = datetemp.toLocaleDateString() + j.toString();
-        article_creneau.classList.add("creneau");
-
-        if (Math.floor(j / 3) % 2 == 0) {
-            article_creneau.classList.add("gris_fonce");
-        } else {
-            article_creneau.classList.add("gris_clair");
-        }
-
-        if (indice_div_jour == 0 && j % 6 == 0) {
-            let carre_heure = create("div", article_creneau);
-            carre_heure.classList.add("carre_heure");
-            let texte = create("p", carre_heure, heure + "h00");
-            heure = heure + 1;
-            texte.classList.add("heure");
-        }
-
-        if (j % 6 == 0) {
-            article_creneau.classList.add("border_top");
-        }
-
-        if (j == 71) {
-            if (indice_div_jour == 0) {
-                article_creneau.classList.add("article_border_bottom_left_radius");
-            } else if (indice_div_jour == 6) {
-                article_creneau.classList.add("article_border_bottom_right_radius");
-            }
-        }
-
-        article_creneau.addEventListener("click", _ => {
-            console.log("Créneau cliqué:", article_creneau.id);
-        });
-    }
-    console.log(`Créneaux pour ${datetemp.toLocaleDateString()} créés.`);
-}
-
 function calcul_duree(heure_debut, duree) {
     let h_dbt_rdv = (8 + Math.floor((heure_debut + 1) / 6)).toString() + "h";
     let m_dbt_rdv = (heure_debut % 6).toString();
@@ -210,37 +200,50 @@ function conversion_heure_en_id(heure_debut) {
 }
 
 function create_rdv(horaire_debut, horaire_fin, journee, color = "yellow", texte) {
-    let duree = 30;
+    const duree = horaire_fin - horaire_debut + 1;
     console.log(`Création d'un rendez-vous: ${journee} ${horaire_debut}-${horaire_fin} ${color}`);
+
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee) !== null) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
-            var creneau_horaire = document.getElementById(journee.toString() + i.toString());
+            const creneau_horaire = document.getElementById(`${journee}${i}`);
             creneau_horaire.style.setProperty('--border-color', color);
             creneau_horaire.classList.add("custom_bg_color");
 
-            if (i == horaire_debut) {
-                let box_invisible = create("article", creneau_horaire);
+            // Si on est au début du rendez-vous, on ajoute un article pour afficher les détails
+            if (i === horaire_debut) {
+                const box_invisible = create("article", creneau_horaire);
                 create("p", box_invisible, texte);
                 create("p", box_invisible, calcul_duree(horaire_debut, duree));
-                create("p", box_invisible, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1));
                 box_invisible.classList.add("rdv");
-                box_invisible.style.height = creneau_horaire.offsetHeight * (duree + 1) - 3 + "px";
+                box_invisible.style.height = `${creneau_horaire.offsetHeight * duree - 3}px`;
             }
 
-            if (i % 6 == 0 && i != horaire_debut) {
+            // Si c'est un créneau en début de ligne, on gère les bordures
+            if (i % 6 === 0 && i !== horaire_debut) {
                 creneau_horaire.classList.add('custom_border_top');
             }
 
-            if (i == horaire_debut && i % 6 != 0) {
+            if (i === horaire_debut && i % 6 !== 0) {
                 creneau_horaire.classList.add("invisible_border_top");
             }
 
-            if (i == horaire_fin && (i + 1) % 6 != 0) {
+            if (i === horaire_fin && (i + 1) % 6 !== 0) {
                 creneau_horaire.classList.add("invisible_border_bottom");
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
