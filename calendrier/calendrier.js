@@ -84,7 +84,7 @@ fetchRdvFromDatabase();
 //     () => create_rdv(2, 50, samedi, samedi_fin, "orange", "docteur Dupont")
 // ];
 
-listeCreneau.forEach(func => func());
+// listeCreneau.forEach(func => func());
 
 function create(tag, container, text = null) {
     let element = document.createElement(tag);
