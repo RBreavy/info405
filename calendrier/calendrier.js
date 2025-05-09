@@ -75,6 +75,21 @@ var listeCreneau = [
 // Exécute chaque fonction pour créer tous les rendez-vous
 listeCreneau.forEach(func => func());
 
+function chargerEtAfficherRDV() {
+    fetch('/info2/site/calendrier/get-data.php?action=rdvs')
+        .then(response => response.json())
+        .then(tableauRDV => {
+            tableauRDV.forEach(rdv => {
+                const nom = rdv.nom_utilisateur;
+                const debut = new Date(rdv.date_debut.replace(' ', 'T'));
+                const fin = new Date(rdv.date_fin.replace(' ', 'T'));
+                create_rdv(nom, debut, fin);
+            });
+        })
+        .catch(error => console.error('Erreur lors du chargement des RDV:', error));
+}
+
+
 // Fonction utilitaire pour créer un élément HTML avec du texte
 function create(tag, container, text = null) {
     let element = document.createElement(tag);
@@ -168,7 +183,6 @@ function maj_rdv() {
 
 // Création des créneaux horaires (72 par jour : 8h-20h en tranches de 10 minutes)
 function creation_crenau(indice_div_jour, div_jour, datetemp) {
-    console.log(`Création des créneaux pour ${datetemp.toLocaleDateString()}...`);
     let heure = 8;
     for (let j = 0; j < 72; j++) {
         let article_creneau = create("article", div_jour);
