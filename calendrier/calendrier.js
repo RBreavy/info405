@@ -1,4 +1,3 @@
-@ -1,274 +1,274 @@
 const dateString = new Date().toLocaleDateString("fr-FR");
 var [day, month, year] = dateString.split('/').map(Number);
 var date = new Date(year, month - 1, day);
@@ -51,7 +50,7 @@ var listeCreneau = [
     () => create_rdv(14, 4, mercredi, mercredi, "aqua"),
     () => create_rdv(21, 17, vendredi, vendredi, "white"),
     () => create_rdv(41, 9, vendredi, vendredi, "purple"),
-    () => create_rdv(6, 5, samedi, samedi_fin, "orange", "docteur Dupont")
+    () => create_rdv(6, 5, samedi, samedi_fin, "orange", "docteur Dupont"),
     () => create_rdv(9, 51, jeudi, jeudi, "green"),
     () => create_rdv(5, 10, dimanche, dimanche, "red"),
     () => create_rdv(6, 10, mardi, mardi, "blue"),
