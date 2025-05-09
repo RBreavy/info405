@@ -4,21 +4,34 @@ ini_set('display_errors', 0);
 
 include_once "../index/db_connect.php";
 
-function getAllRdvs()
+function getAllRdvs($start = null, $end = null)
 {
     global $conn;
     try {
+        $where = "";
+        if ($start !== null && $end !== null) {
+            // Reformater les dates
+            $start = DateTime::createFromFormat('d/m/Y', $start)->format('Y-m-d');
+            $end = DateTime::createFromFormat('d/m/Y', $end)->format('Y-m-d');
+
+            $start = mysqli_real_escape_string($conn, $start);
+            $end = mysqli_real_escape_string($conn, $end);
+            $where = "WHERE r.date_debut >= '$start' AND r.date_debut <= '$end'";
+        }
+
         $query = "SELECT m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
-                  r.date_debut, r.date_fin 
+                         r.date_debut, r.date_fin 
                   FROM rdv r
                   JOIN medecin m ON r.id_medecin = m.id_medecin 
-                  JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs";
+                  JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs
+                  $where";
         $result = mysqli_query($conn, $query);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     } catch (Exception $e) {
         return ['error' => $e->getMessage()];
     }
 }
+
 
 function creer_rdv($id_medecin, $date_debut, $date_fin, $id_utilisateur, $couleur)
 {
