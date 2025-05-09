@@ -85,6 +85,7 @@ function chargerEtAfficherRDV() {
                 const fin = new Date(rdv.date_fin.replace(' ', 'T'));
                 create_rdv(nom, debut, fin);
             });
+            console.log("tous les rendez-vous on été créé");
         })
         .catch(error => console.error('Erreur lors du chargement des RDV:', error));
 }
