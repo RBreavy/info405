@@ -1,17 +1,26 @@
+// Récupère la date actuelle au format français (JJ/MM/AAAA)
 const dateString = new Date().toLocaleDateString("fr-FR");
+// Déstructure la chaîne en jour, mois, année
 var [day, month, year] = dateString.split('/').map(Number);
+// Crée un objet Date avec les valeurs récupérées
 var date = new Date(year, month - 1, day);
 
+// Récupère l'indice du jour dans la semaine (0 pour dimanche à 6 pour samedi)
 var indice_jour = date.getDay();
 
+// Décalage utilisé pour naviguer entre les semaines
 var offsetjour = 0;
+// Si dimanche, on le considère comme jour 7 pour avoir lundi=1 à dimanche=7
 if (indice_jour == 0) {
     indice_jour = 7;
 }
 
 console.log("Initialisation de la date:", date);
 
+// Récupère l'élément input de type date (sélecteur de date)
 var dateInput = document.getElementById("calendrier");
+
+// Ajoute un écouteur d'événement pour changer la semaine selon la date choisie
 dateInput.addEventListener('change', _ => {
     [year, month, day] = dateInput.value.split("-").map(Number);
     if (2000 <= year && year <= 2100) {
@@ -24,24 +33,27 @@ dateInput.addEventListener('change', _ => {
     } 
 });
 
+// Récupère le conteneur principal du calendrier
 var main = document.getElementsByClassName("main_cal")[0];
 console.log("Element main:", main);
 
+// Liste des jours de la semaine en français
 var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
+// Définitions de dates spécifiques utilisées pour les rendez-vous
 var lundi = "13/01/2025";
 var jeudi = "16/01/2025";
 var dimanche = "19/01/2025";
-
 var mardi = "21/01/2025";
 var mercredi = "22/01/2025";
-
 var vendredi = "10/01/2025";
 var samedi = "17/02/2025";
 var samedi_fin = "18/02/2025";
 
+// Crée les jours initiaux du calendrier
 creation_jour();
 
+// Liste de fonctions qui créent des rendez-vous à l’appel
 var listeCreneau = [
     () => create_rdv(0, 71, lundi, lundi, "blue"),
     () => create_rdv(51, 9, jeudi, jeudi, "green"),
@@ -60,8 +72,10 @@ var listeCreneau = [
     () => create_rdv(2, 50, samedi, samedi_fin, "orange", "docteur Dupont")
 ];
 
+// Exécute chaque fonction pour créer tous les rendez-vous
 listeCreneau.forEach(func => func());
 
+// Fonction utilitaire pour créer un élément HTML avec du texte
 function create(tag, container, text = null) {
     let element = document.createElement(tag);
     if (text) {
@@ -71,6 +85,7 @@ function create(tag, container, text = null) {
     return element;
 }
 
+// Création des colonnes jour par jour (lundi à dimanche)
 function creation_jour() {
     console.log("Création des jours...");
     for (let i = 0; i < 7; i++) {
@@ -99,6 +114,7 @@ function creation_jour() {
     console.log("Jours créés.");
 }
 
+// Met à jour la semaine complète
 function maj_semaine() {
     console.log("Mise à jour de la semaine...");
     maj_date();
@@ -107,6 +123,7 @@ function maj_semaine() {
     console.log("Semaine mise à jour.");
 }
 
+// Met à jour les dates affichées pour chaque jour
 function maj_date() {
     console.log("Mise à jour des dates...");
     let jours = document.querySelectorAll(".jour");
@@ -121,6 +138,7 @@ function maj_date() {
     console.log("Dates mises à jour.");
 }
 
+// Met à jour les ID des créneaux selon la date
 function maj_id() {
     console.log("Mise à jour des ID...");
     let jour = document.querySelectorAll(".jour");
@@ -133,25 +151,22 @@ function maj_id() {
     console.log("ID mis à jour.");
 }
 
+// Supprime et recrée tous les rendez-vous selon la nouvelle date
 function maj_rdv() {
     console.log("Mise à jour des rendez-vous...");
     let rdv = document.querySelectorAll(".rdv");
-    rdv.forEach(e => {
-        e.remove();
-    });
+    rdv.forEach(e => e.remove());
 
     let rdv_color = document.querySelectorAll(".custom_bg_color");
     rdv_color.forEach(e => {
-        e.classList.remove("custom_bg_color");
-        e.classList.remove('custom_border_top');
-        e.classList.remove("invisible_border_top");
-        e.classList.remove("invisible_border_bottom");
+        e.classList.remove("custom_bg_color", "custom_border_top", "invisible_border_top", "invisible_border_bottom");
     });
 
     listeCreneau.forEach(func => func());
     console.log("Rendez-vous mis à jour.");
 }
 
+// Création des créneaux horaires (72 par jour : 8h-20h en tranches de 10 minutes)
 function creation_crenau(indice_div_jour, div_jour, datetemp) {
     console.log(`Création des créneaux pour ${datetemp.toLocaleDateString()}...`);
     let heure = 8;
@@ -160,20 +175,23 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
         article_creneau.id = datetemp.toLocaleDateString() + j.toString();
         article_creneau.classList.add("creneau");
 
+        // Alternance de couleurs pour lisibilité
         if (Math.floor(j / 3) % 2 == 0) {
             article_creneau.classList.add("gris_fonce");
         } else {
             article_creneau.classList.add("gris_clair");
         }
 
+        // Affichage de l'heure toutes les heures (6 créneaux de 10min)
         if (indice_div_jour == 0 && j % 6 == 0) {
             let carre_heure = create("div", article_creneau);
             carre_heure.classList.add("carre_heure");
             let texte = create("p", carre_heure, heure + "h00");
-            heure = heure + 1;
+            heure++;
             texte.classList.add("heure");
         }
 
+        // Bordures de séparation
         if (j % 6 == 0) {
             article_creneau.classList.add("border_top");
         }
@@ -186,6 +204,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
             }
         }
 
+        // Écouteur de clic sur un créneau
         article_creneau.addEventListener("click", _ => {
             console.log("Créneau cliqué:", article_creneau.id);
         });
@@ -193,30 +212,28 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
     console.log(`Créneaux pour ${datetemp.toLocaleDateString()} créés.`);
 }
 
+// Calcule et retourne la durée d’un rendez-vous sous forme textuelle
 function calcul_duree(heure_debut, duree) {
     let h_dbt_rdv = (8 + Math.floor((heure_debut + 1) / 6)).toString() + "h";
     let m_dbt_rdv = (heure_debut % 6).toString();
     let h_fin_rdv = (8 + Math.floor((heure_debut + duree + 1) / 6)).toString() + "h";
     let m_fin_rdv = ((heure_debut + duree + 1) % 6).toString();
 
-    if (m_dbt_rdv.length == 1) {
-        m_dbt_rdv = m_dbt_rdv + "0";
-    }
-
-    if (m_fin_rdv.length == 1) {
-        m_fin_rdv = m_fin_rdv + "0";
-    }
+    if (m_dbt_rdv.length == 1) m_dbt_rdv += "0";
+    if (m_fin_rdv.length == 1) m_fin_rdv += "0";
 
     return (h_dbt_rdv + m_dbt_rdv + " - " + h_fin_rdv + m_fin_rdv);
 }
 
+// Convertit une heure en index de créneau
 function conversion_heure_en_id(heure_debut) {
     let int_h = (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
     console.log("Conversion de l'heure:", heure_debut, "=>", int_h);
     return int_h;
 }
 
-function create_rdv(horaire_debut, horaire_fin, journee, color = "yellow", texte) {
+// Crée un rendez-vous sur plusieurs créneaux, avec couleur et texte
+function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color = "yellow", texte) {
     let duree = 30;
     console.log(`Création d'un rendez-vous: ${journee} ${horaire_debut}-${horaire_fin} ${color}`);
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee) !== null) {
@@ -249,12 +266,12 @@ function create_rdv(horaire_debut, horaire_fin, journee, color = "yellow", texte
     }
 }
 
-
+// Navigation gauche/droite entre les semaines avec animation
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
 const boutonD = document.getElementsByClassName("selecteur_droit")[0];
-
 const box = document.querySelectorAll(".jour");
 
+// Semaine précédente
 boutonG.addEventListener('click', () => {
     offsetjour -= 7;
     box.forEach(element => {
@@ -267,6 +284,7 @@ boutonG.addEventListener('click', () => {
     maj_semaine();
 });
 
+// Semaine suivante
 boutonD.addEventListener('click', () => {
     offsetjour += 7;
     box.forEach(element => {
