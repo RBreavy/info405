@@ -166,8 +166,6 @@ function maj_rdv() {
         e.classList.remove("custom_bg_color", "custom_border_top", "invisible_border_top", "invisible_border_bottom");
     });
 
-    listeCreneau.forEach(func => func());
-
     chargerEtAfficherRDV();
 
     console.log("Rendez-vous mis à jour.");
