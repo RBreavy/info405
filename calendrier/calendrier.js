@@ -90,6 +90,7 @@ function chargerEtAfficherRDV() {
         .catch(error => console.error('Erreur lors du chargement des RDV:', error));
 }
 
+chargerEtAfficherRDV();
 
 // Fonction utilitaire pour créer un élément HTML avec du texte
 function create(tag, container, text = null) {
