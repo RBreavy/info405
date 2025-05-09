@@ -90,8 +90,6 @@ function chargerEtAfficherRDV() {
         .catch(error => console.error('Erreur lors du chargement des RDV:', error));
 }
 
-chargerEtAfficherRDV();
-
 // Fonction utilitaire pour créer un élément HTML avec du texte
 function create(tag, container, text = null) {
     let element = document.createElement(tag);
@@ -226,6 +224,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
         });
     }
     console.log(`Créneaux pour ${datetemp.toLocaleDateString()} créés.`);
+    chargerEtAfficherRDV();
 }
 
 // Calcule et retourne la durée d’un rendez-vous sous forme textuelle
