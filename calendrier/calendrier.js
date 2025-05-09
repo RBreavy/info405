@@ -199,8 +199,12 @@ function maj_rdv() {
     });
 
     listeCreneau.forEach(func => func());
+
+    chargerEtAfficherRDV();
+
     console.log("Rendez-vous mis à jour.");
 }
+
 
 // Création des créneaux horaires (72 par jour : 8h-20h en tranches de 10 minutes)
 function creation_crenau(indice_div_jour, div_jour, datetemp) {
