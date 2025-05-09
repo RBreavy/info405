@@ -76,6 +76,12 @@ var listeCreneau = [
 listeCreneau.forEach(func => func());
 
 function chargerEtAfficherRDV() {
+    // Calcule la date de début (lundi) et fin (dimanche) de la semaine affichée
+    const dateDebutSemaine = new Date(date);
+    dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour); // lundi
+    const dateFinSemaine = new Date(dateDebutSemaine);
+    dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6); // dimanche
+
     fetch('/info2/site/calendrier/get-data.php?action=rdvs')
         .then(response => response.json())
         .then(tableauRDV => {
@@ -83,12 +89,27 @@ function chargerEtAfficherRDV() {
                 const nom = rdv.nom_utilisateur;
                 const debut = new Date(rdv.date_debut.replace(' ', 'T'));
                 const fin = new Date(rdv.date_fin.replace(' ', 'T'));
-                create_rdv(nom, debut, fin);
+
+                // Filtrage : si le début OU la fin du rdv est dans la semaine
+                if (
+                    (debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
+                    (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
+                    (debut <= dateDebutSemaine && fin >= dateFinSemaine) // RDV qui couvre toute la semaine
+                ) {
+                    const jourStr = debut.toLocaleDateString("fr-FR");
+                    const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
+                    const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
+
+                    if (h_debut >= 0 && h_fin < 72) {
+                        create_rdv(h_debut, h_fin, jourStr, jourStr, "orange", nom);
+                    }
+                }
             });
-            console.log("tous les rendez-vous on été créé");
+            console.log("Rendez-vous affichés pour la semaine visible.");
         })
         .catch(error => console.error('Erreur lors du chargement des RDV:', error));
 }
+
 
 // Fonction utilitaire pour créer un élément HTML avec du texte
 function create(tag, container, text = null) {
