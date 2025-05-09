@@ -57,7 +57,7 @@ function chargerEtAfficherRDV() {
                 const nom = rdv.nom_utilisateur;
                 const debut = new Date(rdv.date_debut.replace(' ', 'T'));
                 const fin = new Date(rdv.date_fin.replace(' ', 'T'));
-
+                console.log(debut);
                 // Filtrage : si le début OU la fin du rdv est dans la semaine
                 if (
                     (debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
@@ -168,7 +168,7 @@ function maj_rdv() {
 
     chargerEtAfficherRDV();
 
-    console.log("Rendez-vous mis à jour.");
+    console.log("Rendez-vous mis à jour."); 
 }
 
 
