@@ -86,8 +86,9 @@ switch ($action) {
         }
         break;
     case 'rdvs':
-    default:
-        echo json_encode(getAllRdvs());
+        $start = $_GET['start_date'] ?? null;
+        $end = $_GET['end_date'] ?? null;
+        echo json_encode(getAllRdvs($start, $end));
         break;
 }
 ?>
