@@ -40,40 +40,8 @@ console.log("Element main:", main);
 // Liste des jours de la semaine en français
 var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
-// Définitions de dates spécifiques utilisées pour les rendez-vous
-var lundi = "13/01/2025";
-var jeudi = "16/01/2025";
-var dimanche = "19/01/2025";
-var mardi = "21/01/2025";
-var mercredi = "22/01/2025";
-var vendredi = "10/01/2025";
-var samedi = "17/02/2025";
-var samedi_fin = "18/02/2025";
-
 // Crée les jours initiaux du calendrier
 creation_jour();
-
-// Liste de fonctions qui créent des rendez-vous à l’appel
-var listeCreneau = [
-    () => create_rdv(0, 71, lundi, lundi, "blue"),
-    () => create_rdv(51, 9, jeudi, jeudi, "green"),
-    () => create_rdv(6, 5, dimanche, dimanche, "red"),
-    () => create_rdv(39, 6, mardi, mardi, "blue"),
-    () => create_rdv(14, 4, mercredi, mercredi, "aqua"),
-    () => create_rdv(21, 17, vendredi, vendredi, "white"),
-    () => create_rdv(41, 9, vendredi, vendredi, "purple"),
-    () => create_rdv(6, 5, samedi, samedi_fin, "orange", "docteur Dupont"),
-    () => create_rdv(9, 51, jeudi, jeudi, "green"),
-    () => create_rdv(5, 10, dimanche, dimanche, "red"),
-    () => create_rdv(6, 10, mardi, mardi, "blue"),
-    () => create_rdv(4, 14, mercredi, mercredi, "aqua"),
-    () => create_rdv(17, 21, vendredi, vendredi, "white"),
-    () => create_rdv(35, 41, vendredi, vendredi, "purple"),
-    () => create_rdv(2, 50, samedi, samedi_fin, "orange", "docteur Dupont")
-];
-
-// Exécute chaque fonction pour créer tous les rendez-vous
-listeCreneau.forEach(func => func());
 
 function chargerEtAfficherRDV() {
     // Calcule la date de début (lundi) et fin (dimanche) de la semaine affichée
