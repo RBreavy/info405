@@ -57,7 +57,6 @@ function chargerEtAfficherRDV() {
                 const nom = rdv.nom_utilisateur;
                 const debut = new Date(rdv.date_debut.replace(' ', 'T'));
                 const fin = new Date(rdv.date_fin.replace(' ', 'T'));
-                console.log(debut);
                 // Filtrage : si le début OU la fin du rdv est dans la semaine
                 if (
                     (debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
@@ -69,7 +68,7 @@ function chargerEtAfficherRDV() {
                     const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
 
                     if (h_debut >= 0 && h_fin < 72) {
-                        create_rdv(h_debut, h_fin, jourStr, jourStr, "orange", nom);
+                        create_rdv(h_debut, h_fin, jourStr, jourStr, "black", nom);
                     }
                 }
             });
