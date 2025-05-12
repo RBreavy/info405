@@ -260,6 +260,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             var creneau_horaire = document.getElementById(journee.toString() + i.toString());
             creneau_horaire.style.setProperty('--border-color', color);
             creneau_horaire.classList.add("custom_bg_color");
+            creneau_horaire.style.zIndex = -1;
 
             if (i == horaire_debut) {
                 let box_invisible = create("article", creneau_horaire);
