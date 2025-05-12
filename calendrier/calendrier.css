@@ -373,4 +373,7 @@
 .rdv.active .content {
     display: block;
     max-height: 1000px;  /* Suffisamment grand pour afficher le contenu */
+    background-color: black;  /* Fond noir */
+    color: white;  /* Texte en blanc pour plus de visibilité */
+    padding: 10px;  /* Optionnel, pour espacer le texte */
 }
