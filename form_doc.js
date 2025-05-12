@@ -52,9 +52,7 @@ function recupForm() {
         if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
             alert("la durée doit forcément être en période de 10 minutes!");
         } else {
-
-            
-
+            addRep(selectedDay,startTime,endTime);
         }
     
     } else {
@@ -82,9 +80,19 @@ function recupForm() {
 
 async function addTemp(debut_periode,fin_periode) {
     try {
-        console.log(id,debut_periode,fin_periode);
         const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=temp&med=${id}&deb_p=${debut_periode}&fin_p=${fin_periode}`);
-        const appointments = await response.json();
+        const temp = await response.json();
+        alert('Disponibilités enregistrées avec succès!');
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert("Impossible d'insérer cette indisponibilité!");
+    }
+}
+
+async function addRep(journee,deb,fin) {
+    try {
+        const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=repet&med=${id}&jour=${journee}&deb=${deb}&fin=${fin}`);
+        const rep = await response.json();
         alert('Disponibilités enregistrées avec succès!');
     } catch (error) {
         console.error('Erreur:', error);
