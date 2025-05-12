@@ -83,6 +83,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
     <script>
         const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
+        const nomUtilisateur = <?php echo json_encode($nom); ?>;
     </script>
     <script defer src="JS/patient.js"></script>
 </body>

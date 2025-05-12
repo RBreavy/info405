@@ -49,7 +49,6 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
         </article>
 
-        <!-- Form-indisp will be positioned to the right of jour elements -->
         <div class="form-indisp">
             <div class="tabs">
                 <button id="tab-repetitif" class="tab active" onclick="toggleForm('repetitif')">RÉPÉTITIF</button>
@@ -89,6 +88,14 @@ $nom = htmlspecialchars($_SESSION['nom']);
     </section>
 
 </body>
+
+<script>
+    const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
+    const nomUtilisateur = <?php echo json_encode($nom); ?>;
+</script>
+
+
+
 <script src="calendrier/calendrier.js"></script>
 <script src="form_doc.js"></script>
 <script src="JS/docteur.js"></script>

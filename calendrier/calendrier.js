@@ -15,7 +15,13 @@ if (indice_jour == 0) {
     indice_jour = 7;
 }
 
-console.log("Initialisation de la date:", date);
+async function estmedecin(nom) {
+    const response = await fetch('/info2/site/calendrier/get-data.php?action=doctors');
+    const tableauDOC = await response.json();
+    return tableauDOC.some(doc => doc.nom === nom);
+}
+
+console.log(estmedecin(nomUtilisateur));
 
 // Récupère l'élément input de type date (sélecteur de date)
 var dateInput = document.getElementById("calendrier");
