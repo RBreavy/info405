@@ -1,4 +1,3 @@
-@ -1,359 +1,360 @@
 // Récupère la date actuelle au format français (JJ/MM/AAAA)
 const dateString = new Date().toLocaleDateString("fr-FR");
 // Déstructure la chaîne en jour, mois, année
