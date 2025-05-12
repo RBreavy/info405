@@ -274,6 +274,11 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 detailsContainer.classList.add("rdv_details");
                 detailsContainer.style.display = "none"; // Par défaut, le contenu est caché
 
+                // Affichage de la date
+                let dateElement = create("p", detailsContainer);
+                let date = new Date(journee);  // Crée un objet Date à partir de journee
+                dateElement.innerText = `Date : ${date.toLocaleDateString()}`; // Affiche la date formatée
+
                 // Affichage du texte ou de l'heure selon l'utilisateur
                 if (estDoc) {
                     create("p", detailsContainer, texte); // Affiche le texte du rendez-vous
@@ -309,6 +314,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
+
 
 
 
