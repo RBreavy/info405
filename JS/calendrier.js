@@ -56,7 +56,7 @@ async function chargerEtAfficherRDV() {
     try {
         const response = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
         const tableauRDV = await response.json();
-        console.log(tableauRDV)
+        console.log(response)
 
         for (const rdv of tableauRDV) {
             const nom = rdv.nom_utilisateur;
@@ -75,7 +75,6 @@ async function chargerEtAfficherRDV() {
 
                 const estDoc = await estMedecin(nomUtilisateur);
                 const couleurRdv = estDoc ? couleur : "black";
-                console.log("test:",h_debut, h_fin, jourStr, jourStr, couleurRdv, nom)
                 create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
             }
         }
