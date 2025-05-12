@@ -48,42 +48,43 @@ var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "d
 creation_jour();
 
 async function chargerEtAfficherRDV() {
-    // Calcule la date de début (lundi) et fin (dimanche) de la semaine affichée
     const dateDebutSemaine = new Date(date);
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour); // lundi
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6); // dimanche
 
-    fetch('/info2/site/calendrier/get-data.php?action=rdvs')
-        .then(response => response.json())
-        .then(tableauRDV => {
-            tableauRDV.forEach(rdv => {
-                const nom = rdv.nom_utilisateur;
-                const couleur = rdv.couleur;
-                const debut = new Date(rdv.date_debut.replace(' ', 'T'));
-                const fin = new Date(rdv.date_fin.replace(' ', 'T'));
-                // Filtrage : si le début OU la fin du rdv est dans la semaine
-                if (
-                    (debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
-                    (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
-                    (debut <= dateDebutSemaine && fin >= dateFinSemaine) // RDV qui couvre toute la semaine
-                ) {
-                    const jourStr = debut.toLocaleDateString("fr-FR");
-                    const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
-                    const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
+    try {
+        const response = await fetch('/info2/site/calendrier/get-data.php?action=rdvs');
+        const tableauRDV = await response.json();
 
-                    if (estMedecin(nomUtilisateur)) {
-                        create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom);
-                    } else {
-                        create_rdv(h_debut, h_fin, jourStr, jourStr, "black", nom);
-                    }
-                    
-                }
-            });
-            console.log("Rendez-vous affichés pour la semaine visible.");
-        })
-        .catch(error => console.error('Erreur lors du chargement des RDV:', error));
+        for (const rdv of tableauRDV) {
+            const nom = rdv.nom_utilisateur;
+            const couleur = rdv.couleur;
+            const debut = new Date(rdv.date_debut.replace(' ', 'T'));
+            const fin = new Date(rdv.date_fin.replace(' ', 'T'));
+
+            if (
+                (debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
+                (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
+                (debut <= dateDebutSemaine && fin >= dateFinSemaine)
+            ) {
+                const jourStr = debut.toLocaleDateString("fr-FR");
+                const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
+                const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
+
+                const estDoc = await estMedecin(nomUtilisateur);
+                const couleurRdv = estDoc ? couleur : "black";
+
+                create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
+            }
+        }
+
+        console.log("Rendez-vous affichés pour la semaine visible.");
+    } catch (error) {
+        console.error('Erreur lors du chargement des RDV:', error);
+    }
 }
+
 
 
 // Fonction utilitaire pour créer un élément HTML avec du texte
@@ -257,9 +258,9 @@ function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, 
 
             if (i == horaire_debut) {
                 let box_invisible = create("article", creneau_horaire);
-                create("p", box_invisible, texte);
-                create("p", box_invisible, calcul_duree(horaire_debut, duree));
-                create("p", box_invisible, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1));
+                // create("p", box_invisible, texte);
+                // create("p", box_invisible, calcul_duree(horaire_debut, duree));
+                // create("p", box_invisible, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1));
                 box_invisible.classList.add("rdv");
                 box_invisible.style.height = creneau_horaire.offsetHeight * (duree + 1) - 3 + "px";
             }
