@@ -248,7 +248,7 @@ function conversion_heure_en_id(heure_debut) {
 }
 
 // Crée un rendez-vous sur plusieurs créneaux, avec couleur et texte
-async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, texte) {
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom) {
     let duree = 30;
     console.log(`Création d'un rendez-vous: ${journee} ${horaire_debut}-${horaire_fin} ${color}`);
 
@@ -256,12 +256,13 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
     const estDoc = await estMedecin(nomUtilisateur);
 
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee) !== null) {
+        // Crée un rendez-vous seulement s'il n'existe pas déjà
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString() + i.toString());
-            creneau_horaire.style.setProperty('--border-color', color);
-            creneau_horaire.classList.add("custom_bg_color");
 
-            if (i == horaire_debut) {
+            // Vérifie si le créneau a déjà un rendez-vous
+            if (!creneau_horaire.querySelector(".rdv")) {
+                // Si le créneau n'a pas encore de div "rdv", crée-la
                 let box_invisible = create("article", creneau_horaire);
                 box_invisible.classList.add("rdv");
                 box_invisible.style.height = creneau_horaire.offsetHeight * (duree + 1) - 3 + "px";
@@ -290,7 +291,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 
                 // Affichage du texte ou de l'heure selon l'utilisateur
                 if (estDoc) {
-                    create("p", detailsContainer, texte); // Affiche le texte du rendez-vous
+                    create("p", detailsContainer, nom); // Affiche le texte du rendez-vous
                     create("p", detailsContainer, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1));
                 } else {
                     create("p", detailsContainer, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1)); // Affiche uniquement la durée
@@ -308,21 +309,10 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                     }
                 });
             }
-
-            if (i % 6 == 0 && i != horaire_debut) {
-                creneau_horaire.classList.add('custom_border_top');
-            }
-
-            if (i == horaire_debut && i % 6 != 0) {
-                creneau_horaire.classList.add("invisible_border_top");
-            }
-
-            if (i == horaire_fin && (i + 1) % 6 != 0) {
-                creneau_horaire.classList.add("invisible_border_bottom");
-            }
         }
     }
 }
+
 
 
 
