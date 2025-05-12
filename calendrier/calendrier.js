@@ -73,7 +73,7 @@ function chargerEtAfficherRDV() {
                     const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
 
                     if (h_debut >= 0 && h_fin < 72) {
-                        if(est_medecin(nomUtilisateur)){
+                        if(estMedecin(nomUtilisateur)){
                             create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom);
                         } else {
                             create_rdv(h_debut, h_fin, jourStr, jourStr, "black", nom);
