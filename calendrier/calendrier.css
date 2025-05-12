@@ -370,7 +370,7 @@
 }
 
 /* Quand la div est active (dépliée) */
-.rdv.active .content {
+.rdv_details {
     display: block;
     max-height: 1000px;  /* Suffisamment grand pour afficher le contenu */
     background-color: black;  /* Fond noir */
