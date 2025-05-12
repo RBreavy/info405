@@ -10,10 +10,14 @@ var indice_jour = date.getDay();
 
 // Décalage utilisé pour naviguer entre les semaines
 var offsetjour = 0;
+
+
 // Si dimanche, on le considère comme jour 7 pour avoir lundi=1 à dimanche=7
 if (indice_jour == 0) {
     indice_jour = 7;
 }
+
+let nomUtilisateur = window.nomUtilisateur || "";
 
 async function estMedecin(nom) {
     const response = await fetch('/info2/site/PHP/get-data.php?action=doctors');
