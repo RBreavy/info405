@@ -29,8 +29,9 @@ header {
   z-index: 100;
 }
 
-.banner-logo {
-  height: 40px;
+img {
+  height: 10vh;
+  width: 10vh;
 }
 
 
