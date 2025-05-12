@@ -3,12 +3,12 @@ error_reporting(0);
 ini_set('display_errors', 0);
 
 include_once "../index/db_connect.php";
-function indisp_repet($id_medecin, $jour_debut, $heure_debut, $heure_fin)
+function indisp_repet($id_medecin, $journee, $heure_debut, $heure_fin)
 {
     global $conn;
     try {
-        $query = "INSERT INTO IndisponibiliteRepetitive (id_medecin, jour_debut, heure_debut, heure_fin)  
-                  VALUES ($id_medecin, '$jour_debut', '$heure_debut', '$heure_fin')";
+        $query = "INSERT INTO IndisponibiliteRepetitive (id_medecin, journee, heure_debut, heure_fin)  
+                  VALUES ($id_medecin, '$journee', '$heure_debut', '$heure_fin')";
         $result = mysqli_query($conn, $query);
         return ['success' => $result];
     } catch (Exception $e) {
