@@ -1,4 +1,14 @@
 <?php
+
+// ▼▼▼  ▼▼▼
+$duration_colors = [
+    '10' => 'lightgreen',
+    '20' => 'lightorange', 
+    '30' => 'lightred'
+];
+// ▲▲▲  ▲▲▲
+
+
 header('Content-Type: application/json');
 require_once __DIR__ . '/../index/db_connect.php';
 
@@ -23,6 +33,35 @@ foreach ($required as $key) {
         exit;
     }
 }
+
+// ▼▼▼  ▼▼▼
+$duration_colors = [
+    '10' => 'lightgreen',
+    '20' => 'lightorange', 
+    '30' => 'lightred'
+];
+
+$data['duration'] = $data['duration'] ?? 30; 
+
+$start = new DateTime($data['date_debut']);
+$end = new DateTime($data['date_fin']);
+$interval = $start->diff($end);
+$actual_minutes = ($interval->h * 60) + $interval->i;
+
+if ($actual_minutes <= 10) {
+    $duration_key = '10';
+} elseif ($actual_minutes <= 20) {
+    $duration_key = '20';
+} else {
+    $duration_key = '30';
+}
+
+if (!isset($data['couleur']) || empty($data['couleur'])) {
+    $data['couleur'] = $duration_colors[$duration_key] ?? 'blue';
+}
+// ▲▲▲  ▲▲▲
+
+
 
 // Vérifie s’il y a un conflit avec un autre rendez-vous du même médecin
 $check = $conn->prepare("

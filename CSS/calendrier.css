@@ -1,3 +1,31 @@
+.rdv-duration-10 {
+    background-color: #a8e6cf !important;
+    border-color: #88c6b3 !important;
+}
+
+.rdv-duration-20 {
+    background-color: #ffd3b6 !important; 
+    border-color: #dfb396 !important;
+}
+
+.rdv-duration-30 {
+    background-color: #ffaaa5 !important;
+    border-color: #df8a85 !important;
+}
+
+/* Preserve existing color classes */
+.rdv-color-red {
+    background-color: #ffcccc !important;
+    border-color: #ff9999 !important;
+}
+
+.rdv-color-orange {
+    background-color: #ffdd99 !important;
+    border-color: #ffbb66 !important;
+}
+
+
+
 .main_cal {
     position: relative;
     width: 95vw;
