@@ -75,7 +75,7 @@ async function chargerEtAfficherRDV() {
 
                 const estDoc = await estMedecin(nomUtilisateur);
                 const couleurRdv = estDoc ? couleur : "black";
-                console.log(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom)
+                console.log("test:",h_debut, h_fin, jourStr, jourStr, couleurRdv, nom)
                 create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
             }
         }
