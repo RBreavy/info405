@@ -48,12 +48,13 @@ function recupForm() {
         const endTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(2)').value;
         
         console.log('Repetitive:', { day: selectedDay, startTime, endTime }); 
-              
+
         if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
             alert("la durée doit forcément être en période de 10 minutes!");
         } else {
+
             
-            alert('Disponibilités enregistrées avec succès!');
+
         }
     
     } else {
@@ -63,15 +64,15 @@ function recupForm() {
         const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(3)').value;
         const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(4)').value;
 
-
         
         console.log('Temporaire:', { startDate, endDate, startTime, endTime });
 
         if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
             alert("la durée doit forcément être en période de 10 minutes!");
         } else {
-            
-            alert('Disponibilités enregistrées avec succès!');
+            const debut_periode = startDate + " " + startTime;
+            const fin_periode = endDate + " " + endTime;
+            addTemp(debut_periode,fin_periode);
         }
         
     }
@@ -83,6 +84,7 @@ async function addTemp(debut_periode,fin_periode) {
     try {
         const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=temp&med=${id}&deb_p=${debut_periode}&fin_p=${fin_periode}`);
         //const appointments = await response.json();
+        alert('Disponibilités enregistrées avec succès!');
     } catch (error) {
         console.error('Erreur:', error);
         alert("Impossible d'insérer cette indisponibilité!");
