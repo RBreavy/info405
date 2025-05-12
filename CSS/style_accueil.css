@@ -29,11 +29,6 @@ header {
   z-index: 100;
 }
 
-img {
-  height: 10vh;
-  width: 10vh;
-}
-
 
 nav a {
   color: white;
