@@ -44,6 +44,9 @@ console.log("Element main:", main);
 // Liste des jours de la semaine en français
 var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
+// Crée les jours initiaux du calendrier
+creation_jour();
+maj_semaine();
 
 async function chargerEtAfficherRDV() {
     const dateDebutSemaine = new Date(date);
@@ -123,22 +126,13 @@ function creation_jour() {
     console.log("Jours créés.");
 }
 
+// Met à jour la semaine complète
 function maj_semaine() {
-    maj_date(); // Met à jour les dates affichées pour chaque jour
-    maj_id();   // Met à jour les IDs des créneaux
-    maj_rdv();  // Met à jour les rendez-vous
-
-    // Vider les jours actuels avant de recréer les créneaux
-    let jours = document.querySelectorAll(".jour");
-    jours.forEach(jour => {
-        jour.innerHTML = '';
-    });
-
-    creation_jour();
-
+    maj_date();
+    maj_id();
+    maj_rdv();
     console.log("Semaine mise à jour.");
 }
-
 
 // Met à jour les dates affichées pour chaque jour
 function maj_date() {
