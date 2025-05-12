@@ -7,9 +7,14 @@ $_SESSION = array();
 // Effacer le cookie de session
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000,
-        $params["path"], $params["domain"],
-        $params["secure"], $params["httponly"]
+    setcookie(
+        session_name(),
+        '',
+        time() - 42000,
+        $params["path"],
+        $params["domain"],
+        $params["secure"],
+        $params["httponly"]
     );
 }
 
@@ -17,6 +22,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Rediriger vers la page de connexion
-header("Location: index.html");
+header("Location: /info2/site/HTML/connexion.html");
 exit();
 ?>

@@ -25,7 +25,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/info2/site/CSS/style_utilisateur.css">
-    <link rel="stylesheet" href="calendrier/calendrier.css">
+    <link rel="stylesheet" href="/info2/site/CSS/calendrier.css">
     <title>Docteur page</title>
 
 </head>

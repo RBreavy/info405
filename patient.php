@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'patient') {
-    header("Location: /info2/site/index.html");
+    header("Location: /info2/site/HTML/connexion.html");
     exit();
 }
 
@@ -21,7 +21,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Patient</title>
     <link rel="stylesheet" href="/info2/site/CSS/style_utilisateur.css">
-    <link rel="stylesheet" href="/info2/site/calendrier/calendrier.css">
+    <link rel="stylesheet" href="/info2/site/CSS/calendrier.css">
     <link rel="stylesheet" href="/info2/site/CSS/form_crea_rdv.css?v=1.1">
 </head>
 
