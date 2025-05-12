@@ -277,6 +277,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 // Affichage du texte ou de l'heure selon l'utilisateur
                 if (estDoc) {
                     create("p", detailsContainer, texte); // Affiche le texte du rendez-vous
+                    create("p", detailsContainer, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1));
                 } else {
                     create("p", detailsContainer, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1)); // Affiche uniquement la durée
                 }
