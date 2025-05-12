@@ -269,6 +269,13 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 toggleButton.classList.add("toggle_button");
                 toggleButton.innerText = "Afficher les détails"; // Texte par défaut pour le bouton
 
+                // Ajuste la taille du texte en fonction de la hauteur du créneau horaire
+                if (creneau_horaire.offsetHeight < 40) {
+                    toggleButton.style.fontSize = "0.6rem"; // Si la hauteur est petite, on réduit la taille du texte
+                } else {
+                    toggleButton.style.fontSize = "1rem"; // Taille de texte par défaut
+                }
+
                 // Zone contenant les détails du rendez-vous
                 let detailsContainer = create("div", box_invisible);
                 detailsContainer.classList.add("rdv_details");
@@ -314,6 +321,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
+
 
 
 
