@@ -20,7 +20,7 @@ function getAllRdvs($start = null, $end = null)
         }
 
         $query = "SELECT m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
-                         r.date_debut, r.date_fin 
+                         r.date_debut, r.date_fin, r.couleur
                   FROM rdv r
                   JOIN medecin m ON r.id_medecin = m.id_medecin 
                   JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs
