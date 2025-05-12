@@ -1,12 +1,19 @@
 p {
     font-family: "URW Chancery L", cursive;
     font-size:30px;
+    color: white;
+    
 }
 
-h1 {
+h1 {   
+     font-family: "URW Chancery L", cursive;
+    font-size:50px;
+}
+
+h2 {
     font-family: "URW Chancery L", cursive;
     font-size:50px;
-    color:#000000;
+    color: black;
 }
 
 
@@ -43,7 +50,6 @@ body {
     background-repeat: no-repeat;
     margin: 0;
     height: 100vh;
-    color: white;
 }
 
 .dropdown {
