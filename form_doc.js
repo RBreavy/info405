@@ -64,10 +64,20 @@ function recupForm() {
     if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
         alert("la durée doit forcément être en période de 10 minutes!");
     } else {
+        
         alert('Disponibilités enregistrées avec succès!');
     }
-    
-    
+}
+
+
+async function addTemp(debut_periode,fin_periode) {
+    try {
+        const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=temp&med=${id}&deb_p=${debut_periode}&fin_p=${fin_periode}`);
+        //const appointments = await response.json();
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert("Impossible d'insérer cette indisponibilité!");
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
