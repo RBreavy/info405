@@ -44,9 +44,6 @@ console.log("Element main:", main);
 // Liste des jours de la semaine en français
 var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
 
-// Crée les jours initiaux du calendrier
-creation_jour();
-maj_semaine();
 
 async function chargerEtAfficherRDV() {
     const dateDebutSemaine = new Date(date);
@@ -129,7 +126,6 @@ function creation_jour() {
 // Met à jour la semaine complète
 // Met à jour la semaine complète 
 function maj_semaine() {
-    console.log("Mise à jour de la semaine...");
     maj_date();
     maj_id();
     maj_rdv();
