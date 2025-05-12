@@ -125,7 +125,7 @@ function creation_jour() {
     console.log("Jours créés.");
 }
 
-// Met à jour la semaine complète
+// Met à jour la semaine complète 
 function maj_semaine() {
     console.log("Mise à jour de la semaine...");
     maj_date();
