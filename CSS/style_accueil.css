@@ -1,4 +1,4 @@
-/* Reset de base */
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +13,7 @@ html, body {
   background: linear-gradient(180deg, #093580, #400480);
 }
 
-/* HEADER */
+
 header {
   width: 100%;
   padding: 2vh 5vw;
@@ -32,7 +32,7 @@ header {
   height: 40px;
 }
 
-/* NAV */
+
 nav a {
   color: white;
   text-decoration: none;
@@ -43,9 +43,8 @@ nav a:hover {
   color: #ffda77;
 }
 
-/* MAIN - ajout du padding top pour compenser le header */
 main {
-  padding-top: 80px; /* hauteur du header approximative */
+  padding-top: 80px; 
   position: relative;
   z-index: 1;
 }
@@ -121,6 +120,11 @@ main {
 
 .bloc-fonctionnalite:hover {
   transform: translateY(-10px);
+}
+
+img {
+  width: 120px;   
+  height: auto;  
 }
 
 /* Animation d’apparition */
