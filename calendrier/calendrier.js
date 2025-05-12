@@ -264,12 +264,34 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 box_invisible.classList.add("rdv");
                 box_invisible.style.height = creneau_horaire.offsetHeight * (duree + 1) - 3 + "px";
 
-                // Si c'est un médecin, affiche le texte du rendez-vous, sinon, affiche uniquement l'heure
+                // Crée le bouton dépliant
+                let toggleButton = create("div", box_invisible);
+                toggleButton.classList.add("toggle_button");
+                toggleButton.innerText = "Afficher les détails"; // Texte par défaut pour le bouton
+
+                // Zone contenant les détails du rendez-vous
+                let detailsContainer = create("div", box_invisible);
+                detailsContainer.classList.add("rdv_details");
+                detailsContainer.style.display = "none"; // Par défaut, le contenu est caché
+
+                // Affichage du texte ou de l'heure selon l'utilisateur
                 if (estDoc) {
-                    create("p", box_invisible, texte); // Affiche le texte du rendez-vous
+                    create("p", detailsContainer, texte); // Affiche le texte du rendez-vous
                 } else {
-                    create("p", box_invisible, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1)); // Affiche la durée
+                    create("p", detailsContainer, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1)); // Affiche uniquement la durée
                 }
+
+                // Gestion du dépliage/pliage
+                toggleButton.addEventListener("click", () => {
+                    // Bascule l'affichage du contenu
+                    if (detailsContainer.style.display === "none") {
+                        detailsContainer.style.display = "block";
+                        toggleButton.innerText = "Masquer les détails"; // Change le texte du bouton
+                    } else {
+                        detailsContainer.style.display = "none";
+                        toggleButton.innerText = "Afficher les détails"; // Remet le texte du bouton
+                    }
+                });
             }
 
             if (i % 6 == 0 && i != horaire_debut) {
@@ -286,6 +308,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
+
 
 
 // Navigation gauche/droite entre les semaines avec animation
