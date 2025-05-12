@@ -91,8 +91,9 @@ async function addTemp(debut_periode,fin_periode) {
 
 async function addRep(journee,deb,fin) {
     try {
+        console.log("test");
         const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=repet&med=${id}&jour=${journee}&deb=${deb}&fin=${fin}`);
-        const rep = await response.json();
+        const temp = await response.json();
         alert('Disponibilités enregistrées avec succès!');
     } catch (error) {
         console.error('Erreur:', error);
