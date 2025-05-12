@@ -1,7 +1,6 @@
 p {
     font-family: "URW Chancery L", cursive;
     font-size:30px;
-    color: white;
     
 }
 
@@ -13,11 +12,7 @@ h1 {
 h2 {
     font-family: "URW Chancery L", cursive;
     font-size:50px;
-    color: black;
 }
-
-
-
 
 
 .banner {
@@ -104,9 +99,8 @@ body {
 
 img {
     width: 200px;
-    height: 250px;
+    height: 200px;
     border-radius: 5px;
     margin-left: auto; 
 }
 
-#black {color:black;}
