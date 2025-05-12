@@ -99,7 +99,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 
 
-<script src="calendrier/calendrier.js"></script>
+<script src="/info2/site/JS/calendrier.js"></script>
 <script src="form_doc.js"></script>
 <script src="JS/docteur.js"></script>
 

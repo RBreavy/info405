@@ -16,7 +16,7 @@ if (indice_jour == 0) {
 }
 
 async function estMedecin(nom) {
-    const response = await fetch('/info2/site/calendrier/get-data.php?action=doctors');
+    const response = await fetch('/info2/site/PHP/get-data.php?action=doctors');
     const tableauDOC = await response.json();
     return tableauDOC.some(doc => doc.nom === nom);
 }
@@ -54,7 +54,7 @@ async function chargerEtAfficherRDV() {
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6); // dimanche
 
     try {
-        const response = await fetch('/info2/site/calendrier/get-data.php?action=rdvs');
+        const response = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
         const tableauRDV = await response.json();
 
         for (const rdv of tableauRDV) {
