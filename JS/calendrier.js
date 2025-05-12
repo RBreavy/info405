@@ -46,6 +46,7 @@ var listeJour = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "d
 
 // Crée les jours initiaux du calendrier
 creation_jour();
+maj_semaine();
 
 async function chargerEtAfficherRDV() {
     const dateDebutSemaine = new Date(date);
@@ -125,7 +126,7 @@ function creation_jour() {
     console.log("Jours créés.");
 }
 
-// Met à jour la semaine complète
+// Met à jour la semaine complète 
 function maj_semaine() {
     console.log("Mise à jour de la semaine...");
     maj_date();
