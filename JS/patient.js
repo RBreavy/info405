@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadDoctors() {
     try {
-        const response = await fetch('/info2/site/calendrier/get-data.php?action=doctors');
+        const response = await fetch('/info2/site/PHP/get-data.php?action=doctors');
         const doctors = await response.json();
         displayDoctors(doctors);
     } catch (error) {
@@ -111,7 +111,7 @@ function setupEventListeners() {
 
 async function loadAppointments(doctorId) {
     try {
-        const response = await fetch(`/info2/site/calendrier/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
+        const response = await fetch(`/info2/site/PHP/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
         const appointments = await response.json();
         // displayAppointments(appointments);
     } catch (error) {
