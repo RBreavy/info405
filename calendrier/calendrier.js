@@ -246,9 +246,13 @@ function conversion_heure_en_id(heure_debut) {
 }
 
 // Crée un rendez-vous sur plusieurs créneaux, avec couleur et texte
-function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, texte) {
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, texte) {
     let duree = 30;
     console.log(`Création d'un rendez-vous: ${journee} ${horaire_debut}-${horaire_fin} ${color}`);
+
+    // Vérifie si l'utilisateur est un médecin
+    const estDoc = await estMedecin(nomUtilisateur);
+
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee) !== null) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString() + i.toString());
@@ -257,11 +261,15 @@ function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, 
 
             if (i == horaire_debut) {
                 let box_invisible = create("article", creneau_horaire);
-                // create("p", box_invisible, texte);
-                // create("p", box_invisible, calcul_duree(horaire_debut, duree));
-                // create("p", box_invisible, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1));
                 box_invisible.classList.add("rdv");
                 box_invisible.style.height = creneau_horaire.offsetHeight * (duree + 1) - 3 + "px";
+
+                // Si c'est un médecin, affiche le texte du rendez-vous, sinon, affiche uniquement l'heure
+                if (estDoc) {
+                    create("p", box_invisible, texte); // Affiche le texte du rendez-vous
+                } else {
+                    create("p", box_invisible, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1)); // Affiche la durée
+                }
             }
 
             if (i % 6 == 0 && i != horaire_debut) {
@@ -278,6 +286,7 @@ function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, 
         }
     }
 }
+
 
 // Navigation gauche/droite entre les semaines avec animation
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];

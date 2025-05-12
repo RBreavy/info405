@@ -360,3 +360,17 @@
     transition: all 0.5s ease-in;
     text-decoration: underline;
 }
+
+/* Style initial pour la div dépliant */
+.rdv .content {
+    display: none;  /* Cacher le contenu par défaut */
+    transition: max-height 0.3s ease-out;  /* Animation de dépliage */
+    max-height: 0;
+    overflow: hidden;
+}
+
+/* Quand la div est active (dépliée) */
+.rdv.active .content {
+    display: block;
+    max-height: 1000px;  /* Suffisamment grand pour afficher le contenu */
+}
