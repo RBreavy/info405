@@ -47,21 +47,27 @@ function recupForm() {
         const startTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(1)').value;
         const endTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(2)').value;
         
-        console.log('Repetitive Schedule:', { day: selectedDay, startTime, endTime });
+        console.log('Repetitive:', { day: selectedDay, startTime, endTime });
     
     } else {
         
         const startDate = document.querySelector('#form-temporaire input[type="date"]:nth-of-type(1)').value;
         const endDate = document.querySelector('#form-temporaire input[type="date"]:nth-of-type(2)').value;
-        const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(1)').value;
-        const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(2)').value;
+        const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(3)').value;
+        const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(4)').value;
+
+
         
-        console.log('Temporary Schedule:', { startDate, endDate, startTime, endTime });
+        console.log('Temporaire:', { startDate, endDate, startTime, endTime });
         
+    }
+    if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
+        alert("la durée doit forcément être en période de 10 minutes!");
+    } else {
+        alert('Disponibilités enregistrées avec succès!');
     }
     
     
-    alert('Disponibilités enregistrées avec succès!');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
