@@ -26,7 +26,13 @@ function getAllRdvs($start = null, $end = null)
                   JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs
                   $where";
         $result = mysqli_query($conn, $query);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        $rdvs = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rdvs[] = $row;
+        }
+        return $rdvs;
+
     } catch (Exception $e) {
         return ['error' => $e->getMessage()];
     }
