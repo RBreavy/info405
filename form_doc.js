@@ -82,6 +82,7 @@ function recupForm() {
 
 async function addTemp(debut_periode,fin_periode) {
     try {
+        console.log(id,debut_periode,fin_periode);
         const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=temp&med=${id}&deb_p=${debut_periode}&fin_p=${fin_periode}`);
         const appointments = await response.json();
         alert('Disponibilités enregistrées avec succès!');
