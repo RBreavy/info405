@@ -248,6 +248,7 @@ function conversion_heure_en_id(heure_debut) {
 }
 
 // Crée un rendez-vous sur plusieurs créneaux, avec couleur et texte
+// Création du rendez-vous sur plusieurs créneaux
 async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom) {
     let duree = 30;
     console.log(`Création d'un rendez-vous: ${journee} ${horaire_debut}-${horaire_fin} ${color}`);
@@ -256,11 +257,18 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
     const estDoc = await estMedecin(nomUtilisateur);
 
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee) !== null) {
+        let zIndex = 1; // Commence avec un z-index de base pour le premier créneau
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString() + i.toString());
             creneau_horaire.style.setProperty('--border-color', color);
             creneau_horaire.classList.add("custom_bg_color");
-            creneau_horaire.style.zIndex = -1;
+
+            // Si ce n'est pas le premier créneau, on diminue son z-index pour le mettre en dessous
+            if (i !== horaire_debut) {
+                creneau_horaire.style.zIndex = zIndex - 1; // Tous sauf le premier
+            } else {
+                creneau_horaire.style.zIndex = zIndex; // Premier créneau en haut
+            }
 
             if (i == horaire_debut) {
                 let box_invisible = create("article", creneau_horaire);
@@ -324,6 +332,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
+
 
 
 
