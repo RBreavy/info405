@@ -22,7 +22,7 @@ async function estmedecin(nom) {
 }
 
 console.log("Nom de l'utilisateur :", nomUtilisateur);
-//console.log(estmedecin(nomUtilisateur));
+console.log(estmedecin(nomUtilisateur));
 
 // Récupère l'élément input de type date (sélecteur de date)
 var dateInput = document.getElementById("calendrier");

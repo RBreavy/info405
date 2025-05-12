@@ -7,9 +7,14 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION[
 }
 
 $nom = htmlspecialchars($_SESSION['nom']);
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
+<script>
+    const nomUtilisateur = <?php echo json_encode($nom); ?>;
+</script>
 
 <head>
     <meta charset="UTF-8">
@@ -83,7 +88,6 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
     <script>
         const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
-        const nomUtilisateur = <?php echo json_encode($nom); ?>;
     </script>
     <script defer src="JS/patient.js"></script>
 </body>

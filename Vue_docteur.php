@@ -16,6 +16,10 @@ $nom = htmlspecialchars($_SESSION['nom']);
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+    const nomUtilisateur = <?php echo json_encode($nom); ?>;
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,7 +95,6 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 <script>
     const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
-    const nomUtilisateur = <?php echo json_encode($nom); ?>;
 </script>
 
 
