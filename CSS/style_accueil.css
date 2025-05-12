@@ -123,8 +123,8 @@ main {
 }
 
 img {
-  width: 120px;   
-  height: auto;  
+  width: 10vw;   
+  height: 10vh;  
 }
 
 /* Animation d’apparition */
