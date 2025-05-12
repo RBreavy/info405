@@ -13,7 +13,7 @@ function indisp_repet($id_medecin, $jour_debut, $heure_debut, $heure_fin)
         return ['success' => $result];
     } catch (Exception $e) {
         return ['error' => $e->getMessage()];
-    }*/
+    }
 }
 
 function indisp_temp($id_medecin, $debut_periode, $fin_periode)
