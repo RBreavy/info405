@@ -246,7 +246,7 @@ function conversion_heure_en_id(heure_debut) {
 }
 
 // Crée un rendez-vous sur plusieurs créneaux, avec couleur et texte
-function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color = "yellow", texte) {
+function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, texte) {
     let duree = 30;
     console.log(`Création d'un rendez-vous: ${journee} ${horaire_debut}-${horaire_fin} ${color}`);
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee) !== null) {
