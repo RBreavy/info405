@@ -47,7 +47,14 @@ function recupForm() {
         const startTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(1)').value;
         const endTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(2)').value;
         
-        console.log('Repetitive:', { day: selectedDay, startTime, endTime });
+        console.log('Repetitive:', { day: selectedDay, startTime, endTime }); 
+              
+        if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
+            alert("la durée doit forcément être en période de 10 minutes!");
+        } else {
+            
+            alert('Disponibilités enregistrées avec succès!');
+        }
     
     } else {
         
@@ -59,14 +66,16 @@ function recupForm() {
 
         
         console.log('Temporaire:', { startDate, endDate, startTime, endTime });
+
+        if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
+            alert("la durée doit forcément être en période de 10 minutes!");
+        } else {
+            
+            alert('Disponibilités enregistrées avec succès!');
+        }
         
     }
-    if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
-        alert("la durée doit forcément être en période de 10 minutes!");
-    } else {
-        
-        alert('Disponibilités enregistrées avec succès!');
-    }
+
 }
 
 
