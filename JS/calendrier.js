@@ -56,6 +56,7 @@ async function chargerEtAfficherRDV() {
     try {
         const response = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
         const tableauRDV = await response.json();
+        console.log(tableauRDV)
 
         for (const rdv of tableauRDV) {
             const nom = rdv.nom_utilisateur;
