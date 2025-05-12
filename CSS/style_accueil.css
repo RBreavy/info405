@@ -1,124 +1,136 @@
-body, html {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(180deg, #093580, #400480);
-    position: relative;
+/* Reset de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #093580, #400480);
+}
 
+/* HEADER */
 header {
-    width: 100%;
-    padding: 2vh;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    z-index: 100;
+  width: 100%;
+  padding: 2vh 5vw;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
-.logo {
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
+.banner-logo {
+  height: 40px;
 }
 
-
-
+/* NAV */
 nav a {
-    color: white;
-    text-decoration: none;
-    margin-right: 5vw;
+  color: white;
+  text-decoration: none;
+  margin-left: 2rem;
 }
 
 nav a:hover {
-    color: #ffda77;
+  color: #ffda77;
 }
 
-
+/* MAIN - ajout du padding top pour compenser le header */
 main {
-    position: relative;
-    z-index: 1;
+  padding-top: 80px; /* hauteur du header approximative */
+  position: relative;
+  z-index: 1;
 }
 
-
+/* ACCUEIL */
 .accueil {
-    min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 5vh 5vw;
-    color: white;
-    animation: apparition 1.5s ease;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5vh 2rem;
+  color: white;
+  animation: apparition 1.5s ease;
 }
 
 .accueil h1 {
-    font-size: 4vw;
-    margin-bottom: 2vh;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .accueil p {
-    font-size: 1.5vw;
-    margin-bottom: 4vh;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .accueil button {
-    background: white;
-    color: #2575fc;
-    padding: 1.5vh 3vw;
-    font-size: 1.2vw;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: transform 0.3s;
+  background: white;
+  color: #2575fc;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.3s;
 }
 
 .accueil button:hover {
-    background: #6a11cb;
-    color: white;
-    transform: scale(1.05);
+  background: #6a11cb;
+  color: white;
+  transform: scale(1.05);
 }
 
-
+/* FONCTIONNALITÉS */
 .fonctionnalites {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 6vh;
-    text-align: center;
-    color: white;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
 }
 
 .fonctionnalites h2 {
-    font-size: 2.5rem;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
 }
 
 .grille-fonctionnalites {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .bloc-fonctionnalite {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 3vh 2vw;
-    border-radius: 20px;
-    width: 250px;
-    transition: transform 0.3s;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 20px;
+  width: 250px;
+  transition: transform 0.3s;
 }
 
 .bloc-fonctionnalite:hover {
-    transform: translateY(-10px);
+  transform: translateY(-10px);
 }
 
-
+/* Animation d’apparition */
 @keyframes apparition {
-    0% { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
