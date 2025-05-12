@@ -15,14 +15,11 @@ if (indice_jour == 0) {
     indice_jour = 7;
 }
 
-async function estmedecin(nom) {
+async function estMedecin(nom) {
     const response = await fetch('/info2/site/calendrier/get-data.php?action=doctors');
     const tableauDOC = await response.json();
     return tableauDOC.some(doc => doc.nom === nom);
 }
-
-console.log("Nom de l'utilisateur :", nomUtilisateur);
-console.log(estmedecin(nomUtilisateur));
 
 // Récupère l'élément input de type date (sélecteur de date)
 var dateInput = document.getElementById("calendrier");
@@ -62,6 +59,7 @@ function chargerEtAfficherRDV() {
         .then(tableauRDV => {
             tableauRDV.forEach(rdv => {
                 const nom = rdv.nom_utilisateur;
+                const couleur = rdv.couleur;
                 const debut = new Date(rdv.date_debut.replace(' ', 'T'));
                 const fin = new Date(rdv.date_fin.replace(' ', 'T'));
                 // Filtrage : si le début OU la fin du rdv est dans la semaine
@@ -75,7 +73,12 @@ function chargerEtAfficherRDV() {
                     const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
 
                     if (h_debut >= 0 && h_fin < 72) {
-                        create_rdv(h_debut, h_fin, jourStr, jourStr, "black", nom);
+                        if(est_medecin(nomUtilisateur)){
+                            create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom);
+                        } else {
+                            create_rdv(h_debut, h_fin, jourStr, jourStr, "black", nom);
+                        }
+                        
                     }
                 }
             });
