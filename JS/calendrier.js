@@ -50,7 +50,6 @@ async function chargerEtAfficherRDV() {
 
     try {
         const response = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
-@@ -59,154 +63,261 @@ async function chargerEtAfficherRDV() {
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
 
@@ -205,7 +204,7 @@ async function create_rdv(hd, hf, jour, jourFin, color, texte) {
         }
     }
 }
-@@ -215,7 +326,6 @@ async function create_rdv(hd, hf, jour, jourFin, color, texte) {
+async function create_rdv(hd, hf, jour, jourFin, color, texte) {
 
 
 
