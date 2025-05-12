@@ -127,7 +127,9 @@ function creation_jour() {
 }
 
 // Met à jour la semaine complète
+// Met à jour la semaine complète 
 function maj_semaine() {
+    console.log("Mise à jour de la semaine...");
     maj_date();
     maj_id();
     maj_rdv();
@@ -256,61 +258,56 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee) !== null) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString() + i.toString());
-
-            // Si un rendez-vous existe déjà, on ne fait rien
-            if (creneau_horaire.querySelector(".rdv")) {
-                console.log(`Le créneau ${journee} ${i} a déjà un rendez-vous.`);
-                continue;  // Skip this slot if a rendez-vous already exists
-            }
-
             creneau_horaire.style.setProperty('--border-color', color);
             creneau_horaire.classList.add("custom_bg_color");
 
-            let box_invisible = create("article", creneau_horaire);
-            box_invisible.classList.add("rdv");
-            box_invisible.style.height = creneau_horaire.offsetHeight * (duree + 1) - 3 + "px";
+            if (i == horaire_debut) {
+                let box_invisible = create("article", creneau_horaire);
+                box_invisible.classList.add("rdv");
+                box_invisible.style.height = creneau_horaire.offsetHeight * (duree + 1) - 3 + "px";
 
-            // Crée le bouton dépliant
-            let toggleButton = create("div", box_invisible);
-            toggleButton.classList.add("toggle_button");
-            toggleButton.innerText = "Afficher les détails"; // Texte par défaut pour le bouton
+                // Crée le bouton dépliant
+                let toggleButton = create("div", box_invisible);
+                toggleButton.classList.add("toggle_button");
+                toggleButton.innerText = "Afficher les détails"; // Texte par défaut pour le bouton
 
-            // Ajuste la taille du texte en fonction de la hauteur du créneau horaire
-            if (creneau_horaire.offsetHeight < 40) {
-                toggleButton.style.fontSize = "0.6rem"; // Si la hauteur est petite, on réduit la taille du texte
-            } else {
-                toggleButton.style.fontSize = "1rem"; // Taille de texte par défaut
-            }
-
-            // Zone contenant les détails du rendez-vous
-            let detailsContainer = create("div", box_invisible);
-            detailsContainer.classList.add("rdv_details");
-            detailsContainer.style.display = "none"; // Par défaut, le contenu est caché
-
-            // Affichage de la date
-            let dateElement = create("p", detailsContainer);
-            let date = new Date(journee);  // Crée un objet Date à partir de journee
-            dateElement.innerText = `Date : ${date.toLocaleDateString()}`; // Affiche la date formatée
-
-            // Affichage du texte ou de l'heure selon l'utilisateur
-            if (estDoc) {
-                create("p", detailsContainer, nom); // Affiche le texte du rendez-vous
-                create("p", detailsContainer, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1));
-            } else {
-                create("p", detailsContainer, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1)); // Affiche uniquement la durée
-            }
-
-            // Gestion du dépliage/pliage
-            toggleButton.addEventListener("click", () => {
-                // Bascule l'affichage du contenu
-                if (detailsContainer.style.display === "none") {
-                    detailsContainer.style.display = "block";
-                    toggleButton.innerText = "Masquer les détails"; // Change le texte du bouton
+                // Ajuste la taille du texte en fonction de la hauteur du créneau horaire
+                if (creneau_horaire.offsetHeight < 40) {
+                    toggleButton.style.fontSize = "0.6rem"; // Si la hauteur est petite, on réduit la taille du texte
                 } else {
-                    detailsContainer.style.display = "none";
-                    toggleButton.innerText = "Afficher les détails"; // Remet le texte du bouton
+                    toggleButton.style.fontSize = "1rem"; // Taille de texte par défaut
                 }
-            });
+
+                // Zone contenant les détails du rendez-vous
+                let detailsContainer = create("div", box_invisible);
+                detailsContainer.classList.add("rdv_details");
+                detailsContainer.style.display = "none"; // Par défaut, le contenu est caché
+
+                // Affichage de la date
+                let dateElement = create("p", detailsContainer);
+                let date = new Date(journee);  // Crée un objet Date à partir de journee
+                dateElement.innerText = `Date : ${date.toLocaleDateString()}`; // Affiche la date formatée
+
+                // Affichage du texte ou de l'heure selon l'utilisateur
+                if (estDoc) {
+                    create("p", detailsContainer, nom); // Affiche le texte du rendez-vous
+                    create("p", detailsContainer, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1));
+                } else {
+                    create("p", detailsContainer, calcul_duree(horaire_debut, horaire_fin - horaire_debut - 1)); // Affiche uniquement la durée
+                }
+
+                // Gestion du dépliage/pliage
+                toggleButton.addEventListener("click", () => {
+                    // Bascule l'affichage du contenu
+                    if (detailsContainer.style.display === "none") {
+                        detailsContainer.style.display = "block";
+                        toggleButton.innerText = "Masquer les détails"; // Change le texte du bouton
+                    } else {
+                        detailsContainer.style.display = "none";
+                        toggleButton.innerText = "Afficher les détails"; // Remet le texte du bouton
+                    }
+                });
+            }
 
             if (i % 6 == 0 && i != horaire_debut) {
                 creneau_horaire.classList.add('custom_border_top');
@@ -326,9 +323,6 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
-
-
-
 
 
 
