@@ -256,13 +256,18 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
     const estDoc = await estMedecin(nomUtilisateur);
 
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee) !== null) {
-        // Crée un rendez-vous seulement s'il n'existe pas déjà
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             var creneau_horaire = document.getElementById(journee.toString() + i.toString());
 
-            // Vérifie si le créneau a déjà un rendez-vous
-            if (!creneau_horaire.querySelector(".rdv")) {
-                // Si le créneau n'a pas encore de div "rdv", crée-la
+            // Si un rendez-vous existe déjà, ne rien faire
+            if (creneau_horaire.querySelector(".rdv")) {
+                continue;  // Skip this slot if a rendez-vous already exists
+            }
+
+            creneau_horaire.style.setProperty('--border-color', color);
+            creneau_horaire.classList.add("custom_bg_color");
+
+            if (i == horaire_debut) {
                 let box_invisible = create("article", creneau_horaire);
                 box_invisible.classList.add("rdv");
                 box_invisible.style.height = creneau_horaire.offsetHeight * (duree + 1) - 3 + "px";
@@ -309,9 +314,22 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                     }
                 });
             }
+
+            if (i % 6 == 0 && i != horaire_debut) {
+                creneau_horaire.classList.add('custom_border_top');
+            }
+
+            if (i == horaire_debut && i % 6 != 0) {
+                creneau_horaire.classList.add("invisible_border_top");
+            }
+
+            if (i == horaire_fin && (i + 1) % 6 != 0) {
+                creneau_horaire.classList.add("invisible_border_bottom");
+            }
         }
     }
 }
+
 
 
 
