@@ -175,7 +175,7 @@ function maj_date() {
     const jours = document.querySelectorAll(".jour");
     jours.forEach((e, index) => {
         const datetemp = new Date(year, month - 1, day);
-        console.log(index);
+        console.log("test"+index);
         datetemp.setDate(date.getDate() + index + offsetjour + 1 - indice_jour);
         const date_jour = datetemp.toLocaleDateString();
         e.id = date_jour;
