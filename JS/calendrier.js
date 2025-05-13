@@ -200,7 +200,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 details.style.display = "none";
 
                 const dateObj = new Date(journee);
-                create("p", details, `Date : ${dateObj.toLocaleDateString()}`);
+                create("p", details, `Date : ${dateObj.toLocaleDateString('fr-FR')}`);
 
                 if (estDoc) {
                     create("p", details, nom);
@@ -214,9 +214,6 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
-
-
-
 
 // Navigation gauche/droite entre les semaines avec animation
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
