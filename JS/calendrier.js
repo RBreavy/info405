@@ -95,7 +95,6 @@ async function chargerEtAfficherRDV() {
         console.log(tableauRDV);
 
         for (const rdv of tableauRDV) {
-            console.log("test");
             const nom = rdv.nom_utilisateur;
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
