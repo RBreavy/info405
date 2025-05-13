@@ -109,7 +109,7 @@ function maj_semaine() {
 
      setTimeout(() => {
         chargerEtAfficherRDV();
-    }, 100);
+    }, 1000);
 }
 
 function maj_date() {
