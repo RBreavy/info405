@@ -131,7 +131,6 @@ async function chargerEtAfficherRDV() {
 
             }
         }
-        await diffEtMetAJourRDV(tableauRDV);
     } catch (error) {
         console.error('Erreur lors du chargement des RDV:', error);
     }
