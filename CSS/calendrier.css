@@ -243,7 +243,7 @@
     height: 80%;
     margin-left: auto;
     background-color: rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     flex-shrink: 0;
 }
@@ -372,7 +372,7 @@
 .rdv_details {
     display: block;
     max-height: 1000px;  /* Suffisamment grand pour afficher le contenu */
-    background-color: black;  /* Fond noir */
+    background-color: rgba(0, 0, 0, 0.288);  /* Fond noir */
     color: white;  /* Texte en blanc pour plus de visibilité */
     padding: 10px;  /* Optionnel, pour espacer le texte */
 }
