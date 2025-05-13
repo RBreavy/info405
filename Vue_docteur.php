@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION[
 
 // Récupération du nom depuis la session
 $nom = htmlspecialchars($_SESSION['nom']);
-$id = htmlspecialchars($_SESSION['user_id']);
 
 
 
@@ -19,7 +18,6 @@ $id = htmlspecialchars($_SESSION['user_id']);
 
 <script>
     const nomUtilisateur = <?php echo json_encode($nom); ?>;
-    const id = <?php echo json_encode($id)?>;
 </script>
 
 <head>
@@ -102,7 +100,7 @@ $id = htmlspecialchars($_SESSION['user_id']);
 
 
 <script src="/info2/site/JS/calendrier.js"></script>
-<script src="/info2/site/JS/form_doc.js"></script>
+<script src="form_doc.js"></script>
 <script src="JS/docteur.js"></script>
 
 </html>
