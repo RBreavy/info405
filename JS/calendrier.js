@@ -438,3 +438,13 @@ async function diffEtMetAJourRDV(nouveauxRDV) {
 }
 
 // ^^^
+
+export { 
+  date, 
+  offsetjour, 
+  indice_jour, 
+  estDoc, 
+  create_rdv, 
+  create, 
+  calcul_duree 
+};

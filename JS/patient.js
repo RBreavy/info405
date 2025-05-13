@@ -1,3 +1,4 @@
+import { date, offsetjour, indice_jour, estDoc, create_rdv } from './calendrier.js';
 let selectedDoctorId = null;
 let selectedDoctorName = null;
 
