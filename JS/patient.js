@@ -77,7 +77,7 @@ function setupEventListeners() {
 
         const payload = {
             id_medecin: selectedDoctorId,
-            id_utilisateur: userId,
+            id_utilisateur: id,
             couleur: 'blue',
             date_debut: formatDateTime(startDateTime),
             date_fin: formatDateTime(endDateTime)
