@@ -15,7 +15,7 @@ async function estMedecin(nom) {
 
 const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
-    [year, month, day] = dateInput.value.split("-").map(Number);
+    [year, month, day] = dateInput.value.split("/").map(Number);
     if (year >= 2000 && year <= 2100) {
         console.log("Date sélectionnée:", dateInput.value);
         dateInput.value = "";
@@ -187,6 +187,10 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             creneau.style.zIndex = i === horaire_debut ? 1 : 0;
 
             if (i === horaire_debut) {
+
+                // pour ne pas dupliquer
+                if (creneau.querySelector(".rdv")) continue;
+
                 const box = create("article", creneau);
                 box.classList.add("rdv");
                 box.style.height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3 + "px";
@@ -199,21 +203,13 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 details.classList.add("rdv_details");
                 details.style.display = "none";
 
-                // Crée une vraie date avec heure approximative pour affichage lisible
-                const dateParts = journee.split("-");
-                const startHour = 8 + Math.floor(horaire_debut / 3); // chaque creneau = 20 min
-                const startMin = (horaire_debut % 3) * 20;
-
-                const dateObj = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], startHour, startMin);
-
-                const dateStr = dateObj.toLocaleDateString("fr-FR");
-                const timeStr = dateObj.toLocaleTimeString("fr-FR", { hour: '2-digit', minute: '2-digit' });
-
-                create("p", details, `Date : ${dateStr} à ${timeStr}`);
+                const dateObj = new Date(journee);
+                create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
+                create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
 
                 if (estDoc) {
                     create("p", details, nom);
-                    create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
+                    
                 }
 
                 toggleButton.addEventListener("click", () => {
@@ -223,7 +219,6 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
-
 
 // Navigation gauche/droite entre les semaines avec animation
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
