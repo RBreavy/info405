@@ -189,7 +189,7 @@ function maj_id() {
 }
 
 function maj_rdv() {
-    document.querySelectorAll(".rdv:not(.form-indisp)").forEach(e => e.remove());
+    document.querySelectorAll(".rdv").forEach(e => e.remove());
     document.querySelectorAll(".custom_bg_color").forEach(e => {
         e.classList.remove("custom_bg_color", "custom_border_top", "invisible_border_top", "invisible_border_bottom");
     });
