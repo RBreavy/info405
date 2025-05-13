@@ -22,7 +22,6 @@ const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
     
     [year, month, day] = dateInput.value.split("-").map(Number);
-    console.log(dateInput.value);
     if (year >= 2000 && year <= 2100) {
         console.log("Date sélectionnée:", dateInput.value);
         dateInput.value = "";
@@ -42,11 +41,11 @@ maj_semaine();
 async function chargerEtAfficherRDV() {
     const dateDebutSemaine = new Date(date);
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
-    console.log(dateDebutSemaine);
+    
     
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
-
+    console.log(dateFinSemaine);
 
     try {
 
@@ -100,7 +99,6 @@ async function chargerEtAfficherRDV() {
             
         }
         const tableauRDV = await result.json();
-        console.log(tableauRDV);
 
         for (const rdv of tableauRDV) {
             const nom = rdv.nom_utilisateur;
@@ -180,7 +178,6 @@ function maj_date() {
     const jours = document.querySelectorAll(".jour");
     jours.forEach((e, index) => {
         const datetemp = new Date(year, month - 1, day);
-        console.log("test"+index);
         datetemp.setDate(date.getDate() + index + offsetjour + 1 - indice_jour);
         const date_jour = datetemp.toLocaleDateString();
         e.id = date_jour;
