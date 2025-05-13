@@ -1,4 +1,4 @@
-.rdv[data-duration="10"],
+/*.rdv[data-duration="10"],
 .rdv.lightgreen {
     background-color: #a8e6cf !important;
 }
@@ -14,7 +14,7 @@
 }
 
 .rdv {
-    color: white !important; 
+    color: black !important; 
     font-size: 0.8em;
 }
 
@@ -26,7 +26,7 @@
 .rdv.red { background-color: #ff6b6b; }
 .rdv.blue { background-color: #4d96ff; }
 .rdv.purple { background-color: #9c51b6; }
-
+*/
 
 
 

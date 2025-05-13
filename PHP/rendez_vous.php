@@ -112,6 +112,8 @@ $check2->bind_param(
 );
 $check2->execute();
 $check_result2 = $check2->get_result()->fetch_assoc();
+*/
+
 
 //check 3
 $check3 = $conn->prepare("
@@ -149,13 +151,13 @@ $check3->bind_param(
 $check3->execute();
 $check_result3 = $check3->get_result()->fetch_assoc();
 
-if ($check_result2['count'] > 0 || $check_result3['count'] > 0) {
+if (/*$check_result2['count'] > 0 || */$check_result3['count'] > 0) {
     echo json_encode([
         'success' => false,
         'message' => 'Ce créneau est indisponible!.'
     ]);
     exit;
-} */
+} 
 
 // Insertion du nouveau rendez-vous
 $stmt = $conn->prepare("
