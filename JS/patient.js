@@ -108,7 +108,15 @@ function setupEventListeners() {
         }
     });
 }
-function displayIT(IndT) {
+function displayI(IndT,IndR = null) {
+    const dateDebutSemaine = new Date(date);
+    dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+    
+    
+    const dateFinSemaine = new Date(dateDebutSemaine);
+    dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
+    dateFinSemaine.setHours(23, 59, 59);
+    
     for (const IT of IndT) {
         const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
         const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
@@ -159,7 +167,7 @@ async function loadAppointments(doctorId) {
 
         const indep_t = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${doctorId}`);
         const indt = await indep_t.json();
-        displayIT(indt);
+        displayI(indt);
 
         const indep_r = await fetch(`/info2/site/PHP/get-data.php?action=getIR&id_medecin=${doctorId}`);
         const indr = await indep_r.json();
