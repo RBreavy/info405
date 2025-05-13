@@ -124,7 +124,7 @@ async function chargerEtAfficherRDV() {
                 jour.setDate(dateDebutSemaine.getDate() + indice);
                 setTimeout(() => {
                     console.log(h_debut,h_fin,jour, indice, journee);
-                    create_rdv(h_debut, h_fin, jour, "darkgrey", estDoc);
+                    create_rdv(h_debut, h_fin, jour, jour, "lightgrey", estDoc);
                 }, 50);
 
 
