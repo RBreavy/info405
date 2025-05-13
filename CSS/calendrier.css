@@ -35,7 +35,7 @@
     position: relative;
     /*width: 95vw;
     justify-content: flex-start;*/
-    height: 70vh;
+    height: 80vh;
     
     display: flex;
     flex-direction: row;
@@ -45,7 +45,7 @@
     margin: 10px;
     
     
-    padding: 0 12.5% 25px 3.5%;
+    padding: 0 12.5% 20% 20%;
     border-radius: 10px;
 }
 
