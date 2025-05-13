@@ -1,14 +1,3 @@
-body:not(.calendar-js-loaded) .custom_bg_color {
-    transition: none !important;
-}
-
-
-body.updating-calendar .jour, 
-body.updating-calendar .creneau {
-    transition: background-color 0.5s ease-in-out;
-}
-
-
 .rdv {
     color: black !important; 
     font-size: 0.8em;
