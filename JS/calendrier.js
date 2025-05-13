@@ -44,8 +44,7 @@ async function chargerEtAfficherRDV() {
         const estDoc = await estMedecin(nomUtilisateur);
         if (estDoc) {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
-            /*
-            const indispt = await fetch('/info2/site/PHP/get-data.php?action=getIT');
+            const indispt = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${id}`);
             const tableauIT = await indispt.json();
             for (const IT of tableauIT) {
                 const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
@@ -85,7 +84,7 @@ async function chargerEtAfficherRDV() {
                         currentDate = nextDate;
                     }
                 }
-            }*/
+            }
         } else {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_patient=${userId}`);
             
