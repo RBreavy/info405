@@ -49,8 +49,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
         <script src="/info2/site/JS/calendrier.js"></script>
 
-    </section>
-    <article>
+        <article>
             <!-- nom des medecins -->
             <section class="doctor-selection">
                 <h2>Sélectionnez un médecin :</h2>
@@ -82,6 +81,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
                 </form>
             </section>
         </article>
+    </section>
 
 
 
