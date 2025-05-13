@@ -187,6 +187,10 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             creneau.style.zIndex = i === horaire_debut ? 1 : 0;
 
             if (i === horaire_debut) {
+
+                // pour ne pas dupliquer
+                if (creneau.querySelector(".rdv")) continue;
+
                 const box = create("article", creneau);
                 box.classList.add("rdv");
                 box.style.height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3 + "px";
@@ -205,6 +209,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 
                 if (estDoc) {
                     create("p", details, nom);
+                    
                 }
 
                 toggleButton.addEventListener("click", () => {
