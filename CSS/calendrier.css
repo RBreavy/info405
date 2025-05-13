@@ -243,6 +243,7 @@
     margin-right: 1vh;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+    padding: 1px;
     flex-shrink: 0;
 }
 
