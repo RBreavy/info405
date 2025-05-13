@@ -210,7 +210,6 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
         article_creneau.classList.add("creneau");
 
         article_creneau.classList.add(Math.floor(j / 3) % 2 === 0 ? "gris_fonce" : "gris_clair");
-        article_creneau.element.style.minHeight = "50px";
         if (indice_div_jour === 0 && j % 6 === 0) {
             const carre_heure = create("div", article_creneau);
             carre_heure.classList.add("carre_heure");
