@@ -1,4 +1,5 @@
 .doctor-selection {
+    display: flex;
     margin: 0 0 0 auto;
     padding: 3vh;
     background-image: linear-gradient(to bottom right, #4a09ac, #4f0999);
@@ -43,8 +44,8 @@
 }
 
 .appointment-form {
-    margin: 0 0 0 auto;
-    padding: 80vh;
+    margin: 2vh;
+    padding: 3vh;
     background-image: linear-gradient(to bottom right, #042763, #4f0999);
     border-radius: 1vh;
     width: 10vw;
