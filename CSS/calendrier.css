@@ -1,34 +1,7 @@
-/*.rdv[data-duration="10"],
-.rdv.lightgreen {
-    background-color: #a8e6cf !important;
-}
-
-.rdv[data-duration="20"], 
-.rdv.lightorange {
-    background-color: #ffd3b6 !important;
-}
-
-.rdv[data-duration="30"],
-.rdv.lightred {
-    background-color: #ffaaa5 !important;
-}
-
 .rdv {
     color: black !important; 
     font-size: 0.8em;
 }
-
-
-.rdv.lightgreen { background-color: #a8e6cf; border: 1px solid #88c6b3; }
-.rdv.lightorange { background-color: #ffd3b6; border: 1px solid #dfb396; }
-.rdv.lightred { background-color: #ffaaa5; border: 1px solid #df8a85; }
-
-.rdv.red { background-color: #ff6b6b; }
-.rdv.blue { background-color: #4d96ff; }
-.rdv.purple { background-color: #9c51b6; }
-*/
-
-
 
 
 .main_cal {
