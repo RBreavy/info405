@@ -1,3 +1,4 @@
+import { create_rdv } from "./module.js";
 // Récupère la date actuelle au format français (JJ/MM/AAAA)
 const dateString = new Date().toLocaleDateString("fr-FR");
 let [day, month, year] = dateString.split('/').map(Number);
@@ -293,74 +294,6 @@ function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
 }
 
-async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
-    if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
-        // Apply to all cells in appointment
-        for (let i = horaire_debut; i <= horaire_fin; i++) {
-            const creneau = document.getElementById(journee + i);
-            if (!creneau) continue;
-            
-            // Apply background color
-            creneau.style.setProperty('--border-color', color);
-            creneau.classList.add("custom_bg_color");
-            
-            // Reset any previous styles
-            creneau.style.boxShadow = "none";
-            
-            // Style inner cells (no visible borders)
-            if (i > horaire_debut && i < horaire_fin) {
-                creneau.style.borderTop = "0px solid transparent";
-                creneau.style.borderBottom = "0px solid transparent";
-            }
-            
-            // Style first cell - handle top edge case
-            if (i === horaire_debut) {
-                if (i > 0) { // Not at the very top
-                    creneau.style.boxShadow = "0px -1px 0px 0px black";
-                } // Leave original border if at the top
-                creneau.style.borderBottom = "0px solid transparent";
-                creneau.style.position = "relative";
-                creneau.style.zIndex = "1";
-            }
-            
-            // Style last cell
-            if (i === horaire_fin) {
-                creneau.style.boxShadow = "0px 1px 0px 0px black";
-                creneau.style.borderTop = "0px solid transparent";
-                creneau.style.position = "relative";
-                creneau.style.zIndex = "1";
-            }
-        }
-        
-        // Rest of the code remains the same
-        const premierCreneau = document.getElementById(journee + horaire_debut);
-        if (premierCreneau && !premierCreneau.querySelector(".rdv")) {
-            const box = create("article", premierCreneau);
-            box.classList.add("rdv");
-            
-            const toggleButton = create("div", box, "Afficher les détails");
-            toggleButton.classList.add("toggle_button");
-            toggleButton.style.fontSize = "0.8rem";
-            
-            const details = create("div", box);
-            details.classList.add("rdv_details");
-            details.style.display = "none";
-            
-            const [day, month, year] = journee.split("/").map(Number);
-            const dateObj = new Date(year, month - 1, day);
-            create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
-            create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
-            if (estDoc) {
-                create("p", details, `Nom : ${nom}`);
-            }
-            
-            toggleButton.addEventListener("click", () => {
-                details.style.display = details.style.display === "none" ? "block" : "none";
-            });
-        }
-    }
-}
-
 
 // Navigation gauche/droite entre les semaines avec animation
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
@@ -402,7 +335,7 @@ function rdvsIdentiques(a, b) {
            a.date_fin === b.date_fin;
 }
 
-export async function diffEtMetAJourRDV(nouveauxRDV) {
+async function diffEtMetAJourRDV(nouveauxRDV) {
     const ajoutes = [];
 
     document.querySelectorAll('.rdv').forEach(e => e.remove());
