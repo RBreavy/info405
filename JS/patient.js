@@ -148,7 +148,6 @@ function displayI(IndT,IndR = null) {
                 }
                 
                 setTimeout(() => {
-                    console.log("testdeb")
                     //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
                     create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", estDoc);
                 }, 50);
@@ -168,6 +167,7 @@ async function loadAppointments(doctorId) {
 
         const indep_t = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${doctorId}`);
         const indt = await indep_t.json();
+        console.log("detetd")
         displayI(indt);
 
         const indep_r = await fetch(`/info2/site/PHP/get-data.php?action=getIR&id_medecin=${doctorId}`);
