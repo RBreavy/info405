@@ -123,6 +123,7 @@ function displayI(IndT,IndR = null) {
         const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
         const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
         
+        console.log(debutIndisp)
         // Vérifier si l'indisponibilité est dans la semaine affichée
         if ((debutIndisp >= dateDebutSemaine && debutIndisp <= dateFinSemaine) ||
             (finIndisp >= dateDebutSemaine && finIndisp <= dateFinSemaine) ||
