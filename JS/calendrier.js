@@ -7,7 +7,7 @@ let indice_jour = date.getDay();
 let offsetjour = 0;
 if (indice_jour === 0) indice_jour = 7;
 let anciensRDV = [];
-const estDoc = await estMedecin(nomUtilisateur);
+
 
 
 async function estMedecin(nom) {
@@ -15,6 +15,8 @@ async function estMedecin(nom) {
     const tableauDOC = await response.json();
     return tableauDOC.some(doc => doc.nom === nom);
 }
+
+const estDoc = await estMedecin(nomUtilisateur);
 
 const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
