@@ -127,3 +127,14 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.left = "-250px";
 }
+
+// vvv
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.querySelectorAll('.rdv').forEach(rdv => {
+            if (!rdv.className.includes('light') && !rdv.className.includes('red')) {
+                rdv.classList.add('lightgreen'); 
+            }
+        });
+    }, 1000);
+});

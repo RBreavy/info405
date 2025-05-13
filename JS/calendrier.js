@@ -256,3 +256,21 @@ boutonD.addEventListener('click', () => {
     });
     maj_semaine();
 });
+
+
+// vvv
+function createAppointmentElement(appointment) {
+    const element = document.createElement('div');
+    element.className = `rdv ${appointment.couleur}`; 
+    element.textContent = appointment.nom_medecin || appointment.nom_utilisateur;
+    return element;
+}
+
+
+document.querySelectorAll('.creneau').forEach(slot => {
+    if (slot.hasAppointment) { 
+        const appointmentElement = createAppointmentElement(slot.appointmentData);
+        slot.appendChild(appointmentElement);
+    }
+});
+// ^^^
