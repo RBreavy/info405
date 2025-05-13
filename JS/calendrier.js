@@ -39,6 +39,7 @@ async function chargerEtAfficherRDV() {
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
+    console.log("testr")
     console.log(dateDebutSemaine,dateFinSemaine);
 
     try {
