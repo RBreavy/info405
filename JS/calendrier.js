@@ -88,12 +88,11 @@ async function chargerEtAfficherRDV() {
                         // Si c'est le dernier jour de l'indisponibilité
                         if (currentDate.toDateString() === finIndisp.toDateString()) {
                             h_fin = (finIndisp.getHours() - 8) * 6 + Math.floor(finIndisp.getMinutes() / 10) - 1;
-                            console.log("test");
                         }
                         
                         setTimeout(() => {
                             //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
-                            create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", estDoc);
+                            create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", estDoc);
                         }, 50);
                         
                         // Passer au jour suivant
@@ -104,12 +103,30 @@ async function chargerEtAfficherRDV() {
                 }
             }
 
-            console.log("debug")
             for (const IR of tableauIR) {
                 const journee = IR.journee;
                 const h_debut = (IR.heure_debut.slice(0,2) - 8) * 6 + Math.floor(IR.heure_debut.slice(3,5) / 10);
                 const h_fin = (IR.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IR.heure_fin.slice(3,5) / 10) - 1;
-                console.log(h_debut,h_fin);
+                const dateDebutSemaine = new Date(date);
+                dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+                const jourtoindice = new map([
+                    ["LUN",0],
+                    ["MAR",1],
+                    ["MER",2],
+                    ["JEU",3],
+                    ["VEN",4],
+                    ["SAM",5],
+                    ["DIM",6],
+                ]);
+                const indice = jourtoindice[journee];
+                const jour = new Date(dateDebutSemaine);
+                jour.setDate(dateDebutSemaine.getDate() + indice);
+                setTimeout(() => {
+                    create_rdv(h_debut, h_fin, jourSt, "darkgrey", estDoc);
+                }, 50);
+
+
+
             }
 
         } else {
