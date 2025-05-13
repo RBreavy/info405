@@ -238,12 +238,13 @@
 
 .form-indisp {
     position: relative;
-    width: 280px;
-    height: 80%;
-    margin-left: auto;
+    width: 15vw;
+    height: 80.5%;
+    margin-right: 1vh;
+    margin-left: 3vw;
     background-color: rgba(0, 0, 0, 0.2);
-    padding: 10px;
     border-radius: 10px;
+    padding: 1px;
     flex-shrink: 0;
 }
 
