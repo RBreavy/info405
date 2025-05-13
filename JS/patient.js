@@ -110,6 +110,7 @@ function setupEventListeners() {
     });
 }
 function displayI(IndT,IndR = null) {
+    console.log("ref")
     const dateDebutSemaine = new Date(date);
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
     
@@ -167,7 +168,6 @@ async function loadAppointments(doctorId) {
 
         const indep_t = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${doctorId}`);
         const indt = await indep_t.json();
-        console.log("detetd")
         displayI(indt);
 
         const indep_r = await fetch(`/info2/site/PHP/get-data.php?action=getIR&id_medecin=${doctorId}`);
