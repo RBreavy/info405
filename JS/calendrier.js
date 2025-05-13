@@ -104,11 +104,12 @@ async function chargerEtAfficherRDV() {
                 }
             }
 
+            console.log("debug")
             for (const IR of tableauIR) {
                 const journee = IR.journee;
                 const h_debut = (IR.heure_debut.slice(0,2) - 8) * 6 + Math.floor(IR.heure_debut.slice(3,5) / 10);
                 const h_fin = (IR.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IR.heure_fin.slice(3,5) / 10) - 1;
-                console.log("test",h_debut,h_fin);
+                console.log(h_debut,h_fin);
             }
 
         } else {
