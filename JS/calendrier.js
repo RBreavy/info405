@@ -39,6 +39,7 @@ async function chargerEtAfficherRDV() {
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
+    console.log(dateDebutSemaine,dateFinSemaine);
 
     try {
 
@@ -101,7 +102,7 @@ async function chargerEtAfficherRDV() {
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
-            console.log(dateDebutSemaine,dateFinSemaine);
+            
 
             if ((debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
                 (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
