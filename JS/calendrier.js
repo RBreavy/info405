@@ -17,7 +17,9 @@ async function estMedecin(nom) {
 
 const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
-    [year, month, day] = dateInput.value.split("/").map(Number);
+    
+    [year, month, day] = dateInput.value.split("-").map(Number);
+    console.log(dateInput.value);
     if (year >= 2000 && year <= 2100) {
         console.log("Date sélectionnée:", dateInput.value);
         dateInput.value = "";
@@ -57,8 +59,9 @@ async function chargerEtAfficherRDV() {
                     
                     // Parcourir chaque jour de l'indisponibilité
                     let currentDate = new Date(Math.max(debutIndisp, dateDebutSemaine));
-                    const endDate = new Date(Math.min(finIndisp, dateFinSemaine));
                     
+                    const endDate = new Date(Math.min(finIndisp, dateFinSemaine));
+                    console.log(endDate);
                     while (currentDate <= endDate) {
                         const jourStr = currentDate.toLocaleDateString("fr-FR");
                         let h_debut = 0; // 8h00
