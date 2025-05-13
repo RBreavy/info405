@@ -45,10 +45,45 @@ async function chargerEtAfficherRDV() {
         if (!estDoc) {
             const indispt = await fetch('/info2/site/PHP/get-data.php?action=getIT');
             const tableauIT = await indispt.json();
-            for (const IT of indispt) {
-                //code ici
+            for (const IT of tableauIT) {
+                const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
+                const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
+                
+                // Vérifier si l'indisponibilité est dans la semaine affichée
+                if ((debutIndisp >= dateDebutSemaine && debutIndisp <= dateFinSemaine) ||
+                    (finIndisp >= dateDebutSemaine && finIndisp <= dateFinSemaine) ||
+                    (debutIndisp <= dateDebutSemaine && finIndisp >= dateFinSemaine)) {
+                    
+                    // Parcourir chaque jour de l'indisponibilité
+                    let currentDate = new Date(Math.max(debutIndisp, dateDebutSemaine));
+                    const endDate = new Date(Math.min(finIndisp, dateFinSemaine));
+                    
+                    while (currentDate <= endDate) {
+                        const jourStr = currentDate.toLocaleDateString("fr-FR");
+                        let h_debut = 0; // 8h00
+                        let h_fin = 71;  // 19h50
+                        
+                        // Si c'est le premier jour de l'indisponibilité
+                        if (currentDate.toDateString() === debutIndisp.toDateString()) {
+                            h_debut = (debutIndisp.getHours() - 8) * 6 + Math.floor(debutIndisp.getMinutes() / 10);
+                        }
+                        
+                        // Si c'est le dernier jour de l'indisponibilité
+                        if (currentDate.toDateString() === finIndisp.toDateString()) {
+                            h_fin = (finIndisp.getHours() - 8) * 6 + Math.floor(finIndisp.getMinutes() / 10) - 1;
+                        }
+                        
+                        setTimeout(() => {
+                            create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", "Indisponible");
+                        }, 50);
+                        
+                        // Passer au jour suivant
+                        const nextDate = new Date(currentDate);
+                        nextDate.setDate(currentDate.getDate() + 1);
+                        currentDate = nextDate;
+                    }
+                }
             }
-
         }
 
 
