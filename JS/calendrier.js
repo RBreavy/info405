@@ -131,7 +131,6 @@ async function chargerEtAfficherRDV() {
 
             }
         }
-        await diffEtMetAJourRDV(tableauRDV);
     } catch (error) {
         console.error('Erreur lors du chargement des RDV:', error);
     }
@@ -271,36 +270,31 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 box.style.backgroundColor = color;
                 //box.style.height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3 + "px";
                 setTimeout(() => {
-                    // Set a fixed height per time unit instead of calculations
-                    const slots = horaire_fin - horaire_debut + 1;
-                    box.style.height = `calc(${slots} * var(--slot-height, 20px))`;
-                    box.style.maxHeight = "100%"; // Constrain to parent
-                    box.style.overflow = "hidden";
-                    
-                    // Simplified text based on available space
-                    const displayText = slots < 3 ? "+" : "Détails";
-                    const toggleButton = create("div", box, displayText);
+                    const height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3;
+                    box.style.height = height + "px";
+
+                    const toggleButton = create("div", box, "Afficher les détails");
                     toggleButton.classList.add("toggle_button");
-                    
-                    // Rest of your code remains unchanged
+                    toggleButton.style.fontSize = height < 40 ? "0.6rem" : "1rem";
+
                     const details = create("div", box);
                     details.classList.add("rdv_details");
                     details.style.display = "none";
-                    
+
                     const [day, month, year] = journee.split("/").map(Number);
                     const dateObj = new Date(year, month - 1, day);
-                    
+
                     create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
                     create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
-                    
+
                     if (estDoc) {
                         create("p", details, `Nom : ${nom}`);
                     }
-                    
+
                     toggleButton.addEventListener("click", () => {
                         details.style.display = details.style.display === "none" ? "block" : "none";
                     });
-                }, 100);
+                }, 50); 
             }
         }
     }
