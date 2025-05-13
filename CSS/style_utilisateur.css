@@ -30,13 +30,13 @@
 
 body {
     background-image: url("/info2/site/images/Fond_DP.png");
-    background-size: 100%; 
     background-repeat: no-repeat;
     margin: 0;
-    color: white;
+    color: rgb(21, 135, 216);
     overflow: hidden;
     background-position: center center; 
-  background-attachment: fixed;
+    background-attachment: fixed;
+    background-size: 150vw 150vh;
 }
 
 * {
