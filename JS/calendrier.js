@@ -450,3 +450,5 @@ window.cal_create_rdv = create_rdv;
 window.cal_create = create;
 window.cal_calcul_duree = calcul_duree;
 window.cal_maj_rdv = maj_rdv;
+window.cal_chargerEtAfficherRDV = chargerEtAfficherRDV;
+

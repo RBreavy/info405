@@ -20,7 +20,6 @@ async function loadDoctors() {
 window.addEventListener('weekChanged', () => {
     if (selectedDoctorId) {
         loadAppointments(selectedDoctorId);
-        window.cal_maj_rdv();
     }
 });
 
@@ -62,6 +61,7 @@ function setupEventListeners() {
         document.querySelector('.doctor-selection').style.display = 'block';
         document.getElementById('rdv-form').reset();
         window.cal_maj_rdv();
+        window.cal_chargerEtAfficherRDV();
     });
 
     document.getElementById('rdv-form').addEventListener('submit', async (e) => {
