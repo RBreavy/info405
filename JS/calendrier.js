@@ -109,7 +109,7 @@ function maj_semaine() {
 
      setTimeout(() => {
         chargerEtAfficherRDV();
-    }, 50);
+    }, 100);
 }
 
 function maj_date() {
@@ -137,7 +137,7 @@ function maj_rdv() {
     document.querySelectorAll(".custom_bg_color").forEach(e => {
         e.classList.remove("custom_bg_color", "custom_border_top", "invisible_border_top", "invisible_border_bottom");
     });
-    chargerEtAfficherRDV();
+    //chargerEtAfficherRDV();
 }
 
 function creation_crenau(indice_div_jour, div_jour, datetemp) {
