@@ -1,4 +1,4 @@
-import { create_rdv } from "./calendrier";
+import { create_rdv } from "./calendrier.js";
 let selectedDoctorId = null;
 let selectedDoctorName = null;
 
