@@ -51,7 +51,7 @@ main {
 }
 
 .banner {
-  background: linear-gradient(135deg, #042763, #4f0999);
+  background: linear-gradient(135deg,#4f0999, #042763);
   color: white;
   padding: 3rem 2rem;
   font-size: 1.8rem;
@@ -92,6 +92,18 @@ main {
   padding: 5rem 2rem;
   color: white;
   text-align: center;
+}
+
+.contact-images {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.contact-images img {
+  max-width: 100px;
+  height: auto;
 }
 
 .texte p {
@@ -161,16 +173,4 @@ a:hover {
   .texte p {
     font-size: 1.3rem;
   }
-}
-
-.contact-images {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.contact-images img {
-  max-width: 100px;
-  height: auto;
 }
