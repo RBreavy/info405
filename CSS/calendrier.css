@@ -137,10 +137,6 @@
     column-gap: 10%;
 }
 
-.selecteur:hover {
-    box-shadow: 0 0 3px 2px white;
-}
-
 .selecteur_droit, .selecteur_gauche {
     width: 4.5%;
     height: 70%;
