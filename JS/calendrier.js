@@ -43,8 +43,7 @@ async function chargerEtAfficherRDV() {
         
         const estDoc = await estMedecin(nomUtilisateur);
         if (!estDoc) {
-            var result = await fetch('/info2/site/PHP/get-data.php?action=rdvs&id_medecin='+id);
-            
+            var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
             /*
             const indispt = await fetch('/info2/site/PHP/get-data.php?action=getIT');
             const tableauIT = await indispt.json();
@@ -88,7 +87,7 @@ async function chargerEtAfficherRDV() {
                 }
             }*/
         } else {
-            var result = await fetch('/info2/site/PHP/get-data.php?action=rdvs&id_patient='+userId);
+            var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_patient=${userId}`);
             
             
         }
