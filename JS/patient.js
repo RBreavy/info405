@@ -148,6 +148,7 @@ function displayI(IndT,IndR = null) {
                 }
                 
                 setTimeout(() => {
+                    console.log("testdeb")
                     //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
                     create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", estDoc);
                 }, 50);
