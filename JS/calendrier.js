@@ -1,12 +1,13 @@
-import { create_rdv, create, calcul_duree, date} from "./module.js";
 // Récupère la date actuelle au format français (JJ/MM/AAAA)
+const dateString = new Date().toLocaleDateString("fr-FR");
+let [day, month, year] = dateString.split('/').map(Number);
+let date = new Date(year, month - 1, day);
 
-const [day, month, year] = dateString.split('/').map(Number);
-
-var indice_jour = date.getDay();
-var offsetjour = 0;
+let indice_jour = date.getDay();
+let offsetjour = 0;
 if (indice_jour === 0) indice_jour = 7;
-var anciensRDV = [];
+let anciensRDV = [];
+
 
 
 async function estMedecin(nom) {
@@ -165,7 +166,12 @@ async function chargerEtAfficherRDV() {
     }
 }
 
-
+function create(tag, container, text = null) {
+    const element = document.createElement(tag);
+    if (text) element.innerText = text;
+    container.appendChild(element);
+    return element;
+}
 
 function creation_jour() {
 
@@ -271,10 +277,88 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
     //chargerEtAfficherRDV();
 }
 
+function calcul_duree(start, duration) {
+    const total_start = 8 * 60 + start * 10;
+    const total_end = total_start + duration * 10;
 
+    const start_hour = Math.floor(total_start / 60);
+    const start_min = total_start % 60;
+    const end_hour = Math.floor(total_end / 60);
+    const end_min = total_end % 60;
+
+    return `${start_hour}h${start_min.toString().padStart(2, '0')} - ${end_hour}h${end_min.toString().padStart(2, '0')}`;
+}
 
 function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
+}
+
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
+    if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
+        // Apply to all cells in appointment
+        for (let i = horaire_debut; i <= horaire_fin; i++) {
+            const creneau = document.getElementById(journee + i);
+            if (!creneau) continue;
+            
+            // Apply background color
+            creneau.style.setProperty('--border-color', color);
+            creneau.classList.add("custom_bg_color");
+            
+            // Reset any previous styles
+            creneau.style.boxShadow = "none";
+            
+            // Style inner cells (no visible borders)
+            if (i > horaire_debut && i < horaire_fin) {
+                creneau.style.borderTop = "0px solid transparent";
+                creneau.style.borderBottom = "0px solid transparent";
+            }
+            
+            // Style first cell - handle top edge case
+            if (i === horaire_debut) {
+                if (i > 0) { // Not at the very top
+                    creneau.style.boxShadow = "0px -1px 0px 0px black";
+                } // Leave original border if at the top
+                creneau.style.borderBottom = "0px solid transparent";
+                creneau.style.position = "relative";
+                creneau.style.zIndex = "1";
+            }
+            
+            // Style last cell
+            if (i === horaire_fin) {
+                creneau.style.boxShadow = "0px 1px 0px 0px black";
+                creneau.style.borderTop = "0px solid transparent";
+                creneau.style.position = "relative";
+                creneau.style.zIndex = "1";
+            }
+        }
+        
+        // Rest of the code remains the same
+        const premierCreneau = document.getElementById(journee + horaire_debut);
+        if (premierCreneau && !premierCreneau.querySelector(".rdv")) {
+            const box = create("article", premierCreneau);
+            box.classList.add("rdv");
+            
+            const toggleButton = create("div", box, "Afficher les détails");
+            toggleButton.classList.add("toggle_button");
+            toggleButton.style.fontSize = "0.8rem";
+            
+            const details = create("div", box);
+            details.classList.add("rdv_details");
+            details.style.display = "none";
+            
+            const [day, month, year] = journee.split("/").map(Number);
+            const dateObj = new Date(year, month - 1, day);
+            create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
+            create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
+            if (estDoc) {
+                create("p", details, `Nom : ${nom}`);
+            }
+            
+            toggleButton.addEventListener("click", () => {
+                details.style.display = details.style.display === "none" ? "block" : "none";
+            });
+        }
+    }
 }
 
 
