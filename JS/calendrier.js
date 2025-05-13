@@ -16,7 +16,12 @@ async function estMedecin(nom) {
     return tableauDOC.some(doc => doc.nom === nom);
 }
 
-const estDoc = estMedecin(nomUtilisateur);
+let estDoc = false;
+estMedecin(nomUtilisateur).then(val => {
+    estDoc = val;
+    maj_semaine(); // lancer une fois qu'on sait si c'est un doc
+});
+
 
 const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
@@ -248,7 +253,7 @@ function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
 }
 
-async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
