@@ -152,7 +152,7 @@ $check3->bind_param(
 );
 
 $check3->execute();
-$check_result3 = $check3->get_result()->fetch_assoc();
+//$check_result3 = $check3->get_result()->fetch_assoc();
 
 if (/*$check_result2['count'] > 0 || */$check_result3['count'] > 0) {
     echo json_encode([
