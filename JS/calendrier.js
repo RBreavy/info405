@@ -72,6 +72,7 @@ async function chargerEtAfficherRDV() {
                         let h_fin = 71;  // 19h50
 
                         console.log(currentDate);
+                        console.log(endDate.getDate());
                         
                         // Si c'est le premier jour de l'indisponibilité
                         if (currentDate.toDateString() === debutIndisp.toDateString()) {
