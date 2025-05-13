@@ -1,3 +1,5 @@
+export const date = new Date(year, month - 1, day);
+
 export function calcul_duree(start, duration) {
     const total_start = 8 * 60 + start * 10;
     const total_end = total_start + duration * 10;
