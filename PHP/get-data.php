@@ -119,5 +119,13 @@ switch ($action) {
         $end = $_GET['end_date'] ?? null;
         echo json_encode(getAllRdvs($start, $end));
         break;
+    case 'getIT':
+        $id = $_GET['id_medecin'];
+        echo json_encode(getIndispTemp($id));
+        break;
+    case 'getIR':
+        $id = $_GET['id_medecin'];
+        echo json_encode(getIndispRepet($id));
+        break;
 }
 ?>
