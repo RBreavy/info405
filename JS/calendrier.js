@@ -59,6 +59,8 @@ async function chargerEtAfficherRDV() {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
             const indispt = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${id}`);
             const tableauIT = await indispt.json();
+            const indispr = await fetch(`/info2/site/PHP/get-data.php?action=getIR&id_medecin=${id}`);
+            const tableauIR = await indispr.json();
             for (const IT of tableauIT) {
                 const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
                 const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
@@ -101,6 +103,14 @@ async function chargerEtAfficherRDV() {
                     }
                 }
             }
+
+            for (const IR of tableauIT) {
+                const journee = IT.journee;
+                const h_debut = (IT.heure_debut.slice(0,2) - 8) * 6 + Math.floor(IT.heure_debut.slice(3,5) / 10);
+                const h_fin = (IT.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IT.heure_fin.slice(3,5) / 10) - 1;
+                console.log(h_debut,h_fin);
+            }
+
         } else {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_patient=${id}`);
             
