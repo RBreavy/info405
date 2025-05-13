@@ -15,7 +15,7 @@ async function estMedecin(nom) {
 
 const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
-    [year, month, day] = dateInput.value.split("-").map(Number);
+    [year, month, day] = dateInput.value.split("/").map(Number);
     if (year >= 2000 && year <= 2100) {
         console.log("Date sélectionnée:", dateInput.value);
         dateInput.value = "";
@@ -201,10 +201,10 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 
                 const dateObj = new Date(journee);
                 create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
+                create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
 
                 if (estDoc) {
                     create("p", details, nom);
-                    create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
                 }
 
                 toggleButton.addEventListener("click", () => {
