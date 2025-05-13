@@ -28,7 +28,6 @@ function displayDoctors(doctors) {
     const doctorList = document.querySelector('.doctor-list');
     doctorList.innerHTML = '';
 
-    window.cal_maj_rdv();
 
     doctors.forEach(doctor => {
         const button = document.createElement('button');
@@ -62,6 +61,7 @@ function setupEventListeners() {
         document.querySelector('.appointment-form').style.display = 'none';
         document.querySelector('.doctor-selection').style.display = 'block';
         document.getElementById('rdv-form').reset();
+        window.cal_maj_rdv();
     });
 
     document.getElementById('rdv-form').addEventListener('submit', async (e) => {
