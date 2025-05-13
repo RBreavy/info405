@@ -52,7 +52,7 @@ async function chargerEtAfficherRDV() {
                 (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
                 (debut <= dateDebutSemaine && fin >= dateFinSemaine)) {
 
-                const jourStr = debut.toISOString().split("T")[0];
+                const jourStr = debut.toLocaleDateString("fr-FR");
                 const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
                 const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
 
@@ -87,7 +87,7 @@ function creation_jour() {
 
         const date_jour = datetemp.toLocaleDateString();
         create("p", article, listeJour[i] + "\n" + date_jour);
-        div_jour.id = datetemp.toISOString().split("T")[0];
+        div_jour.id = date_jour;
 
         creation_crenau(i, div_jour, datetemp);
 
@@ -136,8 +136,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
     let heure = 8;
     for (let j = 0; j < 72; j++) {
         const article_creneau = create("article", div_jour);
-        const dateId = datetemp.toISOString().split("T")[0];
-        article_creneau.id = dateId + j;
+        article_creneau.id = datetemp.toLocaleDateString() + j;
         article_creneau.classList.add("creneau");
 
         article_creneau.classList.add(Math.floor(j / 3) % 2 === 0 ? "gris_fonce" : "gris_clair");
@@ -220,8 +219,6 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
-
-
 
 
 
