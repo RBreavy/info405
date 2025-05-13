@@ -16,7 +16,7 @@ async function estMedecin(nom) {
     return tableauDOC.some(doc => doc.nom === nom);
 }
 
-const estDoc = await estMedecin(nomUtilisateur);
+const estDoc = estMedecin(nomUtilisateur);
 
 const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
