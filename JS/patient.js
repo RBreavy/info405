@@ -114,7 +114,7 @@ function setupEventListeners() {
         }
     });
 }
-function displayI(IndT,IndR = null) {
+function displayI(IndT,IndR) {
     const dateDebutSemaine = new Date(date);
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
     
@@ -163,6 +163,31 @@ function displayI(IndT,IndR = null) {
             }
         }
     } 
+    
+    for (const IR of IndR) {
+        const journee = IR.journee;
+        const h_debut = (IR.heure_debut.slice(0,2) - 8) * 6 + Math.floor(IR.heure_debut.slice(3,5) / 10);
+        const h_fin = (IR.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IR.heure_fin.slice(3,5) / 10) - 1;
+        const dateDebutSemaine = new Date(date);
+        dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+
+        const jourtoindice = new Map([
+            ["LUN",0],
+            ["MAR",1],
+            ["MER",2],
+            ["JEU",3],
+            ["VEN",4],
+            ["SAM",5],
+            ["DIM",6],
+        ]);
+        const indice = jourtoindice.get(journee);
+        const jour = new Date(dateDebutSemaine);
+        jour.setDate(dateDebutSemaine.getDate() + indice);
+        const jourStr = jour.toLocaleDateString("fr-FR");
+        setTimeout(() => {
+            create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", estDoc);
+        }, 50);
+    }
 }
 async function loadAppointments(doctorId) {
     try {
