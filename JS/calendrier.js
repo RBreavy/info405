@@ -39,11 +39,13 @@ async function chargerEtAfficherRDV() {
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
 
     try {
-        const result = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
-        const tableauRDV = await result.json();
-        console.log(tableauRDV);
+
+        
         const estDoc = await estMedecin(nomUtilisateur);
-        /*if (!estDoc) {
+        if (!estDoc) {
+            var result = await fetch('/info2/site/PHP/get-data.php?action=rdvs&id_medecin='+id);
+            
+            /*
             const indispt = await fetch('/info2/site/PHP/get-data.php?action=getIT');
             const tableauIT = await indispt.json();
             for (const IT of tableauIT) {
@@ -84,9 +86,14 @@ async function chargerEtAfficherRDV() {
                         currentDate = nextDate;
                     }
                 }
-            }
-        }*/
-
+            }*/
+        } else {
+            var result = await fetch('/info2/site/PHP/get-data.php?action=rdvs&id_patient='+userId);
+            
+            
+        }
+        const tableauRDV = await result.json();
+        console.log(tableauRDV);
 
         for (const rdv of tableauRDV) {
             const nom = rdv.nom_utilisateur;

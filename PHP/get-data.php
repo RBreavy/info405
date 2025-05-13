@@ -4,18 +4,18 @@ ini_set('display_errors', 0);
 
 include_once "../index/db_connect.php";
 
-function getAllRdvs($start = null, $end = null)
+function getAllRdvs($start = null, $end = null, $id_medecin = null, $id_patient = null)
 {
     global $conn;
-    $id_utilisateur = $_SESSION['user_id'] ?? null;
 
-    if (!$id_utilisateur) {
-        return ['error' => 'Utilisateur non connecté'];
-    }
 
     try {
-        $where = "WHERE r.id_utilisateurs = $id_utilisateur"; // ← Filtrage de base par utilisateur
-
+        if ($id_medecin == null) {
+            $where = "WHERE r.id_utilisateurs = $id_patient";
+        } else {
+            $where = "WHERE r.id_medecin = $id_medecin";
+        }
+        
         if ($start !== null && $end !== null) {
             $start = DateTime::createFromFormat('d/m/Y', $start)->format('Y-m-d');
             $end = DateTime::createFromFormat('d/m/Y', $end)->format('Y-m-d');
@@ -116,7 +116,9 @@ switch ($action) {
     case 'rdvs':
         $start = $_GET['start_date'] ?? null;
         $end = $_GET['end_date'] ?? null;
-        echo json_encode(getAllRdvs($start, $end));
+        $id_med = $_GET['id_medecin'] ?? null;
+        $id_pat = $_GET['id_patient'] ?? null;
+        echo json_encode(getAllRdvs($start, $end, $id_med, $id_pat));
         break;
     case 'getIT':
         $id = $_GET['id_medecin'];
