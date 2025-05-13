@@ -39,8 +39,8 @@ async function chargerEtAfficherRDV() {
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
 
     try {
-        const rdv = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
-        const tableauRDV = await rdv.json();
+        const result = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
+        const tableauRDV = await result.json();
         const estDoc = await estMedecin(nomUtilisateur);
         if (!estDoc) {
             const indispt = await fetch('/info2/site/PHP/get-data.php?action=getIT');
