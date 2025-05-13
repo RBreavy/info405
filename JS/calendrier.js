@@ -15,7 +15,7 @@ async function estMedecin(nom) {
 
 const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
-    [year, month, day] = dateInput.value.split("-").map(Number);
+    [year, month, day] = dateInput.value.split("/").map(Number);
     if (year >= 2000 && year <= 2100) {
         console.log("Date sélectionnée:", dateInput.value);
         dateInput.value = "";
