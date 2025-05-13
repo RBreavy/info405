@@ -23,7 +23,7 @@
     position: relative;
     /*width: 95vw;
     justify-content: flex-start;*/
-    height: 75vh;
+    height: 70vh;
     
     display: flex;
     flex-direction: row;
@@ -31,9 +31,9 @@
     align-items: flex-end;
     
     margin: 10px;
-    background-image: linear-gradient(to bottom right, rgba(255,255,255,0.66), rgba(0,61,91,0.66));
-    backdrop-filter: blur(5px);
-    padding: 0 25px 25px 3.5%;
+    
+    
+    padding: 0 12.5% 25px 3.5%;
     border-radius: 10px;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .heure {
-    color: black;
+    color: white;
     z-index: 1;
     margin-right: 5px;
     font-size:1vw;
@@ -118,11 +118,9 @@
     position: absolute;
     width: 40vw;
     height: 5vh;
-    background-color: rgba(157, 157, 157, 0.5);
     top: 5px;
     left: 35%;
     margin-left: -10%;
-    border-radius: 40px;
     transition: box-shadow 0.5s ease-in; 
     display: flex;
     flex-direction: row;
@@ -132,45 +130,36 @@
     column-gap: 10%;
 }
 
-.selecteur:hover {
-    box-shadow: 0 0 3px 2px white;
-}
-
 .selecteur_droit, .selecteur_gauche {
     width: 4.5%;
     height: 70%;
-    border-radius: 30px;
-    box-shadow: 0 0 0 1px black;
     background-size: 100%;
     background-position: center;
     transition: background-size 0.5s ease-in-out;
 }
 
 .selecteur_gauche {
-    background-image: url("/info2/site/images/arrow_l.jpg");
-    background-color: white;
+    background-image: url("/info2/site/images/arrow_l.png");
     background-repeat: no-repeat;
 }
 
 .selecteur_droit {
-    background-image: url("/info2/site/images/arrow_r.jpg");
-    background-color: white;
+    background-image: url("/info2/site/images/arrow_r.png");
     background-repeat: no-repeat;
 }
 
 
 .selecteur_droit:hover , .selecteur_gauche:hover {
-    background-size: 110%;
+    background-size: 130%;
 }
 
 #calendrier {
-    background-color: rgba(0, 0, 0, 0);
     width: 40%;
-    color: white;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    border-color: white;
     padding: 4px;
-    border: solid 1px black;
-    border-radius: 3px;
-    text-shadow: 1px 1px 1px black;
 }
 
 

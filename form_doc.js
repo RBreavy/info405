@@ -47,21 +47,57 @@ function recupForm() {
         const startTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(1)').value;
         const endTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(2)').value;
         
-        console.log('Repetitive Schedule:', { day: selectedDay, startTime, endTime });
+        console.log('Repetitive:', { day: selectedDay, startTime, endTime }); 
+
+        if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
+            alert("la durée doit forcément être en période de 10 minutes!");
+        } else {
+            addRep(selectedDay,startTime,endTime);
+        }
     
     } else {
         
         const startDate = document.querySelector('#form-temporaire input[type="date"]:nth-of-type(1)').value;
         const endDate = document.querySelector('#form-temporaire input[type="date"]:nth-of-type(2)').value;
-        const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(1)').value;
-        const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(2)').value;
+        const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(3)').value;
+        const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(4)').value;
+
         
-        console.log('Temporary Schedule:', { startDate, endDate, startTime, endTime });
+        console.log('Temporaire:', { startDate, endDate, startTime, endTime });
+
+        if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
+            alert("la durée doit forcément être en période de 10 minutes!");
+        } else {
+            const debut_periode = startDate + " " + startTime;
+            const fin_periode = endDate + " " + endTime;
+            addTemp(debut_periode,fin_periode);
+        }
         
     }
-    
-    
-    alert('Disponibilités enregistrées avec succès!');
+
+}
+
+
+async function addTemp(debut_periode,fin_periode) {
+    try {
+        const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=temp&med=${id}&deb_p=${debut_periode}&fin_p=${fin_periode}`);
+        const temp = await response.json();
+        alert('Disponibilités enregistrées avec succès!');
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert("Impossible d'insérer cette indisponibilité!");
+    }
+}
+
+async function addRep(journee,deb,fin) {
+    try {
+        const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=repet&med=${id}&jour=${journee}&deb=${deb}&fin=${fin}`);
+        const temp = await response.json();
+        alert('Disponibilités enregistrées avec succès!');
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert("Impossible d'insérer cette indisponibilité!");
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
