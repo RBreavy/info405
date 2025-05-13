@@ -7,7 +7,7 @@ include_once "../index/db_connect.php";
 function getAllRdvs($start = null, $end = null)
 {
     global $conn;
-    $id_utilisateur = $_SESSION['user']['id_utilisateurs'] ?? null;
+    $id_utilisateur = $_SESSION['user_id'] ?? null;
 
     if (!$id_utilisateur) {
         return ['error' => 'Utilisateur non connecté'];
