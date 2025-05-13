@@ -123,13 +123,27 @@ $check3 = $conn->prepare("
     )
 ");
 
+$jour_deb = date('D',$start);
+$jour_map = [
+    'MON' => 'LUN',
+    'TUE' => 'MAR',
+    'WED' => 'MER',
+    'THU' => 'JEU',
+    'FRI' => 'VEN',
+    'SAT' => 'SAM',
+    'SUN' => 'DIM'
+];
+$journee = $jour_map[$jour_deb];
+
+
 $check3->bind_param(
     "issss",
     $data['id_medecin'],
-    $data['date_fin'],
-    $data['date_debut'],
-    $data['date_debut'],
-    $data['date_fin']
+    $journee,
+    date('H:i',$data['date_fin']),
+    date('H:i',$data['date_debut']),
+    date('H:i',$data['date_debut']),
+    date('H:i',$data['date_fin']),
 );
 $check3->execute();
 $check_result3 = $check3->get_result()->fetch_assoc();
