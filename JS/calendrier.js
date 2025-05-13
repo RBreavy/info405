@@ -304,40 +304,51 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 
 async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
-        // First pass: Apply background color to all cells
+        // Apply styling to all cells
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
             if (!creneau) continue;
             
-            // Apply styling to cell
+            // Base styling
             creneau.style.setProperty('--border-color', color);
             creneau.classList.add("custom_bg_color");
             
-            // Manage borders between cells
-            if (i > horaire_debut) {
-                creneau.classList.add("invisible_border_top");
+            // Reset classes first to avoid conflicts
+            creneau.classList.remove("invisible_border_top", "invisible_border_bottom", "custom_border_top");
+            
+            // Only middle cells get invisible borders
+            if (i > horaire_debut && i < horaire_fin) {
+                creneau.style.borderTop = "none";
+                creneau.style.borderBottom = "none";
             }
-            if (i < horaire_fin) {
-                creneau.classList.add("invisible_border_bottom");
+            
+            // First cell keeps its top border
+            if (i === horaire_debut) {
+                creneau.classList.add("custom_border_top");
+                creneau.style.borderBottom = "none";
+            }
+            
+            // Last cell gets a border bottom
+            if (i === horaire_fin) {
+                creneau.style.borderTop = "none";
+                creneau.style.borderBottom = "1px solid black";
             }
         }
         
-        // Add the details only to the first cell
+        // Add details to first cell
         const premierCreneau = document.getElementById(journee + horaire_debut);
         if (premierCreneau && !premierCreneau.querySelector(".rdv")) {
+            // Create rdv element and details as before
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
             
-            // Single line toggle
             const toggleButton = create("div", box, "Afficher les détails");
             toggleButton.classList.add("toggle_button");
             
-            // Details section
             const details = create("div", box);
             details.classList.add("rdv_details");
             details.style.display = "none";
             
-            // Add info to details
             const [day, month, year] = journee.split("/").map(Number);
             const dateObj = new Date(year, month - 1, day);
             create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
@@ -346,7 +357,6 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 create("p", details, `Nom : ${nom}`);
             }
             
-            // Toggle functionality
             toggleButton.addEventListener("click", () => {
                 details.style.display = details.style.display === "none" ? "block" : "none";
             });
