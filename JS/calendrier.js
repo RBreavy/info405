@@ -7,6 +7,7 @@ let indice_jour = date.getDay();
 let offsetjour = 0;
 if (indice_jour === 0) indice_jour = 7;
 let anciensRDV = [];
+const estDoc = await estMedecin(nomUtilisateur);
 
 
 async function estMedecin(nom) {
@@ -39,13 +40,14 @@ maj_semaine();
 async function chargerEtAfficherRDV() {
     const dateDebutSemaine = new Date(date);
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+    console.log(dateDebutSemaine);
     
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
 
 
     try {
-        const estDoc = await estMedecin(nomUtilisateur);
+
         if (estDoc) {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
             const indispt = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${id}`);
@@ -79,7 +81,8 @@ async function chargerEtAfficherRDV() {
                         }
                         
                         setTimeout(() => {
-                            create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", "Indisponible");
+                            document.querySelectorAll('.rdv').forEach(el => el.remove());
+                            create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", "Indisponible", estDoc);
                         }, 50);
                         
                         // Passer au jour suivant
@@ -115,7 +118,7 @@ async function chargerEtAfficherRDV() {
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom);
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc);
                 }, 50);
 
             }
@@ -245,8 +248,7 @@ function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
 }
 
-async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom) {
-    const estDoc = await estMedecin(nom);
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
@@ -261,6 +263,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 
                 const box = create("article", creneau);
                 box.classList.add("rdv");
+                box.style.backgroundColor = color;
                 //box.style.height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3 + "px";
                 setTimeout(() => {
                     const height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3;
@@ -281,7 +284,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                     create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
 
                     if (estDoc) {
-                        create("p", details, nom);
+                        create("p", details, `Nom : ${nom}`);
                     }
 
                     toggleButton.addEventListener("click", () => {
@@ -365,7 +368,7 @@ async function diffEtMetAJourRDV(nouveauxRDV) {
         else if (dureeMinutes <= 20) couleurRdv = "#ffe0b3";   
         else if (dureeMinutes <= 30) couleurRdv = "#ffb3b3";  
 
-        await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
+        await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom, estDoc);
     }
 
     anciensRDV = nouveauxRDV;
