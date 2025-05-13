@@ -159,7 +159,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
             console.log("Créneau cliqué:", article_creneau.id);
         });
     }
-    chargerEtAfficherRDV();
+    //chargerEtAfficherRDV();
 }
 
 function calcul_duree(start, duration) {
@@ -217,6 +217,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 
                 toggleButton.addEventListener("click", () => {
                     details.style.display = details.style.display === "none" ? "block" : "none";
+                    console.log("Détails affichés");
                 });
             }
         }
