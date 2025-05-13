@@ -200,7 +200,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 details.style.display = "none";
 
                 const dateObj = new Date(journee);
-                create("p", details, `Date : ${dateObj.toLocaleDateString('fr-FR')}`);
+                create("p", details, `Date : ${dateObj.toLocaleDateString()}`);
 
                 if (estDoc) {
                     create("p", details, nom);
