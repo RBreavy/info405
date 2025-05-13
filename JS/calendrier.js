@@ -6,6 +6,8 @@ let date = new Date(year, month - 1, day);
 let indice_jour = date.getDay();
 let offsetjour = 0;
 if (indice_jour === 0) indice_jour = 7;
+let anciensRDV = [];
+
 
 async function estMedecin(nom) {
     const response = await fetch('/info2/site/PHP/get-data.php?action=doctors');
@@ -322,8 +324,7 @@ boutonD.addEventListener('click', () => {
 });
 
 
-// vvv
-let anciensRDV = [];
+
 
 function rdvsIdentiques(a, b) {
     return a.nom_utilisateur === b.nom_utilisateur &&
