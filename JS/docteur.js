@@ -12,15 +12,6 @@ function openNav() {
     document.getElementById("mySidenav").style.left = "0";
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // No need to move the form since it's already outside the calendar in the HTML
-    setTimeout(function() {
-        const formIndisp = document.querySelector('.form-indisp');
-        if (formIndisp) {
-            formIndisp.style.display = 'block'; // Make sure it's visible
-        }
-    }, 150);
-});
 
 function closeNav() {
     document.getElementById("mySidenav").style.left = "-250px";

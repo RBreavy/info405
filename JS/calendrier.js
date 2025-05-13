@@ -133,7 +133,7 @@ function create(tag, container, text = null) {
 
 function creation_jour() {
     // vide les jours
-    main.innerHTML = "";
+    //main.innerHTML = "";
 
     for (let i = 0; i < 7; i++) {
         let datetemp = new Date();
