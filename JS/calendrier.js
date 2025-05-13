@@ -59,7 +59,10 @@ async function chargerEtAfficherRDV() {
                 const estDoc = await estMedecin(nom);
                 const couleurRdv = estDoc ? couleur : "grey";
 
-                await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
+                setTimeout(() => {
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
+                }, 50);
+
             }
         }
         await diffEtMetAJourRDV(tableauRDV);
@@ -103,6 +106,10 @@ function maj_semaine() {
     maj_date();
     maj_id();
     maj_rdv();
+
+     setTimeout(() => {
+        chargerEtAfficherRDV();
+    }, 50);
 }
 
 function maj_date() {
@@ -159,7 +166,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
             console.log("Créneau cliqué:", article_creneau.id);
         });
     }
-    chargerEtAfficherRDV();
+    //chargerEtAfficherRDV();
 }
 
 function calcul_duree(start, duration) {
@@ -217,6 +224,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 
                 toggleButton.addEventListener("click", () => {
                     details.style.display = details.style.display === "none" ? "block" : "none";
+                    console.log("Détails affichés");
                 });
             }
         }
