@@ -42,7 +42,7 @@ async function chargerEtAfficherRDV() {
         const result = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
         const tableauRDV = await result.json();
         const estDoc = await estMedecin(nomUtilisateur);
-        if (!estDoc) {
+        /*if (!estDoc) {
             const indispt = await fetch('/info2/site/PHP/get-data.php?action=getIT');
             const tableauIT = await indispt.json();
             for (const IT of tableauIT) {
@@ -84,7 +84,7 @@ async function chargerEtAfficherRDV() {
                     }
                 }
             }
-        }
+        }*/
 
 
         for (const rdv of tableauRDV) {
