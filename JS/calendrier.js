@@ -90,7 +90,7 @@ async function chargerEtAfficherRDV() {
                         }
                         
                         setTimeout(() => {
-                            document.querySelectorAll('.rdv').forEach(el => el.remove());
+                            //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
                             create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", estDoc);
                         }, 50);
                         
@@ -270,31 +270,36 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 box.style.backgroundColor = color;
                 //box.style.height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3 + "px";
                 setTimeout(() => {
-                    const height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3;
+                    const calculatedHeight = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3;
+                    const maxHeight = creneau.parentElement.offsetHeight - 10; // 10px buffer
+                    const height = Math.min(calculatedHeight, maxHeight);
+                    
                     box.style.height = height + "px";
-
-                    const toggleButton = create("div", box, "Afficher les détails");
+                    box.style.overflow = "hidden"; // Prevent content overflow
+                    box.style.maxHeight = maxHeight + "px"; // Ensure it doesn't exceed parent
+                    
+                    const toggleButton = create("div", box, height < 25 ? "+" : "Afficher les détails");
                     toggleButton.classList.add("toggle_button");
                     toggleButton.style.fontSize = height < 40 ? "0.6rem" : "1rem";
-
+                    
                     const details = create("div", box);
                     details.classList.add("rdv_details");
                     details.style.display = "none";
-
+                    
                     const [day, month, year] = journee.split("/").map(Number);
                     const dateObj = new Date(year, month - 1, day);
-
+                    
                     create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
                     create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
-
+                    
                     if (estDoc) {
                         create("p", details, `Nom : ${nom}`);
                     }
-
+                    
                     toggleButton.addEventListener("click", () => {
                         details.style.display = details.style.display === "none" ? "block" : "none";
                     });
-                }, 50); 
+                }, 100); // Increased timeout for more reliable rendering
             }
         }
     }

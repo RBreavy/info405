@@ -10,8 +10,8 @@
 
 .main_cal {
     position: relative;
-    /*width: 95vw;
-    justify-content: flex-start;*/
+    width: 75vw;
+    /*justify-content: flex-start;*/
     height: 80vh;
     
     display: flex;
