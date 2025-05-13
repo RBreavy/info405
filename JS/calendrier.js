@@ -228,20 +228,16 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
 }
 
 // Calcule et retourne la durée d’un rendez-vous sous forme textuelle
-function calcul_duree(start, duration) {
-    const total_start_minutes = 8 * 60 + start * 10;
-    const total_end_minutes = total_start_minutes + duration * 10;
+function calcul_duree(heure_debut, duree) {
+    let h_dbt_rdv = (8 + Math.floor((heure_debut + 1) / 6)).toString() + "h";
+    let m_dbt_rdv = (heure_debut % 6).toString();
+    let h_fin_rdv = (8 + Math.floor((heure_debut + duree + 1) / 6)).toString() + "h";
+    let m_fin_rdv = ((heure_debut + duree + 1) % 6).toString();
 
-    const start_hour = Math.floor(total_start_minutes / 60);
-    const start_min = total_start_minutes % 60;
-    const end_hour = Math.floor(total_end_minutes / 60);
-    const end_min = total_end_minutes % 60;
+    if (m_dbt_rdv.length == 1) m_dbt_rdv += "0";
+    if (m_fin_rdv.length == 1) m_fin_rdv += "0";
 
-    if (total_start_minutes > total_end_minutes) {
-        return "Heure de fin avant l'heure de début";
-    }
-
-    return `${start_hour}h${start_min.toString().padStart(2, '0')} - ${end_hour}h${end_min.toString().padStart(2, '0')}`;
+    return (h_dbt_rdv + m_dbt_rdv + " - " + h_fin_rdv + m_fin_rdv);
 }
 
 // Convertit une heure en index de créneau
