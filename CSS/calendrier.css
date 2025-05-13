@@ -3,6 +3,10 @@
     font-size: 0.8em;
 }
 
+.rdv :hover{
+    cursor: pointer;
+}
+
 
 .main_cal {
     position: relative;
