@@ -59,7 +59,10 @@ async function chargerEtAfficherRDV() {
                 const estDoc = await estMedecin(nom);
                 const couleurRdv = estDoc ? couleur : "grey";
 
-                await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
+                setTimeout(() => {
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
+                }, 50);
+
             }
         }
         await diffEtMetAJourRDV(tableauRDV);
@@ -103,6 +106,10 @@ function maj_semaine() {
     maj_date();
     maj_id();
     maj_rdv();
+
+     setTimeout(() => {
+        chargerEtAfficherRDV();
+    }, 50);
 }
 
 function maj_date() {
