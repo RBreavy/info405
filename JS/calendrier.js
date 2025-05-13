@@ -271,8 +271,9 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 box.style.backgroundColor = color;
                 //box.style.height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3 + "px";
                 setTimeout(() => {
-                    const height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3;
-                    console.log(creneau.offsetHeight,horaire_fin,horaire_debut);
+                    const calculatedHeight = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3;
+                    const maxHeight = creneau.parentElement.offsetHeight - 10; // 10px buffer
+                    const height = Math.min(calculatedHeight, maxHeight);
                     box.style.height = height + "px";
 
                     const toggleButton = create("div", box, "Afficher les détails");
