@@ -1,5 +1,9 @@
 .doctor-selection {
+<<<<<<< HEAD
     margin: 5vw auto 5vw 0;
+=======
+    margin: 0 0 0 auto;
+>>>>>>> 84f49332b6c189b79e8caccee10a44098dc913fa
     padding: 3vh;
     background-image: linear-gradient(to bottom right, #4a09ac, #4f0999);
     border-radius: 1vh;
