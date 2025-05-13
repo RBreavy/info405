@@ -50,6 +50,7 @@ async function chargerEtAfficherRDV() {
     
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
+    dateFinSemaine.setHours(23, 59, 59);
     
 
     try {
@@ -76,8 +77,6 @@ async function chargerEtAfficherRDV() {
                         let h_debut = 0; // 8h00
                         let h_fin = 71;  // 19h50
 
-                        console.log(currentDate);
-                        console.log(endDate.getDate());
                         
                         // Si c'est le premier jour de l'indisponibilité
                         if (currentDate.toDateString() === debutIndisp.toDateString()) {
@@ -87,11 +86,12 @@ async function chargerEtAfficherRDV() {
                         // Si c'est le dernier jour de l'indisponibilité
                         if (currentDate.toDateString() === finIndisp.toDateString()) {
                             h_fin = (finIndisp.getHours() - 8) * 6 + Math.floor(finIndisp.getMinutes() / 10) - 1;
+                            console.log("test");
                         }
                         
                         setTimeout(() => {
                             document.querySelectorAll('.rdv').forEach(el => el.remove());
-                            create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", "Indisponible", estDoc);
+                            create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", estDoc);
                         }, 50);
                         
                         // Passer au jour suivant
