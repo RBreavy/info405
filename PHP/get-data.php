@@ -46,17 +46,7 @@ function getAllRdvs($start = null, $end = null)
     }
 }
 
-function creer_rdv($id_medecin, $date_debut, $date_fin, $id_utilisateur, $couleur)
-{
-    global $conn;
-    try {
-        $query = "SELECT debut_periode, fin_periode FROM IndisponibiliteTemporaire WHERE id_medecin = $id";
-        $result = mysqli_query($conn, $query);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
-    } catch (Exception $e) {
-        return ["error"=> $e->getMessage()];
-    }
-}
+
 
 function getAllIndispR($id) 
 {
@@ -69,6 +59,19 @@ function getAllIndispR($id)
         return ["error"=> $e->getMessage()];
     }
 }
+function getAllIndispT($id) 
+{
+    global $conn;
+    try {
+        $query = "SELECT debut_periode, fin_periode FROM IndisponibiliteTemporaire WHERE id_medecin = $id";
+        $result = mysqli_query($conn, $query);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    } catch (Exception $e) {
+        return ["error"=> $e->getMessage()];
+    }
+}
+
+
 
 function getAllDoctors()
 {
