@@ -158,7 +158,6 @@
 
 .selecteur_droit:hover , .selecteur_gauche:hover {
     background-size: 110%;
-    box-shadow: 0 0 3px 2px white;
 }
 
 #calendrier {
