@@ -440,15 +440,6 @@ async function diffEtMetAJourRDV(nouveauxRDV) {
 }
 
 // ^^^
-/*
-
-window.cal_date = date;
-window.cal_offsetjour = offsetjour;
-window.cal_indice_jour = indice_jour;
-window.cal_estDoc = estDoc;
-
-window.cal_create = create;
-window.cal_calcul_duree = calcul_duree;*/
 
 window.cal_create_rdv = create_rdv;
 window.cal_maj_rdv = maj_rdv;
