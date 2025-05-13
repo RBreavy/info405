@@ -402,7 +402,7 @@ function rdvsIdentiques(a, b) {
            a.date_fin === b.date_fin;
 }
 
-async function diffEtMetAJourRDV(nouveauxRDV) {
+export async function diffEtMetAJourRDV(nouveauxRDV) {
     const ajoutes = [];
 
     document.querySelectorAll('.rdv').forEach(e => e.remove());
