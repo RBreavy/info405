@@ -72,6 +72,17 @@ $check = $conn->prepare("
         (date_debut >= ? AND date_debut < ?)
     )
 ");
+
+
+$check = $conn->prepare("
+    SELECT COUNT(*) as count FROM IndisponibiliteTemporaire
+    WHERE id_medecin = ? 
+    AND (
+        (debut_periode < ? AND fin_periode > ?) OR
+        (debut_periode >= ? AND debut_periode < ?)
+    )
+");
+
 $check->bind_param(
     "issss",
     $data['id_medecin'],
