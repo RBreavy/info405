@@ -76,7 +76,7 @@ function create(tag, container, text = null) {
 
 function creation_jour() {
     for (let i = 0; i < 7; i++) {
-        let datetemp = new Date();
+        let datetemp = new Date(date);
         datetemp.setDate(date.getDate() + i + 1 - indice_jour);
 
         const div_jour = create("div", main);
@@ -85,11 +85,13 @@ function creation_jour() {
         const article = create("article", div_jour);
         article.classList.add("datejour");
 
-        const date_jour = datetemp.toLocaleDateString();
-        create("p", article, listeJour[i] + "\n" + date_jour);
-        div_jour.id = date_jour;
+        const date_jour_str = datetemp.toISOString().split('T')[0];
+        const aff_date = datetemp.toLocaleDateString("fr-FR");
 
-        creation_crenau(i, div_jour, datetemp);
+        create("p", article, listeJour[i] + "\n" + aff_date);
+        div_jour.id = date_jour_str;
+
+        creation_crenau(i, div_jour, date_jour_str);
 
         if (i === 0) div_jour.classList.add("border_bottom_top_left");
         else if (i === 6) {
@@ -97,6 +99,7 @@ function creation_jour() {
         }
     }
 }
+
 
 function maj_semaine() {
     maj_date();
@@ -107,14 +110,18 @@ function maj_semaine() {
 function maj_date() {
     const jours = document.querySelectorAll(".jour");
     jours.forEach((e, index) => {
-        const datetemp = new Date(year, month - 1, day);
+        const datetemp = new Date(date);
         datetemp.setDate(date.getDate() + index + offsetjour + 1 - indice_jour);
-        const date_jour = datetemp.toLocaleDateString();
-        e.id = date_jour;
+
+        const date_jour_str = datetemp.toISOString().split('T')[0];
+        const aff_date = datetemp.toLocaleDateString("fr-FR");
+
+        e.id = date_jour_str;
         const dj = e.querySelector(".datejour > p");
-        dj.innerText = listeJour[index] + "\n" + date_jour;
+        dj.innerText = listeJour[index] + "\n" + aff_date;
     });
 }
+
 
 function maj_id() {
     document.querySelectorAll(".jour").forEach(e => {
@@ -132,14 +139,15 @@ function maj_rdv() {
     chargerEtAfficherRDV();
 }
 
-function creation_crenau(indice_div_jour, div_jour, datetemp) {
+function creation_crenau(indice_div_jour, div_jour, date_str) {
     let heure = 8;
     for (let j = 0; j < 72; j++) {
         const article_creneau = create("article", div_jour);
-        article_creneau.id = datetemp.toLocaleDateString() + j;
+        article_creneau.id = date_str + j;
         article_creneau.classList.add("creneau");
 
         article_creneau.classList.add(Math.floor(j / 3) % 2 === 0 ? "gris_fonce" : "gris_clair");
+
         if (indice_div_jour === 0 && j % 6 === 0) {
             const carre_heure = create("div", article_creneau);
             carre_heure.classList.add("carre_heure");
@@ -161,6 +169,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
     chargerEtAfficherRDV();
 }
 
+
 function calcul_duree(start, duration) {
     const total_start = 8 * 60 + start * 10;
     const total_end = total_start + duration * 10;
@@ -179,9 +188,12 @@ function conversion_heure_en_id(heure_debut) {
 
 async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom) {
     const estDoc = await estMedecin(nom);
+
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
+            if (!creneau) continue;
+
             creneau.style.setProperty('--border-color', color);
             creneau.classList.add("custom_bg_color");
             creneau.style.zIndex = i === horaire_debut ? 1 : 0;
@@ -199,17 +211,26 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 details.classList.add("rdv_details");
                 details.style.display = "none";
 
-                // Crée une vraie date avec heure approximative pour affichage lisible
-                const dateParts = journee.split("-");
-                const startHour = 8 + Math.floor(horaire_debut / 3); // chaque creneau = 20 min
-                const startMin = (horaire_debut % 3) * 20;
+                const [year, month, day] = journee.split("/").map(Number);
 
-                const dateObj = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], startHour, startMin);
+                const startMinutes = 8 * 60 + (horaire_debut * 10);
+                const endMinutes = 8 * 60 + (horaire_fin * 10 + 10);
 
-                const dateStr = dateObj.toLocaleDateString("fr-FR");
-                const timeStr = dateObj.toLocaleTimeString("fr-FR", { hour: '2-digit', minute: '2-digit' });
+                const startHour = Math.floor(startMinutes / 60);
+                const startMin = startMinutes % 60;
+                const endHour = Math.floor(endMinutes / 60);
+                const endMin = endMinutes % 60;
 
-                create("p", details, `Date : ${dateStr} à ${timeStr}`);
+                const dateStart = new Date(year, month - 1, day, startHour, startMin);
+                const dateEnd = new Date(year, month - 1, day, endHour, endMin);
+
+                const options = { hour: '2-digit', minute: '2-digit' };
+                const dateStr = dateStart.toLocaleDateString("fr-FR");
+                const heureDebut = dateStart.toLocaleTimeString("fr-FR", options);
+                const heureFin = dateEnd.toLocaleTimeString("fr-FR", options);
+
+                create("p", details, `Date : ${dateStr}`);
+                create("p", details, `Heure : ${heureDebut} à ${heureFin}`);
 
                 if (estDoc) {
                     create("p", details, nom);
@@ -223,6 +244,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
+
 
 
 // Navigation gauche/droite entre les semaines avec animation
