@@ -20,12 +20,15 @@ async function loadDoctors() {
 window.addEventListener('weekChanged', () => {
     if (selectedDoctorId) {
         loadAppointments(selectedDoctorId);
+        window.cal_maj_rdv();
     }
 });
 
 function displayDoctors(doctors) {
     const doctorList = document.querySelector('.doctor-list');
     doctorList.innerHTML = '';
+
+    window.cal_maj_rdv();
 
     doctors.forEach(doctor => {
         const button = document.createElement('button');
@@ -153,7 +156,7 @@ function displayI(IndT,IndR) {
                 
                 setTimeout(() => {
                     //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", estDoc);
+                    window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey");
                 }, 50);
                 
                 // Passer au jour suivant
@@ -185,7 +188,7 @@ function displayI(IndT,IndR) {
         jour.setDate(dateDebutSemaine.getDate() + indice);
         const jourStr = jour.toLocaleDateString("fr-FR");
         setTimeout(() => {
-            create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", estDoc);
+            window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey");
         }, 50);
     }
 }
