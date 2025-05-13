@@ -236,21 +236,21 @@
     padding: 0;
 }
 
-/* Styles for the form-indisp with relative positioning */
 .form-indisp {
     position: relative;
-    width: 280px;
-    height: 80%;
-    margin-left: auto;
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
-    flex-shrink: 0;
+    box-sizing: border-box;
 }
-
 
 .tabs {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     background: rgba(255, 255, 255, 0.1);
     padding: 10px;
@@ -258,7 +258,8 @@
     margin-bottom: 15px;
 }
 
-#form-repetitif, #form-temporaire {
+#form-repetitif,
+#form-temporaire {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -266,32 +267,35 @@
 
 .day-buttons-container {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 5px;
     margin-bottom: 10px;
 }
 
 .form-indisp label {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 1rem;
     display: block;
+    text-align: left;
+    width: 100%;
 }
 
-.form-indisp input[type="time"], 
+.form-indisp input[type="time"],
 .form-indisp input[type="date"] {
-    width: 80%;
-    padding: 8px;
+    width: 100%;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #5e41a1;
     margin: 5px 0;
     background-color: rgba(255, 255, 255, 0.9);
     color: #000;
+    box-sizing: border-box;
 }
 
 .submit-button {
     margin-top: 15px;
-    width: 80%;
+    width: 100%;
     padding: 10px;
     background-color: #5e41a1;
     color: white;
@@ -305,17 +309,14 @@
     background-color: #7777cd;
 }
 
-/* Style for hiding elements */
-.hidden {
-    display: none !important;
-}
-
-/* Tab styling */
 .tab {
     cursor: pointer;
     padding: 10px;
     border-radius: 5px;
     transition: 0.3s;
+    flex: 1 1 45%;
+    text-align: center;
+    margin: 5px;
 }
 
 .tab.active {
@@ -340,15 +341,16 @@
     color: white;
 }
 
-/* Day button styling */
 .day-button {
-    margin: 5px;
-    padding: 10px;
+    padding: 8px 12px;
     background: #5e41a1;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    flex: 1 0 30%;
+    max-width: 100px;
+    text-align: center;
 }
 
 .day-button.selected {
@@ -359,6 +361,30 @@
     transition: all 0.5s ease-in;
     text-decoration: underline;
 }
+
+.hidden {
+    display: none !important;
+}
+
+@media screen and (max-width: 600px) {
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .day-button {
+        flex: 1 0 40%;
+    }
+
+    .form-indisp {
+        padding: 10px;
+    }
+}
+
 
 /* Style initial pour la div dépliant */
 .rdv .content {
