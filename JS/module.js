@@ -1,9 +1,24 @@
+export function calcul_duree(start, duration) {
+    const total_start = 8 * 60 + start * 10;
+    const total_end = total_start + duration * 10;
+
+    const start_hour = Math.floor(total_start / 60);
+    const start_min = total_start % 60;
+    const end_hour = Math.floor(total_end / 60);
+    const end_min = total_end % 60;
+
+    return `${start_hour}h${start_min.toString().padStart(2, '0')} - ${end_hour}h${end_min.toString().padStart(2, '0')}`;
+}
+
+
 export function create(tag, container, text = null) {
     const element = document.createElement(tag);
     if (text) element.innerText = text;
     container.appendChild(element);
     return element;
 }
+
+
 export async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         // Apply to all cells in appointment

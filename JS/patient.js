@@ -1,4 +1,4 @@
-import { create_rdv } from "./module.js";
+import { create_rdv, create, calcul_duree } from "./module.js";
 let selectedDoctorId = null;
 let selectedDoctorName = null;
 

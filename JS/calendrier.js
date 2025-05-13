@@ -1,4 +1,4 @@
-import { create_rdv, create } from "./module.js";
+import { create_rdv, create, calcul_duree } from "./module.js";
 // Récupère la date actuelle au format français (JJ/MM/AAAA)
 const dateString = new Date().toLocaleDateString("fr-FR");
 let [day, month, year] = dateString.split('/').map(Number);
@@ -273,17 +273,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
     //chargerEtAfficherRDV();
 }
 
-function calcul_duree(start, duration) {
-    const total_start = 8 * 60 + start * 10;
-    const total_end = total_start + duration * 10;
 
-    const start_hour = Math.floor(total_start / 60);
-    const start_min = total_start % 60;
-    const end_hour = Math.floor(total_end / 60);
-    const end_min = total_end % 60;
-
-    return `${start_hour}h${start_min.toString().padStart(2, '0')} - ${end_hour}h${end_min.toString().padStart(2, '0')}`;
-}
 
 function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
