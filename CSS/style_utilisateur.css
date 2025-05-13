@@ -32,7 +32,7 @@ body {
     background-image: url("/info2/site/images/Fond_DP.png");
     background-repeat: no-repeat;
     margin: 0;
-    color: rgb(21, 135, 216);
+    background-color: #7C8CF4;
     overflow: hidden;
     background-position: center center; 
     background-attachment: fixed;
