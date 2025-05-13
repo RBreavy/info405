@@ -1,6 +1,6 @@
 .doctor-selection {
-    margin: 5vw 0 5vw auto;
-    padding: 3vh;
+    margin: 5vw auto 5vw 0;
+    padding: 80vh;
     background-image: linear-gradient(to bottom right, #4a09ac, #4f0999);
     border-radius: 1vh;
     width: 10vw;
