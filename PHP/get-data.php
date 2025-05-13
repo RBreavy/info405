@@ -7,16 +7,23 @@ include_once "../index/db_connect.php";
 function getAllRdvs($start = null, $end = null)
 {
     global $conn;
+    $id_utilisateur = $_SESSION['user']['id_utilisateurs'] ?? null;
+
+    if (!$id_utilisateur) {
+        return ['error' => 'Utilisateur non connecté'];
+    }
+
     try {
-        $where = "";
+        $where = "WHERE r.id_utilisateurs = $id_utilisateur"; // ← Filtrage de base par utilisateur
+
         if ($start !== null && $end !== null) {
-            // Reformater les dates
             $start = DateTime::createFromFormat('d/m/Y', $start)->format('Y-m-d');
             $end = DateTime::createFromFormat('d/m/Y', $end)->format('Y-m-d');
 
             $start = mysqli_real_escape_string($conn, $start);
             $end = mysqli_real_escape_string($conn, $end);
-            $where = "WHERE r.date_debut >= '$start' AND r.date_debut <= '$end'";
+
+            $where .= " AND r.date_debut >= '$start' AND r.date_debut <= '$end'";
         }
 
         $query = "SELECT m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
@@ -39,8 +46,7 @@ function getAllRdvs($start = null, $end = null)
     }
 }
 
-
-function getAllIndispT($id) 
+function creer_rdv($id_medecin, $date_debut, $date_fin, $id_utilisateur, $couleur)
 {
     global $conn;
     try {
