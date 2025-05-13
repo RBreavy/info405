@@ -125,11 +125,9 @@
     position: absolute;
     width: 40vw;
     height: 5vh;
-    background-color: rgba(157, 157, 157, 0.5);
     top: 5px;
     left: 35%;
     margin-left: -10%;
-    border-radius: 40px;
     transition: box-shadow 0.5s ease-in; 
     display: flex;
     flex-direction: row;
@@ -146,8 +144,6 @@
 .selecteur_droit, .selecteur_gauche {
     width: 4.5%;
     height: 70%;
-    border-radius: 30px;
-    box-shadow: 0 0 0 1px black;
     background-size: 100%;
     background-position: center;
     transition: background-size 0.5s ease-in-out;
@@ -155,10 +151,12 @@
 
 .selecteur_gauche {
     background-image: url("/info2/site/images/arrow_l.png");
+    background-repeat: no-repeat;
 }
 
 .selecteur_droit {
     background-image: url("/info2/site/images/arrow_r.png");
+    background-repeat: no-repeat;
 }
 
 
