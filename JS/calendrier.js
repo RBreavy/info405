@@ -1,7 +1,6 @@
 import { create_rdv, create, calcul_duree, date } from "./module.js";
 // Récupère la date actuelle au format français (JJ/MM/AAAA)
 let [day, month, year] = dateString.split('/').map(Number);
-const date = new Date(year, month - 1, day);
 
 let indice_jour = date.getDay();
 let offsetjour = 0;
