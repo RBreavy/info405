@@ -61,7 +61,17 @@ if (!isset($data['couleur']) || empty($data['couleur'])) {
 }
 // ▲▲▲  ▲▲▲
 
-
+$jour_deb = date('D',$start);
+$jour_map = [
+    'MON' => 'LUN',
+    'TUE' => 'MAR',
+    'WED' => 'MER',
+    'THU' => 'JEU',
+    'FRI' => 'VEN',
+    'SAT' => 'SAM',
+    'SUN' => 'DIM'
+];
+$jour_deb = $jour_map[$jour_deb];
 
 // Vérifie s’il y a un conflit avec un autre rendez-vous du même médecin
 $check = $conn->prepare("
@@ -82,6 +92,17 @@ $check = $conn->prepare("
         (debut_periode >= ? AND debut_periode < ?)
     )
 ");
+
+$check = $conn->prepare("
+    SELECT COUNT(*) as count FROM IndisponibiliteRepetitive
+    WHERE id_medecin = ?
+    AND journee = ?
+    AND (
+        (heure_debut < ? AND heure_fin > ?) OR
+        (heure_debut >= ? AND heure_debut < ?)
+    )
+");
+
 
 $check->bind_param(
     "issss",

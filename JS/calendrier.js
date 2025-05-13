@@ -203,7 +203,9 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 details.classList.add("rdv_details");
                 details.style.display = "none";
 
-                const dateObj = new Date(journee);
+                const [day, month, year] = journee.split("/").map(Number);
+                const dateObj = new Date(year, month - 1, day);
+
                 create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
                 create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
 
@@ -253,3 +255,21 @@ boutonD.addEventListener('click', () => {
     });
     maj_semaine();
 });
+
+
+// vvv
+function createAppointmentElement(appointment) {
+    const element = document.createElement('div');
+    element.className = `rdv ${appointment.couleur}`; 
+    element.textContent = appointment.nom_medecin || appointment.nom_utilisateur;
+    return element;
+}
+
+
+document.querySelectorAll('.creneau').forEach(slot => {
+    if (slot.hasAppointment) { 
+        const appointmentElement = createAppointmentElement(slot.appointmentData);
+        slot.appendChild(appointmentElement);
+    }
+});
+// ^^^
