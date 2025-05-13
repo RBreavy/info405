@@ -14,6 +14,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 <script>
     const nomUtilisateur = <?php echo json_encode($nom); ?>;
+    const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
 </script>
 
 <head>
