@@ -1,5 +1,4 @@
 .doctor-selection {
-    display: flex;
     padding: 3vh;
     background-image: linear-gradient(to bottom right, #4a09ac, #4f0999);
     border-radius: 1vh;
