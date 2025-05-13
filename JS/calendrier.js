@@ -39,12 +39,8 @@ async function chargerEtAfficherRDV() {
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
-    console.log("testr")
-    console.log(dateDebutSemaine,dateFinSemaine);
 
     try {
-
-        
         const estDoc = await estMedecin(nomUtilisateur);
         if (estDoc) {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
@@ -99,6 +95,7 @@ async function chargerEtAfficherRDV() {
         console.log(tableauRDV);
 
         for (const rdv of tableauRDV) {
+            console.log("test");
             const nom = rdv.nom_utilisateur;
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
