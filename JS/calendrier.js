@@ -205,6 +205,8 @@ function maj_semaine() {
     maj_rdv();
 
      setTimeout(() => {
+        const event = new CustomEvent('weekChanged'),
+        window.dispatchEvent(event);
         chargerEtAfficherRDV();
     }, 1000);
 }

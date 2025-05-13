@@ -18,6 +18,12 @@ async function loadDoctors() {
     }
 }
 
+window.addEventListener('weekChanged', () => {
+    if (selectedDoctorId) {
+        loadAppointments(selectedDoctorId);
+    }
+});
+
 function displayDoctors(doctors) {
     const doctorList = document.querySelector('.doctor-list');
     doctorList.innerHTML = '';
