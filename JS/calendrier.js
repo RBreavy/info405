@@ -59,6 +59,7 @@ async function chargerEtAfficherRDV() {
                     
                     // Parcourir chaque jour de l'indisponibilité
                     let currentDate = new Date(Math.max(debutIndisp, dateDebutSemaine));
+                    console.log(currentDate);
                     const endDate = new Date(Math.min(finIndisp, dateFinSemaine));
                     
                     while (currentDate <= endDate) {
