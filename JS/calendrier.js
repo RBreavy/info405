@@ -124,7 +124,7 @@ async function chargerEtAfficherRDV() {
                 jour.setDate(dateDebutSemaine.getDate() + indice);
                 const jourStr = jour.toLocaleDateString("fr-FR");
                 setTimeout(() => {
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", estDoc);
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", estDoc);
                 }, 50);
 
 
