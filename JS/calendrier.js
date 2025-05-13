@@ -57,7 +57,7 @@ async function chargerEtAfficherRDV() {
                 const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
 
                 const estDoc = await estMedecin(nom);
-                //const couleurRdv = estDoc ? couleur : "black";
+                const couleurRdv = estDoc ? couleur : "black";
 
                 await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
             }
