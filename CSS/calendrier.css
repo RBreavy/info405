@@ -238,9 +238,9 @@
 
 .form-indisp {
     position: relative;
-    width: 280px;
-    height: 80%;
-    margin-right: 2vh;
+    width: 10vw;
+    height: 75%;
+    margin-right: 1vh;
     background-color: rgba(0, 0, 0, 0.2);
     padding: 10px;
     border-radius: 10px;
