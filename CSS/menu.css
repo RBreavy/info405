@@ -165,12 +165,12 @@ a:hover {
 
 .contact-images {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 1.5rem;
 }
 
 .contact-images img {
-  max-width: 200px;
+  max-width: 100px;
   height: auto;
 }
