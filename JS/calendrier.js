@@ -271,33 +271,36 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 box.style.backgroundColor = color;
                 //box.style.height = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3 + "px";
                 setTimeout(() => {
-                    const calculatedHeight = creneau.offsetHeight * (horaire_fin - horaire_debut + 1) - 3;
-                    const maxHeight = creneau.parentElement.offsetHeight - 10; // 10px buffer
-                    const height = Math.min(calculatedHeight, maxHeight);
-                    box.style.height = height + "px";
-
-                    const toggleButton = create("div", box, "Afficher les détails");
+                    // Set a fixed height per time unit instead of calculations
+                    const slots = horaire_fin - horaire_debut + 1;
+                    box.style.height = `calc(${slots} * var(--slot-height, 20px))`;
+                    box.style.maxHeight = "100%"; // Constrain to parent
+                    box.style.overflow = "hidden";
+                    
+                    // Simplified text based on available space
+                    const displayText = slots < 3 ? "+" : "Détails";
+                    const toggleButton = create("div", box, displayText);
                     toggleButton.classList.add("toggle_button");
-                    toggleButton.style.fontSize = height < 40 ? "0.6rem" : "1rem";
-
+                    
+                    // Rest of your code remains unchanged
                     const details = create("div", box);
                     details.classList.add("rdv_details");
                     details.style.display = "none";
-
+                    
                     const [day, month, year] = journee.split("/").map(Number);
                     const dateObj = new Date(year, month - 1, day);
-
+                    
                     create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
                     create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
-
+                    
                     if (estDoc) {
                         create("p", details, `Nom : ${nom}`);
                     }
-
+                    
                     toggleButton.addEventListener("click", () => {
                         details.style.display = details.style.display === "none" ? "block" : "none";
                     });
-                }, 50); 
+                }, 100);
             }
         }
     }
