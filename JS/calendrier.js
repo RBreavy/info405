@@ -440,3 +440,14 @@ async function diffEtMetAJourRDV(nouveauxRDV) {
 }
 
 // ^^^
+
+
+window.cal = {
+  date, 
+  offsetjour, 
+  indice_jour, 
+  estDoc, 
+  create_rdv, 
+  create, 
+  calcul_duree
+};

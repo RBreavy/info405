@@ -90,7 +90,14 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
         const id = <?php echo json_encode($_SESSION['user_id']); ?>;
     </script>
-    <script type="module" src="JS/patient.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const scriptModule = document.createElement('script');
+            scriptModule.type = "module";
+            scriptModule.src = "JS/patient.js";
+            document.body.appendChild(scriptModule);
+        });
+    </script>
 </body>
 
 </html>
