@@ -109,7 +109,7 @@ function setupEventListeners() {
     });
 }
 function displayIT(IndT) {
-    for (const IT of Indt) {
+    for (const IT of IndT) {
         const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
         const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
         
