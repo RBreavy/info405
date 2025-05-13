@@ -101,6 +101,7 @@ async function chargerEtAfficherRDV() {
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
+            console.log(dateDebutSemaine,dateFinSemaine);
 
             if ((debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
                 (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
