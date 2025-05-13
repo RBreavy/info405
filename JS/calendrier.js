@@ -45,6 +45,7 @@ async function chargerEtAfficherRDV() {
     
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
+    dateFinSemaine.setHours(23, 59, 59);
     
 
     try {
@@ -71,8 +72,6 @@ async function chargerEtAfficherRDV() {
                         let h_debut = 0; // 8h00
                         let h_fin = 71;  // 19h50
 
-                        console.log(currentDate);
-                        console.log(endDate.getDate());
                         
                         // Si c'est le premier jour de l'indisponibilité
                         if (currentDate.toDateString() === debutIndisp.toDateString()) {
