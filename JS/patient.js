@@ -1,4 +1,3 @@
-import { date, offsetjour, indice_jour, estDoc, create_rdv } from './module.js';
 let selectedDoctorId = null;
 let selectedDoctorName = null;
 
