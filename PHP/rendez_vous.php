@@ -114,7 +114,7 @@ $check2->execute();
 $check_result2 = $check2->get_result()->fetch_assoc();
 
 
-/*
+
 //check 3
 $check3 = $conn->prepare("
     SELECT COUNT(*) as count FROM IndisponibiliteRepetitive
@@ -127,7 +127,7 @@ $check3 = $conn->prepare("
 ");
 
 
-$jour_deb = date('D',$start);
+$jour_deb = $jour_deb = $start->format('D');
 $jour_map = [
     'MON' => 'LUN',
     'TUE' => 'MAR',
@@ -140,8 +140,8 @@ $jour_map = [
 $journee = $jour_map[$jour_deb];
 
 
-$h_deb = date('H:i',$data['date_debut']);
-$h_fin = date('H:i',$data['date_fin']);
+$h_deb = $start->format('H:i');
+$h_fin = $end->format('H:i');
 
 $check3->bind_param(
     "isssss",
@@ -154,9 +154,9 @@ $check3->bind_param(
 );
 
 $check3->execute();
-$check_result3 = $check3->get_result()->fetch_assoc();*/
+$check_result3 = $check3->get_result()->fetch_assoc();
 
-if ($check_result2['count'] > 0 /*|| $check_result3['count'] > 0*/) {
+if ($check_result2['count'] > 0 || $check_result3['count'] > 0) {
     echo json_encode([
         'success' => false,
         'message' => 'Ce créneau est indisponible!.'
