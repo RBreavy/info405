@@ -127,15 +127,15 @@ $check3 = $conn->prepare("
 ");
 
 
-$jour_deb = $jour_deb = $start->format('D');
+$jour_deb = $start->format('D');
 $jour_map = [
-    'MON' => 'LUN',
-    'TUE' => 'MAR',
-    'WED' => 'MER',
-    'THU' => 'JEU',
-    'FRI' => 'VEN',
-    'SAT' => 'SAM',
-    'SUN' => 'DIM'
+    'Mon' => 'LUN',
+    'Tue' => 'MAR',
+    'Wed' => 'MER',
+    'Thu' => 'JEU',
+    'Fri' => 'VEN',
+    'Sat' => 'SAM',
+    'Sun' => 'DIM'
 ];
 $journee = $jour_map[$jour_deb];
 
