@@ -9,6 +9,10 @@ if (indice_jour === 0) indice_jour = 7;
 let anciensRDV = [];
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('calendar-js-loaded');
+});
+
 
 async function estMedecin(nom) {
     const response = await fetch('/info2/site/PHP/get-data.php?action=doctors');
@@ -200,16 +204,21 @@ function creation_jour() {
 }
 
 function maj_semaine() {
+    document.body.classList.add('updating-calendar');
     maj_date();
     maj_id();
     maj_rdv();
 
-     setTimeout(() => {
-        const event = new CustomEvent('weekChanged');
+    setTimeout(() => {
+        const event = new CustomEvent('weekChanged', {
+            detail: { date, offsetjour, indice_jour }
+        });
         window.dispatchEvent(event);
         chargerEtAfficherRDV();
+        document.body.classList.remove('updating-calendar');
     }, 1000);
 }
+
 
 function maj_date() {
     const jours = document.querySelectorAll(".jour");

@@ -3,8 +3,15 @@ let selectedDoctorId = null;
 let selectedDoctorName = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadDoctors();
-    setupEventListeners();
+    if (document.body.classList.contains('calendar-js-loaded')) {
+        loadDoctors();
+        setupEventListeners();
+    } else {
+        window.addEventListener('load', () => {
+            loadDoctors();
+            setupEventListeners();
+        });
+    }
 });
 
 async function loadDoctors() {
