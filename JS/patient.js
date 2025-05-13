@@ -115,7 +115,6 @@ function setupEventListeners() {
     });
 }
 function displayI(IndT,IndR = null) {
-    console.log("ref")
     const dateDebutSemaine = new Date(date);
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
     
@@ -124,17 +123,14 @@ function displayI(IndT,IndR = null) {
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
     dateFinSemaine.setHours(23, 59, 59);
     for (const IT of IndT) {
-        console.log("dzedzd")
         const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
         const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
         
-        console.log(debutIndisp)
         // Vérifier si l'indisponibilité est dans la semaine affichée
         if ((debutIndisp >= dateDebutSemaine && debutIndisp <= dateFinSemaine) ||
             (finIndisp >= dateDebutSemaine && finIndisp <= dateFinSemaine) ||
             (debutIndisp <= dateDebutSemaine && finIndisp >= dateFinSemaine)) {
-            
-            console.log("debug patient")
+
             // Parcourir chaque jour de l'indisponibilité
             let currentDate = new Date(Math.max(debutIndisp, dateDebutSemaine));
             
