@@ -47,7 +47,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
         </article>
 
-        <script type="module" src="/info2/site/JS/calendrier.js"></script>
+        <script src="/info2/site/JS/calendrier.js"></script>
 
         <article>
             <!-- nom des medecins -->
