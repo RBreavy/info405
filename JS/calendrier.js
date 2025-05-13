@@ -1,12 +1,12 @@
-import { create_rdv, create, calcul_duree, date } from "./module.js";
+import { create_rdv, create, calcul_duree, date} from "./module.js";
 // Récupère la date actuelle au format français (JJ/MM/AAAA)
-let [day, month, year] = dateString.split('/').map(Number);
 
-let indice_jour = date.getDay();
-let offsetjour = 0;
+const [day, month, year] = dateString.split('/').map(Number);
+
+var indice_jour = date.getDay();
+var offsetjour = 0;
 if (indice_jour === 0) indice_jour = 7;
-let anciensRDV = [];
-
+var anciensRDV = [];
 
 
 async function estMedecin(nom) {
