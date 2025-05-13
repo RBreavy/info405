@@ -7,7 +7,7 @@ let indice_jour = date.getDay();
 let offsetjour = 0;
 if (indice_jour === 0) indice_jour = 7;
 let anciensRDV = [];
-const estDoc = await estMedecin(nomUtilisateur);
+
 
 
 async function estMedecin(nom) {
@@ -16,11 +16,12 @@ async function estMedecin(nom) {
     return tableauDOC.some(doc => doc.nom === nom);
 }
 
+const estDoc = estMedecin(nomUtilisateur);
+
 const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
     
     [year, month, day] = dateInput.value.split("-").map(Number);
-    console.log(dateInput.value);
     if (year >= 2000 && year <= 2100) {
         console.log("Date sélectionnée:", dateInput.value);
         dateInput.value = "";
@@ -40,11 +41,11 @@ maj_semaine();
 async function chargerEtAfficherRDV() {
     const dateDebutSemaine = new Date(date);
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
-    console.log(dateDebutSemaine);
+    
     
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
-
+    
 
     try {
 
@@ -65,6 +66,7 @@ async function chargerEtAfficherRDV() {
                     let currentDate = new Date(Math.max(debutIndisp, dateDebutSemaine));
                     
                     const endDate = new Date(Math.min(finIndisp, dateFinSemaine));
+                    console.log(endDate.getDate());
                     while (currentDate <= endDate) {
                         const jourStr = currentDate.toLocaleDateString("fr-FR");
                         let h_debut = 0; // 8h00
@@ -98,7 +100,6 @@ async function chargerEtAfficherRDV() {
             
         }
         const tableauRDV = await result.json();
-        console.log(tableauRDV);
 
         for (const rdv of tableauRDV) {
             const nom = rdv.nom_utilisateur;
@@ -178,7 +179,6 @@ function maj_date() {
     const jours = document.querySelectorAll(".jour");
     jours.forEach((e, index) => {
         const datetemp = new Date(year, month - 1, day);
-        console.log("test"+index);
         datetemp.setDate(date.getDate() + index + offsetjour + 1 - indice_jour);
         const date_jour = datetemp.toLocaleDateString();
         e.id = date_jour;
