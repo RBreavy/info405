@@ -164,9 +164,9 @@
     width: 40%;
     color: rgb(255, 255, 255);
     background-color: white;
-    border-radius: 50px;
+    border-radius: 10px;
+    border-color: white;
     padding: 4px;
-    border-radius: 3px;
 }
 
 
