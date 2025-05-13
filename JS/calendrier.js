@@ -39,8 +39,18 @@ async function chargerEtAfficherRDV() {
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
 
     try {
-        const response = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
-        const tableauRDV = await response.json();
+        const rdv = await fetch('/info2/site/PHP/get-data.php?action=rdvs');
+        const tableauRDV = await rdv.json();
+        const estDoc = await estMedecin(nom);
+        if (!estDoc) {
+            const indispt = await fetch('/info2/site/PHP/get-data.php?action=getIT');
+            const tableauIT = await indispt.json();
+            for (const IT of indispt) {
+                //code ici
+            }
+
+        }
+
 
         for (const rdv of tableauRDV) {
             const nom = rdv.nom_utilisateur;
@@ -56,7 +66,6 @@ async function chargerEtAfficherRDV() {
                 const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
                 const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
 
-                //const estDoc = await estMedecin(nom);
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
