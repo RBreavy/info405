@@ -56,12 +56,8 @@ async function chargerEtAfficherRDV() {
                 const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
                 const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
 
-                const dureeMinutes = (fin - debut) / 60000;
-                let couleurRdv = "gray";
-
-                if (dureeMinutes <= 10) couleurRdv = "#b6fcb6"; 
-                else if (dureeMinutes <= 20) couleurRdv = "#ffe0b3";  
-                else if (dureeMinutes <= 30) couleurRdv = "#ffb3b3"; 
+                const estDoc = await estMedecin(nom);
+                const couleurRdv = estDoc ? couleur : "grey";
 
                 await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
             }

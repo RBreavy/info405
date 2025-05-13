@@ -34,6 +34,7 @@ $id_med = htmlspecialchars($_SESSION['user_id']);
 <body>
     <div class="banner">
         <img src="images/logo.png" alt="Logo" class="banner-logo">
+        <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, Dr. <?php echo $nom; ?></div>
         <span class="menu-icon" onclick="openNav()">☰</span>
     </div>
 
@@ -45,7 +46,7 @@ $id_med = htmlspecialchars($_SESSION['user_id']);
 
 
 
-    <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, Dr. <?php echo $nom; ?></div>
+
 
     <section class="main_cal">
         <article class="selecteur">
