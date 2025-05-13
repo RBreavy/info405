@@ -1,137 +1,167 @@
+/* Textes généraux */
 p {
-    font-family: "URW Chancery L", cursive;
-    font-size:30px;
-    
+  font-family: "URW Chancery L", cursive;
+  font-size: 1.8rem;
+  margin: 0.5rem 0;
 }
 
-h1 {   
-    font-family: "URW Chancery L", cursive;
-    font-size:50px;
-    text-align: center;
-}
-
+h1,
 h2 {
-    font-family: "URW Chancery L", cursive;
-    font-size:50px;
+  font-family: "URW Chancery L", cursive;
+  font-size: 3rem;
+  text-align: center;
+  margin: 1rem 0;
 }
 
-
+/* Bannière */
 .banner {
-    background: linear-gradient(135deg, #042763,#4f0999);
-    color: white;
-    padding: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 6px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 20px;
+  background: linear-gradient(135deg, #042763, #4f0999);
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
 }
 
 .banner img {
-    height: 100px;
-    width: 160px;
-    object-fit: contain;
-    object-position:center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 6em;
+  width: 5rem;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
 }
 
+/* Corps */
 body {
-    background: linear-gradient(135deg, #042763,#4f0999);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: 0;
-    height: 100vh;
+  background: linear-gradient(35deg, #042763, #4f0999);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  min-height: 100vh;
 }
 
+/* Menu déroulant */
 .dropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
-.dropbtn a{
-    background-color: #5e41a1;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 5px;
+.dropbtn a {
+  background-color: #5e41a1;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: white;
-    min-width: 150px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .dropdown-content a {
-    color: black;
-    background-color: #ffffff;
-    padding: 10px 15px;
-    text-decoration: none;
-    display: block;
-    border-radius: 5px;
-
+  color: black;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  display: block;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 .dropdown-content a:hover {
-    background-color: #a3a3a3;
-    border-radius: 5px;
+  background-color: #a3a3a3;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
-    border-radius: 5px;
+  display: block;
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #440875;
+  background-color: #440875;
 }
 
+/* Images générales */
 img {
-    width: 180px;
-    height: 150px;
-    border-radius: 5px;
-    margin-left: auto; 
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  border-radius: 5px;
+  margin: 0 auto;
 }
 
+/* Tableau centré */
 table {
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-  }
+  margin: 0 auto;
+  width: 90%;
+}
 
-  .accueil {
-  min-height: calc(100vh - 80px);
+/* Section principale centrée */
+.accueil {
+  min-height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
-  padding: 5vh 2rem;
+  padding: 3rem 2rem;
   color: white;
   animation: apparition 1.5s ease;
 }
 
+/* Texte centré avec wrap */
 .texte {
   display: flex;
-  flex-wrap: wrap;             
-  align-items: center;         
-  justify-content: center;    
-  gap: 2rem;                   
-  padding: 6rem 2rem;         
-  color: white;               
-  text-align: center;           
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 3rem 2rem;
+  color: white;
+  text-align: center;
 }
 
+/* Responsive design */
+@media (max-width: 768px) {
+  h1, h2 {
+    font-size: 2.2rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  .banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .accueil {
+    padding-top: 2rem;
+    min-height: auto;
+  }
+
+  .texte {
+    padding: 2rem 1rem;
+  }
+
+  .dropbtn a {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
 
