@@ -92,7 +92,7 @@ if ($check_result['count'] > 0) {
     exit;
 }
 
-/*
+
 //check 2
 $check2 = $conn->prepare("
     SELECT COUNT(*) as count FROM IndisponibiliteTemporaire
@@ -112,7 +112,7 @@ $check2->bind_param(
 );
 $check2->execute();
 $check_result2 = $check2->get_result()->fetch_assoc();
-*/
+
 
 
 //check 3
@@ -126,6 +126,7 @@ $check3 = $conn->prepare("
     )
 ");
 
+/*
 $jour_deb = date('D',$start);
 $jour_map = [
     'MON' => 'LUN',
@@ -137,10 +138,11 @@ $jour_map = [
     'SUN' => 'DIM'
 ];
 $journee = $jour_map[$jour_deb];
-
+*/
+$journee = "LUN";
 
 $check3->bind_param(
-    "issss",
+    "isssss",
     $data['id_medecin'],
     $journee,
     date('H:i',$data['date_fin']),
