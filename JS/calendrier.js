@@ -96,7 +96,7 @@ async function chargerEtAfficherRDV() {
                 }
             }
         } else {
-            var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_patient=${userId}`);
+            var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_patient=${id}`);
             
             
         }
