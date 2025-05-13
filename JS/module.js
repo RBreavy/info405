@@ -1,4 +1,10 @@
 export const date = new Date(year, month - 1, day);
+export const [day, month, year] = dateString.split('/').map(Number);
+
+export var indice_jour = date.getDay();
+export var offsetjour = 0;
+if (indice_jour === 0) indice_jour = 7;
+export var anciensRDV = [];
 
 export function calcul_duree(start, duration) {
     const total_start = 8 * 60 + start * 10;
