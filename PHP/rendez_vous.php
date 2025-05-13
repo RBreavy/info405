@@ -92,6 +92,7 @@ if ($check_result['count'] > 0) {
     exit;
 }
 
+/*
 //check 2
 $check2 = $conn->prepare("
     SELECT COUNT(*) as count FROM IndisponibiliteTemporaire
@@ -135,7 +136,7 @@ $jour_map = [
 ];
 $journee = $jour_map[$jour_deb];
 
-/*
+
 $check3->bind_param(
     "issss",
     $data['id_medecin'],
@@ -146,15 +147,15 @@ $check3->bind_param(
     date('H:i',$data['date_fin']),
 );
 $check3->execute();
-$check_result3 = $check3->get_result()->fetch_assoc();*/
+$check_result3 = $check3->get_result()->fetch_assoc();
 
-if ($check_result2['count'] > 0 /*|| $check_result3['count'] > 0*/) {
+if ($check_result2['count'] > 0 || $check_result3['count'] > 0) {
     echo json_encode([
         'success' => false,
         'message' => 'Ce créneau est indisponible!.'
     ]);
     exit;
-}
+} */
 
 // Insertion du nouveau rendez-vous
 $stmt = $conn->prepare("
