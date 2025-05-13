@@ -45,7 +45,7 @@ async function chargerEtAfficherRDV() {
     
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
-    console.log(dateFinSemaine);
+    
 
     try {
 
@@ -66,6 +66,7 @@ async function chargerEtAfficherRDV() {
                     let currentDate = new Date(Math.max(debutIndisp, dateDebutSemaine));
                     
                     const endDate = new Date(Math.min(finIndisp, dateFinSemaine));
+                    console.log(endDate.getDate());
                     while (currentDate <= endDate) {
                         const jourStr = currentDate.toLocaleDateString("fr-FR");
                         let h_debut = 0; // 8h00
