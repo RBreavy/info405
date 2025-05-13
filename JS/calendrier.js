@@ -41,8 +41,6 @@ async function chargerEtAfficherRDV() {
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
 
     try {
-
-        
         const estDoc = await estMedecin(nomUtilisateur);
         if (estDoc) {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
@@ -101,6 +99,7 @@ async function chargerEtAfficherRDV() {
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
+            
 
             if ((debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
                 (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
@@ -133,7 +132,7 @@ function create(tag, container, text = null) {
 
 function creation_jour() {
     // vide les jours
-    main.innerHTML = "";
+    //main.innerHTML = "";
 
     for (let i = 0; i < 7; i++) {
         let datetemp = new Date();
@@ -189,7 +188,7 @@ function maj_id() {
 }
 
 function maj_rdv() {
-    document.querySelectorAll(".rdv:not(.form-indisp)").forEach(e => e.remove());
+    document.querySelectorAll(".rdv").forEach(e => e.remove());
     document.querySelectorAll(".custom_bg_color").forEach(e => {
         e.classList.remove("custom_bg_color", "custom_border_top", "invisible_border_top", "invisible_border_bottom");
     });
