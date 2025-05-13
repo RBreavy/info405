@@ -63,7 +63,6 @@ async function chargerEtAfficherRDV() {
                     let currentDate = new Date(Math.max(debutIndisp, dateDebutSemaine));
                     
                     const endDate = new Date(Math.min(finIndisp, dateFinSemaine));
-                    console.log(new date(dateDebutSemaine));
                     while (currentDate <= endDate) {
                         const jourStr = currentDate.toLocaleDateString("fr-FR");
                         let h_debut = 0; // 8h00
@@ -141,6 +140,10 @@ function creation_jour() {
     for (let i = 0; i < 7; i++) {
         let datetemp = new Date();
         datetemp.setDate(date.getDate() + i + 1 - indice_jour);
+        if (i == 0) {
+            console.log(datetemp);
+        }
+        
 
         const div_jour = create("div", main);
         div_jour.classList.add("jour");
