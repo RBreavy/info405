@@ -46,18 +46,27 @@ function getAllRdvs($start = null, $end = null)
     }
 }
 
-
-
 function creer_rdv($id_medecin, $date_debut, $date_fin, $id_utilisateur, $couleur)
 {
     global $conn;
     try {
-        $query = "INSERT INTO rdv (id_medecin, id_utilisateurs, date_debut, date_fin, couleur)  
-                  VALUES ($id_medecin, $id_utilisateur, '$date_debut', '$date_fin', '$couleur')";
+        $query = "SELECT debut_periode, fin_periode FROM IndisponibiliteTemporaire WHERE id_medecin = $id";
         $result = mysqli_query($conn, $query);
-        return ['success' => $result];
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
     } catch (Exception $e) {
-        return ['error' => $e->getMessage()];
+        return ["error"=> $e->getMessage()];
+    }
+}
+
+function getAllIndispR($id) 
+{
+    global $conn;
+    try {
+        $query = "SELECT journee, heure_debut, heure_fin FROM IndisponibiliteRepetitive WHERE id_medecin = $id";
+        $result = mysqli_query($conn, $query);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    } catch (Exception $e) {
+        return ["error"=> $e->getMessage()];
     }
 }
 
@@ -85,27 +94,6 @@ function getRdvsByDoctor($id_medecin)
     }
 }
 
-function getIndispTemp($id_medecin){
-    global $conn;
-    try {
-        $query = "SELECT * FROM IndisponibiliteTemporaire WHERE id_medecin = $id_medecin";
-        $result = mysqli_query($conn, $query);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
-    } catch (Exception $e) {
-        return ['error' => $e->getMessage()];
-    }
-}
-
-function getIndispRepet($id_medecin){
-    global $conn;
-    try {
-        $query = "SELECT * FROM IndisponibiliteRepetitive WHERE id_medecin = $id_medecin";
-        $result = mysqli_query($conn, $query);
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
-    } catch (Exception $e) {
-        return ['error' => $e->getMessage()];
-    }
-}
 
 $action = $_GET['action'] ?? 'rdvs';
 header('Content-Type: application/json');
@@ -129,11 +117,11 @@ switch ($action) {
         break;
     case 'getIT':
         $id = $_GET['id_medecin'];
-        echo json_encode(getIndispTemp($id));
+        echo json_encode(getAllIndispT($id));
         break;
     case 'getIR':
         $id = $_GET['id_medecin'];
-        echo json_encode(getIndispRepet($id));
+        echo json_encode(getAllIndispR($id));
         break;
 }
 ?>
