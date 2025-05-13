@@ -90,7 +90,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
         const id = <?php echo json_encode($_SESSION['user_id']); ?>;
     </script>
-    <script defer type="module" src="JS/patient.js"></script>
+    <script type="module" src="JS/patient.js"></script>
 </body>
 
 </html>
