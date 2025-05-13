@@ -4,23 +4,30 @@ ini_set('display_errors', 0);
 
 include_once "../index/db_connect.php";
 
-function getAllRdvs($start = null, $end = null)
+function getAllRdvs($start = null, $end = null, $id_medecin = null, $id_patient = null)
 {
     global $conn;
+
+
     try {
-        $where = "";
+        if ($id_medecin == null) {
+            $where = "WHERE r.id_utilisateurs = $id_patient";
+        } else {
+            $where = "WHERE r.id_medecin = $id_medecin";
+        }
+        
         if ($start !== null && $end !== null) {
-            // Reformater les dates
             $start = DateTime::createFromFormat('d/m/Y', $start)->format('Y-m-d');
             $end = DateTime::createFromFormat('d/m/Y', $end)->format('Y-m-d');
 
             $start = mysqli_real_escape_string($conn, $start);
             $end = mysqli_real_escape_string($conn, $end);
-            $where = "WHERE r.date_debut >= '$start' AND r.date_debut <= '$end'";
+
+            $where .= " AND r.date_debut >= '$start' AND r.date_debut <= '$end'";
         }
 
         $query = "SELECT m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
-                         r.date_debut, r.date_fin, r.couleur
+                         r.date_debut, r.date_fin, r.couleur,
                          TIMESTAMPDIFF(MINUTE, r.date_debut, r.date_fin) AS duration
                   FROM rdv r
                   JOIN medecin m ON r.id_medecin = m.id_medecin 
@@ -40,18 +47,31 @@ function getAllRdvs($start = null, $end = null)
 }
 
 
-function creer_rdv($id_medecin, $date_debut, $date_fin, $id_utilisateur, $couleur)
+
+function getAllIndispR($id) 
 {
     global $conn;
     try {
-        $query = "INSERT INTO rdv (id_medecin, id_utilisateurs, date_debut, date_fin, couleur)  
-                  VALUES ($id_medecin, $id_utilisateur, '$date_debut', '$date_fin', '$couleur')";
+        $query = "SELECT journee, heure_debut, heure_fin FROM IndisponibiliteRepetitive WHERE id_medecin = $id";
         $result = mysqli_query($conn, $query);
-        return ['success' => $result];
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
     } catch (Exception $e) {
-        return ['error' => $e->getMessage()];
+        return ["error"=> $e->getMessage()];
     }
 }
+function getAllIndispT($id) 
+{
+    global $conn;
+    try {
+        $query = "SELECT debut_periode, fin_periode FROM IndisponibiliteTemporaire WHERE id_medecin = $id";
+        $result = mysqli_query($conn, $query);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    } catch (Exception $e) {
+        return ["error"=> $e->getMessage()];
+    }
+}
+
+
 
 function getAllDoctors()
 {
@@ -77,6 +97,7 @@ function getRdvsByDoctor($id_medecin)
     }
 }
 
+
 $action = $_GET['action'] ?? 'rdvs';
 header('Content-Type: application/json');
 
@@ -95,7 +116,17 @@ switch ($action) {
     case 'rdvs':
         $start = $_GET['start_date'] ?? null;
         $end = $_GET['end_date'] ?? null;
-        echo json_encode(getAllRdvs($start, $end));
+        $id_med = $_GET['id_medecin'] ?? null;
+        $id_pat = $_GET['id_patient'] ?? null;
+        echo json_encode(getAllRdvs($start, $end, $id_med, $id_pat));
+        break;
+    case 'getIT':
+        $id = $_GET['id_medecin'];
+        echo json_encode(getAllIndispT($id));
+        break;
+    case 'getIR':
+        $id = $_GET['id_medecin'];
+        echo json_encode(getAllIndispR($id));
         break;
 }
 ?>

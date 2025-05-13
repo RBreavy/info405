@@ -1,36 +1,18 @@
-.rdv-duration-10 {
-    background-color: #a8e6cf !important;
-    border-color: #88c6b3 !important;
+.rdv {
+    color: black !important; 
+    font-size: 0.8em;
 }
 
-.rdv-duration-20 {
-    background-color: #ffd3b6 !important; 
-    border-color: #dfb396 !important;
+.rdv :hover{
+    cursor: pointer;
 }
-
-.rdv-duration-30 {
-    background-color: #ffaaa5 !important;
-    border-color: #df8a85 !important;
-}
-
-/* Preserve existing color classes */
-.rdv-color-red {
-    background-color: #ffcccc !important;
-    border-color: #ff9999 !important;
-}
-
-.rdv-color-orange {
-    background-color: #ffdd99 !important;
-    border-color: #ffbb66 !important;
-}
-
 
 
 .main_cal {
     position: relative;
     /*width: 95vw;
     justify-content: flex-start;*/
-    height: 70vh;
+    height: 80vh;
     
     display: flex;
     flex-direction: row;
@@ -38,9 +20,9 @@
     align-items: flex-end;
     
     margin: 10px;
-    background-image: linear-gradient(to bottom right, rgba(255,255,255,0.66), rgba(0,61,91,0.66));
-    backdrop-filter: blur(5px);
-    padding: 0 25px 25px 3.5%;
+    
+    
+    padding: 0 12.5% 20% 25%;
     border-radius: 10px;
 }
 
@@ -115,7 +97,7 @@
 }
 
 .heure {
-    color: black;
+    color: white;
     z-index: 1;
     margin-right: 5px;
     font-size:1vw;
@@ -125,11 +107,9 @@
     position: absolute;
     width: 40vw;
     height: 5vh;
-    background-color: rgba(157, 157, 157, 0.5);
     top: 5px;
     left: 35%;
     margin-left: -10%;
-    border-radius: 40px;
     transition: box-shadow 0.5s ease-in; 
     display: flex;
     flex-direction: row;
@@ -139,45 +119,36 @@
     column-gap: 10%;
 }
 
-.selecteur:hover {
-    box-shadow: 0 0 3px 2px white;
-}
-
 .selecteur_droit, .selecteur_gauche {
     width: 4.5%;
     height: 70%;
-    border-radius: 30px;
-    box-shadow: 0 0 0 1px black;
     background-size: 100%;
     background-position: center;
     transition: background-size 0.5s ease-in-out;
 }
 
 .selecteur_gauche {
-    background-image: url("/info2/site/images/arrow_l.jpg");
-    background-color: white;
+    background-image: url("/info2/site/images/arrow_l.png");
     background-repeat: no-repeat;
 }
 
 .selecteur_droit {
-    background-image: url("/info2/site/images/arrow_r.jpg");
-    background-color: white;
+    background-image: url("/info2/site/images/arrow_r.png");
     background-repeat: no-repeat;
 }
 
 
 .selecteur_droit:hover , .selecteur_gauche:hover {
-    background-size: 110%;
+    background-size: 130%;
 }
 
 #calendrier {
-    background-color: rgba(0, 0, 0, 0);
     width: 40%;
-    color: white;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    border-radius: 10px;
+    border-color: white;
     padding: 4px;
-    border: solid 1px black;
-    border-radius: 3px;
-    text-shadow: 1px 1px 1px black;
 }
 
 
@@ -270,15 +241,13 @@
     position: relative;
     width: 280px;
     height: 80%;
-    margin-left: 60px;
+    margin-left: auto;
     background-color: rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
-    /*
-    margin-top: 60px;
-    text-align: center;
-    align-self: flex-end;*/
+    flex-shrink: 0;
 }
+
 
 .tabs {
     display: flex;
@@ -403,7 +372,7 @@
 .rdv_details {
     display: block;
     max-height: 1000px;  /* Suffisamment grand pour afficher le contenu */
-    background-color: black;  /* Fond noir */
+    background-color: rgba(0, 0, 0, 0.288);  /* Fond noir */
     color: white;  /* Texte en blanc pour plus de visibilité */
     padding: 10px;  /* Optionnel, pour espacer le texte */
 }

@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION[
 
 // Récupération du nom depuis la session
 $nom = htmlspecialchars($_SESSION['nom']);
-
+$id_med = htmlspecialchars($_SESSION['user_id']);
 
 
 ?>
@@ -18,6 +18,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 <script>
     const nomUtilisateur = <?php echo json_encode($nom); ?>;
+    const id = <?php echo json_encode($id_med); ?>;
 </script>
 
 <head>
@@ -33,6 +34,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 <body>
     <div class="banner">
         <img src="images/logo.png" alt="Logo" class="banner-logo">
+        <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, Dr. <?php echo $nom; ?></div>
         <span class="menu-icon" onclick="openNav()">☰</span>
     </div>
 
@@ -44,7 +46,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 
 
-    <div id="welcome-message" style="margin: 20px; font-size: 18px;">Bienvenue, Dr. <?php echo $nom; ?></div>
+
 
     <section class="main_cal">
         <article class="selecteur">
@@ -100,7 +102,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 
 <script src="/info2/site/JS/calendrier.js"></script>
-<script src="form_doc.js"></script>
-<script src="JS/docteur.js"></script>
+<script src="/info2/site/form_doc.js"></script>
+<script src="/info2/site/JS/docteur.js"></script>
 
 </html>

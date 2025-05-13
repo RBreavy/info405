@@ -5,12 +5,18 @@
   box-sizing: border-box;
 }
 
+header img {
+  height: 100%;
+  max-height: 60px;
+  width: auto;
+}
+
 html, body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(180deg, #093580, #400480);
+  background: linear-gradient(to bottom right, #093580, #400480);
 }
 
 

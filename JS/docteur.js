@@ -12,6 +12,7 @@ function openNav() {
     document.getElementById("mySidenav").style.left = "0";
 }
 
+
 function closeNav() {
     document.getElementById("mySidenav").style.left = "-250px";
 }
@@ -33,4 +34,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }, 100);
+});
+
+// vvv
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.querySelectorAll('.rdv').forEach(rdv => {
+            if (!rdv.className.includes('light') && !rdv.className.includes('red')) {
+                rdv.classList.add('lightgreen'); 
+            }
+        });
+    }, 1000);
 });

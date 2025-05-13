@@ -4,11 +4,12 @@
     background: linear-gradient(135deg, #042763,#4f0999);
     font-size: 30px;
     padding : 15px;
-    height: 15vh;
+    height: 10vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     text-align: center;
+    
 }
 
 
@@ -28,13 +29,14 @@
 
 
 body {
-    background-image: url("/info2/site/images/fond.png");
-    background-size: cover;
-    background-position: center;
+    background-image: url("/info2/site/images/Fond_DP.png");
+    background-size: 100%; 
+    background-repeat: no-repeat;
     margin: 0;
-    height: 100%;
     color: white;
     overflow: hidden;
+    background-position: center center; 
+  background-attachment: fixed;
 }
 
 * {

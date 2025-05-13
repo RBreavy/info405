@@ -72,6 +72,7 @@ $check = $conn->prepare("
         (date_debut >= ? AND date_debut < ?)
     )
 ");
+
 $check->bind_param(
     "issss",
     $data['id_medecin'],
@@ -90,6 +91,78 @@ if ($check_result['count'] > 0) {
     ]);
     exit;
 }
+
+
+//check 2
+$check2 = $conn->prepare("
+    SELECT COUNT(*) as count FROM IndisponibiliteTemporaire
+    WHERE id_medecin = ? 
+    AND (
+        (debut_periode < ? AND fin_periode > ?) OR
+        (debut_periode >= ? AND debut_periode < ?)
+    )
+");
+$check2->bind_param(
+    "issss",
+    $data['id_medecin'],
+    $data['date_fin'],
+    $data['date_debut'],
+    $data['date_debut'],
+    $data['date_fin']
+);
+$check2->execute();
+$check_result2 = $check2->get_result()->fetch_assoc();
+
+
+
+//check 3
+$check3 = $conn->prepare("
+    SELECT COUNT(*) as count FROM IndisponibiliteRepetitive
+    WHERE id_medecin = ?
+    AND journee = ?
+    AND (
+        (heure_debut < ? AND heure_fin > ?) OR
+        (heure_debut >= ? AND heure_debut < ?)
+    )
+");
+
+
+$jour_deb = $start->format('D');
+$jour_map = [
+    'Mon' => 'LUN',
+    'Tue' => 'MAR',
+    'Wed' => 'MER',
+    'Thu' => 'JEU',
+    'Fri' => 'VEN',
+    'Sat' => 'SAM',
+    'Sun' => 'DIM'
+];
+$journee = $jour_map[$jour_deb];
+
+
+$h_deb = $start->format('H:i');
+$h_fin = $end->format('H:i');
+
+$check3->bind_param(
+    "isssss",
+    $data['id_medecin'],
+    $journee,
+    $h_fin,
+    $h_deb,
+    $h_deb,
+    $h_fin
+);
+
+$check3->execute();
+$check_result3 = $check3->get_result()->fetch_assoc();
+
+if ($check_result2['count'] > 0 || $check_result3['count'] > 0) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Ce créneau est indisponible!.'
+    ]);
+    exit;
+} 
 
 // Insertion du nouveau rendez-vous
 $stmt = $conn->prepare("
