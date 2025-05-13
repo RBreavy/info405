@@ -62,6 +62,7 @@ async function chargerEtAfficherRDV() {
                 await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
             }
         }
+        await diffEtMetAJourRDV(tableauRDV);
     } catch (error) {
         console.error('Erreur lors du chargement des RDV:', error);
     }
@@ -258,18 +259,44 @@ boutonD.addEventListener('click', () => {
 
 
 // vvv
-function createAppointmentElement(appointment) {
-    const element = document.createElement('div');
-    element.className = `rdv ${appointment.couleur}`; 
-    element.textContent = appointment.nom_medecin || appointment.nom_utilisateur;
-    return element;
+let anciensRDV = [];
+
+function rdvsIdentiques(a, b) {
+    return a.nom_utilisateur === b.nom_utilisateur &&
+           a.date_debut === b.date_debut &&
+           a.date_fin === b.date_fin;
 }
 
+async function diffEtMetAJourRDV(nouveauxRDV) {
+    const ajoutes = [];
 
-document.querySelectorAll('.creneau').forEach(slot => {
-    if (slot.hasAppointment) { 
-        const appointmentElement = createAppointmentElement(slot.appointmentData);
-        slot.appendChild(appointmentElement);
+    // Supprimer tous les anciens éléments RDV
+    document.querySelectorAll('.rdv').forEach(e => e.remove());
+
+    for (const nouveau of nouveauxRDV) {
+        const existeDeja = anciensRDV.some(ancien => rdvsIdentiques(ancien, nouveau));
+        if (!existeDeja) {
+            ajoutes.push(nouveau);
+        }
     }
-});
+
+    for (const rdv of ajoutes) {
+        const nom = rdv.nom_utilisateur;
+        const couleur = rdv.couleur;
+        const debut = new Date(rdv.date_debut.replace(' ', 'T'));
+        const fin = new Date(rdv.date_fin.replace(' ', 'T'));
+
+        const jourStr = debut.toLocaleDateString("fr-FR");
+        const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
+        const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
+
+        const estDoc = await estMedecin(nom);
+        const couleurRdv = estDoc ? couleur : "black";
+
+        await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom);
+    }
+
+    anciensRDV = nouveauxRDV;
+}
+
 // ^^^
