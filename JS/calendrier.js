@@ -90,7 +90,7 @@ async function chargerEtAfficherRDV() {
                         }
                         
                         setTimeout(() => {
-                            document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
+                            //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
                             create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", estDoc);
                         }, 50);
                         
