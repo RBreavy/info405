@@ -199,8 +199,17 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 details.classList.add("rdv_details");
                 details.style.display = "none";
 
-                const dateObj = new Date(journee);
-                create("p", details, `Date : ${dateObj.toLocaleDateString()}`);
+                // Crée une vraie date avec heure approximative pour affichage lisible
+                const dateParts = journee.split("-");
+                const startHour = 8 + Math.floor(horaire_debut / 3); // chaque creneau = 20 min
+                const startMin = (horaire_debut % 3) * 20;
+
+                const dateObj = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], startHour, startMin);
+
+                const dateStr = dateObj.toLocaleDateString("fr-FR");
+                const timeStr = dateObj.toLocaleTimeString("fr-FR", { hour: '2-digit', minute: '2-digit' });
+
+                create("p", details, `Date : ${dateStr} à ${timeStr}`);
 
                 if (estDoc) {
                     create("p", details, nom);
@@ -214,8 +223,6 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
     }
 }
-
-
 
 
 // Navigation gauche/droite entre les semaines avec animation
