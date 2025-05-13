@@ -220,6 +220,9 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
     }
 }
 
+
+
+
 // Navigation gauche/droite entre les semaines avec animation
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
 const boutonD = document.getElementsByClassName("selecteur_droit")[0];
