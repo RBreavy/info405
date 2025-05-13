@@ -81,6 +81,7 @@ async function chargerEtAfficherRDV() {
                         // Si c'est le dernier jour de l'indisponibilité
                         if (currentDate.toDateString() === finIndisp.toDateString()) {
                             h_fin = (finIndisp.getHours() - 8) * 6 + Math.floor(finIndisp.getMinutes() / 10) - 1;
+                            console.log("test");
                         }
                         
                         setTimeout(() => {
