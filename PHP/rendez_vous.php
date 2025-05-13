@@ -141,14 +141,17 @@ $journee = $jour_map[$jour_deb];
 */
 $journee = "LUN";
 
+$h_deb = date('H:i',$data['date_debut']);
+$h_fin = date('H:i',$data['date_fin']);
+
 $check3->bind_param(
     "isssss",
     $data['id_medecin'],
     $journee,
-    date('H:i',$data['date_fin']),
-    date('H:i',$data['date_debut']),
-    date('H:i',$data['date_debut']),
-    date('H:i',$data['date_fin'])
+    $h_fin,
+    $h_deb,
+    $h_deb,
+    $h_fin
 );
 
 /*$check3->execute();
