@@ -201,10 +201,10 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 
                 const dateObj = new Date(journee);
                 create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
+                create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
 
                 if (estDoc) {
                     create("p", details, nom);
-                    create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
                 }
 
                 toggleButton.addEventListener("click", () => {

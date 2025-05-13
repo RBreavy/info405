@@ -77,6 +77,28 @@ function getRdvsByDoctor($id_medecin)
     }
 }
 
+function getIndispTemp($id_medecin){
+    global $conn;
+    try {
+        $query = "SELECT * FROM IndisponibiliteTemporaire WHERE id_medecin = $id_medecin";
+        $result = mysqli_query($conn, $query);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    } catch (Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
+}
+
+function getIndispRepet($id_medecin){
+    global $conn;
+    try {
+        $query = "SELECT * FROM IndisponibiliteRepetitive WHERE id_medecin = $id_medecin";
+        $result = mysqli_query($conn, $query);
+        return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    } catch (Exception $e) {
+        return ['error' => $e->getMessage()];
+    }
+}
+
 $action = $_GET['action'] ?? 'rdvs';
 header('Content-Type: application/json');
 
