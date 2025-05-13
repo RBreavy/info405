@@ -54,19 +54,20 @@ main {
   background: linear-gradient(135deg, #042763, #4f0999);
   color: white;
   padding: 3rem 2rem;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: bold;
   border-radius: 6px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.2rem;
   text-align: center;
 }
 
 .banner img {
   width: 7rem;
+  height: auto;
   object-fit: contain;
   margin: 0 auto;
 }
@@ -78,7 +79,7 @@ main {
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  padding: 10vh 2rem;
+  padding: 8vh 2rem;
   color: white;
   animation: apparition 1.5s ease;
 }
@@ -161,4 +162,16 @@ a:hover {
   .texte p {
     font-size: 1.3rem;
   }
+}
+
+.contact-images {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.contact-images img {
+  max-width: 100px;
+  height: auto;
 }
