@@ -10,8 +10,8 @@
 
 .main_cal {
     position: relative;
-    /*width: 95vw;
-    justify-content: flex-start;*/
+    width: 95vw;
+    /*justify-content: flex-start;*/
     height: 80vh;
     
     display: flex;
@@ -144,7 +144,6 @@
 
 #calendrier {
     width: 40%;
-    height: 60vh;
     color: rgb(0, 0, 0);
     background-color: white;
     border-radius: 10px;
