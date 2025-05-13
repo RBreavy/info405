@@ -1,4 +1,4 @@
-import { create_rdv } from "./module.js";
+import { create_rdv, create } from "./module.js";
 // Récupère la date actuelle au format français (JJ/MM/AAAA)
 const dateString = new Date().toLocaleDateString("fr-FR");
 let [day, month, year] = dateString.split('/').map(Number);
@@ -167,12 +167,7 @@ async function chargerEtAfficherRDV() {
     }
 }
 
-function create(tag, container, text = null) {
-    const element = document.createElement(tag);
-    if (text) element.innerText = text;
-    container.appendChild(element);
-    return element;
-}
+
 
 function creation_jour() {
 

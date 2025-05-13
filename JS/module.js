@@ -1,3 +1,9 @@
+export function create(tag, container, text = null) {
+    const element = document.createElement(tag);
+    if (text) element.innerText = text;
+    container.appendChild(element);
+    return element;
+}
 export async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         // Apply to all cells in appointment
