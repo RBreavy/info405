@@ -47,7 +47,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <article class="selecteur_droit"></article>
         </article>
 
-        <script src="/info2/site/JS/calendrier.js"></script>
+        <script type = "module" src="/info2/site/JS/calendrier.js"></script>
 
         <article>
             <!-- nom des medecins -->
@@ -90,7 +90,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
         const id = <?php echo json_encode($_SESSION['user_id']); ?>;
     </script>
-    <script defer src="JS/patient.js"></script>
+    <script defer type="module" src="JS/patient.js"></script>
     <script defer type="module" src="JS/module.js"></script>
 </body>
 
