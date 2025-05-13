@@ -237,15 +237,13 @@
     position: relative;
     width: 280px;
     height: 80%;
-    margin-left: 60px;
+    margin-left: auto;
     background-color: rgba(0, 0, 0, 0.2);
     padding: 20px;
     border-radius: 10px;
-    /*
-    margin-top: 60px;
-    text-align: center;
-    align-self: flex-end;*/
+    flex-shrink: 0;
 }
+
 
 .tabs {
     display: flex;

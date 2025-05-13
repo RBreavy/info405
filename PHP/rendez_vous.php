@@ -146,8 +146,9 @@ $check3->bind_param(
     date('H:i',$data['date_fin']),
     date('H:i',$data['date_debut']),
     date('H:i',$data['date_debut']),
-    date('H:i',$data['date_fin']),
+    date('H:i',$data['date_fin'])
 );
+
 $check3->execute();
 $check_result3 = $check3->get_result()->fetch_assoc();
 
