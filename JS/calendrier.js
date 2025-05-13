@@ -9,11 +9,14 @@ if (indice_jour === 0) indice_jour = 7;
 let anciensRDV = [];
 
 
+
 async function estMedecin(nom) {
     const response = await fetch('/info2/site/PHP/get-data.php?action=doctors');
     const tableauDOC = await response.json();
     return tableauDOC.some(doc => doc.nom === nom);
 }
+
+const estDoc = estMedecin(nomUtilisateur);
 
 const dateInput = document.getElementById("calendrier");
 dateInput.addEventListener('change', () => {
@@ -46,7 +49,7 @@ async function chargerEtAfficherRDV() {
 
 
     try {
-        const estDoc = await estMedecin(nomUtilisateur);
+
         if (estDoc) {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
             const indispt = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${id}`);
@@ -248,7 +251,6 @@ function conversion_heure_en_id(heure_debut) {
 }
 
 async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
-    const estDoc = await estMedecin(nomUtilisateur);
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
