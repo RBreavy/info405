@@ -1,7 +1,7 @@
 .doctor-selection {
     position: relative;
-    margin-left: 3vh;
-    padding: 3vh;
+    margin-left: 5vh;
+    padding: 1vh;
     background-image: linear-gradient(to bottom right, #4a09ac, #4f0999);
     border-radius: 1vh;
     width: 10vw;
