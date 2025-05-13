@@ -119,7 +119,7 @@ async function chargerEtAfficherRDV() {
                     ["SAM",5],
                     ["DIM",6],
                 ]);
-                const indice = jourtoindice[journee];
+                const indice = jourtoindice.get(journee);
                 const jour = new Date(dateDebutSemaine);
                 jour.setDate(dateDebutSemaine.getDate() + indice);
                 setTimeout(() => {
