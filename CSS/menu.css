@@ -111,3 +111,27 @@ table {
     width: 80%;
   }
 
+  .accueil {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5vh 2rem;
+  color: white;
+  animation: apparition 1.5s ease;
+}
+
+.texte {
+  display: flex;
+  flex-wrap: wrap;             
+  align-items: center;         
+  justify-content: center;    
+  gap: 2rem;                   
+  padding: 4rem 2rem;         
+  color: white;               
+  text-align: center;           
+}
+
+
