@@ -1,3 +1,4 @@
+import { create_rdv } from "./calendrier";
 let selectedDoctorId = null;
 let selectedDoctorName = null;
 
@@ -116,7 +117,7 @@ function displayI(IndT,IndR = null) {
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
     dateFinSemaine.setHours(23, 59, 59);
-    
+
     for (const IT of IndT) {
         const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
         const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
