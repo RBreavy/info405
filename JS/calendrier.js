@@ -109,6 +109,7 @@ async function chargerEtAfficherRDV() {
                 const h_fin = (IR.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IR.heure_fin.slice(3,5) / 10) - 1;
                 const dateDebutSemaine = new Date(date);
                 dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+
                 const jourtoindice = new Map([
                     ["LUN",0],
                     ["MAR",1],
@@ -122,7 +123,7 @@ async function chargerEtAfficherRDV() {
                 const jour = new Date(dateDebutSemaine);
                 jour.setDate(dateDebutSemaine.getDate() + indice);
                 setTimeout(() => {
-                    console.log(h_debut,h_fin,jour, dateDebutSemaine);
+                    console.log(h_debut,h_fin,jour, indice, journee);
                     create_rdv(h_debut, h_fin, jour, "darkgrey", estDoc);
                 }, 50);
 
