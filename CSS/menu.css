@@ -5,8 +5,9 @@ p {
 }
 
 h1 {   
-     font-family: "URW Chancery L", cursive;
+    font-family: "URW Chancery L", cursive;
     font-size:50px;
+    text-align: center;
 }
 
 h2 {
@@ -103,4 +104,10 @@ img {
     border-radius: 5px;
     margin-left: auto; 
 }
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
 

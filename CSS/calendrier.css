@@ -236,7 +236,6 @@
     padding: 0;
 }
 
-/* Styles for the form-indisp with relative positioning */
 .form-indisp {
     position: relative;
     width: 280px;
@@ -359,6 +358,7 @@
     transition: all 0.5s ease-in;
     text-decoration: underline;
 }
+
 
 /* Style initial pour la div dépliant */
 .rdv .content {
