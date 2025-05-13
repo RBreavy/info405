@@ -92,7 +92,8 @@ async function chargerEtAfficherRDV() {
             
         }
         const tableauRDV = await result.json();
-        console.log("test"+tableauRDV);
+        console.log("test"+id);
+        console.log(tableauRDV);
 
         for (const rdv of tableauRDV) {
             const nom = rdv.nom_utilisateur;
