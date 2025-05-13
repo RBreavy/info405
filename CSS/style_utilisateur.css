@@ -29,7 +29,8 @@
 
 body {
     background-image: url("/info2/site/images/Fond_DP.png");
-    background-size: cover;
+    background-size: 150%; 
+    background-repeat: no-repeat;
     background-position: center;
     margin: 0;
     height: 100%;
