@@ -34,3 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 100);
 });
+
+// vvv
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        document.querySelectorAll('.rdv').forEach(rdv => {
+            if (!rdv.className.includes('light') && !rdv.className.includes('red')) {
+                rdv.classList.add('lightgreen'); 
+            }
+        });
+    }, 1000);
+});

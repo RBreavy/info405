@@ -1,22 +1,16 @@
-.rdv.lightgreen {
-    background-color: #a8e6cf !important;
-    border-color: #88c6b3 !important;
-}
-
-.rdv.lightorange {
-    background-color: #ffd3b6 !important;
-    border-color: #dfb396 !important;
-}
-
-.rdv.lightred {
-    background-color: #ffaaa5 !important;
-    border-color: #df8a85 !important;
+.rdv {
+    color: white !important; 
+    font-size: 0.8em;
 }
 
 
-.rdv.red { background-color: #ffcccc; }
-.rdv.blue { background-color: #cce5ff; }
+.rdv.lightgreen { background-color: #a8e6cf; border: 1px solid #88c6b3; }
+.rdv.lightorange { background-color: #ffd3b6; border: 1px solid #dfb396; }
+.rdv.lightred { background-color: #ffaaa5; border: 1px solid #df8a85; }
 
+.rdv.red { background-color: #ff6b6b; }
+.rdv.blue { background-color: #4d96ff; }
+.rdv.purple { background-color: #9c51b6; }
 
 
 .main_cal {
