@@ -109,7 +109,7 @@ async function chargerEtAfficherRDV() {
                 const h_fin = (IR.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IR.heure_fin.slice(3,5) / 10) - 1;
                 const dateDebutSemaine = new Date(date);
                 dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
-                const jourtoindice = new map([
+                const jourtoindice = new Map([
                     ["LUN",0],
                     ["MAR",1],
                     ["MER",2],
