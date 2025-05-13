@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once "index/db_connect.php";
+require_once "info2/site/index/db_connect.php";
 
 $data = json_decode(file_get_contents('php://input'), true);
 
