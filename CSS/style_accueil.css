@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+header img {
+  height: 10vh;
+  width: 10vw;
+}
+
 html, body {
   height: 100%;
   width: 100%;
