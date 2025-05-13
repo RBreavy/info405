@@ -108,11 +108,61 @@ function setupEventListeners() {
         }
     });
 }
+function displayIT(IndT) {
+    for (const IT of Indt) {
+        const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
+        const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
+        
+        // Vérifier si l'indisponibilité est dans la semaine affichée
+        if ((debutIndisp >= dateDebutSemaine && debutIndisp <= dateFinSemaine) ||
+            (finIndisp >= dateDebutSemaine && finIndisp <= dateFinSemaine) ||
+            (debutIndisp <= dateDebutSemaine && finIndisp >= dateFinSemaine)) {
+            
+            console.log("debug patient")
+            // Parcourir chaque jour de l'indisponibilité
+            let currentDate = new Date(Math.max(debutIndisp, dateDebutSemaine));
+            
+            const endDate = new Date(Math.min(finIndisp, dateFinSemaine));
+            while (currentDate <= endDate) {
+                const jourStr = currentDate.toLocaleDateString("fr-FR");
+                let h_debut = 0; // 8h00
+                let h_fin = 71;  // 19h50
 
+                
+                // Si c'est le premier jour de l'indisponibilité
+                if (currentDate.toDateString() === debutIndisp.toDateString()) {
+                    h_debut = (debutIndisp.getHours() - 8) * 6 + Math.floor(debutIndisp.getMinutes() / 10);
+                }
+                
+                // Si c'est le dernier jour de l'indisponibilité
+                if (currentDate.toDateString() === finIndisp.toDateString()) {
+                    h_fin = (finIndisp.getHours() - 8) * 6 + Math.floor(finIndisp.getMinutes() / 10) - 1;
+                }
+                
+                setTimeout(() => {
+                    //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", estDoc);
+                }, 50);
+                
+                // Passer au jour suivant
+                const nextDate = new Date(currentDate);
+                nextDate.setDate(currentDate.getDate() + 1);
+                currentDate = nextDate;
+            }
+        }
+    } 
+}
 async function loadAppointments(doctorId) {
     try {
-        const response = await fetch(`/info2/site/PHP/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
-        const appointments = await response.json();
+        const rdv = await fetch(`/info2/site/PHP/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
+        const appointments = await rdv.json();
+
+        const indep_t = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${doctorId}`);
+        const indt = await indep_t.json();
+        displayIT(indt);
+
+        const indep_r = await fetch(`/info2/site/PHP/get-data.php?action=getIR&id_medecin=${doctorId}`);
+        const indr = await indep_r.json();
         // displayAppointments(appointments);
     } catch (error) {
         console.error('Erreur en chargeant les RDV:', error);
