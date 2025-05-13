@@ -163,7 +163,7 @@ function displayI(IndT,IndR) {
             }
         }
     } 
-    
+
     for (const IR of IndR) {
         const journee = IR.journee;
         const h_debut = (IR.heure_debut.slice(0,2) - 8) * 6 + Math.floor(IR.heure_debut.slice(3,5) / 10);
@@ -196,10 +196,12 @@ async function loadAppointments(doctorId) {
 
         const indep_t = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${doctorId}`);
         const indt = await indep_t.json();
-        displayI(indt);
 
         const indep_r = await fetch(`/info2/site/PHP/get-data.php?action=getIR&id_medecin=${doctorId}`);
         const indr = await indep_r.json();
+        displayI(indt,indr);
+
+        
         // displayAppointments(appointments);
     } catch (error) {
         console.error('Erreur en chargeant les RDV:', error);
