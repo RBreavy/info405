@@ -40,7 +40,7 @@ h2 {
 }
 
 body {
-    background-image: url("/info2/site/images/fond.png");
+    background: linear-gradient(135deg, #042763,#4f0999);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -129,7 +129,7 @@ table {
   align-items: center;         
   justify-content: center;    
   gap: 2rem;                   
-  padding: 4rem 2rem;         
+  padding: 6rem 2rem;         
   color: white;               
   text-align: center;           
 }
