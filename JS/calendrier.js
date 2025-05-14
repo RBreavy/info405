@@ -139,12 +139,7 @@ async function chargerEtAfficherRDV() {
         const tableauRDV = await result.json();
 
         for (const rdv of tableauRDV) {
-            if (estDoc) {
-                var nom = rdv.nom_utilisateur;
-            } else {
-                var nom = rdv.nom_medecin;
-            }
-            
+            const nom = rdv.nom_utilisateur;
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
@@ -300,21 +295,22 @@ function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
 }
 
-async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false, selection = false) {
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
             if (!creneau) continue;
-
+            
             creneau.style.setProperty('--border-color', color);
             creneau.classList.add("custom_bg_color");
+            
             creneau.style.boxShadow = "none";
-
+            
             if (i > horaire_debut && i < horaire_fin) {
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.borderBottom = "0px solid transparent";
             }
-
+            
             if (i === horaire_debut) {
                 if (i > 0) {
                     creneau.style.boxShadow = "0px -1px 0px 0px black";
@@ -323,75 +319,45 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 creneau.style.position = "relative";
                 creneau.style.zIndex = "1";
             }
-
+            
             if (i === horaire_fin) {
                 creneau.style.boxShadow = "0px 1px 0px 0px black";
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.position = "relative";
                 creneau.style.zIndex = "0";
             }
-        }
 
+        }
+        
         const premierCreneau = document.getElementById(journee + horaire_debut);
         if (premierCreneau && !premierCreneau.querySelector(".rdv")) {
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
-            box.style.position = "relative";
-            box.style.cursor = "pointer";
-
+            
+            const toggleButton = create("div", box, "‎ ‎ ‎ ‎ ‎ ");
+            toggleButton.classList.add("toggle_button");
+            toggleButton.style.fontSize = "0.5rem";
+            toggleButton.style.zIndex = "1";
+            
             const details = create("div", box);
             details.classList.add("rdv_details");
             details.style.display = "none";
-            details.style.position = "absolute";
-            details.style.left = "0";
-            details.style.backgroundColor = "white";
-            details.style.border = "1px solid black";
-            details.style.padding = "5px";
-            details.style.borderRadius = "6px";
-            details.style.boxShadow = "0 0 10px rgba(0,0,0,0.3)";
-            details.style.zIndex = "10";
-
+            details.style.zIndex = "1";
+            
             const [day, month, year] = journee.split("/").map(Number);
             const dateObj = new Date(year, month - 1, day);
             create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
             create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
             if (estDoc) {
                 create("p", details, `Nom : ${nom}`);
-            } else {
-                if (!selection) {
-                    create("p", details, `Nom médecin : ${nom}`);
-                }
             }
-
-            // ✅ Clic sur tout le créneau (box)
-            box.addEventListener("click", () => {
-                if (details.style.display === "none") {
-                    details.style.display = "block";
-
-                    setTimeout(() => {
-                        const rect = details.getBoundingClientRect();
-                        const viewportHeight = window.innerHeight;
-
-                        if (rect.bottom > viewportHeight) {
-                            // Trop bas : affiche au-dessus
-                            details.style.bottom = "100%";
-                            details.style.top = "auto";
-                            details.style.marginBottom = "5px";
-                        } else {
-                            // Assez de place : affiche en dessous
-                            details.style.top = "100%";
-                            details.style.bottom = "auto";
-                            details.style.marginTop = "5px";
-                        }
-                    }, 0);
-                } else {
-                    details.style.display = "none";
-                }
+            
+            toggleButton.addEventListener("click", () => {
+                details.style.display = details.style.display === "none" ? "block" : "none";
             });
         }
     }
 }
-
 
 
 // Navigation gauche/droite entre les semaines avec animation
