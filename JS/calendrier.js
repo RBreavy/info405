@@ -394,6 +394,8 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 // Navigation gauche/droite entre les semaines avec animation
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
 const boutonD = document.getElementsByClassName("selecteur_droit")[0];
+// Récupérer l'image
+const imageCal = document.querySelector('.HC');
 const box = document.querySelectorAll(".jour");
 
 // Semaine précédente
@@ -406,6 +408,16 @@ boutonG.addEventListener('click', () => {
             element.classList.remove('transition_cal_g');
         }, 1000);
     });
+    
+    // Ajouter l'animation à l'image
+    if (imageCal) {
+        imageCal.classList.remove('transition_cal_g');
+        imageCal.classList.add('transition_cal_g');
+        setTimeout(_ => {
+            imageCal.classList.remove('transition_cal_g');
+        }, 1000);
+    }
+    
     maj_semaine();
 });
 
@@ -419,6 +431,16 @@ boutonD.addEventListener('click', () => {
             element.classList.remove('transition_cal_d');
         }, 1000);
     });
+    
+    // Ajouter l'animation à l'image
+    if (imageCal) {
+        imageCal.classList.remove('transition_cal_d');
+        imageCal.classList.add('transition_cal_d');
+        setTimeout(_ => {
+            imageCal.classList.remove('transition_cal_d');
+        }, 1000);
+    }
+    
     maj_semaine();
 });
 

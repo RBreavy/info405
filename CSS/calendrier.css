@@ -192,6 +192,16 @@
     40% {transform: translateX(-20%);}
 }
 
+.HC.transition_cal_g {
+    animation-name: anim_cal_g;
+    animation-duration: 1s;
+}
+
+.HC.transition_cal_d {
+    animation-name: anim_cal_d;
+    animation-duration: 1s;
+}
+
 
 .invisible_border_top {
     box-shadow: 0 -1px 0 black;
