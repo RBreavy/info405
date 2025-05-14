@@ -406,7 +406,7 @@ boutonG.addEventListener('click', () => {
         element.classList.add('transition_cal_g');
         setTimeout(_ => {
             element.classList.remove('transition_cal_g');
-        }, 1000);
+        }, 0);
     });
     
     // Ajouter l'animation à l'image
@@ -415,7 +415,7 @@ boutonG.addEventListener('click', () => {
         imageCal.classList.add('transition_cal_g');
         setTimeout(_ => {
             imageCal.classList.remove('transition_cal_g');
-        }, 1000);
+        }, 0);
     }
     
     maj_semaine();
@@ -429,7 +429,7 @@ boutonD.addEventListener('click', () => {
         element.classList.add('transition_cal_d');
         setTimeout(_ => {
             element.classList.remove('transition_cal_d');
-        }, 1000);
+        }, 0);
     });
     
     // Ajouter l'animation à l'image
@@ -438,7 +438,7 @@ boutonD.addEventListener('click', () => {
         imageCal.classList.add('transition_cal_d');
         setTimeout(_ => {
             imageCal.classList.remove('transition_cal_d');
-        }, 1000);
+        }, 0);
     }
     
     maj_semaine();

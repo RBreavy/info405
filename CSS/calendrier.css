@@ -190,7 +190,7 @@
 }
 
 @keyframes anim_cal_d {
-    40% {transform: translateX(10vw);}
+    40% {transform: translateX(-10vw);}
 }
 
 .HC.transition_cal_g {
