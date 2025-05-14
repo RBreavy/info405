@@ -70,6 +70,7 @@
     position: relative;
     font-family: "URW Chancery L", cursive;
     border-left: solid 1.5px black;
+    box-shadow: 1px 1px 0px 0px black;
 }
 
 .border_bottom_top_left {
