@@ -295,7 +295,7 @@ function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
 }
 
-async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom="", estDoc = false) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
@@ -303,7 +303,6 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             
             creneau.style.setProperty('--border-color', color);
             creneau.classList.add("custom_bg_color");
-            creneau.classList.add("toggle_button");
             
             creneau.style.boxShadow = "none";
             
@@ -325,7 +324,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 creneau.style.boxShadow = "0px 1px 0px 0px black";
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.position = "relative";
-                creneau.style.zIndex = "0";
+                creneau.style.zIndex = "1";
             }
 
         }
@@ -335,10 +334,10 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
             
-            const toggleButton = create("div", box, "Détails");
-            toggleButton.style.fontSize = "2%";
-            
-            toggleButton.style.fontSize = "0.8rem";
+            // const toggleButton = create("div", box, "Détails");
+            // toggleButton.style.fontSize = "2%";
+            // toggleButton.classList.add("toggle_button");
+            // toggleButton.style.fontSize = "0.8rem";
             
             const details = create("div", box);
             details.classList.add("rdv_details");
@@ -351,6 +350,8 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
             if (estDoc) {
                 create("p", details, `Nom : ${nom}`);
+            } else {
+                create("p", details, `Nom médecin : ${nom}`);
             }
             
             creneau.addEventListener("click", () => {
