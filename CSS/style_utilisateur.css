@@ -250,5 +250,8 @@ button {
 }
 
 .HC {
-    width: 6em;             
+    width: 6em;
+    margin-bottom: 20px;         
+    height: auto;
+    border-radius: 8px;    
 }
