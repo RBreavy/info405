@@ -213,6 +213,7 @@ function displayAppointments(appointments) {
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
+                    console.log(h_debut, h_fin, jourStr, jourStr, nom, estDoc)
                     cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", nom, estDoc);
                 }, 50);
 
