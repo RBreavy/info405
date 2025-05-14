@@ -120,8 +120,8 @@
 }
 
 .selecteur_droit, .selecteur_gauche {
-    width: 4.5%;
-    height: 70%;
+    width: 5.5%;
+    height: 90%;
     background-size: 100%;
     background-position: center;
     transition: background-size 0.5s ease-in-out;
@@ -139,7 +139,7 @@
 
 
 .selecteur_droit:hover , .selecteur_gauche:hover {
-    background-size: 130%;
+    background-size: 140%;
 }
 
 #calendrier {
