@@ -250,9 +250,9 @@ button {
 }
 
 .HC {
-    width: 54.2vw;
+    width: 54.35vw;
+    height: 20vh;
     display: block;
-    margin-top: 2.5vw; /* Marge en bas pour la séparer du calendrier */
     margin-left: 24.6vw;
     max-width: 100%;
     position: absolute;
