@@ -120,8 +120,8 @@
 }
 
 .selecteur_droit, .selecteur_gauche {
-    width: 8.5%;
-    height: 80%;
+    width: 7.5%;
+    height: 70%;
     background-size: 100%;
     background-position: center;
     transition: background-size 0.5s ease-in-out;
