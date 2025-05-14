@@ -250,9 +250,5 @@ button {
 }
 
 .HC {
-    display: block;
-    margin: 20px auto;       
-    width: 53vw;         
-    height: auto;            
-    border-radius: 10px;     
+    width: 6em;             
 }
