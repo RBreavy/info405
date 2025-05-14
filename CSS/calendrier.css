@@ -53,6 +53,7 @@
     height: 10%;
     background-color: #63B5FB;
     border-bottom: solid 1px black;
+    border-right: solid 2px #63B5FB
 }
 
 .datejour p {
