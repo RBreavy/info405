@@ -326,6 +326,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 creneau.style.position = "relative";
                 creneau.style.zIndex = "0";
             }
+
         }
         
         const premierCreneau = document.getElementById(journee + horaire_debut);
@@ -340,6 +341,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             const details = create("div", box);
             details.classList.add("rdv_details");
             details.style.display = "none";
+            details.style.zIndex = "1";
             
             const [day, month, year] = journee.split("/").map(Number);
             const dateObj = new Date(year, month - 1, day);
