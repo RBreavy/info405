@@ -117,6 +117,8 @@ function setupEventListeners() {
         }
     });
 }
+
+
 function displayI(IndT,IndR) {
     const dateDebutSemaine = new Date(date);
     dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
@@ -192,10 +194,37 @@ function displayI(IndT,IndR) {
         }, 50);
     }
 }
+
+function displayAppointments(appointments) {
+    for (const rdv of appointments) {
+            const couleur = rdv.couleur;
+            const debut = new Date(rdv.date_debut.replace(' ', 'T'));
+            const fin = new Date(rdv.date_fin.replace(' ', 'T'));
+            
+
+            if ((debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
+                (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
+                (debut <= dateDebutSemaine && fin >= dateFinSemaine)) {
+
+                const jourStr = debut.toLocaleDateString("fr-FR");
+                const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
+                const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
+
+                //const couleurRdv = estDoc ? couleur : "grey";
+
+                setTimeout(() => {
+                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, grey, nom, estDoc);
+                }, 50);
+
+            }
+        }
+}
+
 async function loadAppointments(doctorId) {
     try {
         const rdv = await fetch(`/info2/site/PHP/get-data.php?action=getRdvsByDoctor&id_medecin=${doctorId}`);
         const appointments = await rdv.json();
+        displayAppointments(appointments);
 
         const indep_t = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${doctorId}`);
         const indt = await indep_t.json();
@@ -205,7 +234,7 @@ async function loadAppointments(doctorId) {
         displayI(indt,indr);
 
         
-        // displayAppointments(appointments);
+        displayAppointments(appointments);
     } catch (error) {
         console.error('Erreur en chargeant les RDV:', error);
     }
