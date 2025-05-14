@@ -363,16 +363,6 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             
             toggleButton.addEventListener("click", () => {
                 if (details.style.display === "none") {
-                    // Rendre visible temporairement pour mesurer la hauteur
-                    details.style.display = "block";
-                    details.style.position = "absolute";
-                    details.style.backgroundColor = "white";
-                    details.style.border = "1px solid black";
-                    details.style.padding = "5px";
-                    details.style.borderRadius = "6px";
-                    details.style.boxShadow = "0 0 10px rgba(0,0,0,0.3)";
-                    details.style.zIndex = "10";
-            
                     // Petit délai pour s'assurer que le DOM a bien pris en compte les styles
                     setTimeout(() => {
                         const rect = details.getBoundingClientRect();
