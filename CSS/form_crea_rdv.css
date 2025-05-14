@@ -30,11 +30,11 @@
 }
 
 .doctor-button {
-    padding: 1vh 1.5vw;
+    padding: 1vw 1.5vw;
     background: #7777cd;
     color: white;
     border: none;
-    border-radius: 0.5vh;
+    border-radius: 0.5vw;
     cursor: pointer;
     transition: background 0.3s;
 }
