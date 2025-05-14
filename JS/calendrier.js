@@ -402,21 +402,21 @@ const box = document.querySelectorAll(".jour");
 boutonG.addEventListener('click', () => {
     offsetjour -= 7;
     
-    // Appliquer la transition sur tous les éléments en même temps
-    box.forEach(element => {
-        element.classList.remove('transition_cal_g');
-        element.classList.add('transition_cal_g');
-    });
+    // Créer un tableau avec tous les éléments qui doivent avoir la transition
+    const allElements = [...box, imageCal];
     
-    imageCal.classList.remove('transition_cal_g');
-    imageCal.classList.add('transition_cal_g');
+    // Supprimer d'abord toutes les classes de transition
+    allElements.forEach(el => el.classList.remove('transition_cal_g'));
     
-    // Supprimer la classe après animation pour tous les éléments
+    // Forcer un reflow pour que la suppression soit prise en compte
+    void document.body.offsetHeight;
+    
+    // Ajouter la classe de transition à tous les éléments
+    allElements.forEach(el => el.classList.add('transition_cal_g'));
+    
+    // Nettoyer après l'animation
     setTimeout(() => {
-        box.forEach(element => {
-            element.classList.remove('transition_cal_g');
-        });
-        imageCal.classList.remove('transition_cal_g');
+        allElements.forEach(el => el.classList.remove('transition_cal_g'));
     }, 1000);
     
     
