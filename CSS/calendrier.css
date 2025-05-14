@@ -105,7 +105,7 @@
 
 .selecteur {
     position: absolute;
-    width: 40vw;
+    width: 50vw;
     height: 5vh;
     top: 5px;
     left: 35%;
@@ -116,7 +116,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    column-gap: 10%;
+    column-gap: 3%;
 }
 
 .selecteur_droit, .selecteur_gauche {
