@@ -70,9 +70,6 @@ function getAllIndispT($id)
         return ["error"=> $e->getMessage()];
     }
 }
-
-
-
 function getAllDoctors()
 {
     global $conn;
@@ -96,7 +93,6 @@ function getRdvsByDoctor($id_medecin)
         return ['error' => $e->getMessage()];
     }
 }
-
 
 $action = $_GET['action'] ?? 'rdvs';
 header('Content-Type: application/json');
