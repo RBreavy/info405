@@ -427,7 +427,7 @@ boutonG.addEventListener('click', () => {
         setTimeout(() => {
             box.forEach(element => element.classList.remove('transition_cal_g'));
             imageCal.classList.remove('transition_cal_g');
-        }, 500);
+        }, 1000);
     });
     maj_semaine();
 });
