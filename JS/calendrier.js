@@ -402,12 +402,8 @@ const box = document.querySelectorAll(".jour");
 boutonG.addEventListener('click', () => {
     offsetjour -= 7;
     
-    // Appliquer la transition sur tous les éléments en même temps
-    box.forEach(element => {
-        element.classList.remove('transition_cal_g');
-        element.classList.add('transition_cal_g');
-    });
-    
+    // D'abord, supprimer toutes les classes de transition
+    box.forEach(element => element.classList.remove('transition_cal_g'));
     imageCal.classList.remove('transition_cal_g');
     imageCal.classList.add('transition_cal_g');
     
@@ -420,6 +416,19 @@ boutonG.addEventListener('click', () => {
     }, 2000);
     
     
+    // Utiliser requestAnimationFrame pour synchroniser l'ajout des classes
+    // au prochain cycle de rendu
+    requestAnimationFrame(() => {
+        // Appliquer la transition à tous les éléments en même temps
+        box.forEach(element => element.classList.add('transition_cal_g'));
+        imageCal.classList.add('transition_cal_g');
+        
+        // Nettoyer après la fin de l'animation
+        setTimeout(() => {
+            box.forEach(element => element.classList.remove('transition_cal_g'));
+            imageCal.classList.remove('transition_cal_g');
+        }, 1000);
+    });
     maj_semaine();
 });
 
