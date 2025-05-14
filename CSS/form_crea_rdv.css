@@ -10,7 +10,7 @@
 
 .doctor-selection h2 {
     color: white;
-    font-size: 1.5vh;
+    font-size: 1.5vw;
 }
 
 .appointment-form h2 {
@@ -73,18 +73,18 @@
 #rdv-form button[type="submit"] {
     background: #50a4ef;
     color: white;
-    padding: 1vh 1.5vw;
-    margin-bottom: 1.5vh;
+    padding: 1vw 1.5vw;
+    margin-bottom: 1.5vw;
     border: none;
-    border-radius: 0.5vh;
+    border-radius: 0.5vw;
     cursor: pointer;
 }
 
 #cancel-appointment {
     background: #0a5497;
     color: white;
-    padding: 1vh 1.5vw;
+    padding: 1vw 1.5vw;
     border: none;
-    border-radius: 0.5vh;
+    border-radius: 0.5vw;
     cursor: pointer;
 }
