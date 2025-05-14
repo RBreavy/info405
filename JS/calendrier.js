@@ -434,7 +434,7 @@ boutonG.addEventListener('click', () => {
 
 // Semaine suivante
 boutonD.addEventListener('click', () => {
-    offsetjour -= 7;
+    offsetjour += 7;
     
     // Appliquer la transition sur tous les éléments en même temps
     box.forEach(element => {
