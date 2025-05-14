@@ -346,9 +346,14 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
             create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
             if (estDoc) {
-                create("p", details, `Nom : ${nom}`);
+                if (nom !== "") {
+                    create("p", details, `Nom : ${nom}`);
+                }
+                
             } else if (!selection) {
-                create("p", details, `Nom médecin : ${nom}`);
+                if (nom !== "") {
+                    create("p", details, `Nom médecin : ${nom}`);
+                }
             }
             
             premierCreneau.addEventListener("click", () => {
