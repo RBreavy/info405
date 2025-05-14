@@ -300,17 +300,16 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
             if (!creneau) continue;
-            
+
             creneau.style.setProperty('--border-color', color);
             creneau.classList.add("custom_bg_color");
-            
             creneau.style.boxShadow = "none";
-            
+
             if (i > horaire_debut && i < horaire_fin) {
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.borderBottom = "0px solid transparent";
             }
-            
+
             if (i === horaire_debut) {
                 if (i > 0) {
                     creneau.style.boxShadow = "0px -1px 0px 0px black";
@@ -319,31 +318,34 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 creneau.style.position = "relative";
                 creneau.style.zIndex = "1";
             }
-            
+
             if (i === horaire_fin) {
                 creneau.style.boxShadow = "0px 1px 0px 0px black";
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.position = "relative";
                 creneau.style.zIndex = "0";
             }
-
         }
-        
+
         const premierCreneau = document.getElementById(journee + horaire_debut);
         if (premierCreneau && !premierCreneau.querySelector(".rdv")) {
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
-            
-            const toggleButton = create("div", box, "‎ ‎ ‎ ‎ ‎ ");
-            toggleButton.classList.add("toggle_button");
-            toggleButton.style.fontSize = "0.5rem";
-            toggleButton.style.zIndex = "1";
-            
+            box.style.position = "relative";
+            box.style.cursor = "pointer";
+
             const details = create("div", box);
             details.classList.add("rdv_details");
             details.style.display = "none";
-            details.style.zIndex = "1";
-            
+            details.style.position = "absolute";
+            details.style.left = "0";
+            details.style.backgroundColor = "white";
+            details.style.border = "1px solid black";
+            details.style.padding = "5px";
+            details.style.borderRadius = "6px";
+            details.style.boxShadow = "0 0 10px rgba(0,0,0,0.3)";
+            details.style.zIndex = "10";
+
             const [day, month, year] = journee.split("/").map(Number);
             const dateObj = new Date(year, month - 1, day);
             create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
@@ -351,13 +353,36 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             if (estDoc) {
                 create("p", details, `Nom : ${nom}`);
             }
-            
-            toggleButton.addEventListener("click", () => {
-                details.style.display = details.style.display === "none" ? "block" : "none";
+
+            // ✅ Clic sur tout le créneau (box)
+            box.addEventListener("click", () => {
+                if (details.style.display === "none") {
+                    details.style.display = "block";
+
+                    setTimeout(() => {
+                        const rect = details.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight;
+
+                        if (rect.bottom > viewportHeight) {
+                            // Trop bas : affiche au-dessus
+                            details.style.bottom = "100%";
+                            details.style.top = "auto";
+                            details.style.marginBottom = "5px";
+                        } else {
+                            // Assez de place : affiche en dessous
+                            details.style.top = "100%";
+                            details.style.bottom = "auto";
+                            details.style.marginTop = "5px";
+                        }
+                    }, 0);
+                } else {
+                    details.style.display = "none";
+                }
             });
         }
     }
 }
+
 
 
 // Navigation gauche/droite entre les semaines avec animation
