@@ -30,7 +30,7 @@
 
 .jour {
     /*position: relative;*/
-    background-color: #63B5FB;
+    background-color: black;
     width: 10%;
     height: 80%;
     
@@ -51,6 +51,8 @@
     align-items: center; 
     width: 100%;
     height: 10%;
+    background-color: #63B5FB;
+    border-right: solid 2px #63B5FB;
     background-color: #63B5FB;
     border-bottom: solid 1px black;
     border-right: solid 2px #63B5FB
@@ -194,14 +196,23 @@
 }
 
 .HC.transition_cal_g {
-    animation-name: anim_cal_g;
-    animation-duration: 1s;
+    animation-name: anim_img_g;
+    animation-duration: 2s;
 }
 
 .HC.transition_cal_d {
-    animation-name: anim_cal_d;
-    animation-duration: 1s;
+    animation-name: anim_img_d;
+    animation-duration: 2s;
 }
+
+@keyframes anim_img_g {
+    20% {transform: translateX(20%);}
+}
+
+@keyframes anim_img_d {
+    20% {transform: translateX(-20%);}
+}
+
 
 
 .invisible_border_top {
