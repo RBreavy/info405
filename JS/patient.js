@@ -196,6 +196,13 @@ function displayI(IndT,IndR) {
 }
 
 function displayAppointments(appointments) {
+    const dateDebutSemaine = new Date(date);
+    dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+    
+    
+    const dateFinSemaine = new Date(dateDebutSemaine);
+    dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
+    dateFinSemaine.setHours(23, 59, 59);
     for (const rdv of appointments) {
             const nom = rdv.nom_medecin;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
