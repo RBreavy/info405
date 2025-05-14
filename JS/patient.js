@@ -158,7 +158,7 @@ function displayI(IndT,IndR) {
                 
                 setTimeout(() => {
                     //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
-                    window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey",true);
+                    window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey","",false,true);
                 }, 50);
                 
                 // Passer au jour suivant
@@ -190,7 +190,7 @@ function displayI(IndT,IndR) {
         jour.setDate(dateDebutSemaine.getDate() + indice);
         const jourStr = jour.toLocaleDateString("fr-FR");
         setTimeout(() => {
-            window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey",true);
+            window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey","",false,true);
         }, 50);
     }
 }
