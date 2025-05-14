@@ -310,6 +310,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             if (i > horaire_debut && i < horaire_fin) {
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.borderBottom = "0px solid transparent";
+                creneau.style.zIndex = "0";
             }
             
             if (i === horaire_debut) {
@@ -325,7 +326,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 creneau.style.boxShadow = "0px 1px 0px 0px black";
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.position = "relative";
-                creneau.style.zIndex = "0";
+                creneau.style.zIndex = "1";
             }
 
         }
