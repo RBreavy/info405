@@ -324,7 +324,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 creneau.style.boxShadow = "0px 1px 0px 0px black";
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.position = "relative";
-                creneau.style.zIndex = "0";
+                creneau.style.zIndex = "1";
             }
 
         }
@@ -334,7 +334,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
             
-            const toggleButton = create("div", box, "Afficher les détails");
+            const toggleButton = create("div", box, "Détails");
             toggleButton.style.fontSize = "2%";
             toggleButton.classList.add("toggle_button");
             toggleButton.style.fontSize = "0.8rem";
@@ -354,7 +354,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 create("p", details, `Nom médecin : ${nom}`);
             }
             
-            toggleButton.addEventListener("click", () => {
+            creneau.addEventListener("click", () => {
                 details.style.display = details.style.display === "none" ? "block" : "none";
             });
         }
