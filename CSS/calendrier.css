@@ -194,12 +194,12 @@
 
 .HC.transition_cal_g {
     animation-name: anim_cal_g;
-    animation-duration: 1s;
+    animation-duration: 2s;
 }
 
 .HC.transition_cal_d {
     animation-name: anim_cal_d;
-    animation-duration: 1s;
+    animation-duration: 2s;
 }
 
 
