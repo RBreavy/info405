@@ -261,7 +261,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
         const article_creneau = create("article", div_jour);
         article_creneau.id = datetemp.toLocaleDateString() + j;
         article_creneau.classList.add("creneau");
-
+        article_creneau.style.zIndex = "0";
         article_creneau.classList.add(Math.floor(j / 3) % 2 === 0 ? "gris_fonce" : "gris_clair");
         if (indice_div_jour === 0 && j % 6 === 0) {
             const carre_heure = create("div", article_creneau);
@@ -339,9 +339,10 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
             
-            const toggleButton = create("div", box, "Détails");
+            const toggleButton = create("div", box, "‎ ‎ ‎ ‎ ‎ ");
             toggleButton.classList.add("toggle_button");
             toggleButton.style.fontSize = "0.5rem";
+            toggleButton.style.zIndex = "1";
             
             const details = create("div", box);
             details.classList.add("rdv_details");
