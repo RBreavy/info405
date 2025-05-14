@@ -413,7 +413,7 @@ boutonG.addEventListener('click', () => {
             element.classList.remove('transition_cal_g');
         });
         imageCal.classList.remove('transition_cal_g');
-    }, 2000);
+    }, 1000);
     
     
     // Utiliser requestAnimationFrame pour synchroniser l'ajout des classes
