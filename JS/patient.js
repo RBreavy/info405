@@ -204,7 +204,6 @@ function displayAppointments(appointments) {
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
     dateFinSemaine.setHours(23, 59, 59);
     for (const rdv of appointments) {
-            const nom = rdv.nom_medecin;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
             
@@ -220,8 +219,7 @@ function displayAppointments(appointments) {
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
-                    console.log(h_debut, h_fin, jourStr, jourStr, nom, estDoc)
-                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", nom, estDoc);
+                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", "", false,true);
                 }, 50);
 
             }
