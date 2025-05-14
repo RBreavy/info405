@@ -48,7 +48,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
         </article>
 
 
-        <img src = "/info2/site/images/cal.png"></img>
+        <img src = "/info2/site/images/cal.png" alt="Haut_Cal" class="HC">
         <script src="/info2/site/JS/calendrier.js"></script>
 
         <article>

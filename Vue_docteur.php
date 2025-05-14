@@ -50,7 +50,7 @@ $id_med = htmlspecialchars($_SESSION['user_id']);
 
     <section class="main_cal">
 
-        <img src = "/info2/site/images/cal.png"></img>
+        <img src = "/info2/site/images/cal.png" alt="Haut_Cal" class="HC">
 
         <article class="selecteur">
             <article class="selecteur_gauche"></article>
