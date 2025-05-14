@@ -182,7 +182,7 @@
 
 .transition_cal_g {
     animation-name: anim_cal_g;
-    animation-duration: .5s;
+    animation-duration: 1s;
 }
 
 @keyframes anim_cal_g {
