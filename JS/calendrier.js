@@ -446,7 +446,6 @@ boutonD.addEventListener('click', () => {
 
 
 
-
 function rdvsIdentiques(a, b) {
     return a.nom_utilisateur === b.nom_utilisateur &&
            a.date_debut === b.date_debut &&
