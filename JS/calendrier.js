@@ -139,7 +139,12 @@ async function chargerEtAfficherRDV() {
         const tableauRDV = await result.json();
 
         for (const rdv of tableauRDV) {
-            const nom = rdv.nom_utilisateur;
+            if (estDoc) {
+                var nom = rdv.nom_utilisateur;
+            } else {
+                var nom = rdv.nom_medecin;
+            }
+            
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
