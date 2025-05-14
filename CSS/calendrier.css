@@ -177,12 +177,12 @@
 
 .transition_cal_d {
     animation-name: anim_cal_d;
-    animation-duration: .5s;
+    animation-duration: 1s;
 }
 
 .transition_cal_g {
     animation-name: anim_cal_g;
-    animation-duration: 1s;
+    animation-duration: .5s;
 }
 
 @keyframes anim_cal_g {
