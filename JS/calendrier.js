@@ -352,7 +352,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 create("p", details, `Nom : ${nom}`);
             }
             
-            toggleButton.addEventListener("click", () => {
+            creneau.addEventListener("click", () => {
                 details.style.display = details.style.display === "none" ? "block" : "none";
             });
         }
