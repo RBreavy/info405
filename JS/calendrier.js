@@ -92,7 +92,7 @@ async function chargerEtAfficherRDV() {
                         
                         setTimeout(() => {
                             //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
-                            create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", estDoc);
+                            create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", "", estDoc, false);
                         }, 50);
                         
                         // Passer au jour suivant
@@ -124,7 +124,7 @@ async function chargerEtAfficherRDV() {
                 jour.setDate(dateDebutSemaine.getDate() + indice);
                 const jourStr = jour.toLocaleDateString("fr-FR");
                 setTimeout(() => {
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", estDoc);
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", "", estDoc, false);
                 }, 50);
 
 
@@ -157,7 +157,7 @@ async function chargerEtAfficherRDV() {
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc);
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc, false);
                 }, 50);
 
             }
