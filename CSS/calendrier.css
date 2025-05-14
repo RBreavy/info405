@@ -177,7 +177,7 @@
 
 .transition_cal_d {
     animation-name: anim_cal_d;
-    animation-duration: 1s;
+    animation-duration: .5s;
 }
 
 .transition_cal_g {
