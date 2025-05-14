@@ -211,7 +211,7 @@ button {
     left: -250px;
     top: 0;
     background-color: #111111a1;
-    padding-top: 20px;
+    padding-top: 40px;
     transition: 0.3s;
     z-index: 1;
 }
@@ -219,7 +219,7 @@ button {
 .sidenav a {
     padding: 10px 20px;
     text-decoration: none;
-    margin-top: 40px;
+    margin-top: 50px;
     font-size: 18px;
     color: white;
     display: block;
@@ -245,14 +245,14 @@ button {
     cursor: pointer;
     position: absolute;
     color: white;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: 50px;
 }
 
 .HC {
     width: 54.35vw;
-    height: auto;
-    margin-top: 5%;
+    height: 10vh;
+    margin-top: 6.5vh;
     display: block;
     margin-left: 24.6vw;
     max-width: 100%;
