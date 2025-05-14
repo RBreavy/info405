@@ -353,8 +353,39 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             }
             
             toggleButton.addEventListener("click", () => {
-                details.style.display = details.style.display === "none" ? "block" : "none";
+                if (details.style.display === "none") {
+                    // Rendre visible temporairement pour mesurer la hauteur
+                    details.style.display = "block";
+                    details.style.position = "absolute";
+                    details.style.backgroundColor = "white";
+                    details.style.border = "1px solid black";
+                    details.style.padding = "5px";
+                    details.style.borderRadius = "6px";
+                    details.style.boxShadow = "0 0 10px rgba(0,0,0,0.3)";
+                    details.style.zIndex = "10";
+            
+                    // Petit délai pour s'assurer que le DOM a bien pris en compte les styles
+                    setTimeout(() => {
+                        const rect = details.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight;
+            
+                        if (rect.bottom > viewportHeight) {
+                            // Pas assez de place → afficher au-dessus
+                            details.style.bottom = "100%";
+                            details.style.top = "auto";
+                            details.style.marginBottom = "5px";
+                        } else {
+                            // Assez de place → afficher en dessous
+                            details.style.top = "100%";
+                            details.style.bottom = "auto";
+                            details.style.marginTop = "5px";
+                        }
+                    }, 0);
+                } else {
+                    details.style.display = "none";
+                }
             });
+            
         }
     }
 }
