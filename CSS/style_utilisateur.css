@@ -250,10 +250,11 @@ button {
 }
 
 .HC {
-    width: 70vw;
+    width: 54.2vw;
     display: block;
-    margin-top: 50px; /* Marge en bas pour la séparer du calendrier */
+    margin-top: 2.5vw; /* Marge en bas pour la séparer du calendrier */
+    margin-left: 24.6vw;
     max-width: 100%;
-    position: relative;
-    z-index: 1;   
+    position: absolute;
+    z-index: -1;   
 }
