@@ -334,15 +334,11 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
             
-            const toggleButton = create("div", box, "‎ ‎ ‎ ‎ ‎ ");
-            toggleButton.classList.add("toggle_button");
-            toggleButton.style.fontSize = "0.5rem";
-            toggleButton.style.zIndex = "1";
-            
             const details = create("div", box);
             details.classList.add("rdv_details");
             details.style.display = "none";
             details.style.zIndex = "1";
+            details.style.position = "absolute";
             
             const [day, month, year] = journee.split("/").map(Number);
             const dateObj = new Date(year, month - 1, day);
@@ -352,9 +348,31 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 create("p", details, `Nom : ${nom}`);
             }
             
-            toggleButton.addEventListener("click", () => {
-                details.style.display = details.style.display === "none" ? "block" : "none";
+            premierCreneau.addEventListener("click", () => {
+                if (details.style.display === "none") {
+                    details.style.display = "block";
+            
+                    setTimeout(() => {
+                        const rect = details.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight;
+            
+                        if (rect.bottom > viewportHeight) {
+                            // Afficher au-dessus
+                            details.style.bottom = "100%";
+                            details.style.top = "auto";
+                            details.style.marginBottom = "5px";
+                        } else {
+                            // Afficher en dessous
+                            details.style.top = "100%";
+                            details.style.bottom = "auto";
+                            details.style.marginTop = "5px";
+                        }
+                    }, 0);
+                } else {
+                    details.style.display = "none";
+                }
             });
+            
         }
     }
 }
