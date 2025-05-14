@@ -116,7 +116,7 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    column-gap: 3%;
+    column-gap: 1%;
 }
 
 .selecteur_droit, .selecteur_gauche {
