@@ -252,7 +252,7 @@ button {
 .HC {
     width: 54.35vw;
     height: auto;
-    padding: 0 0 100% 0;
+    margin-top: 10%;
     display: block;
     margin-left: 24.6vw;
     max-width: 100%;
