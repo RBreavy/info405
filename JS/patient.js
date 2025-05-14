@@ -197,7 +197,7 @@ function displayI(IndT,IndR) {
 
 function displayAppointments(appointments) {
     for (const rdv of appointments) {
-            const couleur = rdv.couleur;
+            const nom = rdv.nom_medecin;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
             
@@ -213,7 +213,7 @@ function displayAppointments(appointments) {
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
-                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, grey, nom, estDoc);
+                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", nom, estDoc);
                 }, 50);
 
             }
