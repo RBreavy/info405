@@ -404,19 +404,14 @@ boutonG.addEventListener('click', () => {
     box.forEach(element => {
         element.classList.remove('transition_cal_g');
         element.classList.add('transition_cal_g');
-        setTimeout(_ => {
-            element.classList.remove('transition_cal_g');
-        }, 1000);
-    });
-    
-    // Ajouter l'animation à l'image
-    if (imageCal) {
         imageCal.classList.remove('transition_cal_g');
         imageCal.classList.add('transition_cal_g');
         setTimeout(_ => {
+            element.classList.remove('transition_cal_g');
             imageCal.classList.remove('transition_cal_g');
         }, 1000);
-    }
+    });
+    
     
     maj_semaine();
 });
@@ -427,19 +422,16 @@ boutonD.addEventListener('click', () => {
     box.forEach(element => {
         element.classList.remove('transition_cal_d');
         element.classList.add('transition_cal_d');
-        setTimeout(_ => {
-            element.classList.remove('transition_cal_d');
-        }, 1000);
-    });
-    
-    // Ajouter l'animation à l'image
-    if (imageCal) {
         imageCal.classList.remove('transition_cal_d');
         imageCal.classList.add('transition_cal_d');
         setTimeout(_ => {
+            element.classList.remove('transition_cal_d');
             imageCal.classList.remove('transition_cal_d');
-        }, 1000);
-    }
+        }, 0);
+    });
+    
+    // Ajouter l'animation à l'image
+
     
     maj_semaine();
 });

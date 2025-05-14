@@ -185,29 +185,21 @@
 }
 
 @keyframes anim_cal_g {
-    40% {transform: translateX(20%);}
+    40% {transform: translateX(10vw);}
 }
 
 @keyframes anim_cal_d {
-    40% {transform: translateX(-20%);}
+    40% {transform: translateX(-10vw);}
 }
 
 .HC.transition_cal_g {
-    animation-name: anim_img_g;
+    animation-name: anim_cal_g;
     animation-duration: 2s;
 }
 
 .HC.transition_cal_d {
-    animation-name: anim_img_d;
+    animation-name: anim_cal_d;
     animation-duration: 2s;
-}
-
-@keyframes anim_img_g {
-    20% {transform: translateX(20%);}
-}
-
-@keyframes anim_img_d {
-    20% {transform: translateX(-20%);}
 }
 
 
