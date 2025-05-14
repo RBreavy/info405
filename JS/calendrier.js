@@ -195,6 +195,7 @@ function creation_jour() {
         if (i === 0) div_jour.classList.add("border_bottom_top_left");
         else if (i === 6) {
             div_jour.classList.add("border_bottom_top_right", "border_right");
+            div_jour.style.zIndex = "0";
         }
     }
 }
@@ -324,7 +325,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 creneau.style.boxShadow = "0px 1px 0px 0px black";
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.position = "relative";
-                creneau.style.zIndex = "1";
+                creneau.style.zIndex = "0";
             }
 
         }
@@ -334,7 +335,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
             
-            const toggleButton = create("div", box, "Détails");
+            const toggleButton = create("div", box, "‎ ‎ ‎ ‎ ‎ ");
             toggleButton.classList.add("toggle_button");
             toggleButton.style.fontSize = "0.5rem";
             
