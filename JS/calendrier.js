@@ -195,6 +195,7 @@ function creation_jour() {
         if (i === 0) div_jour.classList.add("border_bottom_top_left");
         else if (i === 6) {
             div_jour.classList.add("border_bottom_top_right", "border_right");
+            div_jour.style.zIndex = "0";
         }
     }
 }
