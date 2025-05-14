@@ -195,7 +195,6 @@ function creation_jour() {
         if (i === 0) div_jour.classList.add("border_bottom_top_left");
         else if (i === 6) {
             div_jour.classList.add("border_bottom_top_right", "border_right");
-            div_jour.style.zIndex = "0";
         }
     }
 }
@@ -257,7 +256,7 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
         const article_creneau = create("article", div_jour);
         article_creneau.id = datetemp.toLocaleDateString() + j;
         article_creneau.classList.add("creneau");
-
+        article_creneau.style.zIndex = "0";
         article_creneau.classList.add(Math.floor(j / 3) % 2 === 0 ? "gris_fonce" : "gris_clair");
         if (indice_div_jour === 0 && j % 6 === 0) {
             const carre_heure = create("div", article_creneau);
