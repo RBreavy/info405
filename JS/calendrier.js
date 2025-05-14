@@ -303,6 +303,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             
             creneau.style.setProperty('--border-color', color);
             creneau.classList.add("custom_bg_color");
+            creneau.classList.add("toggle_button");
             
             creneau.style.boxShadow = "none";
             
@@ -336,7 +337,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             
             const toggleButton = create("div", box, "Détails");
             toggleButton.style.fontSize = "2%";
-            toggleButton.classList.add("toggle_button");
+            
             toggleButton.style.fontSize = "0.8rem";
             
             const details = create("div", box);
@@ -352,7 +353,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 create("p", details, `Nom : ${nom}`);
             }
             
-            toggleButton.addEventListener("click", () => {
+            creneau.addEventListener("click", () => {
                 details.style.display = details.style.display === "none" ? "block" : "none";
             });
         }
