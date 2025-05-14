@@ -252,7 +252,7 @@ button {
 .HC {
     display: block;
     margin: 20px auto;       
-    max-width: 50%;         
+    width: 53vw;         
     height: auto;            
     border-radius: 10px;     
 }
