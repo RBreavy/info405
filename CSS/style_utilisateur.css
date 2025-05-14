@@ -248,3 +248,13 @@ button {
     margin-top: 40px;
     margin-left: 50px;
 }
+
+.HC {
+    width: 55vw;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px auto; /* Marge en bas pour la séparer du calendrier */
+    max-width: 100%;
+    position: relative;
+    z-index: 1;   
+}
