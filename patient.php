@@ -47,6 +47,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
             <input type="date" id="calendrier" name="cal" />
             <article class="selecteur_droit"></article>
         </article>
+        <img src = "/info2/site/images/cal.png" alt="Haut_Cal" class="HC">
 
         <script src="/info2/site/JS/calendrier.js"></script>
 
