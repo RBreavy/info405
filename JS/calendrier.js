@@ -200,6 +200,21 @@ function creation_jour() {
 }
 
 function maj_semaine() {
+    if (!document.querySelector('.HC')) {
+        // Créer l'image
+        const img = document.createElement('img');
+        img.src = "/info2/site/images/cal.png";
+        img.alt = "Haut du calendrier";
+        img.className = "HC";
+        
+        // Insérer l'image avant la section selecteur
+        const selecteur = document.querySelector('.selecteur');
+        if (selecteur) {
+            selecteur.parentNode.insertBefore(img, selecteur);
+        }
+    }
+
+
     maj_date();
     maj_id();
     maj_rdv();

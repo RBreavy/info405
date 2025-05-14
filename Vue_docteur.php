@@ -101,7 +101,7 @@ $id_med = htmlspecialchars($_SESSION['user_id']);
 </script>
 
 
-<img src = "/info2/site/images/cal.png" alt="Haut_Cal" class="HC">
+
 <script src="/info2/site/JS/calendrier.js"></script>
 <script src="/info2/site/JS/form_doc.js"></script>
 <script src="/info2/site/JS/docteur.js"></script>
