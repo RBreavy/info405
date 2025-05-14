@@ -7,6 +7,8 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION[
 }
 
 $nom = htmlspecialchars($_SESSION['nom']);
+$id = htmlspecialchars($_SESSION['user_id']);
+
 
 ?>
 <!DOCTYPE html>
@@ -14,6 +16,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 <script>
     const nomUtilisateur = <?php echo json_encode($nom); ?>;
+    const id = <?php echo json_encode($id); ?>;
 </script>
 
 <head>

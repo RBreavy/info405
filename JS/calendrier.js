@@ -139,12 +139,7 @@ async function chargerEtAfficherRDV() {
         const tableauRDV = await result.json();
 
         for (const rdv of tableauRDV) {
-            if (estDoc) {
-                var nom = rdv.nom_utilisateur;
-            } else {
-                var nom = rdv.nom_medecin;
-            }
-            
+            const nom = rdv.nom_utilisateur;
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
@@ -300,7 +295,7 @@ function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
 }
 
-async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom="", estDoc = false, selection = false) {
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
@@ -355,10 +350,6 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
             if (estDoc) {
                 create("p", details, `Nom : ${nom}`);
-            } else {
-                if (!selection) {
-                    create("p", details, `Nom médecin: ${nom}`);
-                }
             }
             
             toggleButton.addEventListener("click", () => {
