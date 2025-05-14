@@ -158,7 +158,7 @@ function displayI(IndT,IndR) {
                 
                 setTimeout(() => {
                     //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
-                    window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey");
+                    window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey","",false,true);
                 }, 50);
                 
                 // Passer au jour suivant
@@ -190,7 +190,7 @@ function displayI(IndT,IndR) {
         jour.setDate(dateDebutSemaine.getDate() + indice);
         const jourStr = jour.toLocaleDateString("fr-FR");
         setTimeout(() => {
-            window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey");
+            window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey","",false,true);
         }, 50);
     }
 }
@@ -204,7 +204,6 @@ function displayAppointments(appointments) {
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
     dateFinSemaine.setHours(23, 59, 59);
     for (const rdv of appointments) {
-            const nom = rdv.nom_medecin;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
             
@@ -220,8 +219,7 @@ function displayAppointments(appointments) {
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
-                    console.log(h_debut, h_fin, jourStr, jourStr, nom, estDoc)
-                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", nom, estDoc);
+                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", "", false,true);
                 }, 50);
 
             }
