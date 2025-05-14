@@ -92,7 +92,7 @@ async function chargerEtAfficherRDV() {
                         
                         setTimeout(() => {
                             //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
-                            create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", estDoc);
+                            create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", "", estDoc, false);
                         }, 50);
                         
                         // Passer au jour suivant
@@ -124,7 +124,7 @@ async function chargerEtAfficherRDV() {
                 jour.setDate(dateDebutSemaine.getDate() + indice);
                 const jourStr = jour.toLocaleDateString("fr-FR");
                 setTimeout(() => {
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", estDoc);
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", "", estDoc, false);
                 }, 50);
 
 
@@ -139,7 +139,8 @@ async function chargerEtAfficherRDV() {
         const tableauRDV = await result.json();
 
         for (const rdv of tableauRDV) {
-            const nom = rdv.nom_utilisateur;
+            const nom = estDoc ? rdv.nom_utilisateur : rdv.nom_medecin;
+            
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
@@ -156,7 +157,7 @@ async function chargerEtAfficherRDV() {
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc);
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc, false);
                 }, 50);
 
             }
@@ -295,7 +296,7 @@ function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
 }
 
-async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false) {
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false, selection = false) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
@@ -309,6 +310,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             if (i > horaire_debut && i < horaire_fin) {
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.borderBottom = "0px solid transparent";
+                creneau.style.zIndex = "0";
             }
             
             if (i === horaire_debut) {
@@ -324,63 +326,76 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                 creneau.style.boxShadow = "0px 1px 0px 0px black";
                 creneau.style.borderTop = "0px solid transparent";
                 creneau.style.position = "relative";
-                creneau.style.zIndex = "0";
+                creneau.style.zIndex = "1";
             }
 
         }
         
+        // ... début de la fonction inchangé ...
+
         const premierCreneau = document.getElementById(journee + horaire_debut);
+        let details = null;
+
         if (premierCreneau && !premierCreneau.querySelector(".rdv")) {
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
-            
-            const details = create("div", box);
+
+            details = create("div", box);
             details.classList.add("rdv_details");
             details.style.display = "none";
             details.style.zIndex = "1";
             details.style.position = "absolute";
-            
+
             const [day, month, year] = journee.split("/").map(Number);
             const dateObj = new Date(year, month - 1, day);
             create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
             create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
-            if (estDoc) {
+            
+            if (estDoc && nom !== "") {
                 create("p", details, `Nom : ${nom}`);
+            } else if (!selection && nom !== "") {
+                create("p", details, `Nom médecin : ${nom}`);
             }
-            
-            premierCreneau.addEventListener("click", () => {
-                if (details.style.display === "none") {
-                    details.style.display = "block";
-            
-                    setTimeout(() => {
-                        const rect = details.getBoundingClientRect();
-                        const viewportHeight = window.innerHeight;
-            
-                        if (rect.bottom > viewportHeight) {
-                            // Afficher au-dessus
-                            details.style.bottom = "100%";
-                            details.style.top = "auto";
-                            details.style.marginBottom = "5px";
-                        } else {
-                            // Afficher en dessous
-                            details.style.top = "100%";
-                            details.style.bottom = "auto";
-                            details.style.marginTop = "5px";
-                        }
-                    }, 0);
-                } else {
-                    details.style.display = "none";
-                }
-            });
-            
+        }
+
+        // Attacher le clic à **chaque créneau** pour afficher les détails
+        if (details) {
+            for (let i = horaire_debut; i <= horaire_fin; i++) {
+                const creneau = document.getElementById(journee + i);
+                if (!creneau) continue;
+
+                creneau.addEventListener("click", () => {
+                    if (details.style.display === "none") {
+                        details.style.display = "block";
+
+                        setTimeout(() => {
+                            const rect = details.getBoundingClientRect();
+                            const viewportHeight = window.innerHeight;
+
+                            if (rect.bottom > viewportHeight) {
+                                details.style.bottom = "100%";
+                                details.style.top = "auto";
+                                details.style.marginBottom = "5px";
+                            } else {
+                                details.style.top = "100%";
+                                details.style.bottom = "auto";
+                                details.style.marginTop = "5px";
+                            }
+                        }, 0);
+                    } else {
+                        details.style.display = "none";
+                    }
+                });
+            }
         }
     }
 }
 
-
 // Navigation gauche/droite entre les semaines avec animation
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
 const boutonD = document.getElementsByClassName("selecteur_droit")[0];
+// Récupérer l'image
+const imageCal = document.querySelector('.HC');
 const box = document.querySelectorAll(".jour");
 
 // Semaine précédente
@@ -393,6 +408,16 @@ boutonG.addEventListener('click', () => {
             element.classList.remove('transition_cal_g');
         }, 1000);
     });
+    
+    // Ajouter l'animation à l'image
+    if (imageCal) {
+        imageCal.classList.remove('transition_cal_g');
+        imageCal.classList.add('transition_cal_g');
+        setTimeout(_ => {
+            imageCal.classList.remove('transition_cal_g');
+        }, 1000);
+    }
+    
     maj_semaine();
 });
 
@@ -406,9 +431,18 @@ boutonD.addEventListener('click', () => {
             element.classList.remove('transition_cal_d');
         }, 1000);
     });
+    
+    // Ajouter l'animation à l'image
+    if (imageCal) {
+        imageCal.classList.remove('transition_cal_d');
+        imageCal.classList.add('transition_cal_d');
+        setTimeout(_ => {
+            imageCal.classList.remove('transition_cal_d');
+        }, 1000);
+    }
+    
     maj_semaine();
 });
-
 
 
 

@@ -51,9 +51,14 @@
     align-items: center; 
     width: 100%;
     height: 10%;
+<<<<<<< HEAD
     background-color: #3e00a2;
     border-right: solid 2px #63B5FB;
 
+=======
+    background-color: #63B5FB;
+    border-bottom: solid 1px black;
+>>>>>>> 0370e28379599ce4589f73705329a0c023927218
 }
 
 .datejour p {
@@ -191,6 +196,16 @@
 
 @keyframes anim_cal_d {
     40% {transform: translateX(-20%);}
+}
+
+.HC.transition_cal_g {
+    animation-name: anim_cal_g;
+    animation-duration: 1s;
+}
+
+.HC.transition_cal_d {
+    animation-name: anim_cal_d;
+    animation-duration: 1s;
 }
 
 
