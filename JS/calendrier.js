@@ -331,61 +331,65 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
 
         }
         
+        // ... début de la fonction inchangé ...
+
         const premierCreneau = document.getElementById(journee + horaire_debut);
+        let details = null;
+
         if (premierCreneau && !premierCreneau.querySelector(".rdv")) {
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
-            
-            const details = create("div", box);
+
+            details = create("div", box);
             details.classList.add("rdv_details");
             details.style.display = "none";
             details.style.zIndex = "1";
             details.style.position = "absolute";
-            
+
             const [day, month, year] = journee.split("/").map(Number);
             const dateObj = new Date(year, month - 1, day);
             create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
             create("p", details, calcul_duree(horaire_debut, horaire_fin - horaire_debut + 1));
-            if (estDoc) {
-                if (nom !== "") {
-                    create("p", details, `Nom : ${nom}`);
-                }
-                
-            } else if (!selection) {
-                if (nom !== "") {
-                    create("p", details, `Nom médecin : ${nom}`);
-                }
+            
+            if (estDoc && nom !== "") {
+                create("p", details, `Nom : ${nom}`);
+            } else if (!selection && nom !== "") {
+                create("p", details, `Nom médecin : ${nom}`);
             }
-            
-            premierCreneau.addEventListener("click", () => {
-                if (details.style.display === "none") {
-                    details.style.display = "block";
-            
-                    setTimeout(() => {
-                        const rect = details.getBoundingClientRect();
-                        const viewportHeight = window.innerHeight;
-            
-                        if (rect.bottom > viewportHeight) {
-                            // Afficher au-dessus
-                            details.style.bottom = "100%";
-                            details.style.top = "auto";
-                            details.style.marginBottom = "5px";
-                        } else {
-                            // Afficher en dessous
-                            details.style.top = "100%";
-                            details.style.bottom = "auto";
-                            details.style.marginTop = "5px";
-                        }
-                    }, 0);
-                } else {
-                    details.style.display = "none";
-                }
-            });
-            
+        }
+
+        // Attacher le clic à **chaque créneau** pour afficher les détails
+        if (details) {
+            for (let i = horaire_debut; i <= horaire_fin; i++) {
+                const creneau = document.getElementById(journee + i);
+                if (!creneau) continue;
+
+                creneau.addEventListener("click", () => {
+                    if (details.style.display === "none") {
+                        details.style.display = "block";
+
+                        setTimeout(() => {
+                            const rect = details.getBoundingClientRect();
+                            const viewportHeight = window.innerHeight;
+
+                            if (rect.bottom > viewportHeight) {
+                                details.style.bottom = "100%";
+                                details.style.top = "auto";
+                                details.style.marginBottom = "5px";
+                            } else {
+                                details.style.top = "100%";
+                                details.style.bottom = "auto";
+                                details.style.marginTop = "5px";
+                            }
+                        }, 0);
+                    } else {
+                        details.style.display = "none";
+                    }
+                });
+            }
         }
     }
 }
-
 
 // Navigation gauche/droite entre les semaines avec animation
 const boutonG = document.getElementsByClassName("selecteur_gauche")[0];
