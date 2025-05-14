@@ -401,16 +401,23 @@ const box = document.querySelectorAll(".jour");
 // Semaine précédente
 boutonG.addEventListener('click', () => {
     offsetjour -= 7;
+    
+    // Appliquer la transition sur tous les éléments en même temps
     box.forEach(element => {
         element.classList.remove('transition_cal_g');
         element.classList.add('transition_cal_g');
-        imageCal.classList.remove('transition_cal_g');
-        imageCal.classList.add('transition_cal_g');
-        setTimeout(_ => {
-            element.classList.remove('transition_cal_g');
-            imageCal.classList.remove('transition_cal_g');
-        }, 1000);
     });
+    
+    imageCal.classList.remove('transition_cal_g');
+    imageCal.classList.add('transition_cal_g');
+    
+    // Supprimer la classe après animation pour tous les éléments
+    setTimeout(() => {
+        box.forEach(element => {
+            element.classList.remove('transition_cal_g');
+        });
+        imageCal.classList.remove('transition_cal_g');
+    }, 1000);
     
     
     maj_semaine();
@@ -418,20 +425,25 @@ boutonG.addEventListener('click', () => {
 
 // Semaine suivante
 boutonD.addEventListener('click', () => {
-    offsetjour += 7;
+    offsetjour -= 7;
+    
+    // Appliquer la transition sur tous les éléments en même temps
     box.forEach(element => {
         element.classList.remove('transition_cal_d');
         element.classList.add('transition_cal_d');
-        imageCal.classList.remove('transition_cal_d');
-        imageCal.classList.add('transition_cal_d');
-        setTimeout(_ => {
-            element.classList.remove('transition_cal_d');
-            imageCal.classList.remove('transition_cal_d');
-        }, 0);
     });
     
-    // Ajouter l'animation à l'image
-
+    imageCal.classList.remove('transition_cal_d');
+    imageCal.classList.add('transition_cal_d');
+    
+    // Supprimer la classe après animation pour tous les éléments
+    setTimeout(() => {
+        box.forEach(element => {
+            element.classList.remove('transition_cal_d');
+        });
+        imageCal.classList.remove('transition_cal_d');
+    }, 1000);
+    
     
     maj_semaine();
 });
