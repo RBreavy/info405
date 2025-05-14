@@ -27,7 +27,7 @@ function getAllRdvs($start = null, $end = null, $id_medecin = null, $id_patient 
         }
 
         $query = "SELECT m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
-                         r.date_debut, r.date_fin, r.couleur,
+                         r.date_debut, r.date_fin, r.couleur, r.id_utilisateurs,
                          TIMESTAMPDIFF(MINUTE, r.date_debut, r.date_fin) AS duration
                   FROM rdv r
                   JOIN medecin m ON r.id_medecin = m.id_medecin 
