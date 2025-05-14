@@ -334,10 +334,10 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             const box = create("article", premierCreneau);
             box.classList.add("rdv");
             
-            const toggleButton = create("div", box, "Détails");
-            toggleButton.style.fontSize = "2%";
-            toggleButton.classList.add("toggle_button");
-            toggleButton.style.fontSize = "0.8rem";
+            // const toggleButton = create("div", box, "Détails");
+            // toggleButton.style.fontSize = "2%";
+            // toggleButton.classList.add("toggle_button");
+            // toggleButton.style.fontSize = "0.8rem";
             
             const details = create("div", box);
             details.classList.add("rdv_details");
