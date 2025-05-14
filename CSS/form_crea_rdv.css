@@ -64,9 +64,15 @@
     font-weight: bold;
 }
 
-.form-group input,
+.form-group input {
+    width: 89%;
+    padding: 0.8vh;
+    border: 0.1vh solid #1f3548;
+    border-radius: 0.5vh;
+}
+
 .form-group select {
-    width: 100%;
+    width:100%;
     padding: 0.8vh;
     border: 0.1vh solid #1f3548;
     border-radius: 0.5vh;
