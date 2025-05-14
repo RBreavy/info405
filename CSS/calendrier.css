@@ -186,11 +186,11 @@
 }
 
 @keyframes anim_cal_g {
-    40% {transform: translateX(2vw);}
+    40% {transform: translateX(1vw);}
 }
 
 @keyframes anim_cal_d {
-    40% {transform: translateX(-2vw);}
+    40% {transform: translateX(-1vw);}
 }
 
 .HC.transition_cal_g {
