@@ -2,7 +2,6 @@
 // Disable error reporting and output buffering to prevent unexpected output
 error_reporting(0);
 ini_set('display_errors', 0);
-ob_start(); // Start output buffering
 
 include_once "../index/db_connect.php";
 
@@ -148,6 +147,4 @@ switch ($action) {
         echo json_encode(['error' => 'Invalid action']);
 }
 
-// Clear any buffered output and end the script
-ob_end_flush();
 ?>
