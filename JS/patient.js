@@ -235,8 +235,8 @@ async function displayAppointments(appointments) {
     for (const rdv of appointments) {
         const yourdv = await fetch(`/info2/site/PHP/get-data.php?action=rdvOwnByUser&id_rdv=${rdv.id}&id_patient=${id}`);
         const You_RDV = await yourdv.json();
-        console.log("rdv"+You_RDV);
         if (!You_RDV) {
+            
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
         
@@ -252,6 +252,7 @@ async function displayAppointments(appointments) {
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
+                    console.log(h_debut, h_fin, jourStr);
                     cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "grey", "", false,true);
                 }, 50);
 
