@@ -10,42 +10,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (form) {
-        form.addEventListener("submit", async function (event) {
-            event.preventDefault(); // Empêche la soumission classique
+        form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Empêche l'envoi classique
 
-            const nom = nomInput.value.trim();
-            const mail = mailInput.value.trim();
-            const mdp = mdpInput.value.trim();
+        const nom = nomInput.value.trim();
+        const mail = mailInput.value.trim();
+        const mdp = mdpInput.value.trim();
 
-            if (nom === "" || mail === "" || mdp === "") {
-                alert("Tous les champs doivent être remplis.");
-                return;
+        // Vérifications simples côté client
+        if (nom === "" || mail === "" || mdp === "") {
+            alert("Tous les champs doivent être remplis.");
+            return;
+        }
+
+        // Envoi AJAX avec fetch
+        fetch("SignUp.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `nom=${encodeURIComponent(nom)}&mail=${encodeURIComponent(mail)}&mdp=${encodeURIComponent(mdp)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Redirige manuellement si succès
+                window.location.href = "../patient.php";
+            } else {
+                alert(data.message); // Affiche le message d’erreur PHP
             }
-
-            const formData = new FormData();
-            formData.append("nom", nom);
-            formData.append("mail", mail);
-            formData.append("mdp", mdp);
-
-            try {
-                const response = await fetch("SignUp.php", {
-                    method: "POST",
-                    body: formData
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    // Redirection si tout s’est bien passé
-                    window.location.href = "../patient.php";
-                } else {
-                    // Affiche une alerte avec le message d’erreur PHP
-                    alert(data.message);
-                }
-            } catch (error) {
-                alert("Une erreur est survenue lors de l’inscription.");
-                console.error(error);
-            }
+        })
+        .catch(error => {
+            console.error("Erreur réseau :", error);
+            alert("Une erreur est survenue lors de l’envoi du formulaire.");
         });
+    });
+
     }
 });
