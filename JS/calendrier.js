@@ -372,52 +372,53 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
         }
 
         // Attacher le clic à **chaque créneau** pour afficher les détails
-        if (details) {
-            for (let i = horaire_debut; i <= horaire_fin; i++) {
-                const creneau = document.getElementById(journee + i);
-                if (!creneau) continue;
+if (details) {
+    for (let i = horaire_debut; i <= horaire_fin; i++) {
+        const creneau = document.getElementById(journee + i);
+        if (!creneau) continue;
 
-                creneau.addEventListener("click", () => {
-                    if (details.style.display === "none") {
-                        details.style.display = "block";
+        creneau.addEventListener("click", () => {
+            if (details.style.display === "none") {
+                details.style.display = "block";
 
-                        setTimeout(() => {
-                            const rect = details.getBoundingClientRect();
-                            const viewportHeight = window.innerHeight;
+                setTimeout(() => {
+                    const rect = details.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
 
-                            if (rect.bottom > viewportHeight) {
-                                details.style.bottom = "100%";
-                                details.style.top = "auto";
-                                details.style.marginBottom = "5px";
-                            } else {
-                                details.style.top = "100%";
-                                details.style.bottom = "auto";
-                                details.style.marginTop = "5px";
-                            }
-                        }, 0);
+                    if (rect.bottom > viewportHeight) {
+                        details.style.bottom = "100%";
+                        details.style.top = "auto";
+                        details.style.marginBottom = "5px";
                     } else {
-                        details.style.display = "none";
+                        details.style.top = "100%";
+                        details.style.bottom = "auto";
+                        details.style.marginTop = "5px";
                     }
-                });
-
-                if (window.id_rdv_courant && ((estDoc && !selection) || (!estDoc && window.id_utilisateur_rdv == id))) {
-                    const btnAnnuler = create("button", details);
-                    btnAnnuler.innerText = "Annuler";
-                    btnAnnuler.style.backgroundColor = "#ff4757";
-                    btnAnnuler.style.color = "white";
-                    btnAnnuler.style.border = "none";
-                    btnAnnuler.style.padding = "5px 10px";
-                    btnAnnuler.style.borderRadius = "5px";
-                    btnAnnuler.style.marginTop = "10px";
-                    btnAnnuler.style.cursor = "pointer";
-                    
-                    btnAnnuler.addEventListener("click", function(e) {
-                        e.stopPropagation();
-                        annulerRendezVous(window.id_rdv_courant);
-            });
+                }, 0);
+            } else {
+                details.style.display = "none";
             }
-        }
+        });
+    } // Fin de la boucle for ici
+
+    // Création du bouton d'annulation APRÈS la boucle, mais toujours dans le bloc if(details)
+    if (window.id_rdv_courant && ((estDoc && !selection) || (!estDoc && window.id_utilisateur_rdv == id))) {
+        const btnAnnuler = create("button", details);
+        btnAnnuler.innerText = "Annuler";
+        btnAnnuler.style.backgroundColor = "#ff4757";
+        btnAnnuler.style.color = "white";
+        btnAnnuler.style.border = "none";
+        btnAnnuler.style.padding = "5px 10px";
+        btnAnnuler.style.borderRadius = "5px";
+        btnAnnuler.style.marginTop = "10px";
+        btnAnnuler.style.cursor = "pointer";
+            
+        btnAnnuler.addEventListener("click", function(e) {
+            e.stopPropagation();
+            annulerRendezVous(window.id_rdv_courant);
+        });
     }
+}
 }
 }
 
