@@ -181,9 +181,9 @@ switch ($action) {
             echo json_encode(['error' => 'id_medecin manquant']);
         }
         break;
-    case 'rdvs':
+    /*case 'rdvs':
         echo json_encode(getAllRdvs($start, $end, $id_medecin, $id_patient));
-        break;
+        break;*/
     case 'getIT':
         if ($id_medecin !== null) {
             echo json_encode(getAllIndispT($id_medecin));
