@@ -2,14 +2,14 @@
 
 .banner {
     background: linear-gradient(135deg, #042763,#4f0999);
-    font-size: 30px;
+    font-size: 25px;
     padding : 15px;
     height: 10vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     text-align: center;
-    width: 100%;
+    width: 200%;
 }
 
 
