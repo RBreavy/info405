@@ -162,6 +162,8 @@ async function chargerEtAfficherRDV() {
                 //const couleurRdv = estDoc ? couleur : "grey";
 
                 setTimeout(() => {
+                    window.id_rdv_courant = rdv.id_rdv;
+                    window.id_utilisateur_rdv = rdv.id_utilisateurs;
                     create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc, false);
                 }, 50);
 

@@ -26,7 +26,7 @@ function getAllRdvs($start = null, $end = null, $id_medecin = null, $id_patient 
             $where .= " AND r.date_debut >= '$start' AND r.date_debut <= '$end'";
         }
 
-        $query = "SELECT m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
+        $query = "SELECT r.id_rdv, m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
                          r.date_debut, r.date_fin, r.couleur, r.id_utilisateurs,
                          TIMESTAMPDIFF(MINUTE, r.date_debut, r.date_fin) AS duration
                   FROM rdv r
