@@ -14,6 +14,27 @@ function toggleForm(formType) {
         tabRepetitif.classList.remove('inactive');
         tabTemporaire.classList.remove('active');
         tabTemporaire.classList.add('inactive');
+        window.addEventListener('clickedEvent', (event) => {
+            const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(3)');
+            const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(4)');
+            const id = event.detail.id;
+            const idArticle = parseInt(id.substring(10));
+            
+            const totalMinutes = idArticle * 10;
+            const hours = Math.floor(totalMinutes / 60) + 8;
+            const minutes = totalMinutes % 60;
+            const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            if (startTime.value == "") {
+                startTime.value = formattedTime;
+            } else if (startTime.value == "") {
+                endTime.value = formattedTime;
+            }
+            
+
+
+    
+            
+        });
     } else if (formType === 'temporaire') {
         
         formRepetitif.classList.add('hidden');
