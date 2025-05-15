@@ -42,8 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("sss", $nom, $mail, $mdp);
 
         if ($stmt->execute()) {
-            // Pas d'output avant la redirection
-            header("Location: ../patient.php");
+            echo json_encode(['success' => true]);
             exit();
         } else {
             echo json_encode(['success' => false, 'message' => 'Erreur lors de l’insertion : ' . $stmt->error]);
