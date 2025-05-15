@@ -266,6 +266,7 @@
 
 .tabs {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     background: rgba(255, 255, 255, 0.1);
     padding: 5px;
