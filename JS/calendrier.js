@@ -400,20 +400,20 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                     }
                 });
 
-                if (window.id_rdv_courant && ((estDoc && !selection) || (!estDoc && window.id_utilisateur_rdv == id))) {
-                    const btnAnnuler = create("button", details);
-                    btnAnnuler.innerText = "Annuler";
-                    btnAnnuler.style.backgroundColor = "#ff4757";
-                    btnAnnuler.style.color = "white";
-                    btnAnnuler.style.border = "none";
-                    btnAnnuler.style.padding = "5px 10px";
-                    btnAnnuler.style.borderRadius = "5px";
-                    btnAnnuler.style.marginTop = "10px";
-                    btnAnnuler.style.cursor = "pointer";
+            if (window.id_rdv_courant && ((estDoc && !selection) || (!estDoc && window.id_utilisateur_rdv == id))) {
+                const btnAnnuler = create("button", details);
+                btnAnnuler.innerText = "Annuler";
+                btnAnnuler.style.backgroundColor = "#ff4757";
+                btnAnnuler.style.color = "white";
+                btnAnnuler.style.border = "none";
+                btnAnnuler.style.padding = "5px 10px";
+                btnAnnuler.style.borderRadius = "5px";
+                btnAnnuler.style.marginTop = "10px";
+                btnAnnuler.style.cursor = "pointer";
                     
-                    btnAnnuler.addEventListener("click", function(e) {
-                        e.stopPropagation();
-                        annulerRendezVous(window.id_rdv_courant);
+                btnAnnuler.addEventListener("click", function(e) {
+                    e.stopPropagation();
+                    annulerRendezVous(window.id_rdv_courant);
             });
             }
         }
