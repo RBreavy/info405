@@ -1,6 +1,6 @@
 .doctor-selection {
     position: relative;
-    margin-left: 2vh;
+    margin-left: 2vw;
     padding: 2vh;
     background-image: linear-gradient(to bottom right, #042763, #4f0999);
     border-radius: 1vh;
@@ -70,12 +70,16 @@ font-size: calc(0.6vw + 0.6vh);
 }
 
 .appointment-form {
-    margin-left: 3vh;
-    padding: 3vh;
+    position: relative;
+    margin-left: 2vw;
+    padding: 2vh;
     background-image: linear-gradient(to bottom right, #042763, #4f0999);
     border-radius: 1vh;
     width: 10vw;
     height: 58.6vh;
+    flex-wrap: nowrap;
+    font-size: calc(0.6vw + 0.6vh);
+    overflow: auto;
 }
 
 .form-group {
