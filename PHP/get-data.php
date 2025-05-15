@@ -71,7 +71,7 @@ function getAllRdvs($start = null, $end = null, $id_medecin = null, $id_patient 
 function getRdvByIdMed($id) {
     global $conn;
     try {
-        $query = "SELECT r.*,u.nom 
+        $query = "SELECT r.couleur, r.date_debut, r.date_fin, r.id_rdv, u.nom 
         FROM rdv r
         JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs
         WHERE id_medecin = ?";
@@ -90,7 +90,7 @@ function getRdvByIdMed($id) {
 function getRdvByIdPat($id) {
     global $conn;
     try {
-        $query = "SELECT r.*,m.nom 
+        $query = "SELECT r.couleur, r.date_debut, r.date_fin, r.id_rdv, m.nom 
         FROM rdv r
         JOIN medecin m ON r.id_medecin = m.id_medecin
         WHERE id_utilisateurs = ?";
