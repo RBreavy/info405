@@ -15,8 +15,8 @@ function toggleForm(formType) {
         tabTemporaire.classList.remove('active');
         tabTemporaire.classList.add('inactive');
         window.addEventListener('clickedEvent', (event) => {
-            const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(3)');
-            const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(4)');
+            const startTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(1)');
+            const endTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(2)');
             const id = event.detail.id;
             const idArticle = parseInt(id.substring(10));
             
