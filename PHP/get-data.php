@@ -118,6 +118,31 @@ function getAllDoctors()
     }
 }
 
+function isRdvOwnedByUser($user_id, $rdv_id) {
+    global $conn;
+    
+    try {
+        $query = "SELECT COUNT(*) AS count FROM rdv WHERE id_rdv = ? AND id_utilisateurs = ?";
+        $stmt = $conn->prepare($query);
+        
+        if (!$stmt) {
+            return false;
+        }
+        
+        $stmt->bind_param("ii", $rdv_id, $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        
+        return ($row['count'] > 0);
+        
+    } catch (Exception $e) {
+        // Log error but don't expose details
+        return ['error' => "Une erreur est survenue"];
+    }
+}
+
 function getRdvsByDoctor($id_medecin)
 {
     global $conn;
@@ -143,6 +168,7 @@ $id_medecin = isset($_GET['id_medecin']) ? (int)$_GET['id_medecin'] : null;
 $id_patient = isset($_GET['id_patient']) ? (int)$_GET['id_patient'] : null;
 $start = isset($_GET['start_date']) ? $_GET['start_date'] : null;
 $end = isset($_GET['end_date']) ? $_GET['end_date'] : null;
+$id_rdv = isset($_GET['id_rdv']) ? (int)$_GET['id_rdv'] : null;
 
 switch ($action) {
     case 'doctors':
@@ -172,6 +198,12 @@ switch ($action) {
             echo json_encode(['error' => 'id_medecin manquant']);
         }
         break;
+    case 'rdvOwnByUser':
+        if ($id_patient !== null && $id_rdv !== null) {
+            echo json_encode(isRdvOwnedByUser($id_patient, $id_rdv));
+        } else {
+            echo json_encode(['error'=> ['error' => 'id_medecin où id_patient manquant']]);
+        }
     default:
         echo json_encode(['error' => 'Action non reconnue']);
 }
