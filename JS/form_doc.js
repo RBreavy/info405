@@ -143,7 +143,6 @@ async function addRep(journee,deb,fin) {
         const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=repet&med=${id}&jour=${journee}&deb=${deb}&fin=${fin}`);
         const temp = await response.json();
         alert('Disponibilités enregistrées avec succès!');
-        const journee = journee;
         const h_debut = (deb.slice(0,2) - 8) * 6 + Math.floor(deb.slice(3,5) / 10);
         const h_fin = (fin.slice(0,2) - 8) * 6 + Math.floor(fin.slice(3,5) / 10) - 1;
         const dateDebutSemaine = new Date(date);
