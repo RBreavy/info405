@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nom = trim($_POST['nom']);
         $mail = trim($_POST['mail']);
         $mdp = trim($_POST['mdp']);
+        $mdp_hache = password_hash($mdp, PASSWORD_DEFAULT);
 
         // Vérifier que l'email est valide
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
@@ -39,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Requête préparée
         $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $nom, $mail, $mdp);
+        $stmt->bind_param("sss", $nom, $mail, $mdp_hache);
 
         if ($stmt->execute()) {
             echo json_encode(['success' => true]);

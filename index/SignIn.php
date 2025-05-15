@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $result->fetch_assoc();
     $stmt->close();
 
-    if ($user && $password === $user['mot_de_passe']) {
+    if ($user && password_verify($password, $user['mot_de_passe'])) {
         $_SESSION['nom'] = $user['nom'];
         $_SESSION['user_id'] = $user['id_utilisateurs'];
         $_SESSION['user_type'] = 'patient';
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $medecin = $result->fetch_assoc();
     $stmt->close();
 
-    if ($medecin && $password === $medecin['mot_de_passe']) {
+    if ($medecin && password_verify($password, $medecin['mot_de_passe'])) {
         $_SESSION['nom'] = $medecin['nom'];
         $_SESSION['user_id'] = $medecin['id_medecin'];
         $_SESSION['user_type'] = 'medecin';
