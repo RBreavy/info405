@@ -395,7 +395,7 @@
     overflow: hidden;
 }
 
-.rdv .content:hover {
+.rdv:hover {
     cursor:pointer;
 }
 
