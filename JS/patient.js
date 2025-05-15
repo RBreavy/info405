@@ -240,8 +240,7 @@ async function displayAppointments(appointments) {
         if (!You_RDV) {
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
-        
-            console.log(debut,dateDebutSemaine,fin,dateFinSemaine);
+
             if ((debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
                 (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
                 (debut <= dateDebutSemaine && fin >= dateFinSemaine)) {
