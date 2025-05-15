@@ -355,6 +355,9 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             details.style.zIndex = "1";
             details.style.position = "absolute";
 
+            if (window.id_rdv_courant) box.dataset.idRdv = window.id_rdv_courant;
+            if (window.id_utilisateur_rdv) box.dataset.idUtilisateur = window.id_utilisateur_rdv;
+
             const [day, month, year] = journee.split("/").map(Number);
             const dateObj = new Date(year, month - 1, day);
             create("p", details, `Date : ${dateObj.toLocaleDateString("fr-FR")}`);
@@ -395,6 +398,22 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
                         details.style.display = "none";
                     }
                 });
+
+                if (window.id_rdv_courant && ((estDoc && !selection) || (!estDoc && window.id_utilisateur_rdv == id))) {
+                    const btnAnnuler = create("button", details);
+                    btnAnnuler.innerText = "Annuler";
+                    btnAnnuler.style.backgroundColor = "#ff4757";
+                    btnAnnuler.style.color = "white";
+                    btnAnnuler.style.border = "none";
+                    btnAnnuler.style.padding = "5px 10px";
+                    btnAnnuler.style.borderRadius = "5px";
+                    btnAnnuler.style.marginTop = "10px";
+                    btnAnnuler.style.cursor = "pointer";
+                    
+                    btnAnnuler.addEventListener("click", function(e) {
+                        e.stopPropagation();
+                        annulerRendezVous(window.id_rdv_courant);
+            });
             }
         }
     }
@@ -510,6 +529,30 @@ async function diffEtMetAJourRDV(nouveauxRDV) {
 }
 
 // ^^^
+
+
+// Fonction pour annuler un rendez-vous (Théo)
+function annulerRendezVous(idRdv) {
+    if(confirm("Annuler ce rendez-vous?")) {
+        fetch('/info2/site/PHP/annuler.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id_rdv: idRdv})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                alert("Rendez-vous annulé!");
+                // Rafraîchir le calendrier
+                window.cal_maj_rdv();
+                window.cal_chargerEtAfficherRDV();
+            } else {
+                alert("Échec de l'annulation");
+            }
+        });
+    }
+}
+
 
 window.cal_create_rdv = create_rdv;
 window.cal_maj_rdv = maj_rdv;
