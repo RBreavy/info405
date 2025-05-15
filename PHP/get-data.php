@@ -206,7 +206,7 @@ switch ($action) {
             if ($id_patient !== null) {
                 echo json_encode(getRdvById($id_patient));
             } else {
-                echo json_encode(getRdvById(id: $id_medecin));
+                echo json_encode(getRdvById($id_medecin));
             }
             
         } else {
