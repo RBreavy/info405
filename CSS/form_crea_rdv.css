@@ -40,7 +40,7 @@
     margin-top: 1vh;
 }
 
-#rdv-time {
+#rdv-time,#rdv-date,#rdv-duration {
 width: 2vw;
 height: 1vh;
 font-size: calc(0.6vw + 0.6vh);
