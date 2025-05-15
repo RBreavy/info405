@@ -252,7 +252,7 @@
 .form-indisp {
     position: relative;
     width: clamp(150px, 12vw, 200px);
-    max-height: 70vh;
+    height: 20vh;
     overflow-y: auto;
     margin-right: 1vh;
     margin-left: 1vw;
@@ -370,7 +370,7 @@
 
 .tabs .tab,
 .day-button {
-  font-size: calc(1vh + 1vw);
+  font-size: calc(0.5vh + 0.5vw);
 }
 
 .day-button.selected {
