@@ -7,6 +7,7 @@
     width: 8.5vw;
     height: 58.6vh;
     font-size: calc(0.6vw + 0.6vh);
+    flex-wrap: nowrap;
 
 }
 
