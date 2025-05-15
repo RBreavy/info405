@@ -255,7 +255,7 @@
     max-height: 70vh;
     overflow-y: auto;
     margin-right: 1vh;
-    margin-left: 2vw;
+    margin-left: 1vw;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 0.5vh;
@@ -317,6 +317,10 @@
     transition: background-color 0.3s;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .submit-button:hover {
     background-color: #7777cd;
 }
@@ -332,11 +336,13 @@
 .tab.active {
     background-color: #5e41a1;
     color: white;
+    transition: all 1s;
 }
 
 .tab.inactive {
     background-color: #3a3a3a;
     color: white;
+    transition: all 1s;
 }
 
 .tab.active:hover {
