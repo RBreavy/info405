@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Vérifier si l'email existe déjà
-        $check_stmt = $conn->prepare("SELECT id FROM utilisateurs WHERE email = ?");
+        $check_stmt = $conn->prepare("SELECT id_utilisateurs FROM utilisateurs WHERE email = ?");
         $check_stmt->bind_param("s", $mail);
         $check_stmt->execute();
         $check_stmt->store_result();
