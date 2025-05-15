@@ -395,6 +395,10 @@
     overflow: hidden;
 }
 
+.rdv .content:hover {
+    cursor:pointer;
+}
+
 /* Quand la div est active (dépliée) */
 .rdv_details {
     display: block;
