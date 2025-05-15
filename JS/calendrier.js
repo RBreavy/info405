@@ -9,7 +9,6 @@ if (indice_jour === 0) indice_jour = 7;
 let anciensRDV = [];
 
 
-
 async function estMedecin(nom) {
     const response = await fetch('/info2/site/PHP/get-data.php?action=doctors');
     const tableauDOC = await response.json();
@@ -84,7 +83,7 @@ async function chargerEtAfficherRDV() {
                 jour.setDate(dateDebutSemaine.getDate() + indice);
                 const jourStr = jour.toLocaleDateString("fr-FR");
                 setTimeout(() => {
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", "", estDoc, false);
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", "", estDoc, false, rdv.id_rdv, rdv.id_utilisateurs);
                 }, 50);
             }
 
@@ -307,7 +306,7 @@ function conversion_heure_en_id(heure_debut) {
     return (parseInt(heure_debut.slice(0, 2)) - 8) * 6 + parseInt(heure_debut.slice(3, 4));
 }
 
-async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false, selection = false) {
+async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = journee, color, nom, estDoc = false, selection = false, id_rdv = null, id_utilisateur = null) {
     if (horaire_debut > -1 && horaire_fin < 72 && document.getElementById(journee)) {
         for (let i = horaire_debut; i <= horaire_fin; i++) {
             const creneau = document.getElementById(journee + i);
@@ -357,8 +356,8 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             details.style.zIndex = "1";
             details.style.position = "absolute";
 
-            if (window.id_rdv_courant) box.dataset.idRdv = window.id_rdv_courant;
-            if (window.id_utilisateur_rdv) box.dataset.idUtilisateur = window.id_utilisateur_rdv;
+            if (id_rdv) box.dataset.idRdv = id_rdv;
+            if (id_utilisateur) box.dataset.idUtilisateur = id_utilisateur;
 
             const [day, month, year] = journee.split("/").map(Number);
             const dateObj = new Date(year, month - 1, day);
@@ -419,6 +418,7 @@ async function create_rdv(horaire_debut, horaire_fin, journee, journee_fin = jou
             }
         }
     }
+}
 }
 
 // Navigation gauche/droite entre les semaines avec animation
