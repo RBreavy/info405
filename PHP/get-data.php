@@ -122,7 +122,7 @@ function getRdvsByDoctor($id_medecin)
 {
     global $conn;
     try {
-        $query = "SELECT * FROM rdv WHERE id_medecin = ?";
+        $query = "SELECT id_rdv, couleur, date_debut, date_fin FROM rdv WHERE id_medecin = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $id_medecin);
         $stmt->execute();
