@@ -162,7 +162,7 @@ async function chargerEtAfficherRDV() {
 
                 setTimeout(() => {
                     window.id_rdv_courant = rdv.id_rdv;
-                    window.id_utilisateur_rdv = rdv.id_utilisateurs;
+                    window.id_utilisateur_rdv = estDoc ? rdv.id_utilisateurs : id;
                     create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc, false);
                 }, 50);
 
@@ -402,22 +402,20 @@ if (details) {
     } // Fin de la boucle for ici
 
     // Création du bouton d'annulation APRÈS la boucle, mais toujours dans le bloc if(details)
-    if (window.id_rdv_courant && ((estDoc && !selection) || (!estDoc && window.id_utilisateur_rdv == id))) {
-        const btnAnnuler = create("button", details);
-        btnAnnuler.innerText = "Annuler";
-        btnAnnuler.style.backgroundColor = "#ff4757";
-        btnAnnuler.style.color = "white";
-        btnAnnuler.style.border = "none";
-        btnAnnuler.style.padding = "5px 10px";
-        btnAnnuler.style.borderRadius = "5px";
-        btnAnnuler.style.marginTop = "10px";
-        btnAnnuler.style.cursor = "pointer";
-            
-        btnAnnuler.addEventListener("click", function(e) {
-            e.stopPropagation();
-            annulerRendezVous(window.id_rdv_courant);
-        });
-    }
+    const btnAnnuler = create("button", details);
+    btnAnnuler.innerText = "Annuler";
+    btnAnnuler.style.backgroundColor = "#ff4757";
+    btnAnnuler.style.color = "white";
+    btnAnnuler.style.border = "none";
+    btnAnnuler.style.padding = "5px 10px";
+    btnAnnuler.style.borderRadius = "5px";
+    btnAnnuler.style.marginTop = "10px";
+    btnAnnuler.style.cursor = "pointer";
+        
+    btnAnnuler.addEventListener("click", function(e) {
+        e.stopPropagation();
+        annulerRendezVous(window.id_rdv_courant);
+    });
 }
 }
 }
