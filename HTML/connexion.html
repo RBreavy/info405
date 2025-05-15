@@ -1,4 +1,4 @@
-<!--Page Login-->
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -11,33 +11,29 @@
 
   <h2>Bienvenue!!</h2>
 
-  
   <div class="container">
-    <form method="POST" action="../index/SignIn.php">
+    <form method="POST" action="../index/SignIn.php" id="login-form">
       <label for="nom"><b>Nom :</b></label>
       <input name="nom" type="text" placeholder="Entrer votre nom" id="nom" required> <br><br>
       
       <label for="psw"><b>Mot de passe :</b></label>
       <input name="psw" type="password" placeholder="Entrer votre mot de passe" id="psw" required> <br>
     
+      <div class="container">
+        <span class="lien">
+          <a href="../index/mdp_oublie.html">Mot de passe oublié ?</a> 
+          <input type="checkbox" checked="checked" id="souvenir"> Se souvenir de moi
+        </span>
+      </div>
+      <br>
 
-  <div class="container">
-    <span class="lien">
-      <a href="../index/mdp_oublie.html">Mot de passe oublié ?</a> 
-      <input type="checkbox" checked="checked" id="souvenir"> Se souvenir de moi
-    </span>
-  </div>
-        
-  </label><br><br>
+      <button type="submit" id="submit-btn">Connexion</button> <br><br>
 
-  <button type="submit" id="submit-btn">Connexion</button> <br><br>
-
-  <a id="creation" href="../index/creer_compte.html">Créer vous un compte</a>
+      <a id="creation" href="../index/creer_compte.html">Créer vous un compte</a>
     </form>
   </div>
 </div>
 
+<script src="../index/index_JS.js"></script>
 </body>
 </html>
-
-<script src="../index/index_JS.js"></script>

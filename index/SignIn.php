@@ -4,7 +4,7 @@ require_once "db_connect.php";
 
 header('Content-Type: application/json');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nom = htmlspecialchars(trim($_POST['nom']), ENT_QUOTES, 'UTF-8');
     $password = trim($_POST['psw']);
 
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Vérification dans la table médecins
+    // Vérification dans la table medecin
     $stmt = $conn->prepare("SELECT * FROM medecin WHERE nom = ?");
     if (!$stmt) {
         echo json_encode(['success' => false, 'message' => 'Erreur serveur (médecin)']);
@@ -59,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
+    // Si échec
     echo json_encode(['success' => false, 'message' => 'Nom ou mot de passe incorrect.']);
     $conn->close();
 }

@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const nomInput = document.getElementById("nom");
     const pswInput = document.getElementById("psw");
     const souvenirCheckbox = document.getElementById("souvenir");
-    const form = document.querySelector("form");
+    const form = document.getElementById("login-form");
 
-    // Remplissage localStorage
+    // Remplissage des champs avec localStorage
     if (nomInput) nomInput.value = localStorage.getItem("nom") || "";
     if (pswInput) pswInput.value = localStorage.getItem("psw") || "";
     if (souvenirCheckbox) souvenirCheckbox.checked = localStorage.getItem("souvenir") === "true";
