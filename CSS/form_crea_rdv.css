@@ -6,21 +6,29 @@
     border-radius: 1vh;
     width: 10vw;
     height: 58.6vh;
+    font-size: calc(1vw + 1vh);
 
 }
 
 .doctor-selection h2 {
     color: white;
-    font-size: calc(1vw + 1vh);
 }
 
 .appointment-form h2 {
     color: white;
-    font-size: calc(1vw + 1vh);
 }
 
 .appointment-form label {
     color: white;
+}
+
+.appointment-form h2,
+.appointment-form label,
+.form-group label,
+.doctor-button,
+#rdv-form button[type="submit"],
+#cancel-appointment {
+    font-size: calc(1vw + 1vh);
 }
 
 .doctor-list {
