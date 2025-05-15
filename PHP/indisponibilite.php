@@ -1,6 +1,8 @@
 <?php
+// Disable error reporting and output buffering to prevent unexpected output
 error_reporting(0);
 ini_set('display_errors', 0);
+ob_start(); // Start output buffering
 
 include_once "../index/db_connect.php";
 
@@ -133,7 +135,19 @@ switch ($action) {
         $journee = $_GET['jour'] ?? null;
         $heure_debut = $_GET['deb'] ?? null;
         $heure_fin = $_GET['fin'] ?? null;
+        
+        // Make sure we have all required parameters
+        if ($id_medecin === null || $journee === null || $heure_debut === null || $heure_fin === null) {
+            echo json_encode(['error' => 'Missing required parameters']);
+            break;
+        }
+        
         echo json_encode(indisp_repet($id_medecin, $journee, $heure_debut, $heure_fin));
         break;
+    default:
+        echo json_encode(['error' => 'Invalid action']);
 }
+
+// Clear any buffered output and end the script
+ob_end_flush();
 ?>
