@@ -393,11 +393,6 @@
     transition: max-height 0.3s ease-out;  /* Animation de dépliage */
     max-height: 0;
     overflow: hidden;
-    cursor:pointer;
-}
-
-.rdv:hover {
-    cursor:pointer;
 }
 
 /* Quand la div est active (dépliée) */
