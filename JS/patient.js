@@ -70,6 +70,7 @@ function setupEventListeners() {
         const date = document.getElementById('rdv-date').value;
         const time = document.getElementById('rdv-time').value;
         const duration = parseInt(document.getElementById('rdv-duration').value);
+        const couleur = (duration == 10) ? "palegreen" : (duration == 20) ? "orangered" : "paleturquoise";
 
         if (!date || !time || !duration) {
             alert('Veuillez remplir tous les champs');
@@ -87,7 +88,7 @@ function setupEventListeners() {
         const payload = {
             id_medecin: selectedDoctorId,
             id_utilisateur: id,
-            couleur: 'blue',
+            couleur: couleur,
             date_debut: formatDateTime(startDateTime),
             date_fin: formatDateTime(endDateTime)
         };
@@ -106,7 +107,13 @@ function setupEventListeners() {
             if (result.success) {
                 alert('Rendez-vous enregistré avec succès!');
                 document.getElementById('rdv-form').reset();
-                //loadAppointments(selectedDoctorId);
+                const jourStr = startDateTime.toLocaleDateString("fr-FR");
+                const h_debut = (startDateTime.getHours() - 8) * 6 + Math.floor(startDateTime.getMinutes() / 10);
+                const h_fin = (endDateTime.getHours() - 8) * 6 + Math.floor(endDateTime.getMinutes() / 10) - 1;
+            
+                setTimeout(() => {
+                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, selectedDoctorId, false, false);
+                }, 50);
             } else {
                 alert(result.message || 'Erreur lors de la prise de rendez-vous');
             }

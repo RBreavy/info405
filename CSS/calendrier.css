@@ -252,29 +252,34 @@
 .form-indisp {
     position: relative;
     width: 15vw;
-    height: 80.25%;
+    height: 40vh;
+    overflow-y: auto;
     margin-right: 1vh;
-    margin-left: 3vw;
+    margin-left: 1vw;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    padding: 1px;
+    padding: 0.5vh;
     flex-shrink: 0;
+    font-size: 0.75rem;
+    margin-bottom: 20vh;
 }
-
 
 .tabs {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     background: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: calc(1vw+1vh);
+    margin-bottom: 10px;
 }
 
 #form-repetitif, #form-temporaire {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: calc(1vw+1vh);
 }
 
 .day-buttons-container {
@@ -282,52 +287,53 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .form-indisp label {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 6px;
+    font-size: calc(1vw+1vh);
     display: block;
 }
 
-.form-indisp input[type="time"], 
+.form-indisp input[type="time"],
 .form-indisp input[type="date"] {
     width: 80%;
-    padding: 8px;
-    border-radius: 5px;
+    padding: 4px;
+    border-radius: 4px;
     border: 1px solid #5e41a1;
-    margin: 5px 0;
+    margin: 3px 0;
+    font-size: 0.75rem;
     background-color: rgba(255, 255, 255, 0.9);
     color: #000;
 }
 
 .submit-button {
-    margin-top: 15px;
+    margin-top: 10px;
     width: 80%;
-    padding: 10px;
+    padding: 6px;
+    font-size: 0.75rem;
     background-color: #5e41a1;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .submit-button:hover {
     background-color: #7777cd;
 }
 
-/* Style for hiding elements */
-.hidden {
-    display: none !important;
-}
-
-/* Tab styling */
 .tab {
     cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
     transition: 0.3s;
 }
 
@@ -353,15 +359,19 @@
     color: white;
 }
 
-/* Day button styling */
 .day-button {
-    margin: 5px;
-    padding: 10px;
+    margin: 3px;
+    padding: 6px;
     background: #5e41a1;
     border: none;
     color: white;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 4px;
+}
+
+.tabs .tab,
+.day-button {
+  font-size: calc(0.5vh + 0.5vw);
 }
 
 .day-button.selected {
@@ -369,10 +379,8 @@
 }
 
 .day-button:hover {
-    transition: all 0.5s ease-in;
     text-decoration: underline;
 }
-
 
 /* Style initial pour la div dépliant */
 .rdv .content {

@@ -66,7 +66,7 @@ if (!isset($data['couleur']) || empty($data['couleur'])) {
 // Vérifie s’il y a un conflit avec un autre rendez-vous du même médecin
 $check = $conn->prepare("
     SELECT COUNT(*) as count FROM rdv 
-    WHERE id_medecin = ? 
+    WHERE (id_medecin = ? OR id_utilisateurs = ?)
     AND (
         (date_debut < ? AND date_fin > ?) OR
         (date_debut >= ? AND date_debut < ?)
@@ -74,8 +74,9 @@ $check = $conn->prepare("
 ");
 
 $check->bind_param(
-    "issss",
+    "iissss",
     $data['id_medecin'],
+    $data['id_utilisateur'],
     $data['date_fin'],
     $data['date_debut'],
     $data['date_debut'],
@@ -87,7 +88,7 @@ $check_result = $check->get_result()->fetch_assoc();
 if ($check_result['count'] > 0) {
     echo json_encode([
         'success' => false,
-        'message' => 'Ce créneau est déjà réservé pour ce médecin.'
+        'message' => 'Ce créneau est déjà réservé.'
     ]);
     exit;
 }

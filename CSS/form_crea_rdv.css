@@ -11,12 +11,12 @@
 
 .doctor-selection h2 {
     color: white;
-    font-size: 2vh;
+    font-size: calc(1vw + 1vh);
 }
 
 .appointment-form h2 {
     color: white;
-    font-size: 2vh;
+    font-size: calc(1vw + 1vh);
 }
 
 .appointment-form label {
