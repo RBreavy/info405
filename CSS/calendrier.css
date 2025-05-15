@@ -312,7 +312,7 @@
     margin-top: 10px;
     width: 80%;
     padding: 6px;
-    font-size: calc(1vw+1vh);
+    font-size: calc(0.5vw+0.5vh);
     background-color: #5e41a1;
     color: white;
     border: none;
@@ -371,7 +371,7 @@
 
 .tabs .tab,
 .day-button {
-  font-size: calc(1vh + 1vw);
+  font-size: calc(0.5vh + 0.5vw);
 }
 
 .day-button.selected {
