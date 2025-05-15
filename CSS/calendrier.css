@@ -264,6 +264,10 @@
     margin-bottom: 20vh;
 }
 
+.form-indisp label {
+  font-size: calc(0.5vw + 0.5vh);
+}
+
 .tabs {
     display: flex;
     flex-wrap: wrap;
