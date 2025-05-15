@@ -144,8 +144,8 @@
 }
 
 #calendrier {
-    width: 40%;
-    height: 50%;
+    width: 20vw;
+    height: 2vh;
     color: rgb(0, 0, 0);
     background-color: white;
     border-radius: 10px;
