@@ -56,7 +56,7 @@ async function chargerEtAfficherRDV() {
 
 
         if (estDoc) {
-            var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
+            var result = await fetch(`/info2/site/PHP/get-data.php?action=getRdvById&id_medecin=${id}`);
             const indispt = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${id}`);
             const tableauIT = await indispt.json();
             const indispr = await fetch(`/info2/site/PHP/get-data.php?action=getIR&id_medecin=${id}`);
@@ -136,7 +136,7 @@ async function chargerEtAfficherRDV() {
 
 
         } else {
-            var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_patient=${id}`);
+            var result = await fetch(`/info2/site/PHP/get-data.php?action=getRdvById&id_patient=${id}`);
             
             
         }

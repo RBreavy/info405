@@ -68,6 +68,22 @@ function getAllRdvs($start = null, $end = null, $id_medecin = null, $id_patient 
     }
 }
 
+function getRdvById($id) {
+    global $conn;
+    try {
+        $query = "SELECT * FROM rdv WHERE id_utilisateurs = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $data;
+    } catch (Exception $e) {
+        return ["error" => "Une erreur est survenue"];
+    }
+}
+
 function getAllIndispR($id) 
 {
     global $conn;
@@ -183,7 +199,16 @@ switch ($action) {
         break;
     /*case 'rdvs':
         echo json_encode(getAllRdvs($start, $end, $id_medecin, $id_patient));
-        break;*/
+        break;
+    */
+    case 'getRdvById':
+        if ($id_patient !== null) {
+            echo json_encode(getRdvById($id_patient));
+        } else {
+            echo json_encode(['error' => 'id_patient manquant']);
+        }
+        
+        break;
     case 'getIT':
         if ($id_medecin !== null) {
             echo json_encode(getAllIndispT($id_medecin));
