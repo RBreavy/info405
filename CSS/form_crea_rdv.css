@@ -41,8 +41,8 @@
 }
 
 #rdv-time,#rdv-date,#rdv-duration {
-width: 2vw;
-height: 1vh;
+width: 4vw;
+height: 1.5vh;
 font-size: calc(0.6vw + 0.6vh);
 
 }
