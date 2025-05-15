@@ -64,6 +64,22 @@ function setupEventListeners() {
         window.cal_chargerEtAfficherRDV();
     });
 
+    window.addEventListener('clickedEvent', (event) => {
+        const id = event.detail.id;
+        const dateStr = id.substring(0,10);
+        const idArticle = parseInt(id.substring(10));
+        
+        const dateParts = dateStr.split('/');
+        const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+
+        const totalMinutes = idArticle * 10;
+        const hours = Math.floor(totalMinutes / 60) + 8;
+        const minutes = totalMinutes % 60;
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        document.getElementById('rdv-date').value = formattedDate;
+        document.getElementById('rdv-time').value = formattedTime;
+    });
+
     document.getElementById('rdv-form').addEventListener('submit', async (e) => {
         e.preventDefault();
 
