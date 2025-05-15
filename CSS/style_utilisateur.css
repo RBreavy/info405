@@ -31,7 +31,7 @@ overflow-x: hidden;
 #welcome-message{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     cursor: grab;
-    font-size: calc(0.8vw + 0.8vh);
+    font-size: calc(0.75vw + 0.75vh);
     text-align: center;
     margin-top: 10px;
 }
