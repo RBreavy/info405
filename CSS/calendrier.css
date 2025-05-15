@@ -251,8 +251,8 @@
 
 .form-indisp {
     position: relative;
-    width: clamp(150px, 12vw, 200px);
-    height: 20vh;
+    width: 15vw;
+    height: 40vh;
     overflow-y: auto;
     margin-right: 1vh;
     margin-left: 1vw;
@@ -261,11 +261,12 @@
     padding: 0.5vh;
     flex-shrink: 0;
     font-size: 0.75rem;
-    margin-bottom: 30vh;
+    margin-bottom: 20vh;
 }
 
 .tabs {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     background: rgba(255, 255, 255, 0.1);
     padding: 5px;
