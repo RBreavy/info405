@@ -141,17 +141,17 @@
 
 
 .selecteur_droit:hover , .selecteur_gauche:hover {
-    background-size: 140%;
+    background-size: 130%;
 }
 
 #calendrier {
-    width: 20vw;
+    width: 25vw;
     height: 2vh;
     color: rgb(0, 0, 0);
     background-color: white;
     border-radius: 10px;
     border-color: white;
-    padding: 4px;
+    padding: 5px;
 }
 
 
