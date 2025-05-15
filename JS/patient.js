@@ -235,17 +235,16 @@ async function displayAppointments(appointments) {
     for (const rdv of appointments) {
         const yourdv = await fetch(`/info2/site/PHP/get-data.php?action=rdvOwnByUser&id_rdv=${rdv.id}&id_patient=${id}`);
         const You_RDV = await yourdv.json();
-        console.log(!You_RDV);
+        
         if (!You_RDV) {
-            
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
         
-
+            console.log("test1");
             if ((debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
                 (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
                 (debut <= dateDebutSemaine && fin >= dateFinSemaine)) {
-
+                console.log("test2");
                 const jourStr = debut.toLocaleDateString("fr-FR");
                 const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
                 const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
