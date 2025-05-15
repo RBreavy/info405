@@ -66,7 +66,7 @@ if (!isset($data['couleur']) || empty($data['couleur'])) {
 // Vérifie s’il y a un conflit avec un autre rendez-vous du même médecin
 $check = $conn->prepare("
     SELECT COUNT(*) as count FROM rdv 
-    WHERE id_medecin = ? OR id_utilisateurs = ?
+    WHERE (id_medecin = ? OR id_utilisateurs = ?)
     AND (
         (date_debut < ? AND date_fin > ?) OR
         (date_debut >= ? AND date_debut < ?)
