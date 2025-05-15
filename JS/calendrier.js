@@ -87,7 +87,7 @@ async function chargerEtAfficherRDV() {
                     create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", "", estDoc, false);
                 }, 50);
             }
-            
+
             for (const IT of tableauIT) {
                 const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
                 const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
@@ -280,6 +280,10 @@ function creation_crenau(indice_div_jour, div_jour, datetemp) {
 
         article_creneau.addEventListener("click", () => {
             console.log("Créneau cliqué:", article_creneau.id);
+            const event = new CustomEvent('clickedEvent', {
+                detail: {id: article_creneau.id}
+            });
+            window.dispatchEvent(event);
         });
     }
     //chargerEtAfficherRDV();
