@@ -22,6 +22,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
 
+        // Vérifier si l'email existe déjà
+        $check_stmt = $conn->prepare("SELECT id FROM utilisateurs WHERE email = ?");
+        $check_stmt->bind_param("s", $mail);
+        $check_stmt->execute();
+        $check_stmt->store_result();
+
+        if ($check_stmt->num_rows > 0) {
+            echo json_encode(['success' => false, 'message' => 'Cet email est déjà utilisé']);
+            $check_stmt->close();
+            $conn->close();
+            exit;
+        }
+        $check_stmt->close();
+            
+
         // Requête préparée
         $stmt = $conn->prepare("INSERT INTO utilisateurs (nom, email, mot_de_passe) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $nom, $mail, $mdp);
