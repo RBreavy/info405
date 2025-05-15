@@ -361,12 +361,16 @@
 .day-button {
     margin: 3px;
     padding: 6px;
-    font-size: 0.7rem;
     background: #5e41a1;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 4px;
+}
+
+.tabs .tab,
+.day-button {
+  font-size: calc(1vh + 1vw);
 }
 
 .day-button.selected {
