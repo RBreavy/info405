@@ -26,7 +26,7 @@ function toggleForm(formType) {
             const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
             if (startTime.value == "") {
                 startTime.value = formattedTime;
-            } else if (startTime.value == "") {
+            } else if (endTime.value == "") {
                 endTime.value = formattedTime;
             }
             
