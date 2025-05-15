@@ -134,6 +134,32 @@ function displayI(IndT,IndR) {
     const dateFinSemaine = new Date(dateDebutSemaine);
     dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
     dateFinSemaine.setHours(23, 59, 59);
+
+    for (const IR of IndR) {
+        const journee = IR.journee;
+        const h_debut = (IR.heure_debut.slice(0,2) - 8) * 6 + Math.floor(IR.heure_debut.slice(3,5) / 10);
+        const h_fin = (IR.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IR.heure_fin.slice(3,5) / 10) - 1;
+        const dateDebutSemaine = new Date(date);
+        dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+
+        const jourtoindice = new Map([
+            ["LUN",0],
+            ["MAR",1],
+            ["MER",2],
+            ["JEU",3],
+            ["VEN",4],
+            ["SAM",5],
+            ["DIM",6],
+        ]);
+        const indice = jourtoindice.get(journee);
+        const jour = new Date(dateDebutSemaine);
+        jour.setDate(dateDebutSemaine.getDate() + indice);
+        const jourStr = jour.toLocaleDateString("fr-FR");
+        setTimeout(() => {
+            window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey","",false,true);
+        }, 50);
+    }
+
     for (const IT of IndT) {
         const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
         const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
@@ -176,30 +202,7 @@ function displayI(IndT,IndR) {
         }
     } 
 
-    for (const IR of IndR) {
-        const journee = IR.journee;
-        const h_debut = (IR.heure_debut.slice(0,2) - 8) * 6 + Math.floor(IR.heure_debut.slice(3,5) / 10);
-        const h_fin = (IR.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IR.heure_fin.slice(3,5) / 10) - 1;
-        const dateDebutSemaine = new Date(date);
-        dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
 
-        const jourtoindice = new Map([
-            ["LUN",0],
-            ["MAR",1],
-            ["MER",2],
-            ["JEU",3],
-            ["VEN",4],
-            ["SAM",5],
-            ["DIM",6],
-        ]);
-        const indice = jourtoindice.get(journee);
-        const jour = new Date(dateDebutSemaine);
-        jour.setDate(dateDebutSemaine.getDate() + indice);
-        const jourStr = jour.toLocaleDateString("fr-FR");
-        setTimeout(() => {
-            window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey","",false,true);
-        }, 50);
-    }
 }
 
 function displayAppointments(appointments) {

@@ -55,12 +55,39 @@ async function chargerEtAfficherRDV() {
 
     try {
 
+
         if (estDoc) {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
             const indispt = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${id}`);
             const tableauIT = await indispt.json();
             const indispr = await fetch(`/info2/site/PHP/get-data.php?action=getIR&id_medecin=${id}`);
             const tableauIR = await indispr.json();
+
+            for (const IR of tableauIR) {
+                const journee = IR.journee;
+                const h_debut = (IR.heure_debut.slice(0,2) - 8) * 6 + Math.floor(IR.heure_debut.slice(3,5) / 10);
+                const h_fin = (IR.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IR.heure_fin.slice(3,5) / 10) - 1;
+                const dateDebutSemaine = new Date(date);
+                dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+
+                const jourtoindice = new Map([
+                    ["LUN",0],
+                    ["MAR",1],
+                    ["MER",2],
+                    ["JEU",3],
+                    ["VEN",4],
+                    ["SAM",5],
+                    ["DIM",6],
+                ]);
+                const indice = jourtoindice.get(journee);
+                const jour = new Date(dateDebutSemaine);
+                jour.setDate(dateDebutSemaine.getDate() + indice);
+                const jourStr = jour.toLocaleDateString("fr-FR");
+                setTimeout(() => {
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", "", estDoc, false);
+                }, 50);
+            }
+            
             for (const IT of tableauIT) {
                 const debutIndisp = new Date(IT.debut_periode.replace(' ', 'T'));
                 const finIndisp = new Date(IT.fin_periode.replace(' ', 'T'));
@@ -103,30 +130,11 @@ async function chargerEtAfficherRDV() {
                 }
             }
 
-            for (const IR of tableauIR) {
-                const journee = IR.journee;
-                const h_debut = (IR.heure_debut.slice(0,2) - 8) * 6 + Math.floor(IR.heure_debut.slice(3,5) / 10);
-                const h_fin = (IR.heure_fin.slice(0,2) - 8) * 6 + Math.floor(IR.heure_fin.slice(3,5) / 10) - 1;
-                const dateDebutSemaine = new Date(date);
-                dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
 
-                const jourtoindice = new Map([
-                    ["LUN",0],
-                    ["MAR",1],
-                    ["MER",2],
-                    ["JEU",3],
-                    ["VEN",4],
-                    ["SAM",5],
-                    ["DIM",6],
-                ]);
-                const indice = jourtoindice.get(journee);
-                const jour = new Date(dateDebutSemaine);
-                jour.setDate(dateDebutSemaine.getDate() + indice);
-                const jourStr = jour.toLocaleDateString("fr-FR");
-                setTimeout(() => {
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", "", estDoc, false);
-                }, 50);
-            }
+
+           
+
+
 
         } else {
             var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_patient=${id}`);
