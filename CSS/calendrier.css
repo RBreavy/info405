@@ -398,3 +398,37 @@
     color: white;  /* Texte en blanc pour plus de visibilité */
     padding: 10px;  /* Optionnel, pour espacer le texte */
 }
+
+/* ▼▼▼▼▼▼ */
+@media (max-width: 768px) {
+  .main_cal {
+    width: 100vw;
+    height: 70vh;
+    padding: 0 5px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .jour {
+    min-width: 120px;
+    height: 65vh;
+    margin: 0 2px;
+  }
+
+  .creneau {
+    height: 25px;
+  }
+
+  .rdv {
+    font-size: 0.7rem;
+  }
+
+  .datejour p {
+    font-size: 0.8rem;
+  }
+
+  .selecteur {
+    width: 90%;
+    left: 5%;
+  }
+}
