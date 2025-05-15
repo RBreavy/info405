@@ -61,7 +61,7 @@ function setupEventListeners() {
         document.querySelector('.doctor-selection').style.display = 'block';
         document.getElementById('rdv-form').reset();
         selectedDoctorId = null;
-        selectDoctor = null;
+        selectedDoctorName = null;
         window.cal_maj_rdv();
         window.cal_chargerEtAfficherRDV();
     });
