@@ -162,7 +162,6 @@ async function chargerEtAfficherRDV() {
 
                 setTimeout(() => {
                     window.id_rdv_courant = rdv.id_rdv;
-                    window.id_utilisateur_rdv = estDoc ? rdv.id_utilisateurs : id;
                     create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc, false);
                 }, 50);
 
