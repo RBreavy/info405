@@ -61,7 +61,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
             <!-- form rendez-vous -->
             <section class="appointment-form" style="display: none;">
-                <h2>Prendre rendez-vous avec <span id="selected-doctor-name"></span> \n</h2>
+                <h2>Prendre rendez-vous avec <span id="selected-doctor-name"></span></h2>
                 <form id="rdv-form">
                     <div class="form-group">
                         <label for="rdv-date">Date :</label>
