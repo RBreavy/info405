@@ -1,4 +1,5 @@
 <?php
+// Disable error reporting and output buffering to prevent unexpected output
 error_reporting(0);
 ini_set('display_errors', 0);
 
@@ -71,12 +72,9 @@ function delete_conflicting_recurring_appointments($id_medecin, $journee, $heure
 {
     global $conn;
     
-<<<<<<< HEAD
-=======
     // Convert journee to uppercase to ensure consistent lookup
     $journee = strtoupper($journee);
     
->>>>>>> f5b0291c4dc47ba43ee683530a156e51458c27c2
     // Map of day abbreviations to corresponding weekday numbers (MySQL DAYOFWEEK function)
     $jour_map = [
         'LUN' => 2, // Monday = 2 in MySQL
@@ -136,7 +134,17 @@ switch ($action) {
         $journee = $_GET['jour'] ?? null;
         $heure_debut = $_GET['deb'] ?? null;
         $heure_fin = $_GET['fin'] ?? null;
+        
+        // Make sure we have all required parameters
+        if ($id_medecin === null || $journee === null || $heure_debut === null || $heure_fin === null) {
+            echo json_encode(['error' => 'Missing required parameters']);
+            break;
+        }
+        
         echo json_encode(indisp_repet($id_medecin, $journee, $heure_debut, $heure_fin));
         break;
+    default:
+        echo json_encode(['error' => 'Invalid action']);
 }
+
 ?>
