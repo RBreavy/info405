@@ -202,7 +202,7 @@ switch ($action) {
         if ($id_patient !== null && $id_rdv !== null) {
             echo json_encode(isRdvOwnedByUser($id_patient, $id_rdv));
         } else {
-            echo json_encode(['error'=> ['error' => 'id_medecin où id_patient manquant']]);
+            echo json_encode(['error'=> 'id_medecin où id_patient manquant']);
         }
         break;
     default:
