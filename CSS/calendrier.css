@@ -401,54 +401,42 @@
 
 /* ▼▼▼▼▼▼ */
 @media (max-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
   .main_cal {
     width: 100vw;
     height: auto;
     padding: 0;
     margin: 0;
-    display: block;
-    overflow: visible;
+    flex-direction: column;
   }
 
   .jour {
     width: 100%;
     height: auto;
-    display: grid;
-    grid-template-columns: 80px repeat(6, 1fr);
-    margin-bottom: 15px;
-    background: white;
-  }
-
-  .creneau:first-child {
-    position: sticky;
-    left: 0;
-    background: #f3f0f0;
-    z-index: 2;
-  }
-
-  .creneau {
-    min-height: 40px; 
-    border: 1px solid #ddd;
-    font-size: 12px;
+    flex-direction: row;
+    margin-bottom: 10px;
   }
 
   .datejour {
-    grid-column: span 1;
-    height: 40px;
-    font-size: 14px !important;
+    width: 100%;
+    height: 30px;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .creneau {
+    height: 30px;
+    border-left: none;
+    border-bottom: 1px solid #ccc;
   }
 
   .form-indisp {
     width: 100%;
-    padding: 15px;
-    margin-top: 20px;
-    box-sizing: border-box;
-  }
-
-  .rdv {
-    font-size: 14px !important;
-    padding: 3px;
-    transform: scale(0.9);
-    transform-origin: left top;
+    margin: 10px 0;
+    padding: 10px;
   }
 }
