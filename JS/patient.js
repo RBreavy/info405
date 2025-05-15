@@ -235,7 +235,7 @@ async function displayAppointments(appointments) {
     for (const rdv of appointments) {
         const yourdv = await fetch(`/info2/site/PHP/get-data.php?action=rdvOwnByUser&id_rdv=${rdv.id}&id_patient=${id}`);
         const You_RDV = await yourdv.json();
-        if (You_RDV) {
+        if (!You_RDV) {
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
         
