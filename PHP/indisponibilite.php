@@ -71,6 +71,12 @@ function delete_conflicting_recurring_appointments($id_medecin, $journee, $heure
 {
     global $conn;
     
+<<<<<<< HEAD
+=======
+    // Convert journee to uppercase to ensure consistent lookup
+    $journee = strtoupper($journee);
+    
+>>>>>>> f5b0291c4dc47ba43ee683530a156e51458c27c2
     // Map of day abbreviations to corresponding weekday numbers (MySQL DAYOFWEEK function)
     $jour_map = [
         'LUN' => 2, // Monday = 2 in MySQL
