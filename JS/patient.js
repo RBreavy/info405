@@ -245,7 +245,7 @@ async function displayAppointments(appointments) {
             if ((debut >= dateDebutSemaine && debut <= dateFinSemaine) ||
                 (fin >= dateDebutSemaine && fin <= dateFinSemaine) ||
                 (debut <= dateDebutSemaine && fin >= dateFinSemaine)) {
-                console.log("test2");
+                console.log(id,rdv.id);
                 const jourStr = debut.toLocaleDateString("fr-FR");
                 const h_debut = (debut.getHours() - 8) * 6 + Math.floor(debut.getMinutes() / 10);
                 const h_fin = (fin.getHours() - 8) * 6 + Math.floor(fin.getMinutes() / 10) - 1;
@@ -258,8 +258,6 @@ async function displayAppointments(appointments) {
                 }, 50);
 
             }
-        } else {
-            console.log(id,rdv.id);
         }
     }
 }
