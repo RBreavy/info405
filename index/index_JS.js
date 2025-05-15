@@ -5,28 +5,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const savedSouvenir = localStorage.getItem("souvenir");
 
     const nomInput = document.getElementById("nom");
-    if (nomInput) {
-        nomInput.value = savedName || "";
-    }
-
     const pswInput = document.getElementById("psw");
-    if (pswInput) {
-        pswInput.value = savedPsw || "";
-    }
-
     const souvenirCheckbox = document.getElementById("souvenir");
-    if (souvenirCheckbox) {
-        souvenirCheckbox.checked = savedSouvenir === "true"; 
-    }
-
     const form = document.querySelector("form");
+
+    if (nomInput) nomInput.value = savedName || "";
+    if (pswInput) pswInput.value = savedPsw || "";
+    if (souvenirCheckbox) souvenirCheckbox.checked = savedSouvenir === "true";
+
     if (form) {
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
-            const nom = nomInput ? nomInput.value : "";
-            const psw = pswInput ? pswInput.value : "";
+            const nom = nomInput ? nomInput.value.trim() : "";
+            const psw = pswInput ? pswInput.value.trim() : "";
             const souvenir = souvenirCheckbox ? souvenirCheckbox.checked : false;
+
+            if (nom === "" || psw === "") {
+                alert("Tous les champs sont requis.");
+                return;
+            }
 
             if (souvenir) {
                 localStorage.setItem("nom", nom);
@@ -38,7 +36,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("souvenir", "false");
             }
 
-            form.submit();
+            // Envoi AJAX avec fetch
+            fetch("../index/SignIn.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `nom=${encodeURIComponent(nom)}&psw=${encodeURIComponent(psw)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Erreur réseau :", error);
+                alert("Une erreur est survenue lors de la connexion.");
+            });
         });
     }
 });

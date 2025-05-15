@@ -2,19 +2,22 @@
 session_start();
 require_once "db_connect.php";
 
+header('Content-Type: application/json');
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // attaque XSS
     $nom = htmlspecialchars(trim($_POST['nom']), ENT_QUOTES, 'UTF-8');
     $password = trim($_POST['psw']);
 
     if (empty($nom) || empty($password)) {
-        die("Veuillez remplir tous les champs.");
+        echo json_encode(['success' => false, 'message' => 'Veuillez remplir tous les champs.']);
+        exit;
     }
 
-    // Vérification dans la table utilisateurs avec prepared statements
+    // Vérification dans la table utilisateurs
     $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE nom = ?");
     if (!$stmt) {
-        die("Erreur de préparation de requête: " . $conn->error);
+        echo json_encode(['success' => false, 'message' => 'Erreur serveur (utilisateur)']);
+        exit;
     }
 
     $stmt->bind_param('s', $nom);
@@ -23,24 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $result->fetch_assoc();
     $stmt->close();
 
-    if ($user) {
-        if ($password === $user['mot_de_passe']) {
-            $_SESSION['nom'] = $user['nom'];
-            $_SESSION['user_id'] = $user['id_utilisateurs'];
-            $_SESSION['user_type'] = 'patient';
+    if ($user && $password === $user['mot_de_passe']) {
+        $_SESSION['nom'] = $user['nom'];
+        $_SESSION['user_id'] = $user['id_utilisateurs'];
+        $_SESSION['user_type'] = 'patient';
+        session_regenerate_id(true);
 
-            // Régénération de l'ID de session pour éviter la fixation de session
-            session_regenerate_id(true);
-
-            header("Location: ../patient.php");
-            exit();
-        }
+        echo json_encode(['success' => true, 'redirect' => '../patient.php']);
+        exit;
     }
 
-    // Vérification dans la table médecins avec prepared statements
+    // Vérification dans la table médecins
     $stmt = $conn->prepare("SELECT * FROM medecin WHERE nom = ?");
     if (!$stmt) {
-        die("Erreur de préparation de requête: " . $conn->error);
+        echo json_encode(['success' => false, 'message' => 'Erreur serveur (médecin)']);
+        exit;
     }
 
     $stmt->bind_param('s', $nom);
@@ -49,20 +49,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $medecin = $result->fetch_assoc();
     $stmt->close();
 
-    if ($medecin) {
-        if ($password === $medecin['mot_de_passe']) {
-            $_SESSION['user_id'] = $medecin['id_medecin'];
-            $_SESSION['nom'] = $medecin['nom'];
-            $_SESSION['user_type'] = 'medecin';
+    if ($medecin && $password === $medecin['mot_de_passe']) {
+        $_SESSION['nom'] = $medecin['nom'];
+        $_SESSION['user_id'] = $medecin['id_medecin'];
+        $_SESSION['user_type'] = 'medecin';
+        session_regenerate_id(true);
 
-            session_regenerate_id(true);
-
-            header("Location: ../Vue_docteur.php");
-            exit();
-        }
+        echo json_encode(['success' => true, 'redirect' => '../Vue_docteur.php']);
+        exit;
     }
 
-    echo "Nom d'utilisateur ou mot de passe incorrect.";
+    echo json_encode(['success' => false, 'message' => 'Nom ou mot de passe incorrect.']);
     $conn->close();
 }
 ?>
