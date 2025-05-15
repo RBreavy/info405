@@ -1,27 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Récupérer les valeurs sauvegardées dans le localStorage
-    const savedName = localStorage.getItem("nom");
-    const savedPsw = localStorage.getItem("psw");
-    const savedSouvenir = localStorage.getItem("souvenir");
-
     const nomInput = document.getElementById("nom");
     const pswInput = document.getElementById("psw");
     const souvenirCheckbox = document.getElementById("souvenir");
     const form = document.querySelector("form");
 
-    if (nomInput) nomInput.value = savedName || "";
-    if (pswInput) pswInput.value = savedPsw || "";
-    if (souvenirCheckbox) souvenirCheckbox.checked = savedSouvenir === "true";
+    // Remplissage localStorage
+    if (nomInput) nomInput.value = localStorage.getItem("nom") || "";
+    if (pswInput) pswInput.value = localStorage.getItem("psw") || "";
+    if (souvenirCheckbox) souvenirCheckbox.checked = localStorage.getItem("souvenir") === "true";
 
     if (form) {
         form.addEventListener("submit", function (event) {
-            event.preventDefault();
+            event.preventDefault(); // Empêche la soumission classique
 
-            const nom = nomInput ? nomInput.value.trim() : "";
-            const psw = pswInput ? pswInput.value.trim() : "";
-            const souvenir = souvenirCheckbox ? souvenirCheckbox.checked : false;
+            const nom = nomInput.value.trim();
+            const psw = pswInput.value.trim();
+            const souvenir = souvenirCheckbox.checked;
 
-            if (nom === "" || psw === "") {
+            if (!nom || !psw) {
                 alert("Tous les champs sont requis.");
                 return;
             }
@@ -36,18 +32,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("souvenir", "false");
             }
 
-            // Envoi AJAX avec fetch
+            // Envoi AJAX
             fetch("../index/SignIn.php", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: `nom=${encodeURIComponent(nom)}&psw=${encodeURIComponent(psw)}`
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = data.redirect;
+                    window.location.href = data.redirect; // Redirection manuelle
                 } else {
                     alert(data.message);
                 }
