@@ -252,7 +252,7 @@
 .form-indisp {
     position: relative;
     width: clamp(150px, 12vw, 200px);
-    height: 20vh;
+    height: 30vh;
     overflow-y: auto;
     margin-right: 1vh;
     margin-left: 1vw;
