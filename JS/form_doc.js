@@ -32,10 +32,10 @@ function toggleForm(formType) {
         });
     } else if (formType === 'temporaire') {
         window.addEventListener('clickedEvent', (event) => {
-            const startDate = document.querySelector('#form-temporaire input[type="date"]:nth-of-type(1)').value;
-            const endDate = document.querySelector('#form-temporaire input[type="date"]:nth-of-type(2)').value;
-            const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(3)').value;
-            const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(4)').value;
+            const startDate = document.querySelector('#form-temporaire input[type="date"]:nth-of-type(1)');
+            const endDate = document.querySelector('#form-temporaire input[type="date"]:nth-of-type(2)');
+            const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(3)');
+            const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(4)');
             const id = event.detail.id;
             const dateStr = id.substring(0,10);
             const idArticle = parseInt(id.substring(10));
