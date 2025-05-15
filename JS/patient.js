@@ -60,6 +60,8 @@ function setupEventListeners() {
         document.querySelector('.appointment-form').style.display = 'none';
         document.querySelector('.doctor-selection').style.display = 'block';
         document.getElementById('rdv-form').reset();
+        selectedDoctorId = null;
+        selectDoctor = null;
         window.cal_maj_rdv();
         window.cal_chargerEtAfficherRDV();
     });
