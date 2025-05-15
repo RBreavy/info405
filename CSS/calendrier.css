@@ -404,3 +404,9 @@
     padding: 10px;  /* Optionnel, pour espacer le texte */
 }
 
+@media (max-width: 768px) {
+    .main_cal {
+    padding: 0 12.5% 20% 5%;
+}
+}
+
