@@ -18,6 +18,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-end;
+    overflow-x: auto;
     
     margin: 10px;
     
