@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Sélection des éléments
     const form = document.querySelector("form");
     const nomInput = document.getElementById("nom");
     const mailInput = document.getElementById("mail");
     const mdpInput = document.getElementById("mdp");
-
-
 
     if (!nomInput || !mailInput || !mdpInput) {
         console.error("Un ou plusieurs champs du formulaire sont introuvables !");
@@ -13,24 +10,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (form) {
-        form.addEventListener("submit", function (event) {
-            event.preventDefault(); // Empêcher la soumission classique
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault(); // Empêche la soumission classique
 
-            const nom = nomInput.value;
-            const mail = mailInput.value;
-            const mdp = mdpInput.value;
+            const nom = nomInput.value.trim();
+            const mail = mailInput.value.trim();
+            const mdp = mdpInput.value.trim();
 
-            // Vérifications de base
             if (nom === "" || mail === "" || mdp === "") {
                 alert("Tous les champs doivent être remplis.");
                 return;
             }
 
-            console.log("Nom:", nomInput, "Valeur:", nomInput.value);
-            console.log("Mail:", mailInput, "Valeur:", mailInput.value);
-            console.log("Mot de passe:", mdpInput, "Valeur:", mdpInput.value);
+            const formData = new FormData();
+            formData.append("nom", nom);
+            formData.append("mail", mail);
+            formData.append("mdp", mdp);
 
-            form.submit();
+            try {
+                const response = await fetch("SignUp.php", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Redirection si tout s’est bien passé
+                    window.location.href = "../patient.php";
+                } else {
+                    // Affiche une alerte avec le message d’erreur PHP
+                    alert(data.message);
+                }
+            } catch (error) {
+                alert("Une erreur est survenue lors de l’inscription.");
+                console.error(error);
+            }
         });
     }
 });
