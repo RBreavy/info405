@@ -74,8 +74,7 @@ function getRdvByIdMed($id) {
         $query = "SELECT r.*,u.nom 
         FROM rdv r
         JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs
-        WHERE id_medecin = ?
-        ";
+        WHERE id_medecin = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -91,7 +90,10 @@ function getRdvByIdMed($id) {
 function getRdvByIdPat($id) {
     global $conn;
     try {
-        $query = "SELECT * FROM rdv WHERE id_utilisateurs = ?";
+        $query = "SELECT r.*,m.nom 
+        FROM rdv r
+        JOIN medecin m ON r.id_medecin = m.id_medecin
+        WHERE id_utilisateurs = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();
