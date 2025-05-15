@@ -202,10 +202,15 @@ switch ($action) {
         break;
     */
     case 'getRdvById':
-        if ($id_patient !== null) {
-            echo json_encode(getRdvById($id_patient));
+        if (($id_patient !== null && $id_medecin === null) || ($id_patient === null && $id_medecin !== null)) {
+            if ($id_patient !== null) {
+                echo json_encode(getRdvById($id_patient));
+            } else {
+                echo json_encode(getRdvById(id: $id_medecin));
+            }
+            
         } else {
-            echo json_encode(['error' => 'id_patient manquant']);
+            echo json_encode(['error' => 'doit contenir soit id_patient soit id_medecin']);
         }
         
         break;
