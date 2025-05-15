@@ -149,13 +149,13 @@ async function addRep(journee,deb,fin) {
         dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
 
         const jourtoindice = new Map([
-            ["LUN",0],
-            ["MAR",1],
-            ["MER",2],
-            ["JEU",3],
-            ["VEN",4],
-            ["SAM",5],
-            ["DIM",6],
+            ["lun",0],
+            ["mar",1],
+            ["mer",2],
+            ["jeu",3],
+            ["ven",4],
+            ["sam",5],
+            ["dim",6],
         ]);
         const indice = jourtoindice.get(journee);
         const jour = new Date(dateDebutSemaine);
