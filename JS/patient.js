@@ -70,6 +70,7 @@ function setupEventListeners() {
         const date = document.getElementById('rdv-date').value;
         const time = document.getElementById('rdv-time').value;
         const duration = parseInt(document.getElementById('rdv-duration').value);
+        const couleur = (duration == 10) ? "palegreen" : (duration == 20) ? "orangered" : "paleturquoise";
 
         if (!date || !time || !duration) {
             alert('Veuillez remplir tous les champs');
@@ -87,7 +88,7 @@ function setupEventListeners() {
         const payload = {
             id_medecin: selectedDoctorId,
             id_utilisateur: id,
-            couleur: 'blue',
+            couleur: couleur,
             date_debut: formatDateTime(startDateTime),
             date_fin: formatDateTime(endDateTime)
         };
