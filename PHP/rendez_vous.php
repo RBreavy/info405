@@ -74,7 +74,7 @@ $check = $conn->prepare("
 ");
 
 $check->bind_param(
-    "issss",
+    "iissss",
     $data['id_medecin'],
     $data['id_utilisateur'],
     $data['date_fin'],
