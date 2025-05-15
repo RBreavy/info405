@@ -255,12 +255,13 @@
     max-height: 70vh;
     overflow-y: auto;
     margin-right: 1vh;
-    margin-left: 2vw;
+    margin-left: 1vw;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 0.5vh;
     flex-shrink: 0;
     font-size: 0.75rem;
+    margin-bottom: 30vh;
 }
 
 .tabs {
@@ -269,6 +270,7 @@
     background: rgba(255, 255, 255, 0.1);
     padding: 5px;
     border-radius: 4px;
+    font-size: calc(1vw+1vh);
     margin-bottom: 10px;
 }
 
@@ -276,6 +278,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: calc(1vw+1vh);
 }
 
 .day-buttons-container {
@@ -288,7 +291,7 @@
 
 .form-indisp label {
     margin-top: 6px;
-    font-size: 0.7rem;
+    font-size: calc(1vw+1vh);
     display: block;
 }
 
@@ -317,6 +320,10 @@
     transition: background-color 0.3s;
 }
 
+.hidden {
+    display: none !important;
+}
+
 .submit-button:hover {
     background-color: #7777cd;
 }
@@ -332,11 +339,13 @@
 .tab.active {
     background-color: #5e41a1;
     color: white;
+    transition: all 1s;
 }
 
 .tab.inactive {
     background-color: #3a3a3a;
     color: white;
+    transition: all 1s;
 }
 
 .tab.active:hover {
