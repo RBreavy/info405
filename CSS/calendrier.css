@@ -285,6 +285,7 @@
     flex-direction: column;
     align-items: center;
     font-size: calc(1vw+1vh);
+    padding-bottom: 3px;
 }
 
 .day-buttons-container {
