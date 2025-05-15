@@ -83,17 +83,88 @@ async function addTemp(debut_periode,fin_periode) {
         const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=temp&med=${id}&deb_p=${debut_periode}&fin_p=${fin_periode}`);
         const temp = await response.json();
         alert('Disponibilités enregistrées avec succès!');
+        const dateDebutSemaine = new Date(date);
+        dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+            
+            
+        const dateFinSemaine = new Date(dateDebutSemaine);
+        dateFinSemaine.setDate(dateDebutSemaine.getDate() + 6);
+        dateFinSemaine.setHours(23, 59, 59);
+        const debutIndisp = new Date(debut_periode.replace(' ', 'T'));
+        const finIndisp = new Date(fin_periode.replace(' ', 'T'));
+
+        // Vérifier si l'indisponibilité est dans la semaine affichée
+        if ((debutIndisp >= dateDebutSemaine && debutIndisp <= dateFinSemaine) ||
+            (finIndisp >= dateDebutSemaine && finIndisp <= dateFinSemaine) ||
+            (debutIndisp <= dateDebutSemaine && finIndisp >= dateFinSemaine)) {
+            
+            // Parcourir chaque jour de l'indisponibilité
+            let currentDate = new Date(Math.max(debutIndisp, dateDebutSemaine));
+            
+            const endDate = new Date(Math.min(finIndisp, dateFinSemaine));
+            while (currentDate <= endDate) {
+                const jourStr = currentDate.toLocaleDateString("fr-FR");
+                let h_debut = 0; // 8h00
+                let h_fin = 71;  // 19h50
+
+                
+                // Si c'est le premier jour de l'indisponibilité
+                if (currentDate.toDateString() === debutIndisp.toDateString()) {
+                    h_debut = (debutIndisp.getHours() - 8) * 6 + Math.floor(debutIndisp.getMinutes() / 10);
+                }
+                
+                // Si c'est le dernier jour de l'indisponibilité
+                if (currentDate.toDateString() === finIndisp.toDateString()) {
+                    h_fin = (finIndisp.getHours() - 8) * 6 + Math.floor(finIndisp.getMinutes() / 10) - 1;
+                }
+                
+                setTimeout(() => {
+                    //document.querySelectorAll(`#${jourStr} .rdv`).forEach(el => el.remove());
+                    window.cal_create_rdv(h_debut, h_fin, jourStr, jourStr, "lightgrey", "", estDoc, false);
+                }, 50);
+                
+                // Passer au jour suivant
+                const nextDate = new Date(currentDate);
+                nextDate.setDate(currentDate.getDate() + 1);
+                currentDate = nextDate;
+            }
+        }
+        
     } catch (error) {
         console.error('Erreur:', error);
         alert("Impossible d'insérer cette indisponibilité!");
     }
 }
 
+
+
 async function addRep(journee,deb,fin) {
     try {
         const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=repet&med=${id}&jour=${journee}&deb=${deb}&fin=${fin}`);
         const temp = await response.json();
         alert('Disponibilités enregistrées avec succès!');
+        const journee = journee;
+        const h_debut = (deb.slice(0,2) - 8) * 6 + Math.floor(deb.slice(3,5) / 10);
+        const h_fin = (fin.slice(0,2) - 8) * 6 + Math.floor(fin.slice(3,5) / 10) - 1;
+        const dateDebutSemaine = new Date(date);
+        dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
+
+        const jourtoindice = new Map([
+            ["LUN",0],
+            ["MAR",1],
+            ["MER",2],
+            ["JEU",3],
+            ["VEN",4],
+            ["SAM",5],
+            ["DIM",6],
+        ]);
+        const indice = jourtoindice.get(journee);
+        const jour = new Date(dateDebutSemaine);
+        jour.setDate(dateDebutSemaine.getDate() + indice);
+        const jourStr = jour.toLocaleDateString("fr-FR");
+        setTimeout(() => {
+            create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", "", estDoc, false);
+        }, 50);
     } catch (error) {
         console.error('Erreur:', error);
         alert("Impossible d'insérer cette indisponibilité!");

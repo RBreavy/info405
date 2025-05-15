@@ -126,9 +126,6 @@ async function chargerEtAfficherRDV() {
                 setTimeout(() => {
                     create_rdv(h_debut, h_fin, jourStr, jourStr, "darkgrey", "", estDoc, false);
                 }, 50);
-
-
-
             }
 
         } else {

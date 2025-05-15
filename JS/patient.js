@@ -112,7 +112,7 @@ function setupEventListeners() {
                 const h_fin = (endDateTime.getHours() - 8) * 6 + Math.floor(endDateTime.getMinutes() / 10) - 1;
             
                 setTimeout(() => {
-                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, selectedDoctorName, false, false);
+                    cal_create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, selectedDoctorId, false, false);
                 }, 50);
             } else {
                 alert(result.message || 'Erreur lors de la prise de rendez-vous');
