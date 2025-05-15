@@ -204,6 +204,7 @@ switch ($action) {
         } else {
             echo json_encode(['error'=> ['error' => 'id_medecin où id_patient manquant']]);
         }
+        break;
     default:
         echo json_encode(['error' => 'Action non reconnue']);
 }
