@@ -131,4 +131,7 @@ font-size: calc(0.6vw + 0.6vh);
     .doctor-button {
         font-size: 2.5vw;
     }
+    .doctor-selection {
+        width: 11.5vw;
+    }
 }
