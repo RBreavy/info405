@@ -434,9 +434,11 @@
 
     .heure {
         font-size: 1.5vw;
+        font-family: bold;
     }
 
     .datejour p{
         font-size: 1.5vw;
+        font-family: bold;
     }
 }
