@@ -278,4 +278,9 @@ button {
     #welcome-message {
         font-size: 4vw;
     }
+    .menu-icon {
+        font-size: 7vw;
+        margin-top: 9vw;
+        margin-left: 10vw;
+    }
 }
