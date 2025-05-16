@@ -417,8 +417,12 @@
     }
     .selecteur {
         width: 60vw;
-        height: 50px;
     }
+
+    #calendrier {
+        width: 40vw;
+    }
+
     .selecteur_droit, .selecteur_gauche {
         width: 17%;
         height: 180%;
