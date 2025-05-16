@@ -417,7 +417,7 @@
     }
     .selecteur {
         width: 100vw;
-        margin-left: -30% ;
+        margin-left: -37% ;
     }
 
     #calendrier {
@@ -425,8 +425,8 @@
     }
 
     .selecteur_droit, .selecteur_gauche {
-        width: 17%;
-        height: 180%;
+        width: 10%;
+        height: 100%;
     }
 
     .main_cal {
