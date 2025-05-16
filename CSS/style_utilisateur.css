@@ -274,5 +274,6 @@ button {
     }
     body {
         background-size: 400%;
+        font-size: 2vw;
     }
 }
