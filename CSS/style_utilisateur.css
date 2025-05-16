@@ -272,4 +272,7 @@ button {
     .HC {
         margin-left: 17.7vw;
     }
+    body {
+        background-image: none;
+    }
 }
