@@ -426,4 +426,8 @@
     .main_cal {
         padding-left: 5%; 
     }
+
+    .form-indisp {
+        width: 25vw;
+    }
 }
