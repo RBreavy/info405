@@ -167,6 +167,8 @@ switch ($action) {
                 echo json_encode(getRdvByIdPat($id_patient));
             } else if ($_SESSION['user_id'] === $id_medecin) {
                 echo json_encode(getRdvByIdMed($id_medecin));
+            } else {
+                echo json_encode(['error'=> $_SESSION['user_id']]);
             }
             
         } else {
