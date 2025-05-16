@@ -162,7 +162,7 @@ async function chargerEtAfficherRDV() {
 
                 setTimeout(() => {
                     window.id_rdv_courant = rdv.id_rdv;
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc, false);
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc, false, rdv.id_rdv);
                 }, 50);
 
             }
@@ -527,7 +527,7 @@ async function diffEtMetAJourRDV(nouveauxRDV) {
         else if (dureeMinutes <= 20) couleurRdv = "#ffe0b3";   
         else if (dureeMinutes <= 30) couleurRdv = "#ffb3b3";  
 
-        await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom, estDoc);
+        await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom, estDoc,false,rdv.id_rdv);
     }
 
     anciensRDV = nouveauxRDV;
