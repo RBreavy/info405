@@ -423,6 +423,10 @@
     }
 
     .main_cal {
-        padding-left: 5%; /* Moins de padding à gauche */
+        padding-left: 5%; 
+    }
+
+    .HC {
+        padding-left: 5%;
     }
 }
