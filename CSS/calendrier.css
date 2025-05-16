@@ -425,31 +425,4 @@
     .main_cal {
         padding-left: 10%; /* Moins de padding à gauche */
     }
-    
-    /* L'image HC à gauche */
-    .HC {
-        margin-left: 5vw !important; /* Aligné à gauche */
-        width: 65vw !important; /* Largeur adaptée */
-    }
-    
-    /* Permet de voir tous les jours du calendrier */
-    .jour {
-        min-width: 60px;
-    }
-    
-    /* Évite que le texte soit trop petit */
-    .datejour p {
-        font-size: 2vw;
-    }
-    
-    /* S'assure que le sélecteur reste bien placé */
-    .selecteur {
-        left: 30%;
-        width: 60vw;
-    }
-    
-    /* Ajustements pour les heures sur le côté */
-    .heure {
-        font-size: 2vw;
-    }
 }
