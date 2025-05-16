@@ -269,9 +269,10 @@ button {
 
 @media (max-width: 768px){
     .HC {
-        margin-left: 10%;
+        margin-left: 4.2%;
         height: 5vh;
         margin-top: 11vh;
+        width: 45.65vh;
     }
     body {
         background-size: 350%;
