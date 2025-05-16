@@ -269,7 +269,7 @@ button {
 
 @media (max-width: 768px){
     .HC {
-        margin-left: 17.7vw;
+        margin-left: 10%;
         height: 5vh;
         margin-top: 11vh;
     }

@@ -409,7 +409,8 @@
         font-size: 3vw;
     }
     .main_cal {
-        padding: 0 12.5% 20% 18%
+        padding: 0 12.5% 20% 18%;
+        width: 90vw;
     }
     p {
         font-family: 2vw;
@@ -424,9 +425,5 @@
 
     .main_cal {
         padding-left: 5%; 
-    }
-
-    .HC {
-        padding-left: 5%;
     }
 }
