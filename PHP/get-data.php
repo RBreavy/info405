@@ -4,69 +4,7 @@ ini_set('display_errors', 0);
 
 include_once "../index/db_connect.php";
 
-function getAllRdvs($start = null, $end = null, $id_medecin = null, $id_patient = null)
-{
-    global $conn;
 
-    try {
-        $where = [];
-        $params = [];
-        $types = "";
-
-        if ($id_medecin !== null) {
-            $where[] = "r.id_medecin = ?";
-            $params[] = $id_medecin;
-            $types .= "i";
-        } elseif ($id_patient !== null) {
-            $where[] = "r.id_utilisateurs = ?";
-            $params[] = $id_patient;
-            $types .= "i";
-        }
-        
-        if ($start !== null && $end !== null) {
-            $start = DateTime::createFromFormat('d/m/Y', $start)->format('Y-m-d');
-            $end = DateTime::createFromFormat('d/m/Y', $end)->format('Y-m-d');
-            
-            $where[] = "r.date_debut >= ?";
-            $params[] = $start;
-            $types .= "s";
-            
-            $where[] = "r.date_debut <= ?";
-            $params[] = $end;
-            $types .= "s";
-        }
-
-        $where_clause = count($where) > 0 ? "WHERE " . implode(" AND ", $where) : "";
-
-        $query = "SELECT r.id_rdv, m.nom AS nom_medecin, u.nom AS nom_utilisateur, 
-                        r.date_debut, r.date_fin, r.couleur, r.id_utilisateurs,
-                        TIMESTAMPDIFF(MINUTE, r.date_debut, r.date_fin) AS duration
-                FROM rdv r
-                JOIN medecin m ON r.id_medecin = m.id_medecin 
-                JOIN utilisateurs u ON r.id_utilisateurs = u.id_utilisateurs
-                $where_clause";
-        
-        $stmt = $conn->prepare($query);
-        
-        if (count($params) > 0) {
-            $stmt->bind_param($types, ...$params);
-        }
-        
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        $rdvs = [];
-        while ($row = $result->fetch_assoc()) {
-            $rdvs[] = $row;
-        }
-        
-        $stmt->close();
-        return $rdvs;
-
-    } catch (Exception $e) {
-        return ['error' => 'Une erreur est survenue'];
-    }
-}
 
 function getRdvByIdMed($id) {
     global $conn;
@@ -225,9 +163,9 @@ switch ($action) {
     */
     case 'getRdvById':
         if (($id_patient !== null && $id_medecin === null) || ($id_patient === null && $id_medecin !== null)) {
-            if ($id_patient !== null) {
+            if ($id_patient !== null && $id_patient === $_SESSION['user_id']) {
                 echo json_encode(getRdvByIdPat($id_patient));
-            } else {
+            } else if ($_SESSION['user_id'] === $id_medecin) {
                 echo json_encode(getRdvByIdMed($id_medecin));
             }
             
