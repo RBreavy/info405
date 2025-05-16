@@ -5,6 +5,10 @@ session_start();
 
 include_once "../index/db_connect.php";
 
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type'])) {
+    header("Location: /info2/site/HTML/connexion.html");
+    exit();
+}
 
 
 function getRdvByIdMed($id) {
