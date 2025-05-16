@@ -54,7 +54,6 @@ function selectDoctor(id, name) {
 }
 
 function setupEventListeners() {
-    console.log(selectedDoctorId);
 
     document.getElementById('cancel-appointment').addEventListener('click', () => {
         document.querySelector('.appointment-form').style.display = 'none';
