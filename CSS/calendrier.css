@@ -416,7 +416,8 @@
         font-size: 50vw;
     }
     .selecteur {
-        width: 40vw;
+        width: 60vw;
+        height: 50px;
     }
     .selecteur_droit, .selecteur_gauche {
         width: 17%;
