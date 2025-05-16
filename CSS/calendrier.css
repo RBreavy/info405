@@ -428,6 +428,7 @@
     }
 
     .form-indisp {
-        width: 25vw;
+        width: 20vw;
+        margin-left: 6px;
     }
 }
