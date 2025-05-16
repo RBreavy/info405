@@ -405,5 +405,7 @@
 }
 
 @media (max-width: 768px) {
-    font-size: 3vw;
+    .rdv {
+        font-size: 3vw;
+    }
 }
