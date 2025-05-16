@@ -413,7 +413,10 @@ if (details) {
             
         btnAnnuler.addEventListener("click", function(e) {
             e.stopPropagation();
-            annulerRendezVous(window.id_rdv_courant);
+            // Utiliser l'ID du rendez-vous stocké dans l'élément parent
+            const rdvElement = e.target.closest('.rdv');
+            const rdvId = rdvElement.dataset.idRdv || window.id_rdv_courant;
+            annulerRendezVous(rdvId);
         });
     }
 }
