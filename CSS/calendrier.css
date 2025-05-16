@@ -421,6 +421,8 @@
 
     #calendrier {
         width: 40vw;
+        position: absolute;
+        margin-left: 20vw;
     }
 
     .selecteur_droit, .selecteur_gauche {
