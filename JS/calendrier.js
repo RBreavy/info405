@@ -56,7 +56,7 @@ async function chargerEtAfficherRDV() {
 
 
         if (estDoc) {
-            var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_medecin=${id}`);
+            var result = await fetch(`/info2/site/PHP/get-data.php?action=getRdvById&id_medecin=${id}`); 
             const indispt = await fetch(`/info2/site/PHP/get-data.php?action=getIT&id_medecin=${id}`);
             const tableauIT = await indispt.json();
             const indispr = await fetch(`/info2/site/PHP/get-data.php?action=getIR&id_medecin=${id}`);
@@ -136,15 +136,12 @@ async function chargerEtAfficherRDV() {
 
 
         } else {
-            var result = await fetch(`/info2/site/PHP/get-data.php?action=rdvs&id_patient=${id}`);
-            
-            
+            var result = await fetch(`/info2/site/PHP/get-data.php?action=getRdvById&id_patient=${id}`);         
         }
         const tableauRDV = await result.json();
 
         for (const rdv of tableauRDV) {
-            const nom = estDoc ? rdv.nom_utilisateur : rdv.nom_medecin;
-            
+            const nom = rdv.nom;            
             const couleur = rdv.couleur;
             const debut = new Date(rdv.date_debut.replace(' ', 'T'));
             const fin = new Date(rdv.date_fin.replace(' ', 'T'));
@@ -162,8 +159,7 @@ async function chargerEtAfficherRDV() {
 
                 setTimeout(() => {
                     window.id_rdv_courant = rdv.id_rdv;
-                    window.id_utilisateur_rdv = rdv.id_utilisateurs;
-                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc, false);
+                    create_rdv(h_debut, h_fin, jourStr, jourStr, couleur, nom, estDoc, false, rdv.id_rdv);
                 }, 50);
 
             }
@@ -401,7 +397,10 @@ if (details) {
         });
     } // Fin de la boucle for ici
 
-    if (window.id_rdv_courant && ((estDoc && !selection) || (!estDoc && window.id_utilisateur_rdv == id))) {
+    // Création du bouton d'annulation APRÈS la boucle, mais toujours dans le bloc if(details)
+    const yourdv = await fetch(`/info2/site/PHP/get-data.php?action=rdvOwnByUser&id_rdv=${id_rdv}&id_patient=${id}`);
+    const You_RDV = await yourdv.json();
+    if (You_RDV || estDoc) {
         const btnAnnuler = create("button", details);
         btnAnnuler.innerText = "Annuler";
         btnAnnuler.style.backgroundColor = "#ff4757";
@@ -524,7 +523,7 @@ async function diffEtMetAJourRDV(nouveauxRDV) {
         else if (dureeMinutes <= 20) couleurRdv = "#ffe0b3";   
         else if (dureeMinutes <= 30) couleurRdv = "#ffb3b3";  
 
-        await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom, estDoc);
+        await create_rdv(h_debut, h_fin, jourStr, jourStr, couleurRdv, nom, estDoc,false,rdv.id_rdv);
     }
 
     anciensRDV = nouveauxRDV;
