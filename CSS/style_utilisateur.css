@@ -285,4 +285,9 @@ button {
         margin-top: 9vw;
         margin-left: 10vw;
     }
+
+    html, body {
+        width:100%;
+        position:fixed;
+    }
 }
