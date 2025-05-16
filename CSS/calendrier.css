@@ -418,6 +418,6 @@
         width: 40vw;
     }
     .selecteur_droit, .selecteur_gauche {
-        height: 18%;
+        width: 17%;
     }
 }
