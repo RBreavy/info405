@@ -2,8 +2,14 @@
 // Disable error reporting and output buffering to prevent unexpected output
 error_reporting(0);
 ini_set('display_errors', 0);
+session_start();
 
 include_once "../index/db_connect.php";
+
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'medecin') {
+    header("Location: /info2/site/HTML/connexion.html");
+    exit();
+}
 
 function indisp_repet($id_medecin, $journee, $heure_debut, $heure_fin)
 {
@@ -124,13 +130,13 @@ header('Content-Type: application/json');
 
 switch ($action) {
     case 'temp':
-        $id_medecin = $_GET['med'] ?? null;
+        $id_medecin = $_SESSION['user_id'];
         $debut_periode = $_GET['deb_p'] ?? null;
         $fin_periode = $_GET['fin_p'] ?? null;
         echo json_encode(indisp_temp($id_medecin, $debut_periode, $fin_periode));
         break;
     case 'repet':
-        $id_medecin = $_GET['med'] ?? null;
+        $id_medecin = $_SESSION['user_id'];
         $journee = $_GET['jour'] ?? null;
         $heure_debut = $_GET['deb'] ?? null;
         $heure_fin = $_GET['fin'] ?? null;
