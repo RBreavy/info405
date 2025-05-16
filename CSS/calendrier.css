@@ -416,7 +416,8 @@
         font-size: 50vw;
     }
     .selecteur {
-        width: 60vw;
+        width: 80vw;
+        margin-left: -30% ;
     }
 
     #calendrier {
