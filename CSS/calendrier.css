@@ -432,6 +432,7 @@
         width: 20vw;
         margin-left: 6px;
         margin-top: 30vh;
+        position: absolute;
     }
 
     .heure {
