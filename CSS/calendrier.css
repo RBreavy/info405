@@ -409,14 +409,13 @@
         font-size: 3vw;
     }
     .main_cal {
-        padding: 0 12.5% 20% 10%
+        padding: 0 12.5% 20% 18%
     }
     p {
         font-family: 2vw;
     }
     .selecteur {
         width: 40vw;
-        height: 20px;
     }
     .selecteur_droit, .selecteur_gauche {
         width: 17%;
