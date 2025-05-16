@@ -417,4 +417,8 @@
     .selecteur {
         width: 40vw;
     }
+    .selecteur_droit, .selecteur_gauche {
+        width: 17%;
+        height: 18%;
+    }
 }
