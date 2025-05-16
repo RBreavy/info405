@@ -134,4 +134,7 @@ font-size: calc(0.6vw + 0.6vh);
     .doctor-selection {
         width: 11.5vw;
     }
+    .appointment-form {
+        width: 11.5vw;
+    }
 }
