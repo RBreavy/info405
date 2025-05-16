@@ -417,8 +417,6 @@
     }
     .selecteur {
         width: 60vw;
-        position: absolute;
-        margin-left: 20vw;
     }
 
     #calendrier {
