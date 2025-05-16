@@ -401,20 +401,25 @@ if (details) {
     } // Fin de la boucle for ici
 
     // Création du bouton d'annulation APRÈS la boucle, mais toujours dans le bloc if(details)
-    const btnAnnuler = create("button", details);
-    btnAnnuler.innerText = "Annuler";
-    btnAnnuler.style.backgroundColor = "#ff4757";
-    btnAnnuler.style.color = "white";
-    btnAnnuler.style.border = "none";
-    btnAnnuler.style.padding = "5px 10px";
-    btnAnnuler.style.borderRadius = "5px";
-    btnAnnuler.style.marginTop = "10px";
-    btnAnnuler.style.cursor = "pointer";
-        
-    btnAnnuler.addEventListener("click", function(e) {
-        e.stopPropagation();
-        annulerRendezVous(window.id_rdv_courant);
-    });
+    const yourdv = await fetch(`/info2/site/PHP/get-data.php?action=rdvOwnByUser&id_rdv=${id_rdv}&id_patient=${id}`);
+    const You_RDV = await yourdv.json();
+    console.log(You_RDV,id_rdv,id);
+    if (You_RDV) {
+        const btnAnnuler = create("button", details);
+        btnAnnuler.innerText = "Annuler";
+        btnAnnuler.style.backgroundColor = "#ff4757";
+        btnAnnuler.style.color = "white";
+        btnAnnuler.style.border = "none";
+        btnAnnuler.style.padding = "5px 10px";
+        btnAnnuler.style.borderRadius = "5px";
+        btnAnnuler.style.marginTop = "10px";
+        btnAnnuler.style.cursor = "pointer";
+            
+        btnAnnuler.addEventListener("click", function(e) {
+            e.stopPropagation();
+            annulerRendezVous(window.id_rdv_courant);
+        });
+    }
 }
 }
 }
