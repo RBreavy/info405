@@ -275,4 +275,7 @@ button {
     body {
         background-size: 400%;
     }
+    #welcome-message {
+        font-size: 4vw;
+    }
 }
