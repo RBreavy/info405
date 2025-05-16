@@ -401,7 +401,7 @@ if (details) {
     } // Fin de la boucle for ici
 
     // Création du bouton d'annulation APRÈS la boucle, mais toujours dans le bloc if(details)
-    const yourdv = await fetch(`/info2/site/PHP/get-data.php?action=rdvOwnByUser&id_rdv=${rdv.id_rdv}&id_patient=${id}`);
+    const yourdv = await fetch(`/info2/site/PHP/get-data.php?action=rdvOwnByUser&id_rdv=${id_rdv}&id_patient=${id}`);
     const You_RDV = await yourdv.json();
     if (You_RDV) {
         const btnAnnuler = create("button", details);
