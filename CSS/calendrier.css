@@ -414,4 +414,7 @@
     p {
         font-family: 2vw;
     }
+    .selecteur {
+        width: 40vw;
+    }
 }
