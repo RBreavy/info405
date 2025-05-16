@@ -18,7 +18,7 @@ async function loadDoctors() {
 }
 
 window.addEventListener('weekChanged', () => {
-    if (selectedDoctorId !== nul) {
+    if (selectedDoctorId !== null) {
         loadAppointments(selectedDoctorId);
     }
 });
