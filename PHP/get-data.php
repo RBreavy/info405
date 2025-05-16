@@ -166,18 +166,12 @@ switch ($action) {
         echo json_encode(getAllRdvs($start, $end, $id_medecin, $id_patient));
         break;
     */
+
     case 'getRdvById':
-        if (($id_patient !== null && $id_medecin === null) || ($id_patient === null && $id_medecin !== null)) {
-            if ($id_patient !== null && $id_patient === $_SESSION['user_id']) {
-                echo json_encode(getRdvByIdPat($id_patient));
-            } else if ($_SESSION['user_id'] === $id_medecin) {
-                echo json_encode(getRdvByIdMed($id_medecin));
-            } else {
-                echo json_encode(['error'=> $_SESSION['user_id']]);
-            }
-            
+        if ($_SESSION['user_type'] === 'patient') {
+            echo json_encode(getRdvByIdPat($_SESSION['user_id']));
         } else {
-            echo json_encode(['error' => 'doit contenir soit id_patient soit id_medecin']);
+            echo json_encode(getRdvByIdMed($_SESSION['user_id']));
         }
         
         break;
