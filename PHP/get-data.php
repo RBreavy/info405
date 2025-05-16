@@ -192,10 +192,10 @@ switch ($action) {
         }
         break;
     case 'rdvOwnByUser':
-        if ($id_patient !== null && $id_rdv !== null) {
+        if ($id_patient !== null && $_SESSION['user_id'] === $id_patient && $id_rdv !== null) {
             echo json_encode(isRdvOwnedByUser($id_patient, $id_rdv));
         } else {
-            echo json_encode(['error'=> 'id_medecin où id_patient manquant']);
+            echo json_encode(['error'=> 'id_medecin où id_rdv manquant']);
         }
         break;
     default:
