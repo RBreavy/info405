@@ -157,7 +157,7 @@
 
 
 .gris_fonce {
-    background-color: #7777cd;
+    background-color: white;
 }
 
 .gris_clair {
@@ -430,5 +430,9 @@
     .form-indisp {
         width: 20vw;
         margin-left: 6px;
+    }
+
+    .heure {
+        font-size: 3vw;
     }
 }
