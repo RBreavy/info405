@@ -403,8 +403,7 @@ if (details) {
     // Création du bouton d'annulation APRÈS la boucle, mais toujours dans le bloc if(details)
     const yourdv = await fetch(`/info2/site/PHP/get-data.php?action=rdvOwnByUser&id_rdv=${id_rdv}&id_patient=${id}`);
     const You_RDV = await yourdv.json();
-    console.log(You_RDV,id_rdv,id);
-    if (You_RDV) {
+    if (You_RDV || estDoc) {
         const btnAnnuler = create("button", details);
         btnAnnuler.innerText = "Annuler";
         btnAnnuler.style.backgroundColor = "#ff4757";
