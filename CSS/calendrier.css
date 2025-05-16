@@ -416,12 +416,12 @@
         font-size: 50vw;
     }
     .selecteur {
-        width: 80vw;
+        width: 100vw;
         margin-left: -30% ;
     }
 
     #calendrier {
-        width: 40vw;
+        width: 60vw;
     }
 
     .selecteur_droit, .selecteur_gauche {
