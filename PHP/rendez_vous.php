@@ -1,8 +1,11 @@
 <?php
 
+require_once __DIR__ . '/../lib/PHPMailer/src/PHPMailer.php';
+require_once __DIR__ . '/../lib/PHPMailer/src/SMTP.php';
+require_once __DIR__ . '/../lib/PHPMailer/src/Exception.php';
 
-
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 header('Content-Type: application/json');
 require_once __DIR__ . '/../index/db_connect.php';
@@ -209,7 +212,6 @@ $stmt->bind_param(
 if ($stmt->execute()) {
     // envoi mail
     // Récupération de l’e-mail de l’utilisateur
-    /*
     $email_stmt = $conn->prepare("SELECT email, nom FROM utilisateurs WHERE id = ?");
     $email_stmt->bind_param("i", $data['id_utilisateur']);
     $email_stmt->execute();
@@ -246,7 +248,6 @@ if ($stmt->execute()) {
             error_log("Erreur envoi mail : " . $mail->ErrorInfo);
         }
     }
-    */
     // Réponse JSON au client
     echo json_encode(['success' => true]);
 } else {
