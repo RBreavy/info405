@@ -34,7 +34,6 @@ foreach ($required as $key) {
 
 $start = new DateTime($data['date_debut']);
 $end = new DateTime($data['date_fin']);
-$duration_minutes = $actual_minutes;
 
 $start_minutes = (int)$start->format('i');
 if ($start_minutes % 10 !== 0) {
@@ -208,7 +207,9 @@ $stmt->bind_param(
     $data['date_fin']
 );
 if ($stmt->execute()) {
-    // 🔹 Récupération de l’e-mail de l’utilisateur
+    // envoi mail
+    // Récupération de l’e-mail de l’utilisateur
+    /*
     $email_stmt = $conn->prepare("SELECT email, nom FROM utilisateurs WHERE id = ?");
     $email_stmt->bind_param("i", $data['id_utilisateur']);
     $email_stmt->execute();
@@ -245,7 +246,7 @@ if ($stmt->execute()) {
             error_log("Erreur envoi mail : " . $mail->ErrorInfo);
         }
     }
-
+    */
     // Réponse JSON au client
     echo json_encode(['success' => true]);
 } else {
