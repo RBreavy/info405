@@ -214,8 +214,46 @@ $stmt->bind_param(
     $data['date_debut'],
     $data['date_fin']
 );
-
 if ($stmt->execute()) {
+    // 🔹 Récupération de l’e-mail de l’utilisateur
+    $email_stmt = $conn->prepare("SELECT email, nom FROM utilisateurs WHERE id = ?");
+    $email_stmt->bind_param("i", $data['id_utilisateur']);
+    $email_stmt->execute();
+    $email_result = $email_stmt->get_result();
+    $user = $email_result->fetch_assoc();
+
+    if ($user && isset($user['email'])) {
+        $mail = new PHPMailer(true);
+        try {
+            // Configuration SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'info405mailrecup@gmail.com';
+            $mail->Password = 'xvzq fxdo dfpg cjpo';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+            $mail->CharSet = 'UTF-8';
+
+            // Infos mail
+            $mail->setFrom('info405mailrecup@gmail.com', 'Libdocto');
+            $mail->addAddress($user['to_email']);
+            $mail->Subject = "Confirmation de votre rendez-vous";
+
+            // Corps du message
+            $mail->Body = "Bonjour {$user['nom']},\n\n".
+                          "Votre rendez-vous a bien été enregistré pour le ".
+                          $start->format('d/m/Y') . " de " .
+                          $start->format('H:i') . " à " . $end->format('H:i') . ".\n\n".
+                          "Merci de votre confiance.\nLibdocto";
+
+            $mail->send();
+        } catch (Exception $e) {
+            error_log("Erreur envoi mail : " . $mail->ErrorInfo);
+        }
+    }
+
+    // Réponse JSON au client
     echo json_encode(['success' => true]);
 } else {
     echo json_encode([
