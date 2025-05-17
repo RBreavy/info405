@@ -31,14 +31,6 @@ foreach ($required as $key) {
     }
 }
 
-// ▼▼▼  ▼▼▼
-$duration_colors = [
-    '10' => 'lightgreen',
-    '20' => 'lightorange', 
-    '30' => 'lightred'
-];
-
-$data['duration'] = $data['duration'] ?? 30; 
 
 $start = new DateTime($data['date_debut']);
 $end = new DateTime($data['date_fin']);
@@ -54,7 +46,7 @@ if ($start_minutes % 10 !== 0) {
 
 
 $interval = $start->diff($end);
-$actual_minutes = ($interval->h * 60) + $interval->i;
+$duration_minutes = ($interval->h * 60) + $interval->i;
 
 
 if (!in_array($duration_minutes, [10, 20, 30])) {
