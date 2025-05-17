@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             if (data.success) {
                 // Redirige manuellement si succès
-                window.location.href = "../patient.php";
+                window.location.href = "../PHP/patient.php";
             } else {
                 alert(data.message); // Affiche le message d’erreur PHP
             }

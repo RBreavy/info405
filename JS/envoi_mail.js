@@ -11,7 +11,7 @@ function generateToken(length = 32) {
 function envoiMail() {
     const email = document.getElementById('mail-recup').value;
     const token = generateToken();
-    const resetLink = `http://51.68.91.213/info2/site/index/reset_mdp.html?token=${token}`;
+    const resetLink = `http://51.68.91.213/info2/site/HTML/reset_mdp.html?token=${token}`;
 
     const message = `Cliquez sur le lien suivant pour réinitialiser votre mot de passe : ${resetLink}`;
 
