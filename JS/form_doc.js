@@ -123,7 +123,7 @@ async function addTemp(debut_periode,fin_periode) {
     try {
         const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=temp&med=${id}&deb_p=${debut_periode}&fin_p=${fin_periode}`);
         const temp = await response.json();
-        alert('Disponibilités enregistrées avec succès!');
+        alert('Indisponibilités enregistrées avec succès!');
         const dateDebutSemaine = new Date(date);
         dateDebutSemaine.setDate(date.getDate() + offsetjour + 1 - indice_jour);
             
@@ -183,7 +183,7 @@ async function addRep(journee,deb,fin) {
     try {
         const response = await fetch(`/info2/site/PHP/indisponibilite.php?action=repet&med=${id}&jour=${journee}&deb=${deb}&fin=${fin}`);
         const temp = await response.json();
-        alert('Disponibilités enregistrées avec succès!');
+        alert('Indisponibilités enregistrées avec succès!');
         const h_debut = (deb.slice(0,2) - 8) * 6 + Math.floor(deb.slice(3,5) / 10);
         const h_fin = (fin.slice(0,2) - 8) * 6 + Math.floor(fin.slice(3,5) / 10) - 1;
         const dateDebutSemaine = new Date(date);
