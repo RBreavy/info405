@@ -42,6 +42,7 @@ $data['duration'] = $data['duration'] ?? 30;
 
 $start = new DateTime($data['date_debut']);
 $end = new DateTime($data['date_fin']);
+$duration_minutes = $actual_minutes;
 
 $start_minutes = (int)$start->format('i');
 if ($start_minutes % 10 !== 0) {
