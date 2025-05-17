@@ -212,13 +212,11 @@ $stmt->bind_param(
 if ($stmt->execute()) {
     // envoi mail
     // Récupération de l’e-mail de l’utilisateur
-    $email_stmt = $conn->prepare("SELECT email, nom FROM utilisateurs WHERE id = ?");
+    $email_stmt = $conn->prepare("SELECT email, nom FROM utilisateurs WHERE id_utilisateurs = ?");
     $email_stmt->bind_param("i", $data['id_utilisateur']);
     $email_stmt->execute();
     $email_result = $email_stmt->get_result();
     $user = $email_result->fetch_assoc();
-
-    error_log("Envoi mail à : " . $user['email']);
 
     if ($user && isset($user['email'])) {
         $mail = new PHPMailer(true);
