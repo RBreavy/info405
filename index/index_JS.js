@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const formData = new FormData();
             formData.append("nom", nom);
             formData.append("psw", psw);
-            // Add CSRF token: formData.append("csrf_token", csrfToken);
+            formData.append("csrf_token", csrfToken);
 
             fetch("../index/SignIn.php", {
                 method: "POST",
