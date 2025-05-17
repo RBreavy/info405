@@ -47,20 +47,59 @@ $data['duration'] = $data['duration'] ?? 30;
 
 $start = new DateTime($data['date_debut']);
 $end = new DateTime($data['date_fin']);
+
+$start_minutes = (int)$start->format('i');
+if ($start_minutes % 10 !== 0) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'L\'heure de début doit se terminer par 0 (ex: 8h00, 8h10, 8h20)'
+    ]);
+    exit;
+}
+
+
 $interval = $start->diff($end);
 $actual_minutes = ($interval->h * 60) + $interval->i;
 
-if ($actual_minutes <= 10) {
-    $duration_key = '10';
-} elseif ($actual_minutes <= 20) {
-    $duration_key = '20';
-} else {
-    $duration_key = '30';
+
+if (!in_array($duration_minutes, [10, 20, 30])) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'La durée du rendez-vous doit être de 10, 20 ou 30 minutes exactement'
+    ]);
+    exit;
 }
 
-if (!isset($data['couleur']) || empty($data['couleur'])) {
-    $data['couleur'] = $duration_colors[$duration_key] ?? 'blue';
+
+if ($end <= $start) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'La date de fin doit être après la date de début'
+    ]);
+    exit;
 }
+
+// Vérifier que le rendez-vous est dans le futur
+$now = new DateTime();
+if ($start <= $now) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Le rendez-vous doit être dans le futur'
+    ]);
+    exit;
+}
+
+// Vérifier que le rendez-vous n'est pas plus de 6 mois à l'avance
+$six_months = new DateTime();
+$six_months->modify('+6 months');
+if ($start > $six_months) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Le rendez-vous ne peut pas être pris plus de 6 mois à l\'avance'
+    ]);
+    exit;
+}
+
 // ▲▲▲  ▲▲▲
 
 
