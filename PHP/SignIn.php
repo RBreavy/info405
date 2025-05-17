@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['user_type'] = 'patient';
         session_regenerate_id(true);
 
-        echo json_encode(['success' => true, 'redirect' => 'patient.php']);
+        echo json_encode(['success' => true, 'redirect' => '../PHP/patient.php']);
         exit;
     }
 
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['user_type'] = 'medecin';
         session_regenerate_id(true);
 
-        echo json_encode(['success' => true, 'redirect' => 'Vue_docteur.php']);
+        echo json_encode(['success' => true, 'redirect' => '../PHP/Vue_docteur.php']);
         exit;
     }
 
