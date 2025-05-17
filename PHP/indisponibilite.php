@@ -15,14 +15,14 @@ function indisp_repet($id_medecin, $journee, $heure_debut, $heure_fin)
 {
     global $conn;
     try {
-        // Delete conflicting appointments first
         delete_conflicting_recurring_appointments($id_medecin, $journee, $heure_debut, $heure_fin);
         
-        // Then create the unavailability
-        $query = "INSERT INTO IndisponibiliteRepetitive (id_medecin, journee, heure_debut, heure_fin)  
-                  VALUES ($id_medecin, '$journee', '$heure_debut', '$heure_fin')";
-        $result = mysqli_query($conn, $query);
-        return ['success' => $result];
+        $query = "INSERT INTO IndisponibiliteRepetitive (id_medecin, journee, heure_debut, heure_fin) 
+                  VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, 'isss', $id_medecin, $journee, $heure_debut, $heure_fin);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
     } catch (Exception $e) {
         return ['error' => $e->getMessage()];
     }
@@ -32,13 +32,14 @@ function indisp_temp($id_medecin, $debut_periode, $fin_periode)
 {
     global $conn;
     try {
-        // Delete conflicting appointments first
         delete_conflicting_temporary_appointments($id_medecin, $debut_periode, $fin_periode);
         
-        // Then create the unavailability
-        $query = "INSERT INTO IndisponibiliteTemporaire (id_medecin, debut_periode, fin_periode)  
-                  VALUES ($id_medecin, '$debut_periode', '$fin_periode')";
-        $result = mysqli_query($conn, $query);
+        $query = "INSERT INTO IndisponibiliteTemporaire (id_medecin, debut_periode, fin_periode) 
+                  VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, 'iss', $id_medecin, $debut_periode, $fin_periode);
+        $result = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
         return ['success' => $result];
     } catch (Exception $e) {
         return ['error' => $e->getMessage()];
