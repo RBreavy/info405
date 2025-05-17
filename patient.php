@@ -20,6 +20,7 @@ $nom = htmlspecialchars($_SESSION['nom']);
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="/info2/site/images/logo-page.png" type="image-logo">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Patient</title>
     <link rel="stylesheet" href="/info2/site/CSS/style_utilisateur.css">

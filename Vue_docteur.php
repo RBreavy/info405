@@ -22,6 +22,7 @@ $id_med = htmlspecialchars($_SESSION['user_id']);
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="/info2/site/images/logo-page.png" type="image-logo">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/info2/site/CSS/style_utilisateur.css">
