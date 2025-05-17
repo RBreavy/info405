@@ -88,6 +88,11 @@ function recupForm() {
         const startTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(1)').value;
         const endTime = document.querySelector('#form-repetitif input[type="time"]:nth-of-type(2)').value;
         
+        if (startTime >= endTime) {
+            alert("L'heure de début doit être avant l'heure de fin!");
+            return;
+        }
+
         console.log('Repetitive:', { day: selectedDay, startTime, endTime }); 
 
         if (startTime.slice(4) != "0" || endTime.slice(4) != "0") {
@@ -102,7 +107,15 @@ function recupForm() {
         const endDate = document.querySelector('#form-temporaire input[type="date"]:nth-of-type(2)').value;
         const startTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(3)').value;
         const endTime = document.querySelector('#form-temporaire input[type="time"]:nth-of-type(4)').value;
+        
 
+        const dateTimeStart = new Date(startDate + "T" + startTime);
+        const dateTimeEnd = new Date(endDate + "T" + endTime);
+        
+        if (dateTimeStart >= dateTimeEnd) {
+            alert("La date/heure de début doit être avant la date/heure de fin!");
+            return;
+        }
         
         console.log('Temporaire:', { startDate, endDate, startTime, endTime });
 
