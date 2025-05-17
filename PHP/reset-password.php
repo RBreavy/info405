@@ -10,10 +10,6 @@ if (!isset($data['token']) || !isset($data['newPassword'])) {
     exit;
 }
 
-if (!isset($data['csrf_token']) || $data['csrf_token'] !== $_SESSION['csrf_token']) {
-    http_response_code(403);
-    die(json_encode(["success" => false, "message" => "CSRF validation failed"]));
-}
 
 $token = $data['token'];
 $newPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT); // Hash du mot de passe
