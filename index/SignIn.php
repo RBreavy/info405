@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['nom'] = $user['nom'];
         $_SESSION['user_id'] = $user['id_utilisateurs'];
         $_SESSION['user_type'] = 'patient';
+        $_SESSION['csrf_token'] = generateCSRFToken();
         session_regenerate_id(true);
 
         echo json_encode(['success' => true, 'redirect' => '../patient.php']);
