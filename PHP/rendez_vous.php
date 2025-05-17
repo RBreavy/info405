@@ -237,7 +237,7 @@ if ($stmt->execute()) {
 
             // Infos mail
             $mail->setFrom('info405mailrecup@gmail.com', 'Libdocto');
-            $mail->addAddress($user['to_email']);
+            $mail->addAddress($user['email']);
             $mail->Subject = "Confirmation de votre rendez-vous";
 
             // Corps du message
