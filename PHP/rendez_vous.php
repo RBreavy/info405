@@ -1,12 +1,7 @@
 <?php
 
-// ▼▼▼  ▼▼▼
-$duration_colors = [
-    '10' => 'lightgreen',
-    '20' => 'lightorange', 
-    '30' => 'lightred'
-];
-// ▲▲▲  ▲▲▲
+
+
 
 
 header('Content-Type: application/json');
