@@ -33,7 +33,7 @@ $id_med = htmlspecialchars($_SESSION['user_id']);
 
 <body>
     <div class="banner">
-        <img src="images/logo.png" alt="Logo" class="banner-logo">
+        <img src="../images/logo.png" alt="Logo" class="banner-logo">
         <div id="welcome-message">Bienvenue, Dr. <?php echo $nom; ?></div>
         <span class="menu-icon" onclick="openNav()">☰</span>
     </div>
@@ -50,7 +50,7 @@ $id_med = htmlspecialchars($_SESSION['user_id']);
 
     <section class="main_cal">
 
-        <img src = "/info2/site/images/cal.png" alt="Haut_Cal" class="HC">
+        <img src="/info2/site/images/cal.png" alt="Haut_Cal" class="HC">
 
         <article class="selecteur">
             <article class="selecteur_gauche"></article>
