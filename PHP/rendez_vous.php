@@ -218,6 +218,8 @@ if ($stmt->execute()) {
     $email_result = $email_stmt->get_result();
     $user = $email_result->fetch_assoc();
 
+    error_log("Envoi mail à : " . $user['email']);
+
     if ($user && isset($user['email'])) {
         $mail = new PHPMailer(true);
         try {
