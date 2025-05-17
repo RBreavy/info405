@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
             formData.append("psw", psw);
             formData.append("csrf_token", "<?php echo generateCSRFToken(); ?>");
 
-            fetch("../index/SignIn.php", {
+            fetch("../PHP/SignIn.php", {
                 method: "POST",
                 body: formData,
                 credentials: 'same-origin'

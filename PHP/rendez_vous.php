@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 header('Content-Type: application/json');
-require_once __DIR__ . '/../index/db_connect.php';
+require_once('db_connect.php');
 
 
 
@@ -38,7 +38,7 @@ foreach ($required as $key) {
 $start = new DateTime($data['date_debut']);
 $end = new DateTime($data['date_fin']);
 
-$start_minutes = (int)$start->format('i');
+$start_minutes = (int) $start->format('i');
 if ($start_minutes % 10 !== 0) {
     echo json_encode([
         'success' => false,
@@ -194,7 +194,7 @@ if ($check_result2['count'] > 0 || $check_result3['count'] > 0) {
         'message' => 'Ce créneau est indisponible!.'
     ]);
     exit;
-} 
+}
 
 // Insertion du nouveau rendez-vous
 $stmt = $conn->prepare("
@@ -237,11 +237,11 @@ if ($stmt->execute()) {
             $mail->Subject = "Confirmation de votre rendez-vous";
 
             // Corps du message
-            $mail->Body = "Bonjour {$user['nom']},\n\n".
-                          "Votre rendez-vous a bien été enregistré pour le ".
-                          $start->format('d/m/Y') . " de " .
-                          $start->format('H:i') . " à " . $end->format('H:i') . ".\n\n".
-                          "Merci de votre confiance.\nLibdocto";
+            $mail->Body = "Bonjour {$user['nom']},\n\n" .
+                "Votre rendez-vous a bien été enregistré pour le " .
+                $start->format('d/m/Y') . " de " .
+                $start->format('H:i') . " à " . $end->format('H:i') . ".\n\n" .
+                "Merci de votre confiance.\nLibdocto";
 
             $mail->send();
         } catch (Exception $e) {

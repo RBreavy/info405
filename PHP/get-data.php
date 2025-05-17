@@ -3,7 +3,7 @@ error_reporting(0);
 ini_set('display_errors', 0);
 session_start();
 
-include_once "../index/db_connect.php";
+include_once "db_connect.php";
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type'])) {
     header("Location: /info2/site/HTML/connexion.html");
@@ -11,7 +11,8 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type'])) {
 }
 
 
-function getRdvByIdMed($id) {
+function getRdvByIdMed($id)
+{
     global $conn;
     try {
         $query = "SELECT r.couleur, r.date_debut, r.date_fin, r.id_rdv, u.nom 
@@ -30,7 +31,8 @@ function getRdvByIdMed($id) {
     }
 }
 
-function getRdvByIdPat($id) {
+function getRdvByIdPat($id)
+{
     global $conn;
     try {
         $query = "SELECT r.couleur, r.date_debut, r.date_fin, r.id_rdv, m.nom 
@@ -49,7 +51,7 @@ function getRdvByIdPat($id) {
     }
 }
 
-function getAllIndispR($id) 
+function getAllIndispR($id)
 {
     global $conn;
     try {
@@ -66,7 +68,7 @@ function getAllIndispR($id)
     }
 }
 
-function getAllIndispT($id) 
+function getAllIndispT($id)
 {
     global $conn;
     try {
@@ -99,25 +101,26 @@ function getAllDoctors()
     }
 }
 
-function isRdvOwnedByUser($user_id, $rdv_id) {
+function isRdvOwnedByUser($user_id, $rdv_id)
+{
     global $conn;
-    
+
     try {
         $query = "SELECT COUNT(*) AS count FROM rdv WHERE id_rdv = ? AND id_utilisateurs = ?";
         $stmt = $conn->prepare($query);
-        
+
         if (!$stmt) {
             return false;
         }
-        
+
         $stmt->bind_param("ii", $rdv_id, $user_id);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
         $stmt->close();
-        
+
         return ($row['count'] > 0);
-        
+
     } catch (Exception $e) {
         // Log error but don't expose details
         return ['error' => "Une erreur est survenue"];
@@ -145,11 +148,11 @@ $action = $_GET['action'] ?? 'rdvs';
 header('Content-Type: application/json');
 
 // Valider les paramètres
-$id_medecin = isset($_GET['id_medecin']) ? (int)$_GET['id_medecin'] : null;
-$id_patient = isset($_GET['id_patient']) ? (int)$_GET['id_patient'] : null;
+$id_medecin = isset($_GET['id_medecin']) ? (int) $_GET['id_medecin'] : null;
+$id_patient = isset($_GET['id_patient']) ? (int) $_GET['id_patient'] : null;
 $start = isset($_GET['start_date']) ? $_GET['start_date'] : null;
 $end = isset($_GET['end_date']) ? $_GET['end_date'] : null;
-$id_rdv = isset($_GET['id_rdv']) ? (int)$_GET['id_rdv'] : null;
+$id_rdv = isset($_GET['id_rdv']) ? (int) $_GET['id_rdv'] : null;
 
 switch ($action) {
     case 'doctors':
@@ -173,7 +176,7 @@ switch ($action) {
         } else {
             echo json_encode(getRdvByIdMed($_SESSION['user_id']));
         }
-        
+
         break;
     case 'getIT':
         if ($id_medecin !== null) {
@@ -193,7 +196,7 @@ switch ($action) {
         if ($id_patient !== null && $_SESSION['user_id'] === $id_patient && $id_rdv !== null) {
             echo json_encode(isRdvOwnedByUser($id_patient, $id_rdv));
         } else {
-            echo json_encode(['error'=> 'id_medecin où id_rdv manquant']);
+            echo json_encode(['error' => 'id_medecin où id_rdv manquant']);
         }
         break;
     default:

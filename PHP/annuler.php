@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-include_once "../index/db_connect.php";
+include_once "db_connect.php";
 session_start();
 
 // Récupérer l'ID du rendez-vous
@@ -10,8 +10,8 @@ $user_id = $_SESSION['user_id'] ?? 0;
 $user_type = $_SESSION['user_type'] ?? '';
 
 // Créer la requête selon le type d'utilisateur (médecin ou patient)
-$query = ($user_type === 'medecin') 
-    ? "DELETE FROM rdv WHERE id_rdv = ? AND id_medecin = ?" 
+$query = ($user_type === 'medecin')
+    ? "DELETE FROM rdv WHERE id_rdv = ? AND id_medecin = ?"
     : "DELETE FROM rdv WHERE id_rdv = ? AND id_utilisateurs = ?";
 
 // Exécuter la requête

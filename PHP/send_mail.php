@@ -14,7 +14,7 @@ require_once __DIR__ . '/../lib/PHPMailer/src/Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once __DIR__ . '/../index/db_connect.php';
+require_once('db_connect.php');
 
 $data = json_decode(file_get_contents('php://input'), true);
 

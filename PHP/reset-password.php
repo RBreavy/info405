@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-require_once('../index/db_connect.php');
+require_once('db_connect.php');
 
 // Lire les données JSON du corps de la requête
 $data = json_decode(file_get_contents("php://input"), true);
