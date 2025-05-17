@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Envoi AJAX avec fetch
-        fetch("SignUp.php", {
+        fetch("../PHP/SignUp.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
